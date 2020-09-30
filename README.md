@@ -4,3 +4,4 @@ something
 don
 this way
 comes
+newline
