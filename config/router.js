@@ -1,14 +1,16 @@
 const router = require('express').Router()
-const routes = require('../controllers/routes')
+
+const quests = require('../controllers/quests')
+const auth = require('../controllers/auth')
 
 
-router.route('/routes')
-  .get(routes.index)
-  .post(routes.create)
+router.route('/quests')
+  .get(quests.index)
+  .post(quests.create)
 
 router.route('/register')
   .post(auth.register)
-  
+
 // router.route(/routes/:routeId/stops)
 
 
