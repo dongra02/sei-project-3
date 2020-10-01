@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from '../common/Header'
-import QuestShow from './QuestShow'
+// import QuestShow from './QuestShow'
 
 class QuestIndex extends React.Component {
 

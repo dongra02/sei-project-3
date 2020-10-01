@@ -65,3 +65,13 @@ body {
 .navbar {
   background-color: #82c4e0;
 }
+
+// Quest Show
+
+.show-quests {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 50px;
+
+}

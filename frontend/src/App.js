@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/common/Home'
 import Navbar from './components/common/Navbar'
 import QuestIndex from './components/Quests/QuestIndex'
+import QuestShow from './components/Quests/QuestShow'
 
 
 
@@ -15,10 +16,10 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/quests" component={QuestIndex} />
-        {/* <Route path="/create" component={RouteIndex} />
-        <Route path="/register" component={RouteIndex} />
-        <Route path="/login" component={RouteIndex} />
-        <Route path="/profile" component={RouteIndex} /> */}
+        <Route path="/quest-show" component={QuestShow} />
+        {/* <Route path="/register" component={QuestIndex} />
+        <Route path="/login" component={QuestIndex} />
+        <Route path="/profile" component={QuestIndex} />  */}
       </Switch>
       {/* Footer */}
     </BrowserRouter>
