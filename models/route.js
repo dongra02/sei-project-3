@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const stopSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  latLon: [{ type: Number, required: true }],
   location: {
     latitute: { type: Number, required: true },
     longitude: { type: Number, required: true }
