@@ -15,8 +15,8 @@ const stopSchema = new mongoose.Schema({
 const questSchema = new mongoose.Schema({
   name: { type: String, required: true },
   timer: { type: Boolean, required: true, default: false },
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   stops: [stopSchema]
+  // owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
 }, {
   timestamps: true
 })
