@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './components/common/Home'
 import RouteIndex from './components/Routes/RouteIndex'
+import Navbar from './components/common/Navbar'
 
 
 
@@ -10,7 +11,7 @@ const App = () => {
   return (
     <BrowserRouter>
       {/* Header */}
-      {/* Navbar */}
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/routes" component={RouteIndex} />
