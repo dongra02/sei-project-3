@@ -17,7 +17,15 @@ class Map extends React.Component {
 
   componentDidMount() {
     this.mapObject = this.mapRef.getMap()
-    console.log(this.mapObject.getBounds())
+    // console.log(this.mapObject.getBounds())
+
+    navigator.geolocation.getCurrentPosition(data => {
+      const currentLocation = {
+        latitude: data.coords.latitude,
+        longitude: data.coords.longitude
+      }
+      this.setState({ currentLocation })
+    })
   }
 
   moveMapView = event => {

@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
 
 
@@ -12,10 +14,12 @@ $map-grey: #a3a9aa;
 body {
   margin: 0;
   background-color: $map-white;
+  font-family: 'Lato', sans-serif;
 }
 
 .header {
   text-align: center;
+  font-family: 'Sansita Swashed', cursive;
   height: 120px;
   background-color: $map-blue;
   color: rgb(24, 1, 21);
@@ -48,6 +52,7 @@ body {
     width: 65%;
     height: 300px;
     outline: 1px dashed $map-red;
+    padding: 5px;
   }
 
 
@@ -55,6 +60,7 @@ body {
     width: 30%;
     height: 300px;
     outline: 1px dashed $map-red;
+    overflow-y: scroll;
   }
 }
 
@@ -64,6 +70,20 @@ body {
   background-color: #eeeab730;
   margin: 5px;
 
-  box-shadow: 0px 0px 3px $map-grey;
+  box-shadow: 0px 0px 2px $map-grey;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $map-red;
+}
+
+::-webkit-scrollbar-track {
+  &:hover {
+    // background-color: #def;
+  }
+}
