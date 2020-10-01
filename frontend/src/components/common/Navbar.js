@@ -6,8 +6,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar navbar-dark bg-primary">   
         <div className="navbar-nav">
           <Link to="/" className="nav-item nav-link active">Home <span className="sr-only">(current)</span></Link>
-          <Link to="/routes" className="nav-item nav-link">Browse Routes</Link>
-          <Link to="" className="nav-item nav-link">Create Routes</Link>
+          <Link to="/routes" className="nav-item nav-link active">Browse Routes</Link>
+          <Link to="" className="nav-item nav-link active">Create Routes</Link>
         </div>   
     </nav>
   )
