@@ -17,6 +17,10 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+button {
+  font-family: 'Lato', sans-serif;
+}
+
 .navbar-nav + .user {
   position: absolute;
   right: 20px;
@@ -43,29 +47,78 @@ body {
 }
 
 .filters {
-  font-size: 2em;
-  text-align: center;
-  margin: 1em;
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+
+  div {
+    margin: 0 30px;
+  }
+
+  label {
+    margin-right: 15px;
+  }
+
+  input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px dashed $map-red;
+
+    &:focus {
+      outline: none;
+      background-color: white;
+    }
+  }
+
+  select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px dashed $map-red;
+    padding-bottom: 4px;
+    width: 150px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type=range] {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $map-red;
 }
 
 .results {
   display: flex;
   justify-content: space-between;
   margin: 50px;
+  height: 400px;
 
   .results-map {
     width: 65%;
-    height: 300px;
     outline: 1px dashed $map-red;
     padding: 5px;
+    box-shadow: 3px 5px $map-red;
   }
 
 
   .results-list {
     width: 30%;
-    height: 300px;
     outline: 1px dashed $map-red;
-    overflow-y: scroll;
+    padding: 5px;
+    box-shadow: 3px 5px $map-red;
+    
+    .container {
+      height: 100%;
+      overflow-y: scroll;
+    }
   }
 }
 
@@ -73,18 +126,26 @@ body {
   text-align: center;
   line-height: 54px;
   background-color: #eeeab730;
-  margin: 5px;
+  margin: 5px -5px;
 
   box-shadow: 0px 0px 2px $map-grey;
 }
 
+.browse-quests {
+  h3 {
+    text-align: center;
+    margin-top: 50px;
+    color: #555;
+  }
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $map-red;
+  background-color: $map-grey;
 }
 
 ::-webkit-scrollbar-track {
