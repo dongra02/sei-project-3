@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from '../common/Header'
-// import QuestShow from './QuestShow'
+import Map from '../map/Map'
 
 class QuestIndex extends React.Component {
 
@@ -24,7 +24,7 @@ class QuestIndex extends React.Component {
           <div className="filters">FILTERS</div>
           <div className="results">
             <div className="results-map">
-              MAP
+              <Map />
             </div>
             <div className="results-list">
               {searchResults && searchResults.map((quest, i) => <div key={i} className="results-list-item">{quest}</div>)}
