@@ -11,7 +11,8 @@ router.route('/quests')
 router.route('/register')
   .post(auth.register)
 
-// router.route(/routes/:routeId/stops)
+router.route('/quests/:id/stops')
+  .post(quests.stopCreate)
 
 
 

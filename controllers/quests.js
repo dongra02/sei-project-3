@@ -22,8 +22,22 @@ async function questIndex(req, res, _next){
   }
 }
 
+async function stopCreate(req, res, _next){
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error()
+    const stop = { ...req.body }
+    quest.stops.push(stop)
+    await quest.save()
+    res.status(201).json(quest)
+  } catch (err) {
+    res.status(422).json(err)
+  }
+}
+
 module.exports = {
   index: questIndex,
-  create: questCreate
+  create: questCreate,
+  stopCreate
 }
 
