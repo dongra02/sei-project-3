@@ -1,8 +1,22 @@
 import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import Home from './components/common/Home'
+import RouteIndex from './components/Routes/RouteIndex'
+
+
 
 const App = () => {
   return (
-    <h1>Hello World</h1>
+    <BrowserRouter>
+      {/* Header */}
+      {/* Navbar */}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/routes" component={RouteIndex} />
+      </Switch>
+      {/* Footer */}
+    </BrowserRouter>
   )
 }
 
