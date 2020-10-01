@@ -6,19 +6,24 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 class Map extends React.Component {
 
   state = {
-    zoom: 5,
+    zoom: 10,
     currentLocation: {
       latitude: 0,
       longitude: 0
     }
   }
 
-  moveMapView = (event) => {
+  mapObject = null
+
+  componentDidMount() {
+    this.mapObject = this.mapRef.getMap()
+    console.log(this.mapObject.getBounds())
+  }
+
+  moveMapView = event => {
     if (event.zoom === this.state.zoom) {
-      const { latitude, longitude } = event
-      this.setState({
-        currentLocation: { latitude, longitude }
-      })
+      const currentLocation = { latitude: event.latitude, longitude: event.longitude }
+      this.setState({ currentLocation })
     }
   }
 
@@ -44,9 +49,11 @@ class Map extends React.Component {
         zoom={zoom}
         doubleClickZoom={false}
         onViewportChange={this.moveMapView}
+        
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
+        ref={ map => this.mapRef = map }
       />
     )
   }
