@@ -11,6 +11,9 @@ class QuestIndex extends React.Component {
       'quest 56434',
       'quest 56424',
       'quest 23754',
+      'quest 08655',
+      'quest 08655',
+      'quest 08655',
       'quest 08655'
     ]
   }

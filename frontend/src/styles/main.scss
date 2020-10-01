@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
 
 
@@ -12,10 +14,17 @@ $map-grey: #a3a9aa;
 body {
   margin: 0;
   background-color: $map-white;
+  font-family: 'Lato', sans-serif;
+}
+
+.navbar-nav + .user {
+  position: absolute;
+  right: 20px;
 }
 
 .header {
   text-align: center;
+  font-family: 'Sansita Swashed', cursive;
   height: 120px;
   background-color: $map-blue;
   color: rgb(24, 1, 21);
@@ -48,6 +57,7 @@ body {
     width: 65%;
     height: 300px;
     outline: 1px dashed $map-red;
+    padding: 5px;
   }
 
 
@@ -55,6 +65,7 @@ body {
     width: 30%;
     height: 300px;
     outline: 1px dashed $map-red;
+    overflow-y: scroll;
   }
 }
 
@@ -63,6 +74,13 @@ body {
   line-height: 54px;
   background-color: #eeeab730;
   margin: 5px;
+
+  box-shadow: 0px 0px 2px $map-grey;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
 // Navbar
@@ -77,7 +95,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 30px;
-  margin: 60px;
+  margin: 20px;
 
 }
 
@@ -93,7 +111,8 @@ body {
 
   .clues {
     width: 50%;
-    border: 1px solid grey;
+    border: 8px solid #a3a9aa;
+    border-radius: 15px;
     text-align: center;
     padding: 40px;
     height: 400px;
@@ -106,7 +125,9 @@ body {
 
   .show-map {
     width: 50%;
-    border: 1px solid grey;
+    border: 8px solid #a3a9aa;
+    margin-left: 10px;
+    border-radius: 15px;
     text-align: center;
     padding: 20px;
     height: 400px;
@@ -117,4 +138,13 @@ body {
 .btn {
   padding: 5px;
   margin: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $map-red;
+}
+
+::-webkit-scrollbar-track {
+  &:hover {
+    // background-color: #def;
+  }
 }
