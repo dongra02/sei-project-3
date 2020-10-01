@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '../common/Header'
 
-class RouteIndex extends React.Component {
+class QuestIndex extends React.Component {
 
   state = {
 
@@ -17,4 +17,4 @@ class RouteIndex extends React.Component {
   }
 }
 
-export default RouteIndex
+export default QuestIndex
