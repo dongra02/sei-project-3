@@ -14,7 +14,11 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/routes" component={RouteIndex} />
+        <Route path="/quests" component={RouteIndex} />
+        <Route path="/create" component={RouteIndex} />
+        <Route path="/register" component={RouteIndex} />
+        <Route path="/login" component={RouteIndex} />
+        <Route path="/profile" component={RouteIndex} />
       </Switch>
       {/* Footer */}
     </BrowserRouter>
