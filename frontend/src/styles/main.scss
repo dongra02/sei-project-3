@@ -17,6 +17,11 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.navbar-nav + .user {
+  position: absolute;
+  right: 20px;
+}
+
 .header {
   text-align: center;
   font-family: 'Sansita Swashed', cursive;
