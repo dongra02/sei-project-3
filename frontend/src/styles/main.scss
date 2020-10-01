@@ -1,2 +1,62 @@
 @import "~bootstrap/scss/bootstrap";
 
+
+
+
+$map-blue: #82c4e0;
+$map-sand: #eeeab7;
+$map-red: #a63535;
+$map-white: #f8f8f8;
+$map-grey: #a3a9aa;
+
+body {
+  margin: 0;
+  background-color: $map-white;
+}
+
+.header {
+  text-align: center;
+  height: 120px;
+  background-color: $map-blue;
+  color: rgb(24, 1, 21);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  .header-title {
+    font-size: 4em;
+
+  }
+}
+
+.filters {
+  font-size: 2em;
+  text-align: center;
+  margin: 1em;
+}
+
+.results {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+
+  .results-map {
+    width: 65%;
+    height: 300px;
+    outline: 1px dashed $map-red;
+  }
+
+
+  .results-list {
+    width: 30%;
+    height: 300px;
+    outline: 1px dashed $map-red;
+  }
+}
+
+.results-list-item {
+  text-align: center;
+  line-height: 60px;
+}
+
