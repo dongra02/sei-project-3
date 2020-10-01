@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const app = express()
 const { dbURI, port } = require('./config/environment')
 
-
 mongoose.connect(
   dbURI,
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
