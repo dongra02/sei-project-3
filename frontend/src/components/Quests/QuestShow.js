@@ -14,9 +14,9 @@ class QuestShow extends React.Component {
       <Header />
       <div className="show-quests">
         <div className="top-show-buttons">
-            <button classname="top-buttons">View Map</button>
-            <button classname="top-buttons">Clue</button>
-            <button classname="top-buttons">Comments</button>
+        <button type="button" className="btn btn-info">VIEW MAP</button>
+        <button type="button" className="btn btn-info">CLUE</button>
+        <button type="button" className="btn btn-info">COMMENTS</button>
         </div>
         <div className="middle">
           <div className="clues">
