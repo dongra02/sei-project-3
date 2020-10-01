@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({ isHome }) => {
   return (
-    <div className="header">
+    <div className={`header ${isHome ? 'is-home' : ''}`}>
       <div className="header-title">
         302
       </div>

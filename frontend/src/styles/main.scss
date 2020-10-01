@@ -23,10 +23,13 @@ body {
   align-items: center;
   justify-content: center;
 
+  &.is-home {
+    height: calc(100vh - 56px);
+  }
+
 
   .header-title {
     font-size: 4em;
-
   }
 }
 
