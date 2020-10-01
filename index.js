@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const { dbURI, port } = require('./config/environment')
-const { logger } = require('./lib/logger')
+const logger  = require('./lib/logger')
 
 mongoose.connect(
   dbURI,
