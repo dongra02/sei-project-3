@@ -46,6 +46,18 @@ async function questShow(req, res, _next) {
   }
 }
 
+async function questUpdate(req, res, _next) {
+  try {
+    const questToEdit = await Quest.findById(req.params.id)
+    if (!questToEdit) throw new Error()
+    Object.assign(questToEdit, req.body)
+    await questToEdit.save()
+    res.status(202).json(questToEdit)
+  } catch (err) {
+    res.status(404).json(err)
+  }
+}
+
 async function stopShow(req, res, _next) {
   try {
     const quest = await Quest.findById(req.params.id)
@@ -59,11 +71,27 @@ async function stopShow(req, res, _next) {
   }
 }
 
+async function stopUpdate(req, res, _next) {
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error()
+    const stopToEdit = await quest.stops.id(req.params.stopId)
+    if (!stopToEdit) throw new Error()
+    Object.assign(stopToEdit, req.body)
+    await stopToEdit.save()
+    res.status(202).json(stopToEdit)
+  } catch (err) {
+    res.status(404).json(err)
+  }
+}
+
 module.exports = {
   index: questIndex,
   create: questCreate,
   show: questShow,
   stopCreate,
-  stopShow
+  stopShow,
+  questUpdate,
+  stopUpdate
 }
 
