@@ -99,6 +99,15 @@ label {
   border: 1px solid $map-red;
 }
 
+.marker-select {
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  background-color: $map-sand;
+  border: 1px solid $map-red;
+  transform: translate(-50%, -50%);
+}
+
 .results {
   display: flex;
   justify-content: space-between;
@@ -267,11 +276,10 @@ label {
   color: $map-white;
   width: 15em;
   font-size: 0.9em;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  z-index: 3;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  z-index: 2;
   position: relative;
-  z-index: 3;
 
   &:nth-child(2) {
     left: -5px;
@@ -290,11 +298,23 @@ label {
   border: 1px solid $map-red;
   border-bottom: none;
   color: #444;
+  z-index: 0;
 
-  &:nth-child(1) {
-    z-index: 2;
-  }
-  &:nth-child(2) {
+  &:nth-of-type(1) {
     z-index: 1;
+  }
+}
+
+.btn-next {
+  position: relative;
+  top: -35px;
+
+  button {
+    padding: 5px 15px;
+    width: 170px;
+    background-color: $map-white;
+    border: 1px solid $map-blue;
+    box-shadow: 1px 1px $map-blue;
+    color: #444;
   }
 }

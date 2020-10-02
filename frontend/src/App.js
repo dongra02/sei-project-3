@@ -15,8 +15,8 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/quests/:id" component={QuestShow} />
         <Route path="/quests" component={QuestIndex} />
-        <Route path="/quest-show" component={QuestShow} />
         {/* <Route path="/create" component={QuestIndex} />
         <Route path="/login" component={QuestIndex} />
         <Route path="/profile" component={QuestIndex} />   */}

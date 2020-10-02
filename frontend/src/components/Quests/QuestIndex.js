@@ -23,20 +23,19 @@ class QuestIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await axios.get('/api/quests')
-    console.log(response.data)
     this.setState({ searchResults: response.data })
   }
 
-  generateMarkers = () => {
-    const { searchResults } = this.state
-    for (let i = 0; i < 20; i++) {
-      const lat = 51 + Math.random()
-      const lng = -1 + Math.random()
-      searchResults.push({ name: 'questx', lat, lng })
-    }
+  // generateMarkers = () => {
+  //   const { searchResults } = this.state
+  //   for (let i = 0; i < 20; i++) {
+  //     const lat = 51 + Math.random()
+  //     const lng = -1 + Math.random()
+  //     searchResults.push({ name: 'questx', lat, lng })
+  //   }
 
-    this.setState({ searchResults })
-  }
+  //   this.setState({ searchResults })
+  // }
 
   handleChange = event => {
     console.log(event.target)
@@ -56,6 +55,11 @@ class QuestIndex extends React.Component {
     this.setState({ selectedQuest: quest })
   }
 
+  startQuest = questId => {
+    console.log(questId)
+    this.props.history.push(`/quests/${questId}`)
+  }
+
   render() {
     const { formData, searchResults, selectedQuest } = this.state
     return (
@@ -66,7 +70,7 @@ class QuestIndex extends React.Component {
           <Filter {...formData} handleChange={this.handleChange} />
           <div className="results">
             <div className="results-map">
-              <Map getBounds={this.getBounds} searchResults={searchResults} selectedQuest={selectedQuest} />
+              <Map getBounds={this.getBounds} searchResults={searchResults} selectedQuest={selectedQuest} startQuest={this.startQuest} />
             </div>
             <div className="results-list">
               <div className="container">

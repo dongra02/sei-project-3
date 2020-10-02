@@ -14,10 +14,8 @@ class QuestShow extends React.Component {
     answer: ''
   }
 
-  id = '5f772851c76e74fc7cb0fc6e'
-
   componentDidMount = async () => {
-    const response = await axios.get(`/api/quests/${this.id}`)
+    const response = await axios.get(`/api/quests/${this.props.match.params.id}`)
     this.setState({ route: response.data })
   }
 
@@ -69,27 +67,28 @@ class QuestShow extends React.Component {
                     type="text"
                     name="answer"
                     value={answer}
+                    placeholder="answer"
                     onChange={this.changeAnswer}
                   />
                 </div>
-                <div className="start-button">
-                  <button type="button" className="btn btn-success btn-lg" onClick={() => this.nextStop()}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
+                <div className="btn-next">
+                  <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
                 </div>
               </div>
             }
             {screen === 'map' &&
               <div className="show-map">
-                <Map getBounds={() => null} />
+                <Map selectedQuest={this.state.route} getBounds={() => null} />
               </div>
+            }
+            {screen === 'comments' && 
+            <div className="comments">
+              <h1>Comments</h1>
+              <p>Other users comments</p>
+            </div>
             }
           </div>
         </div>
-        {screen === 'comments' && 
-        <div className="comments">
-            <h1>Comments</h1>
-              <p>Other user's comments</p>
-        </div>
-        }
       </>
     )
   }

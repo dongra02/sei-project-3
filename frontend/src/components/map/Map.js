@@ -17,14 +17,16 @@ class Map extends React.Component {
 
   componentDidMount = () => {
     this.setState({ mapRef: this.mapRef })
-
-    navigator.geolocation.getCurrentPosition(data => {
-      const currentLocation = {
-        latitude: data.coords.latitude,
-        longitude: data.coords.longitude
-      }
-      this.setState({ currentLocation })
-    })
+    
+    if (!this.props.selectedQuest) {
+      navigator.geolocation.getCurrentPosition(data => {
+        const currentLocation = {
+          latitude: data.coords.latitude,
+          longitude: data.coords.longitude
+        }
+        this.setState({ currentLocation })
+      })
+    }
   }
 
   componentDidUpdate = (prevProps) => {
@@ -61,7 +63,7 @@ class Map extends React.Component {
   render() {
 
     const { zoom, currentLocation } = this.state
-    const { searchResults, selectedQuest } = this.props
+    const { searchResults, selectedQuest, startQuest } = this.props
 
     return (
       <MapGL
@@ -87,7 +89,10 @@ class Map extends React.Component {
               key={i}
               latitude={quest.stops[0].location.latitude}
               longitude={quest.stops[0].location.longitude}>
-              <div className={ `${selectedQuest && selectedQuest._id === quest._id ? 'marker-select' : 'marker'}` } />
+              {selectedQuest && selectedQuest._id === quest._id
+                ? <div className="marker-select" onClick={() => startQuest(quest._id)}>GO!</div>
+                : <div className="marker" />
+              }
             </Marker>
           ))}
       </MapGL>
