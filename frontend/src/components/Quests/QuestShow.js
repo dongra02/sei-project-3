@@ -14,7 +14,8 @@ class QuestShow extends React.Component {
   // Then in render, return the right state according to which button clicked
 
   handleClick = event => {
-    const buttonClicked = this.props
+    event.preventDefault()
+    const buttonClicked = event.target.innerHTML
     console.log(buttonClicked)
   }
 
@@ -25,9 +26,9 @@ class QuestShow extends React.Component {
       <Header />
       <div className="show-quests">
         <div className="top-show-buttons">
-        <button type="button" className="btn btn-primary btn-block">VIEW MAP</button>
-        <button type="button" className="btn btn-success btn-block">CLUE</button>
-        <button type="button" className="btn btn-warning btn-block">COMMENTS</button>
+        <button value="map" onClick={this.handleClick} type="button" className="btn btn-primary btn-block">VIEW MAP</button>
+        <button value="clue" onClick={this.handleClick} type="button" className="btn btn-success btn-block">CLUE</button>
+        <button value-="comments" onClick={this.handleClick} type="button" className="btn btn-warning btn-block">COMMENTS</button>
         </div>
         <div className="middle">
           <div className="clues">
@@ -41,7 +42,7 @@ class QuestShow extends React.Component {
               <button type="button" className="btn btn-info">SUBMIT ANSWER</button>
             </div>
             <div className="start-button">
-            <button onClick={this.handleClick} type="button" className="btn btn-success btn-lg">START</button>
+            <button type="button" className="btn btn-success btn-lg">START</button>
             <button type="button" className="btn btn-danger btn-lg">GO TO NEXT STAGE</button>
             </div>
           </div>
