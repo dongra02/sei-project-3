@@ -149,6 +149,62 @@ label {
   height: 10px;
 }
 
+// Navbar
+
+.navbar {
+  background-color: #82c4e0;
+}
+
+// Quest Show
+
+.top-show-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 30px 80px;;
+  margin: 20px;
+
+}
+
+.top-buttons {
+  padding: 20px;
+}
+
+
+.middle {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 100px;
+
+  .clues {
+    width: 50%;
+    border: 8px solid #a3a9aa;
+    border-radius: 15px;
+    text-align: center;
+    padding: 40px;
+    height: 400px;
+  }
+
+  .answer-input {
+    margin: 50px;
+  }
+
+
+  .show-map {
+    width: 50%;
+    border: 8px solid #a3a9aa;
+    margin-left: 10px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    height: 400px;
+  }
+
+}
+
+.btn {
+  padding: 5px;
+  margin: 5px;
+}
 ::-webkit-scrollbar-thumb {
   background-color: $map-grey;
 }
