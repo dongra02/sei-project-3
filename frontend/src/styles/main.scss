@@ -160,22 +160,19 @@ label {
 .top-show-buttons {
   display: flex;
   justify-content: center;
-  padding: 30px 80px;;
-  margin: 20px;
+  margin: 30px auto 0;
+  width: 95%;
 
 }
-
-.top-buttons {
-  padding: 20px;
-}
-
 
 .quest-view {
   display: flex;
   justify-content: center;
-  margin: 20px 100px;
+  margin: 0 auto 100px;
   border: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
+  width: 95%;
+
 
   .clues {
     border-radius: 15px;
@@ -263,10 +260,37 @@ label {
   }
 }
 
-.tabs {
+.tab {
   border: none;
-  padding: 3px 10px;
+  padding: 0 5px;
   background-color: $map-red;
   color: $map-white;
   width: 15em;
+  font-size: 0.9em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index: 3;
+  position: relative;
+  z-index: 3;
+
+  &:nth-child(2) {
+    left: -5px;
+  }
+  &:nth-child(3) {
+    left: -10px;
+  }
+}
+
+.inactive {
+  background-color: $map-white;
+  border: 1px solid $map-red;
+  border-bottom: none;
+  color: #444;
+
+  &:nth-child(1) {
+    z-index: 2;
+  }
+  &:nth-child(2) {
+    z-index: 1;
+  }
 }
