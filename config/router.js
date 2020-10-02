@@ -11,6 +11,9 @@ router.route('/quests')
 router.route('/quests/:id')
   .get(quests.show)
 
+router.route('/quests/:id/stops/:stopId')
+  .get(quests.stopShow)
+
 router.route('/register')
   .post(auth.register)
 
