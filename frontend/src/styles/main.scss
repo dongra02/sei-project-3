@@ -5,8 +5,8 @@
 
 
 
-$map-blue: #82c4e0;
-$map-sand: #eeeab7;
+$map-blue: #94c1cf;
+$map-sand: #f8f6e3;
 $map-red: #a63535;
 $map-white: #f8f8f8;
 $map-grey: #a3a9aa;
@@ -15,6 +15,30 @@ body {
   margin: 0;
   background-color: $map-white;
   font-family: 'Lato', sans-serif;
+}
+
+button {
+  font-family: 'Lato', sans-serif;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dashed $map-red;
+
+  &:focus {
+    outline: none;
+    background-color: $map-sand;
+  }
+}
+
+label {
+  margin-right: 15px;
+}
+
+.navbar-nav + .user {
+  position: absolute;
+  right: 20px;
 }
 
 .header {
@@ -27,10 +51,13 @@ body {
   align-items: center;
   justify-content: center;
 
+  background-image: 
+    linear-gradient(#f8f6f3aa, #f8f6f3aa),
+    url('../images/texture.png');
+
   &.is-home {
     height: calc(100vh - 56px);
   }
-
 
   .header-title {
     font-size: 4em;
@@ -38,29 +65,64 @@ body {
 }
 
 .filters {
-  font-size: 2em;
-  text-align: center;
-  margin: 1em;
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+
+  div {
+    margin: 0 30px;
+  }
+
+  
+
+  
+
+  select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px dashed $map-red;
+    padding-bottom: 4px;
+    width: 150px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
+
+.marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $map-blue;
+  border: 1px solid $map-red;
 }
 
 .results {
   display: flex;
   justify-content: space-between;
   margin: 50px;
+  height: 400px;
 
   .results-map {
     width: 65%;
-    height: 300px;
     outline: 1px dashed $map-red;
     padding: 5px;
+    box-shadow: 3px 5px $map-red;
   }
 
 
   .results-list {
     width: 30%;
-    height: 300px;
     outline: 1px dashed $map-red;
-    overflow-y: scroll;
+    padding: 5px;
+    box-shadow: 3px 5px $map-red;
+    
+    .container {
+      height: 100%;
+      overflow-y: scroll;
+    }
   }
 }
 
@@ -68,22 +130,68 @@ body {
   text-align: center;
   line-height: 54px;
   background-color: #eeeab730;
-  margin: 5px;
+  margin: 5px -5px;
 
   box-shadow: 0px 0px 2px $map-grey;
+  cursor: crosshair;
+}
+
+.browse-quests {
+  h3 {
+    text-align: center;
+    margin-top: 50px;
+    color: #555;
+  }
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $map-red;
+  background-color: $map-grey;
 }
 
 ::-webkit-scrollbar-track {
   &:hover {
     // background-color: #def;
   }
+}
+
+.form-container {
+  margin: 50px auto;
+  max-width: 500px;
+  background-color: $map-sand;
+  box-shadow: 2px 3px $map-red;
+  color: #444;
+
+  h3 {
+    margin: 0 5%;
+    padding-top: 15px;
+  }
+
+  .input-field {
+    margin-top: 15px;
+  }
+
+  input {
+    width: 95%;
+    margin-left: 5%;
+    color: #444;
+  }
+
+  .submit {
+
+    text-align: right;
+    padding: 15px;
+
+    button {
+      border: none;
+      padding: 3px 10px;
+      background-color: $map-red;
+      color: $map-white;
+    }
+  }
+
 }

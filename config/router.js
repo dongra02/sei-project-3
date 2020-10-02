@@ -14,6 +14,9 @@ router.route('/register')
 router.route('/quests/:id/stops')
   .post(quests.stopCreate)
 
+router.route('/login')
+  .post(auth.login)
+
 
 
 module.exports = router

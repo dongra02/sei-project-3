@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MapGL from 'react-map-gl'
+import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'  
 
 class Map extends React.Component {
@@ -10,14 +10,13 @@ class Map extends React.Component {
     currentLocation: {
       latitude: 0,
       longitude: 0
-    }
+    },
+    mapRef: null
   }
 
-  mapObject = null
 
-  componentDidMount() {
-    this.mapObject = this.mapRef.getMap()
-    // console.log(this.mapObject.getBounds())
+  componentDidMount = () => {
+    this.setState({ mapRef: this.mapRef })
 
     navigator.geolocation.getCurrentPosition(data => {
       const currentLocation = {
@@ -28,10 +27,26 @@ class Map extends React.Component {
     })
   }
 
-  moveMapView = event => {
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.questLocation !== this.props.questLocation) {
+      const currentLocation = {
+        latitude: this.props.questLocation.lat,
+        longitude: this.props.questLocation.lng
+      }
+      this.setState({ currentLocation })
+    }
+  }
+
+  moveMapView = async event => {
     if (event.zoom === this.state.zoom) {
       const currentLocation = { latitude: event.latitude, longitude: event.longitude }
       this.setState({ currentLocation })
+    }
+
+    // Gets NE and SW bounds
+    if (this.state.mapRef) {
+      const bounds = this.state.mapRef.getMap().getBounds()
+      this.props.getBounds(bounds)
     }
   }
 
@@ -45,6 +60,7 @@ class Map extends React.Component {
   render() {
 
     const { zoom, currentLocation } = this.state
+    const { searchResults } = this.props
 
     return (
       <MapGL
@@ -62,7 +78,17 @@ class Map extends React.Component {
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
         ref={ map => this.mapRef = map }
-      />
+      >
+        {searchResults &&
+          searchResults.map((quest, i) => (
+            <Marker
+              key={i}
+              latitude={quest.lat}
+              longitude={quest.lng}>
+              <div className="marker" />
+            </Marker>
+          ))}
+      </MapGL>
     )
   }
 }
