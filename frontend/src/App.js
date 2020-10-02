@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './components/common/Home'
 import Navbar from './components/common/Navbar'
+import Register from './components/common/Register'
 import QuestIndex from './components/Quests/QuestIndex'
 
 
@@ -16,9 +17,9 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route path="/quests" component={QuestIndex} />
         {/* <Route path="/create" component={RouteIndex} />
-        <Route path="/register" component={RouteIndex} />
         <Route path="/login" component={RouteIndex} />
-        <Route path="/profile" component={RouteIndex} /> */}
+      <Route path="/profile" component={RouteIndex} /> */}
+        <Route path="/register" component={Register} />
       </Switch>
       {/* Footer */}
     </BrowserRouter>

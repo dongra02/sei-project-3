@@ -5,8 +5,8 @@
 
 
 
-$map-blue: #82c4e0;
-$map-sand: #eeeab7;
+$map-blue: #94c1cf;
+$map-sand: #f8f6e3;
 $map-red: #a63535;
 $map-white: #f8f8f8;
 $map-grey: #a3a9aa;
@@ -19,6 +19,21 @@ body {
 
 button {
   font-family: 'Lato', sans-serif;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dashed $map-red;
+
+  &:focus {
+    outline: none;
+    background-color: $map-sand;
+  }
+}
+
+label {
+  margin-right: 15px;
 }
 
 .navbar-nav + .user {
@@ -37,13 +52,12 @@ button {
   justify-content: center;
 
   background-image: 
-    linear-gradient(#5a99e088, #82c4e088),
+    linear-gradient(#f8f6f3aa, #f8f6f3aa),
     url('../images/texture.png');
 
   &.is-home {
     height: calc(100vh - 56px);
   }
-
 
   .header-title {
     font-size: 4em;
@@ -59,20 +73,9 @@ button {
     margin: 0 30px;
   }
 
-  label {
-    margin-right: 15px;
-  }
+  
 
-  input {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px dashed $map-red;
-
-    &:focus {
-      outline: none;
-      background-color: white;
-    }
-  }
+  
 
   select {
     background-color: transparent;
@@ -154,4 +157,41 @@ button {
   &:hover {
     // background-color: #def;
   }
+}
+
+.form-container {
+  margin: 50px auto;
+  max-width: 500px;
+  background-color: $map-sand;
+  box-shadow: 2px 3px $map-red;
+  color: #444;
+
+  h3 {
+    margin: 0 5%;
+    padding-top: 15px;
+  }
+
+  .input-field {
+    margin-top: 15px;
+  }
+
+  input {
+    width: 95%;
+    margin-left: 5%;
+    color: #444;
+  }
+
+  .submit {
+
+    text-align: right;
+    padding: 15px;
+
+    button {
+      border: none;
+      padding: 3px 10px;
+      background-color: $map-red;
+      color: $map-white;
+    }
+  }
+
 }
