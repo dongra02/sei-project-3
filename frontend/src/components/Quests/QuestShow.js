@@ -17,6 +17,10 @@ class QuestShow extends React.Component {
     event.preventDefault()
     const buttonClicked = event.target.innerHTML
     console.log(buttonClicked)
+    
+    this.setState({
+      screen: buttonClicked
+    })
   }
 
 
@@ -32,9 +36,9 @@ class QuestShow extends React.Component {
         </div>
         <div className="middle">
           <div className="clues">
-            <h2>Clue</h2>
-            <p>Here is your clue:</p>
-            <p>Text here telling them the clue</p>
+            <h2>Quest</h2>
+            <p>Your next location is:</p>
+            <p>Crown Inn Pub</p>
             <div className="answer-input">
               {/* <h2>Answer Input</h2> */}
               <input>
