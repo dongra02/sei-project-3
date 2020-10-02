@@ -7,6 +7,7 @@
     "eslint-plugin-react": "^7.18.3",
     "http-proxy-middleware": "^1.0.5",
     "node-sass": "^4.13.1",
+    "rc-slider": "^9.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-map-gl": "^5.2.8",
