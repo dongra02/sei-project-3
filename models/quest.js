@@ -18,8 +18,8 @@ const questSchema = new mongoose.Schema({
   theme: { type: String, required: true },
   location: { type: String, required: true },
   estTime: { type: String, required: true },
-  stops: [stopSchema]
-  // owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  stops: [stopSchema],
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
 })

@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 const { dbURI } = require('../config/environment')
 const Quest = require('../models/quest')
+const User = require('../models/user')
 const stopData = require('./data/stops')
 const questData = require('./data/quests')
+const userData = require('./data/users')
 
 mongoose.connect(
   dbURI,
@@ -15,10 +17,14 @@ mongoose.connect(
     try {
       await mongoose.connection.db.dropDatabase()
       console.log('Database dropped!')
-      const quest = await Quest.create(questData)
-      console.log(quest)
-      stopData.map(stop => quest.stops.push(stop))
-      await quest.save()
+      const users = await User.create(userData)
+      
+      const questsWithUsers = questData.map(quest => {
+        quest.owner = users[0]
+        stopData.map(stop => quest.stops.push(stop))
+        return quest
+      })
+      await Quest.create(questsWithUsers)
     } catch (err) {
       console.log(err)
     }
