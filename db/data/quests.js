@@ -102,5 +102,57 @@ module.exports = [{
       }
     }
   ]
+}, {
+  name: 'Escape of the country',
+  theme: 'political fugitive',
+  estTime: '45 minutes',
+  location: 'London',
+  timer: true,
+  stops: [
+    {
+      'name': 'Marble arch station',
+      'location': {
+        'latitude': 51.513563,
+        'longitude': -0.158275
+      },
+      'question': {
+        'clue': 'Where anyone can be heard',
+        'answer': 'Speakers corner'
+      }
+    },
+    {
+      'name': 'Speakers corner',
+      'location': {
+        'latitude': 51.512012,
+        'longitude': -0.159181
+      },
+      'question': {
+        'clue': 'Dont take the tunnel',
+        'answer': 'Princess diana memorial'
+      }
+    },
+    {
+      'name': 'Princess diana memorial',
+      'location': {
+        'latitude': 51.504892,
+        'longitude': -0.171752
+      },
+      'question': {
+        'clue': 'You should probably read the Bulgarian constitution',
+        'answer': 'The Bulgarian embassy'
+      }
+    },
+    {
+      'name': 'The Bulgarian Embassy',
+      'location': {
+        'latitude': 51.499981,
+        'longitude': -0.179345
+      },
+      'question': {
+        'clue': 'Claim immunity',
+        'answer': 'Have a nice life'
+      }
+    }
+  ]
 }
 ]
