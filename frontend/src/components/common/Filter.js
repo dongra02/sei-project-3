@@ -18,7 +18,8 @@ const Filter = ({ location, theme, time, handleChange }) => {
       </div>
       <div>
         <label htmlFor="time">Time :</label>
-        <input id="time" type="range" value={time} onChange={handleChange} />
+        {/* <input id="time" type="range" value={time} onChange={handleChange} /> */}
+        <Slider onChange={event => console.log(event)} />
       </div>
     </div>
   )
