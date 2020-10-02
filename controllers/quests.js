@@ -35,9 +35,35 @@ async function stopCreate(req, res, _next){
   }
 }
 
+async function questShow(req, res, _next) {
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error()
+    res.status(200).json(quest)
+  } catch (err) {
+    res.status(404).json(err)
+    console.log(err)
+  }
+}
+
+async function stopShow(req, res, _next) {
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error()
+    const stop = await quest.stops.id(req.params.stopId)
+    if (!stop) throw new Error()
+    res.status(200).json(stop)
+  } catch (err) {
+    res.status(404).json(err)
+    console.log(err)
+  }
+}
+
 module.exports = {
   index: questIndex,
   create: questCreate,
-  stopCreate
+  show: questShow,
+  stopCreate,
+  stopShow
 }
 
