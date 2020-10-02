@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '../common/Header'
 
-// import Map from '../map/Map'
+import Map from '../map/Map'
 
 class QuestShow extends React.Component {
   
@@ -34,7 +34,7 @@ class QuestShow extends React.Component {
             </div>
           </div>
           <div className="show-map">
-            <h1>Map</h1>
+            <Map />
           </div>
         </div>
       </div>
