@@ -9,6 +9,16 @@ class QuestShow extends React.Component {
     screen: null
   }
 
+
+  // Write a function handleClick for the buttons clue and comments that will change the state of window
+  // Then in render, return the right state according to which button clicked
+
+  handleClick = event => {
+    const buttonClicked = this.props
+    console.log(buttonClicked)
+  }
+
+
   render()  {
     return (
       <>
@@ -31,7 +41,7 @@ class QuestShow extends React.Component {
               <button type="button" className="btn btn-info">SUBMIT ANSWER</button>
             </div>
             <div className="start-button">
-            <button type="button" className="btn btn-success btn-lg">START</button>
+            <button onClick={this.handleClick} type="button" className="btn btn-success btn-lg">START</button>
             <button type="button" className="btn btn-danger btn-lg">GO TO NEXT STAGE</button>
             </div>
           </div>
