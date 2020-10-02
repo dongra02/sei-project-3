@@ -10,19 +10,19 @@ router.route('/quests')
 
 router.route('/quests/:id')
   .get(quests.show)
-
-router.route('/quests/:id/stops/:stopId')
-  .get(quests.stopShow)
-
-router.route('/register')
-  .post(auth.register)
+  .put(quests.questUpdate)
 
 router.route('/quests/:id/stops')
   .post(quests.stopCreate)
 
+router.route('/quests/:id/stops/:stopId')
+  .get(quests.stopShow)
+  .put(quests.stopUpdate)
+
+router.route('/register')
+  .post(auth.register)
+
 router.route('/login')
   .post(auth.login)
-
-
 
 module.exports = router
