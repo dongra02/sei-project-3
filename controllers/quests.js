@@ -11,7 +11,7 @@ async function questCreate(req, res, next) {
   }
 }
 
-async function questIndex(req, res, next){
+async function questIndex(_req, res, next){
   try {
     const quests = await Quest.find()
     if (!quests) throw new Error(notFound)
