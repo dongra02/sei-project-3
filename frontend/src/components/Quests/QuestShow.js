@@ -54,9 +54,9 @@ class QuestShow extends React.Component {
         <Header />
         <div className="show-quests">
           <div className="top-show-buttons">
-            <button value="map" onClick={this.handleClick} type="button" className="btn btn-primary btn-block">VIEW MAP</button>
-            <button value="clue" onClick={this.handleClick} type="button" className="btn btn-success btn-block">CLUE</button>
-            <button value="comments" onClick={this.handleClick} type="button" className="btn btn-warning btn-block">COMMENTS</button>
+            <button value="map" onClick={this.handleClick} type="button" className={`tab ${screen === 'map' ? '' : 'inactive'}`} >MAP</button>
+            <button value="clue" onClick={this.handleClick} type="button" className={`tab ${screen === 'clue' ? '' : 'inactive'}`} >CLUE</button>
+            <button value="comments" onClick={this.handleClick} type="button" className={`tab ${screen === 'comments' ? '' : 'inactive'}`} >COMMENTS</button>
           </div>
           <div className="quest-view">
             {screen === 'clue' &&
