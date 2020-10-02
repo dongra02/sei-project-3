@@ -6,7 +6,7 @@ const Header = ({ isHome }) => {
       <div className="header-title">
         302
       </div>
-      <img src={require('../../images/trail.png')} alt="trail" />
+      <img src={require('../../images/trail-red.png')} />
       <div className="header-title">
         Found
       </div>
