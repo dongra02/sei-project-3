@@ -170,14 +170,14 @@ label {
 }
 
 
-.middle {
+.quest-view {
   display: flex;
-  justify-content: space-between;
-  padding: 20px 100px;
+  justify-content: center;
+  margin: 20px 100px;
+  border: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
 
   .clues {
-    width: 50%;
-    border: 8px solid #a3a9aa;
     border-radius: 15px;
     text-align: center;
     padding: 40px;
@@ -190,13 +190,12 @@ label {
 
 
   .show-map {
-    width: 50%;
-    border: 8px solid #a3a9aa;
     margin-left: 10px;
-    border-radius: 15px;
     text-align: center;
     padding: 20px;
     height: 400px;
+    width: 100%;
+
   }
 
 }
