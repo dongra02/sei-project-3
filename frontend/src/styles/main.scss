@@ -262,3 +262,11 @@ label {
     top: 0;
   }
 }
+
+.tabs {
+  border: none;
+  padding: 3px 10px;
+  background-color: $map-red;
+  color: $map-white;
+  width: 15em;
+}

@@ -33,7 +33,8 @@ class QuestShow extends React.Component {
         <Header />
         <div className="show-quests">
           <div className="top-show-buttons">
-            <button value="map" onClick={this.handleClick} type="button" className="btn btn-primary btn-block">VIEW MAP</button>
+            {/* <button value="map" onClick={this.handleClick} type="button" className="btn btn-primary btn-block">VIEW MAP</button> */}
+            <button value="map" onClick={this.handleClick} type="button" className="tabs">MAP</button>
             <button value="clue" onClick={this.handleClick} type="button" className="btn btn-success btn-block">CLUE</button>
             <button value="comments" onClick={this.handleClick} type="button" className="btn btn-warning btn-block">COMMENTS</button>
           </div>
