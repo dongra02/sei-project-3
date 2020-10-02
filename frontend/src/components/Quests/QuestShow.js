@@ -5,7 +5,9 @@ import Header from '../common/Header'
 import Map from '../map/Map'
 
 class QuestShow extends React.Component {
-  
+  state = {
+    screen: null
+  }
 
   render()  {
     return (
