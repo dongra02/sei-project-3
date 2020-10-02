@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/environment')
-const { unauthorized } = require('../lib/errorMessages')
+const { unauthorized, notFound } = require('../lib/errorMessages')
 
 async function register(req, res, next) {
   try {
@@ -27,7 +27,30 @@ async function login(req, res, next) {
   }
 }
 
+async function profile(req, res, next) {
+  try {
+    const user = await User.findById(req.params.id)
+      .populate('createdQuest')
+    if (!user) throw new Error(notFound)
+    res.status(200).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function profileIndex(_req, res, next) {
+  try {
+    const users = await User.find()
+    if (!users) throw new Error(notFound)
+    res.status(200).json(users)
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   register,
-  login
+  login,
+  profile,
+  profileIndex
 }
