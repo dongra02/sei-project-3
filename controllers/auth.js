@@ -41,6 +41,7 @@ async function profile(req, res, next) {
 async function profileIndex(_req, res, next) {
   try {
     const users = await User.find()
+      .populate('createdQuest')
     if (!users) throw new Error(notFound)
     res.status(200).json(users)
   } catch (err) {
