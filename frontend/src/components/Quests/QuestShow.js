@@ -44,7 +44,6 @@ class QuestShow extends React.Component {
                 <p>Your next location is:</p>
                 <p>Crown Inn Pub</p>
                 <div className="answer-input">
-                  {/* <h2>Answer Input</h2> */}
                   <input>
                   </input>
                   <button type="button" className="btn btn-info">SUBMIT ANSWER</button>
@@ -61,6 +60,12 @@ class QuestShow extends React.Component {
             }
           </div>
         </div>
+        {screen === 'comments' && 
+        <div className="comments">
+            <h1>Comments</h1>
+              <p>Other user's comments</p>
+        </div>
+        }
       </>
     )
   }
