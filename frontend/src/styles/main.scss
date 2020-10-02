@@ -193,5 +193,17 @@ label {
       color: $map-white;
     }
   }
+}
 
+.filter-option {
+  width: 200px;
+
+  .slider {
+    position: relative;
+    top: -25px;
+  }
+
+  .rc-slider-handle {
+    top: 0;
+  }
 }

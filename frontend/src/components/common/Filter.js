@@ -16,10 +16,13 @@ const Filter = ({ location, theme, time, handleChange }) => {
           <option value="horror">horror</option>
         </select>
       </div>
-      <div>
+      <div className="filter-option">
         <label htmlFor="time">Time :</label>
         {/* <input id="time" type="range" value={time} onChange={handleChange} /> */}
-        <Slider onChange={event => console.log(event)} />
+        <Slider
+          className="slider"
+          trackStyle={{ backgroundColor: '#a63535' }}
+          onChange={event => console.log(event)} />
       </div>
     </div>
   )
