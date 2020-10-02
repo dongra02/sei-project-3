@@ -8,6 +8,9 @@ router.route('/quests')
   .get(quests.index)
   .post(quests.create)
 
+router.route('/quests/:id')
+  .get(quests.show)
+
 router.route('/register')
   .post(auth.register)
 
