@@ -97,7 +97,7 @@ async function stopDelete(req, res, next) {
   try {
     const quest = await Quest.findById(req.params.id)
     if (!quest) throw new Error(notFound)
-    const stopToDelete = await quest.stops.id(req.params.id)
+    const stopToDelete = await quest.stops.id(req.params.stopId)
     if (!stopToDelete) throw new Error(notFound)
     await stopToDelete.remove()
     res.sendStatus(204)
