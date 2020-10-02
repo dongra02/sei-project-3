@@ -36,6 +36,10 @@ button {
   align-items: center;
   justify-content: center;
 
+  background-image: 
+    linear-gradient(#5a99e088, #82c4e088),
+    url('../images/texture.png');
+
   &.is-home {
     height: calc(100vh - 56px);
   }
@@ -82,17 +86,14 @@ button {
     }
   }
 
-  input[type=range] {
-    position: relative;
-    top: 4px;
-  }
 }
 
 .marker {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: $map-red;
+  background-color: $map-blue;
+  border: 1px solid $map-red;
 }
 
 .results {
@@ -129,6 +130,7 @@ button {
   margin: 5px -5px;
 
   box-shadow: 0px 0px 2px $map-grey;
+  cursor: crosshair;
 }
 
 .browse-quests {

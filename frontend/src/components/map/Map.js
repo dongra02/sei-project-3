@@ -27,6 +27,16 @@ class Map extends React.Component {
     })
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.questLocation !== this.props.questLocation) {
+      const currentLocation = {
+        latitude: this.props.questLocation.lat,
+        longitude: this.props.questLocation.lng
+      }
+      this.setState({ currentLocation })
+    }
+  }
+
   moveMapView = async event => {
     if (event.zoom === this.state.zoom) {
       const currentLocation = { latitude: event.latitude, longitude: event.longitude }

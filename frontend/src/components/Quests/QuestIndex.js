@@ -12,7 +12,8 @@ class QuestIndex extends React.Component {
       location: 'under the sea',
       theme: '',
       time: 0
-    }
+    },
+    questLocation: null
   }
 
   componentDidMount = () => {
@@ -22,8 +23,8 @@ class QuestIndex extends React.Component {
   generateMarkers = () => {
     const { searchResults } = this.state
     for (let i = 0; i < 20; i++) {
-      const lat = 51.51 + (Math.random() / 10)
-      const lng = 0.13 + (Math.random() / 10)
+      const lat = 51 + Math.random()
+      const lng = -1 + Math.random()
       searchResults.push({ name: 'questx', lat, lng })
     }
 
@@ -45,11 +46,11 @@ class QuestIndex extends React.Component {
   }
 
   flyToQuest = quest => {
-    console.log(quest)
+    this.setState({ questLocation: quest })
   }
 
   render() {
-    const { formData, searchResults } = this.state
+    const { formData, searchResults, questLocation } = this.state
     return (
       <>
         <Header />
@@ -58,7 +59,7 @@ class QuestIndex extends React.Component {
           <Filter {...formData} handleChange={this.handleChange} />
           <div className="results">
             <div className="results-map">
-              <Map getBounds={this.getBounds} searchResults={searchResults} />
+              <Map getBounds={this.getBounds} searchResults={searchResults} questLocation={questLocation} />
             </div>
             <div className="results-list">
               <div className="container">
