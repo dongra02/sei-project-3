@@ -14,7 +14,7 @@ class QuestIndex extends React.Component {
       theme: '',
       time: 0
     },
-    questLocation: null
+    selectedQuest: null
   }
 
   // componentDidMount = () => {
@@ -53,11 +53,11 @@ class QuestIndex extends React.Component {
   }
 
   flyToQuest = quest => {
-    this.setState({ questLocation: quest.stops[0].location })
+    this.setState({ selectedQuest: quest })
   }
 
   render() {
-    const { formData, searchResults, questLocation } = this.state
+    const { formData, searchResults, selectedQuest } = this.state
     return (
       <>
         <Header />
@@ -66,7 +66,7 @@ class QuestIndex extends React.Component {
           <Filter {...formData} handleChange={this.handleChange} />
           <div className="results">
             <div className="results-map">
-              <Map getBounds={this.getBounds} searchResults={searchResults} questLocation={questLocation} />
+              <Map getBounds={this.getBounds} searchResults={searchResults} selectedQuest={selectedQuest} />
             </div>
             <div className="results-list">
               <div className="container">

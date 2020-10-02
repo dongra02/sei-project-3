@@ -28,12 +28,13 @@ class Map extends React.Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.questLocation !== this.props.questLocation) {
+    if (prevProps.selectedQuest !== this.props.selectedQuest) {
+      console.log(this.props.selectedQuest)
       const currentLocation = {
-        latitude: this.props.questLocation.latitude,
-        longitude: this.props.questLocation.longitude
+        latitude: this.props.selectedQuest.stops[0].location.latitude,
+        longitude: this.props.selectedQuest.stops[0].location.longitude
       }
-      this.setState({ currentLocation })
+      this.setState({ zoom: 13, currentLocation })
     }
   }
 
@@ -60,7 +61,7 @@ class Map extends React.Component {
   render() {
 
     const { zoom, currentLocation } = this.state
-    const { searchResults } = this.props
+    const { searchResults, selectedQuest } = this.props
 
     return (
       <MapGL
@@ -81,11 +82,12 @@ class Map extends React.Component {
       >
         {searchResults &&
           searchResults.map((quest, i) => (
+            
             <Marker
               key={i}
               latitude={quest.stops[0].location.latitude}
               longitude={quest.stops[0].location.longitude}>
-              <div className="marker" />
+              <div className={ `${selectedQuest && selectedQuest._id === quest._id ? 'marker-select' : 'marker'}` } />
             </Marker>
           ))}
       </MapGL>
