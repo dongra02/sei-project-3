@@ -56,6 +56,17 @@ async function questUpdate(req, res, next) {
   }
 }
 
+async function questDelete(req, res, next) {
+  try {
+    const questToDelete = await Quest.findById(req.params.id)
+    if (!questToDelete) throw new Error(notFound)
+    await questToDelete.remove()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
 async function stopShow(req, res, next) {
   try {
     const quest = await Quest.findById(req.params.id)
@@ -82,13 +93,27 @@ async function stopUpdate(req, res, next) {
   }
 }
 
+async function stopDelete(req, res, next) {
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error(notFound)
+    const stopToDelete = await quest.stops.id(req.params.id)
+    if (!stopToDelete) throw new Error(notFound)
+    await stopToDelete.remove()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   index: questIndex,
   create: questCreate,
   show: questShow,
+  questUpdate,
+  questDelete,
   stopCreate,
   stopShow,
-  questUpdate,
-  stopUpdate
+  stopUpdate,
+  stopDelete
 }
-
