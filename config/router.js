@@ -11,6 +11,7 @@ router.route('/quests')
 router.route('/quests/:id')
   .get(quests.show)
   .put(quests.questUpdate)
+  .delete(quests.questDelete)
 
 router.route('/quests/:id/stops')
   .post(quests.stopCreate)
@@ -18,11 +19,18 @@ router.route('/quests/:id/stops')
 router.route('/quests/:id/stops/:stopId')
   .get(quests.stopShow)
   .put(quests.stopUpdate)
+  .delete(quests.stopDelete)
 
 router.route('/register')
   .post(auth.register)
 
 router.route('/login')
   .post(auth.login)
+
+router.route('/users')
+  .get(auth.profileIndex)
+
+router.route('/users/:id')
+  .get(auth.profile)
 
 module.exports = router
