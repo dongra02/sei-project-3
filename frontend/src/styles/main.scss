@@ -159,8 +159,9 @@ label {
 
 .top-show-buttons {
   display: flex;
-  justify-content: center;
-  margin: 30px auto 0;
+  justify-content: left;
+  margin-top: 50px;
+  margin-left: 5%;
   width: 95%;
 
 }
@@ -187,9 +188,8 @@ label {
 
 
   .show-map {
-    margin-left: 10px;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     height: 400px;
     width: 100%;
 
@@ -278,6 +278,10 @@ label {
   }
   &:nth-child(3) {
     left: -10px;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
