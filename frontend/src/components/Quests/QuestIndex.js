@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Header from '../common/Header'
 import Filter from '../common/Filter'
@@ -7,7 +8,7 @@ import Map from '../map/Map'
 class QuestIndex extends React.Component {
 
   state = {
-    searchResults: [],
+    searchResults: null,
     formData: {
       location: 'under the sea',
       theme: '',
@@ -16,8 +17,14 @@ class QuestIndex extends React.Component {
     questLocation: null
   }
 
-  componentDidMount = () => {
-    this.generateMarkers()
+  // componentDidMount = () => {
+  //   this.generateMarkers()
+  // }
+
+  componentDidMount = async () => {
+    const response = await axios.get('/api/quests')
+    console.log(response.data)
+    this.setState({ searchResults: response.data })
   }
 
   generateMarkers = () => {
@@ -46,7 +53,7 @@ class QuestIndex extends React.Component {
   }
 
   flyToQuest = quest => {
-    this.setState({ questLocation: quest })
+    this.setState({ questLocation: quest.stops[0].location })
   }
 
   render() {

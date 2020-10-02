@@ -30,8 +30,8 @@ class Map extends React.Component {
   componentDidUpdate = (prevProps) => {
     if (prevProps.questLocation !== this.props.questLocation) {
       const currentLocation = {
-        latitude: this.props.questLocation.lat,
-        longitude: this.props.questLocation.lng
+        latitude: this.props.questLocation.latitude,
+        longitude: this.props.questLocation.longitude
       }
       this.setState({ currentLocation })
     }
@@ -83,8 +83,8 @@ class Map extends React.Component {
           searchResults.map((quest, i) => (
             <Marker
               key={i}
-              latitude={quest.lat}
-              longitude={quest.lng}>
+              latitude={quest.stops[0].location.latitude}
+              longitude={quest.stops[0].location.longitude}>
               <div className="marker" />
             </Marker>
           ))}
