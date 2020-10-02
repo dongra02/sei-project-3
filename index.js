@@ -4,6 +4,7 @@ const app = express()
 
 const { dbURI, port } = require('./config/environment')
 const router = require('./config/router')
+const errorHandler = require('./lib/errorHandler')
 const logger  = require('./lib/logger')
 
 mongoose.connect(
@@ -23,5 +24,7 @@ app.use(express.json())
 app.use(logger)
 
 app.use('/api', router)
+
+app.use(errorHandler)
 
 app.listen(port, ()=> console.log(`Listening on localhost:${port} 😎 😎`))
