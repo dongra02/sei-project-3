@@ -49,6 +49,7 @@ class QuestCreate extends React.Component{
             <div>This is going to be a map</div>
           </div>
         </div>
+        <h3>We could have list of stops added down here</h3>
       </div>
     )
   }
