@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../common/Header'
 import QuestForm from './QuestForm'
-import questForm from './QuestForm'
 
 class QuestCreate extends React.Component{
 
@@ -18,7 +17,7 @@ class QuestCreate extends React.Component{
 
   // Need to collect quest info (name, location, estTime, theme) update to setState
   // 'form in form' for filling out stop info (name, location: lat, long, clue, answer)
-    // grab stops array from state, push new stop, setState.
+  // grab stops array from state, push new stop, setState.
   // add 'owner' as current user info
   // send questFormData to backend /api/quests
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
