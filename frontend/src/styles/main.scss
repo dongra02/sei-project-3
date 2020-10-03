@@ -109,8 +109,10 @@ label {
   &.select {
     width: 20px;
     height: 20px;
-    background-color: $map-sand;
-    border-width: 2px;
+    background-color: $map-red;
+    border: none;
+    border-radius: 0;
+    clip-path: polygon(100% 0, 100% 70%, 50% 100%, 0 70%, 0 0);
   }
 }
 
@@ -165,7 +167,6 @@ label {
   margin-top: 50px;
   margin-left: 5%;
   width: 95%;
-
 }
 
 .quest-view {
@@ -175,7 +176,6 @@ label {
   border: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
   width: 95%;
-
 
   .clues {
     border-radius: 15px;
@@ -188,21 +188,17 @@ label {
     margin: 50px;
   }
 
-
   .show-map {
-    text-align: center;
     padding: 10px;
     height: 400px;
     width: 100%;
-
   }
-
 }
 
-.btn {
-  padding: 5px;
-  margin: 5px;
-}
+// .btn {
+//   padding: 5px;
+//   margin: 5px;
+// }
 
 .form-container {
   margin: 50px auto;
@@ -246,10 +242,7 @@ label {
   .slider {
     position: relative;
     top: -25px;
-  }
-
-  .rc-slider-handle {
-    top: 0;
+    left: 50px;
   }
 }
 
@@ -302,7 +295,6 @@ label {
     color: #444;
   }
 }
-
 
 .create-container {
   display: flex;
