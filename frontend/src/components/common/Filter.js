@@ -1,13 +1,14 @@
 import React from 'react'
-import Slider, { Range } from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import Geocoder from '../map/Geocoder'
 
-const Filter = ({ location, theme, time, handleChange }) => {
+const Filter = ({ location, theme, handleChange, selectLocation }) => {
   return (
     <div className="filters">
       <div>
         <label htmlFor="location">Location :</label>
-        <input id="location" type="text" value={location} onChange={handleChange} />
+        <Geocoder selectLocation={selectLocation} />
       </div>
       <div>
         <label htmlFor="theme">Theme :</label>

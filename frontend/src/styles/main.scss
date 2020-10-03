@@ -117,6 +117,7 @@ label {
   height: 400px;
 
   .results-map {
+    position: relative;
     width: 65%;
     outline: 1px dashed $map-red;
     padding: 5px;
@@ -355,4 +356,19 @@ label {
     padding: 5px;
     box-shadow: 3px 5px $map-red;
   }
+}
+
+.react-geocoder {
+  display: inline-block;
+  position: relative;
+  // width: 350px;
+}
+
+.react-geocoder-results {
+  border: 1px solid $map-sand;
+  background-color: $map-sand;
+  position: absolute;
+  left: -30px;
+  width: 100%;
+  z-index: 1;
 }

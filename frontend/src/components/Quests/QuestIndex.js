@@ -59,6 +59,12 @@ class QuestIndex extends React.Component {
     this.props.history.push(`/quests/${questId}`)
   }
 
+  selectLocation = ({ latitude, longitude, zoom }) => {
+    zoom = Math.min(zoom + 10, 18)
+    // this.setState({ currentLocation: { latitude, longitude }, zoom })
+    console.log(latitude, longitude, zoom)
+  } 
+
   render() {
     const { formData, searchResults, selectedQuest } = this.state
     return (
@@ -66,7 +72,7 @@ class QuestIndex extends React.Component {
         {/* <Header /> */}
         <div className="browse-quests">
           <h3>Find a new Quest</h3>
-          <Filter {...formData} handleChange={this.handleChange} />
+          <Filter {...formData} handleChange={this.handleChange} selectLocation={this.selectLocation} />
           <div className="results">
             <div className="results-map">
               <Map

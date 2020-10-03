@@ -1,10 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 
 import MapGL, { Marker } from 'react-map-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'
-
-import Geocoder from 'react-map-gl-geocoder'
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
+// import 'mapbox-gl/dist/mapbox-gl.css'
 
 class Map extends React.Component {
 
@@ -33,7 +30,6 @@ class Map extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.selectedQuest !== this.props.selectedQuest) {
-      console.log(this.props.selectedQuest)
       const currentLocation = {
         latitude: this.props.selectedQuest.stops[0].location.latitude,
         longitude: this.props.selectedQuest.stops[0].location.longitude
@@ -97,6 +93,7 @@ class Map extends React.Component {
               }
             </Marker>
           ))}
+        
       </MapGL>
     )
   }
