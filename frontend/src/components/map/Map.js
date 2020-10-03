@@ -83,7 +83,7 @@ class Map extends React.Component {
           const handleClick = quest.selected ? () => startQuest(quest._id) : null
           const marker =
             < Marker key={i} latitude={latitude} longitude={longitude}>
-              <div className={`${quest.selected ? 'marker-select' : 'marker'}`} onClick={handleClick} />
+              <div className={`marker ${quest.selected ? 'select' : ''}`} onClick={handleClick} />
             </Marker>
           return marker
         })}

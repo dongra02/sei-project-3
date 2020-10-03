@@ -23,7 +23,7 @@ button {
   }
 }
 
-input {
+input, select {
   background-color: transparent;
   border: none;
   border-bottom: 1px dashed $map-red;
@@ -39,17 +39,19 @@ label {
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-family: 'Sansita Swashed', cursive;
+  font-size: 4em;
+  text-align: center;
   height: 120px;
   background-color: $map-blue;
-  color: rgb(24, 1, 21);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #222;
 
   background-image: 
-    linear-gradient(#f8f6f388, #f8f6f388),
+    linear-gradient(#eee8, #eee8),
     url('../images/texture.png');
 
   &.is-home {
@@ -57,106 +59,9 @@ label {
   }
 
   .header-title {
-    font-size: 4em;
     position: relative;
     left: -30px;
   }
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 50px;
-
-  div {
-    margin: 0 30px;
-  }
-
-  
-
-  
-
-  select {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px dashed $map-red;
-    padding-bottom: 4px;
-    width: 150px;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-}
-
-.marker {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: $map-blue;
-  border: 1px solid $map-red;
-}
-
-.marker-select {
-  width: 50px;
-  height: 30px;
-  text-align: center;
-  background-color: $map-sand;
-  border: 1px solid $map-red;
-  transform: translate(-50%, -50%);
-}
-
-.results {
-  display: flex;
-  justify-content: space-between;
-  margin: 50px;
-  height: 400px;
-
-  .results-map {
-    position: relative;
-    width: 65%;
-    outline: 1px dashed $map-red;
-    padding: 5px;
-    box-shadow: 3px 5px $map-red;
-  }
-
-
-  .results-list {
-    width: 30%;
-    outline: 1px dashed $map-red;
-    padding: 5px;
-    box-shadow: 3px 5px $map-red;
-    
-    .container {
-      height: 100%;
-      overflow-y: scroll;
-    }
-  }
-}
-
-.results-list-item {
-  text-align: center;
-  line-height: 54px;
-  background-color: #eeeab730;
-  margin: 5px -5px;
-
-  box-shadow: 0px 0px 2px $map-grey;
-  cursor: crosshair;
-}
-
-.browse-quests, .create-quest {
-  h3 {
-    text-align: center;
-    margin-top: 50px;
-    color: #555;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 10px;
 }
 
 // Navbar
@@ -179,6 +84,78 @@ label {
     }
   }
 }
+
+
+
+
+.filters {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 50px;
+  
+  select {
+    padding-bottom: 4px;
+    width: 150px;
+  }
+}
+
+.marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $map-blue;
+  border: 1px solid $map-red;
+  
+  &.select {
+    width: 20px;
+    height: 20px;
+    background-color: $map-sand;
+    border-width: 2px;
+  }
+}
+
+// Container for map and list divs
+.results {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+  height: 500px;
+
+  .results-map, 
+  .results-list {
+    position: relative;
+    width: 65%;
+    padding: 5px;
+    border: 1px dashed $map-red;
+    box-shadow: 3px 5px $map-red;
+  }
+
+  .results-list {
+    width: 30%;
+    
+    .container {
+      height: 100%;
+      overflow-y: scroll;
+    }
+  }
+
+  .results-list-item {
+    text-align: center;
+    line-height: 54px;
+    margin: 5px -5px;
+    background-color: $map-sand;
+    box-shadow: 0px 0px 2px $map-grey;
+    cursor: crosshair;
+  }
+}
+
+.browse-quests h3, 
+.create-quest h3 {
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+}
+
 
 // Quest Show
 
@@ -225,15 +202,6 @@ label {
 .btn {
   padding: 5px;
   margin: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: $map-grey;
-}
-
-::-webkit-scrollbar-track {
-  &:hover {
-    // background-color: #def;
-  }
 }
 
 .form-container {
@@ -370,4 +338,19 @@ label {
   left: -30px;
   width: 100%;
   z-index: 1;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $map-grey;
+}
+
+::-webkit-scrollbar-track {
+  &:hover {
+    // background-color: #def;
+  }
 }
