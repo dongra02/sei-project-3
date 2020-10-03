@@ -161,10 +161,23 @@ label {
 
 // Navbar
 
-.navbar {
-  background-color: #82c4e0;
-  // border-bottom: 1px solid $map-blue;
+.navbar-expand {
+  background-image: url('../images/nav-bg-sand.png');
+  padding: 5px 20px;
+  
+  .user {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+  }
 
+  .nav-link {
+    color:#555;
+
+    &.active {
+      color: $map-red;
+    }
+  }
 }
 
 // Quest Show
@@ -319,25 +332,6 @@ label {
     border: 1px solid $map-blue;
     box-shadow: 1px 1px $map-blue;
     color: #444;
-  }
-}
-
-.navbar-expand {
-  background-image: url('../images/nav-bg-sand.png');
-  padding: 5px 20px;
-  
-  .user {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-  }
-
-  .nav-link {
-    color:#555;
-
-    &.active {
-      color: $map-red;
-    }
   }
 }
 
