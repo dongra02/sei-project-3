@@ -84,6 +84,7 @@ class Map extends React.Component {
           const marker =
             < Marker key={i} latitude={latitude} longitude={longitude}>
               <div className={`marker ${quest.selected ? 'select' : ''}`} onClick={handleClick} />
+              {quest.selected && <div className="marker-border" />}
             </Marker>
           return marker
         })}

@@ -107,6 +107,9 @@ label {
   border: 1px solid $map-red;
   
   &.select {
+    position: relative;
+    top: -16px;
+    left: -8px;
     width: 20px;
     height: 20px;
     background-color: $map-red;
@@ -114,6 +117,16 @@ label {
     border-radius: 0;
     clip-path: polygon(100% 0, 100% 70%, 50% 100%, 0 70%, 0 0);
   }
+}
+
+.marker-border {
+  position: relative;
+  top: -34px;
+  left: -6px;
+  width: 16px;
+  height: 16px;
+  background-color: $map-sand;
+  clip-path: polygon(100% 0, 100% 70%, 50% 100%, 0 70%, 0 0);
 }
 
 // Container for map and list divs
