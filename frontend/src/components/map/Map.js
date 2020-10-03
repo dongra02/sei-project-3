@@ -1,7 +1,7 @@
 import React from 'react'
 
 import MapGL, { Marker } from 'react-map-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'  
+// import 'mapbox-gl/dist/mapbox-gl.css'
 
 class Map extends React.Component {
 
@@ -14,39 +14,37 @@ class Map extends React.Component {
     mapRef: null
   }
 
-
   componentDidMount = () => {
+    // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
     
-    if (!this.props.selectedQuest) {
-      navigator.geolocation.getCurrentPosition(data => {
-        const currentLocation = {
-          latitude: data.coords.latitude,
-          longitude: data.coords.longitude
-        }
-        this.setState({ currentLocation })
+    // Get current location and go to position on map
+    navigator.geolocation.getCurrentPosition(data => {
+      const { latitude, longitude } = data.coords
+      this.setState({ currentLocation: { latitude, longitude } })
+    })
+  }
+
+  componentDidUpdate = () => {
+    // Go to location on map if requested to by parent component
+    // Only called once as the flyTo prop should always be nulled as a callback function to setState when used
+    if (this.props.flyTo) {
+      const { latitude, longitude } = this.props.flyTo
+      this.setState({
+        zoom: 13,
+        currentLocation: { latitude, longitude }
       })
     }
   }
 
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.selectedQuest !== this.props.selectedQuest) {
-      console.log(this.props.selectedQuest)
-      const currentLocation = {
-        latitude: this.props.selectedQuest.stops[0].location.latitude,
-        longitude: this.props.selectedQuest.stops[0].location.longitude
-      }
-      this.setState({ zoom: 13, currentLocation })
-    }
-  }
-
-  moveMapView = async event => {
+  moveMapView = event => {
+    // This if block stop the scroll zoom from moving the map
     if (event.zoom === this.state.zoom) {
-      const currentLocation = { latitude: event.latitude, longitude: event.longitude }
-      this.setState({ currentLocation })
+      const { latitude, longitude } = event
+      this.setState({ currentLocation: { latitude, longitude } })
     }
 
-    // Gets NE and SW bounds
+    // Gets NE and SW bounds of visible area
     if (this.state.mapRef) {
       const bounds = this.state.mapRef.getMap().getBounds()
       this.props.getBounds(bounds)
@@ -54,47 +52,41 @@ class Map extends React.Component {
   }
 
   scrollToZoom = event => {
-    const scroll = event.srcEvent.deltaY
-    event.lngLat = [this.state.currentLocation.longitude, this.state.currentLocation.latitude]
-    if (scroll > 5) this.setState({ zoom: this.state.zoom - 0.05 })
-    if (scroll < -5) this.setState({ zoom: this.state.zoom + 0.05 })
+    const scrollSpeed = event.srcEvent.deltaY
+    if (scrollSpeed >  5) this.setState({ zoom: this.state.zoom - 0.05 })
+    if (scrollSpeed < -5) this.setState({ zoom: this.state.zoom + 0.05 })
   }
 
   render() {
 
     const { zoom, currentLocation } = this.state
-    const { searchResults, selectedQuest, startQuest } = this.props
+    const { results, startQuest } = this.props
 
     return (
       <MapGL
+        ref={map => this.mapRef = map}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        width={'100%'}
-        height={'100%'}
         mapStyle='mapbox://styles/sriramsiv/ckfqhispj079919t8xxbwa6t7'
+        width={'100%'} height={'100%'}
         latitude={currentLocation.latitude}
         longitude={currentLocation.longitude}
         zoom={zoom}
         doubleClickZoom={false}
         onViewportChange={this.moveMapView}
-        
-        onDblClick={this.placeMarker}
+        // onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
-        ref={ map => this.mapRef = map }
       >
-        {searchResults &&
-          searchResults.map((quest, i) => (
-            
-            <Marker
-              key={i}
-              latitude={quest.stops[0].location.latitude}
-              longitude={quest.stops[0].location.longitude}>
-              {selectedQuest && selectedQuest._id === quest._id
-                ? <div className="marker-select" onClick={() => startQuest(quest._id)}>GO!</div>
-                : <div className="marker" />
-              }
+        {results && results.map((quest, i) => {
+          const { latitude, longitude } = quest.stops[0].location
+          // TODO onClick *not-selected* -> open quest details
+          const handleClick = quest.selected ? () => startQuest(quest._id) : null
+          const marker =
+            < Marker key={i} latitude={latitude} longitude={longitude}>
+              <div className={`${quest.selected ? 'marker-select' : 'marker'}`} onClick={handleClick} />
             </Marker>
-          ))}
+          return marker
+        })}
       </MapGL>
     )
   }

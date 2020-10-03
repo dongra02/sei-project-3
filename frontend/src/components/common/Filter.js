@@ -1,13 +1,14 @@
 import React from 'react'
-import Slider, { Range } from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import Geocoder from '../map/Geocoder'
 
-const Filter = ({ location, theme, time, handleChange }) => {
+const Filter = ({ theme, handleChange, selectLocation }) => {
   return (
     <div className="filters">
       <div>
         <label htmlFor="location">Location :</label>
-        <input id="location" type="text" value={location} onChange={handleChange} />
+        <Geocoder selectLocation={selectLocation} />
       </div>
       <div>
         <label htmlFor="theme">Theme :</label>
@@ -18,7 +19,6 @@ const Filter = ({ location, theme, time, handleChange }) => {
       </div>
       <div className="filter-option">
         <label htmlFor="time">Time :</label>
-        {/* <input id="time" type="range" value={time} onChange={handleChange} /> */}
         <Slider
           className="slider"
           trackStyle={{ backgroundColor: '#a63535' }}
