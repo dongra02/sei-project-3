@@ -7,6 +7,7 @@ import Register from './components/common/Register'
 import Login from './components/common/Login'
 import QuestIndex from './components/Quests/QuestIndex'
 import QuestShow from './components/Quests/QuestShow'
+import QuestCreate from './components/Quests/QuestCreate'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route path="/quests/:id" component={QuestShow} />
         <Route path="/quests" component={QuestIndex} />
+        <Route path='/create' component={QuestCreate} />
         {/* <Route path="/create" component={QuestIndex} />
         <Route path="/profile" component={QuestIndex} />   */}
         <Route path="/login" component={Login} />
