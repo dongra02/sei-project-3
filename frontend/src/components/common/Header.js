@@ -3,9 +3,9 @@ import React from 'react'
 const Header = ({ isHome }) => {
   return (
     <div className={`header ${isHome ? 'is-home' : ''}`}>
-      <div className="header-title">
+      {/* <div className="header-title">
         302
-      </div>
+      </div> */}
       <img src={require('../../images/trail-red.png')} />
       <div className="header-title">
         Found

@@ -47,7 +47,7 @@ class QuestIndex extends React.Component {
     this.setState({ formData })
   }
 
-  getBounds = bounds => {
+  getBounds = () => {
     // console.log(bounds)
   }
 
@@ -64,13 +64,18 @@ class QuestIndex extends React.Component {
     const { formData, searchResults, selectedQuest } = this.state
     return (
       <>
-        <Header />
+        {/* <Header /> */}
         <div className="browse-quests">
           <h3>Find a new Quest</h3>
           <Filter {...formData} handleChange={this.handleChange} />
           <div className="results">
             <div className="results-map">
-              <Map getBounds={this.getBounds} searchResults={searchResults} selectedQuest={selectedQuest} startQuest={this.startQuest} />
+              <Map
+                getBounds={this.getBounds}
+                searchResults={searchResults}
+                selectedQuest={selectedQuest}
+                startQuest={this.startQuest}
+              />
             </div>
             <div className="results-list">
               <div className="container">

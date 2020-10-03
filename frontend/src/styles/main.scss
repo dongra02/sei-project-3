@@ -61,6 +61,8 @@ label {
 
   .header-title {
     font-size: 4em;
+    position: relative;
+    left: -30px;
   }
 }
 
@@ -162,6 +164,8 @@ label {
 
 .navbar {
   background-color: #82c4e0;
+  // border-bottom: 1px solid $map-blue;
+
 }
 
 // Quest Show
@@ -320,7 +324,7 @@ label {
 }
 
 #nav-tex {
-  background-image: url('../images/nav-bg.png');
+  background-image: url('../images/nav-bg-sand.png');
   
   .nav-link {
     color:#555;
