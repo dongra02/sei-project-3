@@ -318,3 +318,15 @@ label {
     color: #444;
   }
 }
+
+#nav-tex {
+  background-image: url('../images/nav-bg.png');
+  
+  .nav-link {
+    color:#555;
+
+    &.active {
+      color: $map-red;
+    }
+  }
+}
