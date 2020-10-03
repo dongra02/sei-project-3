@@ -7,66 +7,59 @@ import Map from '../map/Map'
 class QuestIndex extends React.Component {
 
   state = {
-    searchResults: null,
     formData: {
-      location: 'under the sea',
       theme: '',
       time: 0
     },
-    selectedQuest: null
+    results: null,
+    flyTo: null
   }
-
-  // componentDidMount = () => {
-  //   this.generateMarkers()
-  // }
 
   componentDidMount = async () => {
     const response = await axios.get('/api/quests')
-    this.setState({ searchResults: response.data })
+    this.setState({ results: response.data })
   }
 
-  // generateMarkers = () => {
-  //   const { searchResults } = this.state
-  //   for (let i = 0; i < 20; i++) {
-  //     const lat = 51 + Math.random()
-  //     const lng = -1 + Math.random()
-  //     searchResults.push({ name: 'questx', lat, lng })
-  //   }
-
-  //   this.setState({ searchResults })
-  // }
-
+  // Form input control
   handleChange = event => {
-    console.log(event.target)
     const formData = {
       ...this.state.formData,
       [event.target.id]: event.target.value
     }
-
     this.setState({ formData })
   }
 
+  // This will be used to filter search results by visible map area
   getBounds = () => {
     // console.log(bounds)
   }
 
   flyToQuest = quest => {
-    this.setState({ selectedQuest: quest })
+    const results = this.state.results.map(result => (
+      { ...result, selected: result._id === quest._id ? true : false }
+    ))
+    const { latitude, longitude } = quest.stops[0].location
+    const flyTo = { latitude, longitude }
+    // Set state and reset flyTo so that same location can be triggered consecutively if requested
+    // ie. Click to go to location -> move map -> click location again
+    this.setState({ results, flyTo }, () => this.setState({ flyTo: null }))
   }
 
   startQuest = questId => {
-    console.log(questId)
     this.props.history.push(`/quests/${questId}`)
   }
 
-  selectLocation = ({ latitude, longitude, zoom }) => {
-    zoom = Math.min(zoom + 10, 18)
-    // this.setState({ currentLocation: { latitude, longitude }, zoom })
-    console.log(latitude, longitude, zoom)
+  // Called when a item is clicked in the geocoder component results
+  selectLocation = location => {
+    // location.zoom = Math.min(location.zoom + 10, 18)
+    // could set the zoom of the map with this, but not quite sure how its measured here yet
+    const { latitude, longitude } = location
+    const flyTo = { latitude, longitude }
+    this.setState({ flyTo }, () => this.setState({ flyTo: null }))
   } 
 
   render() {
-    const { formData, searchResults, selectedQuest } = this.state
+    const { formData, results,flyTo } = this.state
     return (
       <>
         {/* <Header /> */}
@@ -77,14 +70,16 @@ class QuestIndex extends React.Component {
             <div className="results-map">
               <Map
                 getBounds={this.getBounds}
-                searchResults={searchResults}
-                selectedQuest={selectedQuest}
+                results={results}
                 startQuest={this.startQuest}
+                flyTo={flyTo}
               />
             </div>
             <div className="results-list">
               <div className="container">
-                {searchResults && searchResults.map((quest, i) => <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}</div>)}
+                {results && results.map((quest, i) => (
+                  <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}</div>
+                ))}
               </div>
             </div>
           </div>

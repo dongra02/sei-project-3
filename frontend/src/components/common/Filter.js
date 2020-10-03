@@ -3,7 +3,7 @@ import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import Geocoder from '../map/Geocoder'
 
-const Filter = ({ location, theme, handleChange, selectLocation }) => {
+const Filter = ({ theme, handleChange, selectLocation }) => {
   return (
     <div className="filters">
       <div>
@@ -19,7 +19,6 @@ const Filter = ({ location, theme, handleChange, selectLocation }) => {
       </div>
       <div className="filter-option">
         <label htmlFor="time">Time :</label>
-        {/* <input id="time" type="range" value={time} onChange={handleChange} /> */}
         <Slider
           className="slider"
           trackStyle={{ backgroundColor: '#a63535' }}
