@@ -3,8 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
-
-
+// Custom Variables
 $map-blue: #94c1cf;
 $map-sand: #f8f6e3;
 $map-red: #a63535;
@@ -19,6 +18,9 @@ body {
 
 button {
   font-family: 'Lato', sans-serif;
+  &:focus {
+    outline: none;
+  }
 }
 
 input {
@@ -34,11 +36,6 @@ input {
 
 label {
   margin-right: 15px;
-}
-
-.navbar-nav + .user {
-  position: absolute;
-  right: 20px;
 }
 
 .header {
@@ -68,6 +65,7 @@ label {
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 50px;
 
@@ -324,9 +322,16 @@ label {
   }
 }
 
-#nav-tex {
+.navbar-expand {
   background-image: url('../images/nav-bg-sand.png');
+  padding: 5px 20px;
   
+  .user {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+  }
+
   .nav-link {
     color:#555;
 

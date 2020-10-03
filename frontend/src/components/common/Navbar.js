@@ -26,7 +26,7 @@ class Navbar extends React.Component {
     const { loggedIn, page } = this.state
 
     return (
-      <nav className="navbar navbar-expand-lg navbar navbar-dark bg-primary" id="nav-tex">   
+      <nav className="navbar-expand">   
         <div className="navbar-nav">
           <Link to="/"       className={`nav-link ${page === 'Home' ? 'active' : ''}`}   onClick={this.selectNavItem}>Home</Link>
           <Link to="/quests" className={`nav-link ${page === 'Find' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
