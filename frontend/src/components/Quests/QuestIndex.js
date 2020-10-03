@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-import Header from '../common/Header'
 import Filter from '../common/Filter'
 import Map from '../map/Map'
 
