@@ -5,24 +5,28 @@ import QuestForm from './QuestForm'
 class QuestCreate extends React.Component{
 
   state = {
-    step: 1,
     questFormData: {
       name: '',
       location: '',
       estTime: '',
       theme: '',
       stops: []
+    },
+    stopFormData: {
+      name: '',
+      question: {
+        clue: '',
+        answer: ''
+      },
+      location: {
+        latitude: '',
+        longitude: ''
+      }
     }
   }
-
-  // Need to collect quest info (name, location, estTime, theme) update to setState
-  // 'form in form' for filling out stop info (name, location: lat, long, clue, answer)
-  // grab stops array from state, push new stop, setState.
-  // add 'owner' as current user info
-  // send questFormData to backend /api/quests
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
-  handleChange = event => {
+  handleQuestFormChange = event => {
     const questFormData = {
       ...this.state.questFormData,
       [event.target.id]: event.target.value
@@ -30,9 +34,28 @@ class QuestCreate extends React.Component{
     this.setState({ questFormData })
   }
 
+  handleQuestSubmit = async event => {
+    //set object with formdata as new quest
+    //send quest object to backend with post
+  }
+
+  handleStopFormChange = event => {
+    const stopFormData = {
+      ...this.state.stopFormData,
+      [event.target.id]: event.target.value
+    }
+    this.setState({ stopFormData })
+  }
+
+  handleStopSubmit = event => {
+    //get current formData.stops array
+    //push submitted stop to array
+    //set state in formData.stops to updated array
+  }
+
   render() {
 
-    const { questFormData } = this.state
+    const { questFormData, stopFormData } = this.state
 
     return (
       <div className="create-quest">
@@ -41,7 +64,11 @@ class QuestCreate extends React.Component{
         <div className="create-container">
           <QuestForm
             questFormData={questFormData}
-            handleChange={this.handleChange}
+            handleQuestFormChange={this.handleQuestFormChange}
+            handleQuestSubmit={this.handleQuestSubmit}
+            stopFormData={stopFormData}
+            handleStopFormChange={this.handleQuestFormChange}
+            handleStopSubmit={this.handleStopSubmit}
             themes={this.themes}
           />
           <div className="create-map">
