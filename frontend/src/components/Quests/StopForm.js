@@ -3,7 +3,7 @@ import React from 'react'
 const StopForm = (props) => {
 
   const { name, question } = props.stopFormData
-  const { clue, answer } = props.stopFormData.question
+  const { answer, clue } = question
   const { handleStopFormChange, handleStopSubmit } = props
 
 
@@ -30,7 +30,7 @@ const StopForm = (props) => {
       <div className="form-group">
         <input
           type="text"
-          id="question[clue]"
+          id={question[clue]}
           className="form-control"
           value={question[clue]}
           onChange={handleStopFormChange}
@@ -39,7 +39,7 @@ const StopForm = (props) => {
       <div className="form-group">
         <input
           type="text"
-          id="question[answer]"
+          id="question.answer"
           className="form-control"
           value={question[answer]}
           onChange={handleStopFormChange}
