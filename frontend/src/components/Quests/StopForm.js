@@ -2,13 +2,13 @@ import React from 'react'
 
 const StopForm = (props) => {
 
-  const { name, location } = props.stopFormData
+  const { name, question } = props.stopFormData
   const { clue, answer } = props.stopFormData.question
   const { handleStopFormChange, handleStopSubmit } = props
 
 
   return (
-    <form className="stop-form">
+    <form className="create-form" onSubmit={handleStopSubmit}>
       <h6>Add A Stop</h6>
       <div className="form-group">
         <input
@@ -24,28 +24,28 @@ const StopForm = (props) => {
           type="text"
           id="location"
           className="form-control"
-          value={`${location.latitude}${location.longitude}`}
           onChange={handleStopFormChange}
           placeholder="Location - pick from map!!??"/>
       </div>
       <div className="form-group">
         <input
           type="text"
-          id="clue"
+          id="question[clue]"
           className="form-control"
-          value={clue}
+          value={question[clue]}
           onChange={handleStopFormChange}
           placeholder="Clue"/>
       </div>
       <div className="form-group">
         <input
           type="text"
-          id="answer"
+          id="question[answer]"
           className="form-control"
-          value={answer}
+          value={question[answer]}
           onChange={handleStopFormChange}
           placeholder="Answer"/>
       </div>
+      <button type="submit">add stop</button>
     </form>
   )
 }

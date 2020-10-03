@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../common/Header'
 import QuestForm from './QuestForm'
+import StopForm from './StopForm'
 
 class QuestCreate extends React.Component{
 
@@ -9,8 +10,7 @@ class QuestCreate extends React.Component{
       name: '',
       location: '',
       estTime: '',
-      theme: '',
-      stops: []
+      theme: ''
     },
     stopFormData: {
       name: '',
@@ -22,7 +22,8 @@ class QuestCreate extends React.Component{
         latitude: '',
         longitude: ''
       }
-    }
+    },
+    stops: []
   }
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
@@ -48,9 +49,13 @@ class QuestCreate extends React.Component{
   }
 
   handleStopSubmit = event => {
-    //get current formData.stops array
-    //push submitted stop to array
-    //set state in formData.stops to updated array
+    event.preventDefault()
+    const stops = this.state.stops
+    console.log('stops before adding', stops)
+    const stopFormData = this.state.stopFormData
+    stops.push(stopFormData)
+    console.log('stops before setState', stops)
+    this.setState({ stops })
   }
 
   render() {
@@ -61,15 +66,17 @@ class QuestCreate extends React.Component{
       <div className="create-quest">
         <Header />
         <h3>Create a New Quest</h3>
+        <QuestForm
+          questFormData={questFormData}
+          handleQuestFormChange={this.handleQuestFormChange}
+          handleQuestSubmit={this.handleQuestSubmit}
+          themes={this.themes}
+        />
         <div className="create-container">
-          <QuestForm
-            questFormData={questFormData}
-            handleQuestFormChange={this.handleQuestFormChange}
-            handleQuestSubmit={this.handleQuestSubmit}
+          <StopForm
             stopFormData={stopFormData}
-            handleStopFormChange={this.handleQuestFormChange}
+            handleStopFormChange={this.handleStopFormChange}
             handleStopSubmit={this.handleStopSubmit}
-            themes={this.themes}
           />
           <div className="create-map">
             <div>This is going to be a map</div>

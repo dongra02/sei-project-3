@@ -1,11 +1,8 @@
 import React from 'react'
 
-import StopForm from './StopForm'
-
-
 const QuestForm = (props) => {
   const { name, location, estTime } = props.questFormData
-  const { handleQuestFormChange, themes, stopFormData, handleStopFormChange } = props
+  const { handleQuestFormChange, themes } = props
 
 
   return (
@@ -46,7 +43,6 @@ const QuestForm = (props) => {
             onChange={handleQuestFormChange}
             placeholder="Quest duration (minutes)"/>
         </div>
-        <StopForm stopFormData={stopFormData} handleStopFormChange={handleStopFormChange}/>
       </form>
     </>
   )
