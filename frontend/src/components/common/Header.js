@@ -3,10 +3,7 @@ import React from 'react'
 const Header = ({ isHome }) => {
   return (
     <div className={`header ${isHome ? 'is-home' : ''}`}>
-      {/* <div className="header-title">
-        302
-      </div> */}
-      <img src={require('../../images/trail-red.png')} />
+      <img src={require('../../images/trail-red.png')} alt="logo" />
       <div className="header-title">
         Found
       </div>

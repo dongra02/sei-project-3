@@ -1,7 +1,7 @@
 import React from 'react'
 
 import MapGL, { Marker } from 'react-map-gl'
-// import 'mapbox-gl/dist/mapbox-gl.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 class Map extends React.Component {
 

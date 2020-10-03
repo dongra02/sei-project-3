@@ -8,6 +8,7 @@ const Geocoder = ({ selectLocation }) => {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       onSelected={selectLocation}
       updateInputOnSelect={true}
+      viewport={{ view: 0 }} // TODO put in real object
     />
   )
 }
