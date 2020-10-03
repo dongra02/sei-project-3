@@ -154,5 +154,58 @@ module.exports = [{
       }
     }
   ]
+},
+{
+  name: 'Batroun Tour',
+  theme: 'Sightseeing',
+  estTime: '1 hour',
+  location: 'Batroun',
+  timer: false,
+  stops: [
+    {
+      'name': 'Our Lady of the Sea',
+      'location': {
+        'latitude': 34.254793,
+        'longitude': 35.656035
+      },
+      'question': {
+        'clue': 'A structure protecting Batroun since the first century BC ',
+        'answer': 'Old Pheonician Wall'
+      }
+    },
+    {
+      'name': 'Old Phoenician Wall',
+      'location': {
+        'latitude': 34.255256,
+        'longitude': 35.655740
+      },
+      'question': {
+        'clue': 'Cool of with a rereshing drink, you can even ask for a guinness world record size',
+        'answer': 'Hilmi House of Lemonade'
+      }
+    },
+    {
+      'name': 'Hilmi House of Lemonade',
+      'location': {
+        'latitude': 34.255253,
+        'longitude': 35.658611
+      },
+      'question': {
+        'clue': 'Have a beer at this decorated distillery',
+        'answer': 'Colonel Brewery & Distillery'
+      }
+    },
+    {
+      'name': 'Colonel Brewery & Distillery',
+      'location': {
+        'latitude': 34.250493,
+        'longitude': 35.658175
+      },
+      'question': {
+        'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
+        'answer': 'Zeituna Bay'
+      }
+    }
+  ]
 }
 ]
