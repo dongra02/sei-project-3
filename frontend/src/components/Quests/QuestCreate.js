@@ -51,10 +51,8 @@ class QuestCreate extends React.Component{
   handleStopSubmit = event => {
     event.preventDefault()
     const stops = this.state.stops
-    console.log('stops before adding', stops)
     const stopFormData = this.state.stopFormData
     stops.push(stopFormData)
-    console.log('stops before setState', stops)
     this.setState({ stops })
   }
 
