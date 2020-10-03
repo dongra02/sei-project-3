@@ -104,7 +104,7 @@ module.exports = [{
   ]
 }, {
   name: 'Escape of the country',
-  theme: 'political fugitive',
+  theme: 'Political fugitive',
   estTime: '45 minutes',
   location: 'London',
   timer: true,
