@@ -20,8 +20,6 @@ class QuestShow extends React.Component {
   }
 
 
-  // Write a function handleClick for the buttons clue and comments that will change the state of window
-  // Then in render, return the right state according to which button clicked
   handleClick = event => {
     this.setState({
       screen: event.target.value
@@ -42,11 +40,9 @@ class QuestShow extends React.Component {
     }
   }
 
-
   render() {
     const { screen, route, currentStop, answer } = this.state
     const stop = route ? route.stops[currentStop] : null
-
     return (
       <>
         <Header />
@@ -61,7 +57,9 @@ class QuestShow extends React.Component {
               <div className="clues">
                 <h2>Quest</h2>
                 <p>Your next location is:</p>
+                {stop !== null &&
                 <p>{stop.question.clue}</p>
+                }
                 <div className="answer-input">
                   <input
                     type="text"
