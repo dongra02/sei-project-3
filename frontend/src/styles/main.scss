@@ -145,7 +145,7 @@ label {
   cursor: crosshair;
 }
 
-.browse-quests {
+.browse-quests, .create-quest {
   h3 {
     text-align: center;
     margin-top: 50px;
@@ -344,7 +344,7 @@ label {
     padding: 5px;
     box-shadow: 3px 5px $map-red;
   }
-  
+
   .create-form {
     width: 40%;
     outline: 1px dashed $map-red;

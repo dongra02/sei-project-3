@@ -1,5 +1,7 @@
 import React from 'react'
 import Header from '../common/Header'
+import QuestForm from './QuestForm'
+import questForm from './QuestForm'
 
 class QuestCreate extends React.Component{
 
@@ -18,50 +20,36 @@ class QuestCreate extends React.Component{
   // 'form in form' for filling out stop info (name, location: lat, long, clue, answer)
     // grab stops array from state, push new stop, setState.
   // add 'owner' as current user info
-  // send questFromData to backend /api/quests
+  // send questFormData to backend /api/quests
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
-  nextStep = () => {
-    const { step } = this.state
-    this.setState({ step: step + 1 })
+  handleChange = event => {
+    const questFormData = {
+      ...this.state.questFormData,
+      [event.target.id]: event.target.value
+    }
+    this.setState({ questFormData })
   }
-
-  prevStep = () => {
-    const { step } = this.state
-    this.setState({ step: step - 1 })
-  }
-
 
   render() {
+
+    const { questFormData } = this.state
+
     return (
-      <>
+      <div className="create-quest">
         <Header />
         <h3>Create a New Quest</h3>
         <div className="create-container">
-          <form className="create-form">
-            <div className="form-group">
-              <input type="text" className="form-control" id="name" placeholder="Give your quest a name"/>
-            </div>
-            <div className="form-group">
-              <input type="text" className="form-control" id="name" placeholder="City/Location (pick from map?)"/>
-            </div>
-            <div className="form-group">
-              <select className="form-control" id="exampleFormControlSelect1">
-                <option value=''>Select a Theme</option>
-                {this.themes.map(theme => 
-                  <option key={theme} value={theme}>{theme}</option>
-                )}
-              </select>
-            </div>
-            <div className="form-group">
-              <input type="number" className="form-control" id="name" placeholder="Quest duration (minutes)"/>
-            </div>
-          </form>
+          <QuestForm
+            questFormData={questFormData}
+            handleChange={this.handleChange}
+            themes={this.themes}
+          />
           <div className="create-map">
             <div>This is going to be a map</div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
