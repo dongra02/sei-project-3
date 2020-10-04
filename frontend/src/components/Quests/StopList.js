@@ -1,8 +1,7 @@
 import React from 'react'
 
 const StopList = (props) => {
-  const {stops } = props
-
+  const { stops } = props
 
   return (
     <div className="stop-list">

@@ -4,6 +4,7 @@ import Header from '../common/Header'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
 import StopList from './StopList'
+import Map from '../map/Map'
 
 class QuestCreate extends React.Component{
 
@@ -25,7 +26,8 @@ class QuestCreate extends React.Component{
         longitude: ''
       }
     },
-    stops: []
+    stops: [],
+    flyTo: null,
   }
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
@@ -50,17 +52,36 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
+  handleQuestionChange = event => {
+    const stopFormData = { ...this.state.stopFormData }
+    if (event.target.id === 'clue') {
+      stopFormData.question.clue = event.target.value
+    }
+    if (event.target.id === 'answer') {
+      stopFormData.question.answer = event.target.value
+    }
+    this.setState({ stopFormData })
+  }
+
   handleStopSubmit = event => {
     event.preventDefault()
-    const stops = this.state.stops
-    const stopFormData = this.state.stopFormData
+    const stops = [ ...this.state.stops ]
+    const stopFormData = { ...this.state.stopFormData }
     stops.push(stopFormData)
-    this.setState({ stops })
+    this.setState({ stops: [...stops] })
+  }
+
+  selectLocation = location => {
+    const { latitude, longitude } = location
+    const flyTo = { latitude, longitude }
+    const stopLocation = { latitude: latitude, longitude: longitude }
+    const updateStop = { ...this.state.stopFormData, location: stopLocation }
+    this.setState({ flyTo, stopFormData: updateStop }, () => this.setState({ flyTo: null }))
   }
 
   render() {
 
-    const { questFormData, stopFormData, stops } = this.state
+    const { questFormData, stopFormData, stops, results, flyTo } = this.state
 
     return (
       <div className="create-quest">
@@ -76,10 +97,12 @@ class QuestCreate extends React.Component{
           <StopForm
             stopFormData={stopFormData}
             handleStopFormChange={this.handleStopFormChange}
+            handleQuestionChange={this.handleQuestionChange}
             handleStopSubmit={this.handleStopSubmit}
+            selectLocation={this.selectLocation}
           />
           <div className="create-map">
-            <div>This is going to be a map</div>
+            <Map flyTo={flyTo} getBounds={() => null} />
           </div>
         </div>
         <StopList stops={stops} />
