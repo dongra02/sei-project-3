@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 class Map extends React.Component {
 
   state = {
-    zoom: 10,
+    zoom: 1,
     currentLocation: {
       latitude: 0,
       longitude: 0

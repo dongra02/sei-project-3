@@ -6,11 +6,11 @@ import Geocoder from '../map/Geocoder'
 const Filter = ({ theme, handleChange, selectLocation }) => {
   return (
     <div className="filters">
-      <div>
+      <div className="filter-option">
         <label htmlFor="location">Location :</label>
         <Geocoder selectLocation={selectLocation} />
       </div>
-      <div>
+      <div className="filter-option">
         <label htmlFor="theme">Theme :</label>
         <select id="theme" value={theme} onChange={handleChange} >
           <option value="adventure">adventure</option>
@@ -22,7 +22,9 @@ const Filter = ({ theme, handleChange, selectLocation }) => {
         <Slider
           className="slider"
           trackStyle={{ backgroundColor: '#a63535' }}
-          onChange={event => console.log(event)} />
+          handleStyle={{ border: '2px solid #a63535' }}
+        // onChange={event => console.log(event)}
+        />
       </div>
     </div>
   )

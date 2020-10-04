@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Filter from '../common/Filter'
 import Map from '../map/Map'
@@ -11,13 +12,14 @@ class QuestIndex extends React.Component {
       theme: '',
       time: 0
     },
+    allQuests: null,
     results: null,
     flyTo: null
   }
 
   componentDidMount = async () => {
     const response = await axios.get('/api/quests')
-    this.setState({ results: response.data })
+    this.setState({ allQuests: response.data, results: response.data })
   }
 
   // Form input control
@@ -29,9 +31,23 @@ class QuestIndex extends React.Component {
     this.setState({ formData })
   }
 
-  // This will be used to filter search results by visible map area
-  getBounds = () => {
-    // console.log(bounds)
+  // Used to filter search results by visible map area
+  getBounds = ({ _ne, _sw }) => {
+    const bounds = {
+      latitude: [_sw.lat, _ne.lat],
+      longitude: [_sw.lng, _ne.lng]
+    }
+    this.filterResultsByBounds(bounds)
+  }
+
+  filterResultsByBounds = (bounds) => {
+    const results = this.state.allQuests.filter(res => {
+      const location = res.stops[0].location
+      const inLat = location.latitude > bounds.latitude[0] && location.latitude < bounds.latitude[1]
+      const inLng = location.longitude > bounds.longitude[0] && location.longitude < bounds.longitude[1]
+      return inLat && inLng
+    })
+    this.setState({ results })
   }
 
   flyToQuest = quest => {
@@ -56,10 +72,19 @@ class QuestIndex extends React.Component {
     const { latitude, longitude } = location
     const flyTo = { latitude, longitude }
     this.setState({ flyTo }, () => this.setState({ flyTo: null }))
-  } 
+  }
+
+  exitDetailView = () => {
+    const results = this.state.results.map(result => (
+      { ...result, selected: false }
+    ))
+    this.setState({ results })
+  }
 
   render() {
-    const { formData, results,flyTo } = this.state
+    const { formData, results, flyTo } = this.state
+    const selected = results ? results.filter(quest => quest.selected)[0] : null
+    console.log(selected)
     return (
       <>
         {/* <Header /> */}
@@ -76,11 +101,28 @@ class QuestIndex extends React.Component {
               />
             </div>
             <div className="results-list">
-              <div className="container">
-                {results && results.map((quest, i) => (
-                  <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}</div>
-                ))}
-              </div>
+              {results &&
+                <div className="container">
+                  {selected
+                    ?
+                    <div className="quest-details">
+                      <div className="detail-name">{selected.name}</div>
+                      <div className="detail-owner">by {selected.owner}</div>
+                      <br />
+                      <div className="detail-theme">{selected.theme}</div>
+                      <div className="detail-length">{selected.stops.length} stops</div>
+                      <br />
+                      <div className="detail-start">{selected.stops[0].name}</div>
+                      <br />
+                      <Link className="detail-button" to={`/quests/${selected._id}`}>Begin</Link>
+                      <div className="detail-button" onClick={this.exitDetailView}>Back</div>
+                    </div>
+                    :
+                    results.map((quest, i) => (
+                      <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}</div>
+                    ))
+                  }
+                </div>}
             </div>
           </div>
         </div>

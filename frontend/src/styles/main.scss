@@ -90,12 +90,28 @@ label {
 
 .filters {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 50px;
   
   select {
     padding-bottom: 4px;
     width: 150px;
+  }
+}
+
+.filter-option {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  min-width: 200px;
+  margin: 10px 0;
+
+  .slider, select, input {
+    width: 90%;
+  }
+  .slider {
+    padding-top: 10px;
   }
 }
 
@@ -129,6 +145,10 @@ label {
   clip-path: polygon(100% 0, 100% 70%, 50% 100%, 0 70%, 0 0);
 }
 
+.browse-quests {
+  margin: 50px;
+}
+
 // Container for map and list divs
 .results {
   display: flex;
@@ -141,7 +161,7 @@ label {
     position: relative;
     width: 65%;
     padding: 5px;
-    border: 1px dashed $map-red;
+    outline: 1px dashed $map-red;
     box-shadow: 3px 5px $map-red;
   }
 
@@ -161,6 +181,31 @@ label {
     background-color: $map-sand;
     box-shadow: 0px 0px 2px $map-grey;
     cursor: crosshair;
+  }
+}
+
+.quest-details {
+  text-align: center;
+  margin: 5px -5px;
+  padding: 20px 10px;
+  height: 95%;
+  background-color: $map-sand;
+  box-shadow: 0px 0px 2px $map-grey;
+
+  .detail-name {
+    font-size: 1.1em;
+  }
+
+  .detail-button {
+    margin: 10px;
+    background-color: $map-red;
+    color: $map-white;
+    width: 5em;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -249,16 +294,6 @@ label {
   }
 }
 
-.filter-option {
-  width: 200px;
-
-  .slider {
-    position: relative;
-    top: -25px;
-    left: 50px;
-  }
-}
-
 .tab {
   border: none;
   padding: 0 5px;
@@ -340,8 +375,8 @@ label {
   border: 1px solid $map-sand;
   background-color: $map-sand;
   position: absolute;
-  left: -30px;
-  width: 100%;
+  padding: 5px 10px;
+  width: 90%;
   z-index: 1;
 }
 
