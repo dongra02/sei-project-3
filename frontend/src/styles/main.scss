@@ -292,6 +292,10 @@ label {
       color: $map-white;
     }
   }
+
+  h5 {
+    text-align: center;
+  }
 }
 
 .tab {
@@ -393,4 +397,9 @@ label {
   &:hover {
     // background-color: #def;
   }
+}
+
+.quest-form {
+  display: flex;
+  justify-content: space-between;
 }

@@ -7,8 +7,9 @@ const QuestForm = (props) => {
 
   return (
     <>
-      <form className="create-form">
-        <h6>Quest Details</h6>
+      <form className="form-container">
+        <h5>Quest Details</h5>
+        <div className="quest-form">
         <div className="form-group">
           <input
             type="text"
@@ -42,6 +43,7 @@ const QuestForm = (props) => {
             value={estTime}
             onChange={handleQuestFormChange}
             placeholder="Quest duration (minutes)"/>
+        </div>
         </div>
       </form>
     </>
