@@ -1,7 +1,9 @@
 import React from 'react'
+
 import Header from '../common/Header'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
+import StopList from './StopList'
 
 class QuestCreate extends React.Component{
 
@@ -58,7 +60,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData } = this.state
+    const { questFormData, stopFormData, stops } = this.state
 
     return (
       <div className="create-quest">
@@ -80,7 +82,7 @@ class QuestCreate extends React.Component{
             <div>This is going to be a map</div>
           </div>
         </div>
-        <h3>We could have list of stops added down here</h3>
+        <StopList stops={stops} />
       </div>
     )
   }

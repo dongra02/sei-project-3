@@ -9,7 +9,7 @@ const StopForm = (props) => {
 
   return (
     <form className="create-form" onSubmit={handleStopSubmit}>
-      <h6>Add A Stop</h6>
+      <h5>Add A Stop</h5>
       <div className="form-group">
         <input
           type="text"
