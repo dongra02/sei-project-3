@@ -17,10 +17,8 @@ class QuestCreate extends React.Component{
     },
     stopFormData: {
       name: '',
-      question: {
-        clue: '',
-        answer: ''
-      },
+      clue: '',
+      answer: '',
       location: {
         latitude: '',
         longitude: ''
@@ -55,10 +53,10 @@ class QuestCreate extends React.Component{
   handleQuestionChange = event => {
     const stopFormData = { ...this.state.stopFormData }
     if (event.target.id === 'clue') {
-      stopFormData.question.clue = event.target.value
+      stopFormData.clue = event.target.value
     }
     if (event.target.id === 'answer') {
-      stopFormData.question.answer = event.target.value
+      stopFormData.answer = event.target.value
     }
     this.setState({ stopFormData })
   }

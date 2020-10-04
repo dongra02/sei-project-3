@@ -19,8 +19,8 @@ const StopList = (props) => {
             <tr key={i}>
               <th scope="row">{i + 1}</th>
               <td>{stop.name}</td>
-              <td>{stop.question.clue}</td>
-              <td>{stop.question.answer}</td>
+              <td>{stop.clue}</td>
+              <td>{stop.answer}</td>
             </tr>
           )}
         </tbody>

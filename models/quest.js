@@ -6,10 +6,8 @@ const stopSchema = new mongoose.Schema({
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true }
   },
-  question: {
-    clue: { type: String, required: true },
-    answer: { type: String, required: true }
-  }
+  clue: { type: String, required: true },
+  answer: { type: String, required: true }
 })
 
 const questSchema = new mongoose.Schema({

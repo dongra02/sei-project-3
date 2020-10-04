@@ -35,7 +35,7 @@ class QuestShow extends React.Component {
 
     const { currentStop, route, answer } = this.state
 
-    if (answer.toLowerCase() === route.stops[currentStop].question.answer.toLowerCase()) {
+    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       const currentStop = this.state.currentStop + 1
       this.setState({ currentStop })
     }
@@ -57,7 +57,7 @@ class QuestShow extends React.Component {
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
               <h2>{stop ? stop.name : ''}</h2><br />
               <p>Your next clue is:</p>
-              <p>{stop ? stop.question.clue : ''}</p>
+              <p>{stop ? stop.clue : ''}</p>
               <div className="answer-input">
                 <input
                   type="text"
