@@ -4,21 +4,22 @@ import axios from 'axios'
 import Header from '../common/Header'
 import Map from '../map/Map'
 
-
-
 class QuestShow extends React.Component {
   state = {
     screen: 'map',
     route: null,
     currentStop: 0,
-    answer: ''
+    answer: '',
+    flyTo: null
   }
 
   componentDidMount = async () => {
     const response = await axios.get(`/api/quests/${this.props.match.params.id}`)
-    this.setState({ route: response.data })
+    this.setState(
+      { route: response.data, flyTo: response.data.stops[0].location },
+      () => this.setState({ flyTo: null })
+    )
   }
-
 
   handleClick = event => {
     this.setState({
@@ -47,10 +48,10 @@ class QuestShow extends React.Component {
       <>
         <Header />
         <div className="show-quests">
-          <div className="top-show-buttons">
-            <button value="map" onClick={this.handleClick} type="button" className={`tab ${screen === 'map' ? '' : 'inactive'}`} >MAP</button>
-            <button value="clue" onClick={this.handleClick} type="button" className={`tab ${screen === 'clue' ? '' : 'inactive'}`} >CLUE</button>
-            <button value="comments" onClick={this.handleClick} type="button" className={`tab ${screen === 'comments' ? '' : 'inactive'}`} >COMMENTS</button>
+          <div className="show-tabs">
+            {['map', 'clue', 'comments'].map((tab, i) => (
+              <button key={i} value={tab} onClick={this.handleClick} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
+            ))}
           </div>
           <div className="quest-view">
             {screen === 'clue' &&
@@ -76,7 +77,7 @@ class QuestShow extends React.Component {
             }
             {screen === 'map' &&
               <div className="show-map">
-                <Map selectedQuest={this.state.route} getBounds={() => null} />
+                <Map flyTo={this.state.flyTo} getBounds={() => null} route={this.state.route} stop={this.state.currentStop} />
               </div>
             }
             {screen === 'comments' && 

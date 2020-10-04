@@ -2,6 +2,7 @@ import React from 'react'
 
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import StopMarker from '../map/StopMarker'
 
 class Map extends React.Component {
 
@@ -17,7 +18,7 @@ class Map extends React.Component {
   componentDidMount = () => {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
-    
+
     // Get current location and go to position on map
     navigator.geolocation.getCurrentPosition(data => {
       const { latitude, longitude } = data.coords
@@ -60,7 +61,7 @@ class Map extends React.Component {
   render() {
 
     const { zoom, currentLocation } = this.state
-    const { results, startQuest } = this.props
+    const { results, startQuest, route, stop } = this.props
 
     return (
       <MapGL
@@ -77,12 +78,17 @@ class Map extends React.Component {
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
       >
+        {route && 
+          <Marker latitude={route.stops[stop].location.latitude} longitude={route.stops[stop].location.longitude}>
+            <StopMarker number={stop} />
+          </Marker>
+        }
         {results && results.map((quest, i) => {
           const { latitude, longitude } = quest.stops[0].location
           // TODO onClick *not-selected* -> open quest details
           const handleClick = quest.selected ? () => startQuest(quest._id) : null
           const marker =
-            < Marker key={i} latitude={latitude} longitude={longitude}>
+            <Marker key={i} latitude={latitude} longitude={longitude}>
               <div className={`marker ${quest.selected ? 'select' : ''}`} onClick={handleClick} />
               {quest.selected && <div className="marker-border" />}
             </Marker>
