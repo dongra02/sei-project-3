@@ -1,10 +1,11 @@
 import React from 'react'
 
+import Geocoder from '../map/Geocoder'
+
 const StopForm = (props) => {
 
   const { name, question } = props.stopFormData
-  const { answer, clue } = question
-  const { handleStopFormChange, handleStopSubmit } = props
+  const { handleStopFormChange, handleStopSubmit, handleQuestionChange, selectLocation } = props
 
 
   return (
@@ -20,29 +21,27 @@ const StopForm = (props) => {
           placeholder="Stop Name"/>
       </div>
       <div className="form-group">
-        <input
-          type="text"
-          id="location"
-          className="form-control"
-          onChange={handleStopFormChange}
-          placeholder="Location - pick from map!!??"/>
+      <div className="filter-option">
+        <label htmlFor="location">Location :</label>
+        <Geocoder selectLocation={selectLocation} />
+      </div>
       </div>
       <div className="form-group">
         <input
           type="text"
-          id={question[clue]}
+          id="clue"
           className="form-control"
-          value={question[clue]}
-          onChange={handleStopFormChange}
+          value={question.clue}
+          onChange={handleQuestionChange}
           placeholder="Clue"/>
       </div>
       <div className="form-group">
         <input
           type="text"
-          id="question.answer"
+          id="answer"
           className="form-control"
-          value={question[answer]}
-          onChange={handleStopFormChange}
+          value={question.answer}
+          onChange={handleQuestionChange}
           placeholder="Answer"/>
       </div>
       <button type="submit">add stop</button>
