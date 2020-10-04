@@ -399,7 +399,11 @@ label {
   }
 }
 
+.quest {
+  max-width: 1000px;
+}
+
 .quest-form {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }

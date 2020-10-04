@@ -7,7 +7,7 @@ const QuestForm = (props) => {
 
   return (
     <>
-      <form className="form-container">
+      <form className="form-container quest">
         <h5>Quest Details</h5>
         <div className="quest-form">
         <div className="form-group">
@@ -18,14 +18,6 @@ const QuestForm = (props) => {
             value={name}
             onChange={handleQuestFormChange}
             placeholder="Give your quest a name"/>
-        </div>
-        <div className="form-group">
-          <input type="text"
-            className="form-control"
-            id="location"
-            value={location}
-            onChange={handleQuestFormChange}
-            placeholder="City/Location (pick from map???)"/>
         </div>
         <div className="form-group">
           <select className="form-control" id="theme" onChange={handleQuestFormChange}>
