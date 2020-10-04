@@ -54,38 +54,30 @@ class QuestShow extends React.Component {
             ))}
           </div>
           <div className="quest-view">
-            {screen === 'clue' &&
-              <div className="clues">
-                <h2>Quest</h2>
-                <p>Your next location is:</p>
-                {stop !== null &&
-                <p>{stop.question.clue}</p>
-                }
-                <div className="answer-input">
-                  <input
-                    type="text"
-                    name="answer"
-                    value={answer}
-                    placeholder="answer"
-                    onChange={this.changeAnswer}
-                  />
-                </div>
-                <div className="btn-next">
-                  <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
-                </div>
+            <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
+              <h2>{stop ? stop.name : ''}</h2><br />
+              <p>Your next clue is:</p>
+              <p>{stop ? stop.question.clue : ''}</p>
+              <div className="answer-input">
+                <input
+                  type="text"
+                  name="answer"
+                  value={answer}
+                  placeholder="answer"
+                  onChange={this.changeAnswer}
+                />
               </div>
-            }
-            {screen === 'map' &&
-              <div className="show-map">
-                <Map flyTo={this.state.flyTo} getBounds={() => null} route={this.state.route} stop={this.state.currentStop} />
+              <div className="btn-next">
+                <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
               </div>
-            }
-            {screen === 'comments' && 
-            <div className="comments">
-              <h1>Comments</h1>
+            </div>
+            <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
+              <Map flyTo={this.state.flyTo} getBounds={() => null} route={this.state.route} stop={this.state.currentStop} />
+            </div>
+            <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
+              <h2>Comments</h2>
               <p>Other users comments</p>
             </div>
-            }
           </div>
         </div>
       </>
