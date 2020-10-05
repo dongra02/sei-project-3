@@ -62,7 +62,6 @@ class QuestShow extends React.Component {
     const stop = route ? route.stops[currentStop] : null
     return (
       <>
-        <Header />
         <div className="show-quests">
           <div className="show-tabs">
             {['map', 'clue', 'comments'].map((tab, i) => (
