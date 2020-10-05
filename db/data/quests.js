@@ -44,7 +44,7 @@ module.exports = [{
   ]
 }, {
   name: 'Beirut Corniche Crawl',
-  theme: 'Sightseeing',
+  theme: 'Food & Drink',
   estTime: '1 hour',
   location: 'Beirut',
   timer: false,
@@ -88,7 +88,7 @@ module.exports = [{
   ]
 }, {
   name: 'Escape of the country',
-  theme: 'Political fugitive',
+  theme: 'Adventure',
   estTime: '45 minutes',
   location: 'London',
   timer: true,
