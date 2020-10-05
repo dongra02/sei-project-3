@@ -18,15 +18,18 @@ class QuestCreate extends React.Component{
     stopFormData: {
       name: '',
       clue: '',
+      hint: '',
       answer: '',
       location: {
         latitude: '',
         longitude: ''
       }
     },
+    stopAnswerType: 'Answer',
     stops: [],
     flyTo: null,
   }
+
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
   handleQuestFormChange = event => {
@@ -51,6 +54,16 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
+  handleStopAnswerTypeChange = event => {
+    const stopAnswerType = event.target.value
+    this.setState({ stopAnswerType })
+  }
+
+  displayAnswerType = () => {
+    const stopAnsweryType = this.state.stopAnswerType
+    return stopAnsweryType === 'Answer'
+  }
+
   handleStopSubmit = event => {
     event.preventDefault()
     const stops = [ ...this.state.stops ]
@@ -69,7 +82,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, results, flyTo } = this.state
+    const { questFormData, stopFormData, stops, flyTo, stopAnswerType } = this.state
 
     return (
       <div className="create-quest">
@@ -85,16 +98,20 @@ class QuestCreate extends React.Component{
           <StopForm
             stopFormData={stopFormData}
             handleStopFormChange={this.handleStopFormChange}
-            handleQuestionChange={this.handleQuestionChange}
+            handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
+            displayAnswerType={this.displayAnswerType}
             handleStopSubmit={this.handleStopSubmit}
             selectLocation={this.selectLocation}
+            stopAnswerType={stopAnswerType}
           />
           <div className="create-map">
             <Map flyTo={flyTo} getBounds={() => null} />
           </div>
         </div>
         <StopList stops={stops} />
-        <button onClick={this.handleQuestSubmit}>Save Quest</button>
+        <div className="btn-submit-quest">
+          <button onClick={this.handleQuestSubmit}>Save Quest</button>
+        </div>
       </div>
     )
   }
