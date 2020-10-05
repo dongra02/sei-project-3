@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MapGL, { Marker } from 'react-map-gl'
+import MapGL, { Marker, FlyToInterpolator } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import StopMarker from '../map/StopMarker'
 
@@ -13,10 +13,18 @@ class Map extends React.Component {
       longitude: 0
     },
     clickedLocation: null,
-    mapRef: null
+    mapRef: null,
+    transition: null,
+    transitionDuration: null,
+    transitionInterpolator: null
   }
 
-  componentDidMount = () => {
+  transition = {
+    transitionDuration: 'auto',
+    transitionInterpolator: new FlyToInterpolator({ speed: 1.2 })
+  }
+
+  componentDidMount() {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
     // Get current location and go to position on map
@@ -26,11 +34,13 @@ class Map extends React.Component {
   goToCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition(data => {
       const { latitude, longitude } = data.coords
-      this.setState({ currentLocation: { latitude, longitude }, zoom: 12 })
+      // this.setState({ currentLocation: { latitude, longitude }, zoom: 12 })
+      this.mapRef.getMap().flyTo({ center: [longitude, latitude], zoom: 11, speed: 1 })
+
     })
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate(prevProps) {
     // Go to location on map if requested to by parent component
     // Only called once as the flyTo prop should always be nulled as a callback function to setState when used
     if (this.props.flyTo) {
@@ -43,16 +53,21 @@ class Map extends React.Component {
   }
 
   moveMapView = event => {
+    console.log(event)
     // This if block stop the scroll zoom from moving the map
-    if (event.zoom === this.state.zoom) {
+    // if (event.zoom === this.state.zoom) {
       const { latitude, longitude } = event
-      this.setState({ currentLocation: { latitude, longitude } })
-    }
+      this.setState({ currentLocation: { latitude, longitude }, })
+    // }
 
     // Gets NE and SW bounds of visible area
     if (this.state.mapRef && this.props.getBounds) {
-      const bounds = this.state.mapRef.getMap().getBounds()
-      this.props.getBounds(bounds)
+      try {
+        const bounds = this.state.mapRef.getMap().getBounds()
+        this.props.getBounds(bounds)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -90,6 +105,8 @@ class Map extends React.Component {
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
+        transitionDuration={this.state.transitionDuration}
+        transitionInterpolator={this.state.transitionInterpolator}
       >
         {route && 
           <Marker latitude={route.stops[stop].location.latitude} longitude={route.stops[stop].location.longitude}>
