@@ -1,8 +1,11 @@
 module.exports = [{
   name: 'London Bridge Walkabout',
   theme: 'Sightseeing',
-  estTime: '15 minutes',
-  location: 'London',
+  estTime: 15,
+  location: {
+    'latitude': 51.505347,
+    'longitude': -0.086167
+  },
   timer: false,
   stops: [
     {
@@ -50,8 +53,11 @@ module.exports = [{
 }, {
   name: 'Beirut Corniche Crawl',
   theme: 'Food & Drink',
-  estTime: '1 hour',
-  location: 'Beirut',
+  estTime: 60,
+  location: {
+    'latitude': 33.890556,
+    'longitude': 35.470499
+  },
   timer: false,
   stops: [
     {
@@ -98,8 +104,11 @@ module.exports = [{
 }, {
   name: 'Escape of the country',
   theme: 'Adventure',
-  estTime: '45 minutes',
-  location: 'London',
+  estTime: 45,
+  location: {
+    'latitude': 51.513563,
+    'longitude': -0.158275
+  },
   timer: true,
   stops: [
     {
@@ -148,8 +157,11 @@ module.exports = [{
 {
   name: 'Batroun Tour',
   theme: 'Sightseeing',
-  estTime: '1 hour',
-  location: 'Batroun',
+  estTime: 60,
+  location: {
+    'latitude': 34.254793,
+    'longitude': 35.656035
+  },
   timer: false,
   stops: [
     {

@@ -18,6 +18,10 @@ export const getSingleQuest = questId => {
   return axios.get(`${baseUrl}/quests/${questId}`)
 }
 
+export const createQuest = questFormData => {
+  return axios.post(`${baseUrl}/quests`, questFormData, withHeaders())
+}
+
 export const registerUser = formData => {
   return axios.post(`${baseUrl}/register`, formData)
 }
