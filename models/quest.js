@@ -13,7 +13,7 @@ const stopSchema = new mongoose.Schema({
 const questSchema = new mongoose.Schema({
   name: { type: String, required: true },
   timer: { type: Boolean, required: true, default: false },
-  theme: { type: String, enum: ['Sightseeing', 'Political fugitive', 'Under the sea'], required: true },
+  theme: { type: String, enum: ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed'], required: true },
   location: { type: String, required: true },
   estTime: { type: String, required: true },
   stops: [stopSchema],
