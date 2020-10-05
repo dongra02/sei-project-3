@@ -37,15 +37,7 @@ const StopForm = (props) => {
           <option value="Location">Location</option>
         </select>
       </div>
-      {displayAnswerType() &&  <div className="form-group">
-        <textarea
-          type="text"
-          id="hint"
-          className="form-control"
-          value={hint}
-          onChange={handleStopFormChange}
-          placeholder="Hint"/>
-      </div>}
+      {displayAnswerType() &&  
       <div className="form-group">
         <textarea
           type="text"
@@ -55,7 +47,7 @@ const StopForm = (props) => {
           onChange={handleStopFormChange}
           placeholder="Answer"
           required/>
-      </div>
+      </div>}
       {!displayAnswerType() &&  <div className="form-group">
         <input
           type="number"
