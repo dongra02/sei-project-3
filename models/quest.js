@@ -8,6 +8,7 @@ const stopSchema = new mongoose.Schema({
   },
   clue: { type: String, required: true },
   hint: { type: String },
+  answerType: { type: String, enum: ['Answer', 'Proximity'], required: true },
   answer: { type: String, required: true }
 })
 
