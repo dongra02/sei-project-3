@@ -37,6 +37,7 @@ class Register extends React.Component {
   render() {
 
     const { formData } = this.state
+    const { hidePopup } = this.props
 
     return (
       <div className="form-container">
@@ -77,7 +78,8 @@ class Register extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <div className="submit">
+        <div className="form-buttons">
+          <button onClick={hidePopup}>cancel</button>
           <button onClick={this.handleSubmit}>submit</button>
         </div>
       </div>
