@@ -14,9 +14,7 @@ class Map extends React.Component {
     },
     clickedLocation: null,
     mapRef: null,
-    transition: null,
-    transitionDuration: null,
-    transitionInterpolator: null
+    autoTransition: false
   }
 
   transition = {
@@ -24,7 +22,7 @@ class Map extends React.Component {
     transitionInterpolator: new FlyToInterpolator({ speed: 1.2 })
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
     // Get current location and go to position on map
@@ -33,32 +31,38 @@ class Map extends React.Component {
 
   goToCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition(data => {
-      const { latitude, longitude } = data.coords
-      // this.setState({ currentLocation: { latitude, longitude }, zoom: 12 })
-      this.mapRef.getMap().flyTo({ center: [longitude, latitude], zoom: 11, speed: 1 })
-
+      this.flyTo(data.coords)
     })
   }
 
-  componentDidUpdate(prevProps) {
+  flyTo = (coords) => {
+    const { latitude, longitude } = coords
+    this.setState({ autoTransition: coords }, () => {
+      this.mapRef.getMap().flyTo({ center: [longitude, latitude], zoom: 11, speed: 2 })
+      
+      this.mapRef.getMap().on('moveend', () => {
+        if (this.state.autoTransition) {
+          const { latitude, longitude } = this.state.autoTransition
+          this.setState({ currentLocation: { latitude, longitude }, autoTransition: false, zoom: 11  })
+        }
+      })
+    })
+  }
+
+  componentDidUpdate = () => {
     // Go to location on map if requested to by parent component
     // Only called once as the flyTo prop should always be nulled as a callback function to setState when used
     if (this.props.flyTo) {
-      const { latitude, longitude } = this.props.flyTo
-      this.setState({
-        zoom: 13,
-        currentLocation: { latitude, longitude }
-      })
+      this.flyTo(this.props.flyTo)
     }
   }
 
   moveMapView = event => {
-    console.log(event)
     // This if block stop the scroll zoom from moving the map
-    // if (event.zoom === this.state.zoom) {
+    if (event.zoom === this.state.zoom) {
       const { latitude, longitude } = event
-      this.setState({ currentLocation: { latitude, longitude }, })
-    // }
+      this.setState({ currentLocation: { latitude, longitude } })
+    }
 
     // Gets NE and SW bounds of visible area
     if (this.state.mapRef && this.props.getBounds) {
@@ -88,7 +92,7 @@ class Map extends React.Component {
 
   render() {
 
-    const { zoom, currentLocation, clickedLocation } = this.state
+    const { zoom, currentLocation, clickedLocation, autoTransition } = this.state
     const { results, startQuest, route, stop } = this.props
 
     return (
@@ -105,8 +109,6 @@ class Map extends React.Component {
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
-        transitionDuration={this.state.transitionDuration}
-        transitionInterpolator={this.state.transitionInterpolator}
       >
         {route && 
           <Marker latitude={route.stops[stop].location.latitude} longitude={route.stops[stop].location.longitude}>
@@ -118,7 +120,7 @@ class Map extends React.Component {
             <div className="marker" />
           </Marker>
         }
-        {results && results.map((quest, i) => {
+        {results && !autoTransition && results.map((quest, i) => {
           const { latitude, longitude } = quest.stops[0].location
           // TODO onClick *not-selected* -> open quest details
           const handleClick = quest.selected ? () => startQuest(quest._id) : null
