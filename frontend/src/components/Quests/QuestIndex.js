@@ -48,6 +48,7 @@ class QuestIndex extends React.Component {
   }
 
   filterResultsByBounds = (bounds) => {
+    if (!this.state.allQuests) return
     const results = this.state.allQuests.filter(res => {
       const location = res.stops[0].location
       const inLat = location.latitude > bounds.latitude[0] && location.latitude < bounds.latitude[1]
