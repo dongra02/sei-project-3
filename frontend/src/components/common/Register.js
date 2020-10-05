@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { registerUser } from '../../lib/api'
 
 class Register extends React.Component {
 
@@ -25,7 +26,7 @@ class Register extends React.Component {
     event.preventDefault()
 
     try {
-      await axios.post('/api/register', this.state.formData)
+      await registerUser(this.state.formData)
       console.log('register complete')
       this.props.history.push('/login')
     } catch (err) {

@@ -228,6 +228,18 @@ label {
   }
 }
 
+.newquest-button {
+  margin: 10px;
+    background-color: $map-red;
+    color: $map-white;
+    width: 10em;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+      text-decoration: none;
+    }
+}
+
 .browse-quests h3, 
 .create-quest h3 {
   text-align: center;
@@ -370,7 +382,7 @@ label {
   display: flex;
   justify-content: space-between;
   margin: 50px;
-  height: 400px;
+  height: 480px;
 
   .create-map {
     width: 55%;

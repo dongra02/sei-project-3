@@ -3,7 +3,7 @@ const { notFound } = require('../lib/errorMessages')
 
 async function questCreate(req, res, next) {
   try {
-    const newQuestData = { ...req.body }
+    const newQuestData = { ...req.body, owner: req.currentUser._id }
     const newQuest = await Quest.create(newQuestData)
     res.status(201).json(newQuest)
   } catch (err) {

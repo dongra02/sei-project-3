@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+import { setToken } from '../../lib/auth'
+import { loginUser } from '../../lib/api'
 
 class Login extends React.Component {
 
@@ -23,8 +24,9 @@ class Login extends React.Component {
     event.preventDefault()
 
     try {
-      await axios.post('/api/login', this.state.formData)
+      const response = await loginUser(this.state.formData)
       console.log('login complete')
+      setToken(response.data.token)
       this.props.history.push('/quests')
     } catch (err) {
       console.log(this.state.formData)

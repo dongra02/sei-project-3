@@ -4,7 +4,7 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
-  const { name, clue, answer, hint, stopAnswerType } = props.stopFormData
+  const { name, clue, answer, hint, answerType } = props.stopFormData
   const { handleStopFormChange, handleStopSubmit, selectLocation, handleStopAnswerTypeChange, displayAnswerType } = props
 
 
@@ -34,18 +34,10 @@ const StopForm = (props) => {
       <div className="form-group">
         <select className="form-control" onChange={handleStopAnswerTypeChange}>
           <option value='Answer'>Answer</option>
-          <option value="Location">Location</option>
+          <option value="Proximity">Proximity</option>
         </select>
       </div>
-      {displayAnswerType() &&  <div className="form-group">
-        <textarea
-          type="text"
-          id="hint"
-          className="form-control"
-          value={hint}
-          onChange={handleStopFormChange}
-          placeholder="Hint"/>
-      </div>}
+      {displayAnswerType() &&  
       <div className="form-group">
         <textarea
           type="text"
@@ -55,7 +47,7 @@ const StopForm = (props) => {
           onChange={handleStopFormChange}
           placeholder="Answer"
           required/>
-      </div>
+      </div>}
       {!displayAnswerType() &&  <div className="form-group">
         <input
           type="number"
