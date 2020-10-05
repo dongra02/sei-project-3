@@ -3,7 +3,7 @@ import React from 'react'
 import MapGL from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-const BgMap = () => {
+const BgMap = ({ latLng }) => {
 
   const style = {
     width: '100vw',
@@ -15,17 +15,14 @@ const BgMap = () => {
     pointerEvents: 'none'
   }
 
-  const latitude = (Math.random() * 180) - 90
-  const longitude = (Math.random() * 360) - 180
-
   return (
     <div style={style}>
       <MapGL
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle='mapbox://styles/sriramsiv/ckfqhispj079919t8xxbwa6t7'
         width={'100%'} height={'100%'}
-        latitude={latitude}
-        longitude={longitude}
+        latitude={latLng[0]}
+        longitude={latLng[1]}
         zoom={5}
       />
     </div>
