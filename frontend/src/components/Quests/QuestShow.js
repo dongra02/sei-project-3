@@ -47,8 +47,14 @@ class QuestShow extends React.Component {
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
-  getLocationGuess = g => {
-    console.log(g)
+  getLocationGuess = guess => {
+    const { currentStop, route } = this.state
+    const degreeLengthInMeters = 111000
+    const nextLocation = route.stops[currentStop + 1].location
+    const latDiff = Math.abs(guess.latitude - nextLocation.latitude) * degreeLengthInMeters
+    const lngDiff = Math.abs(guess.longitude - nextLocation.longitude) * degreeLengthInMeters
+    const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
+    console.log(length)
   }
 
   render() {
