@@ -1,11 +1,12 @@
 import React from 'react'
-import axios from 'axios'
+
 
 import Header from '../common/Header'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
+import BgMap from '../map/BgMap'
 
 class QuestCreate extends React.Component{
 
@@ -32,6 +33,10 @@ class QuestCreate extends React.Component{
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
+  bgLatLng = [
+    (Math.random() * 180) - 90,
+    (Math.random() * 360) - 180
+  ]
 
   handleQuestFormChange = event => {
     const questFormData = {
@@ -88,7 +93,7 @@ class QuestCreate extends React.Component{
 
     return (
       <div className="create-quest">
-        <Header />
+        <BgMap latLng={this.bgLatLng} />
         <h3>Create a New Quest</h3>
         <QuestForm
           questFormData={questFormData}
