@@ -2,11 +2,12 @@ const router = require('express').Router()
 
 const quests = require('../controllers/quests')
 const auth = require('../controllers/auth')
+const secureRoute = require('../lib/secureRoute')
 
 
 router.route('/quests')
   .get(quests.index)
-  .post(quests.create)
+  .post(secureRoute, quests.create)
 
 router.route('/quests/:id')
   .get(quests.show)
