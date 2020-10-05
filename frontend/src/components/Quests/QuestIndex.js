@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { getAllQuests } from '../../lib/api'
 
 import Filter from '../common/Filter'
 import Map from '../map/Map'
@@ -24,7 +25,7 @@ class QuestIndex extends React.Component {
   ]
 
   componentDidMount = async () => {
-    const response = await axios.get('/api/quests')
+    const response = await getAllQuests()
     this.setState({ allQuests: response.data, results: response.data })
   }
 

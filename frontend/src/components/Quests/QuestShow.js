@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import { getSingleQuest } from '../../lib/api'
 
 import Header from '../common/Header'
 import Map from '../map/Map'
@@ -15,7 +15,7 @@ class QuestShow extends React.Component {
   }
 
   componentDidMount = async () => {
-    const response = await axios.get(`/api/quests/${this.props.match.params.id}`)
+    const response = await getSingleQuest(this.props.match.params.id)
     this.setState(
       { route: response.data, flyTo: response.data.stops[0].location },
       () => this.setState({ flyTo: null })
