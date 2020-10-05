@@ -92,7 +92,8 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 50px;
+  margin: 50px auto;
+  background-color: #eeea;
   
   select {
     padding-bottom: 4px;
@@ -155,7 +156,7 @@ label {
 .results {
   display: flex;
   justify-content: space-between;
-  margin: 50px;
+  margin: auto;
   height: 500px;
 
   .results-map, 
@@ -165,10 +166,11 @@ label {
     padding: 5px;
     outline: 1px dashed $map-red;
     box-shadow: 3px 5px $map-red;
+    background-color: #eeea;
   }
 
   .results-list {
-    width: 30%;
+    width: calc(35% - 20px);
     
     .container {
       height: 100%;
