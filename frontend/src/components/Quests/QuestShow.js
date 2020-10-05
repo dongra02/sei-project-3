@@ -79,15 +79,15 @@ class QuestShow extends React.Component {
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
               { !lastStop && firstStop &&
                 <div>
-                  <h1>First Stop:</h1>
+                  <h2>First Stop:</h2>
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <button onClick={this.nextStop}>START</button>
+                  <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
                 <h2>{stop ? stop.name : ''}</h2><br />
-                <p>Your next clue is:</p>
+                <h2>Your next clue is:</h2>
                 <p>{stop ? stop.clue : ''}</p>
                 <div className="answer-input">
                   <input
@@ -99,7 +99,7 @@ class QuestShow extends React.Component {
                   />
                 </div>
                 <div className="btn-next">
-                  <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
+                  <button onClick={this.nextStop}>{'NEXT'}</button>
                 </div>
               </div>
               }

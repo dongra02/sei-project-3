@@ -232,7 +232,7 @@ label {
   margin: 10px;
     background-color: $map-red;
     color: $map-white;
-    width: 10em;
+    width: 7em;
     padding: 5px;
     display: inline-block;
     &:hover {
@@ -271,6 +271,15 @@ label {
     text-align: center;
     padding: 40px;
     height: 400px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    background-color: #f8f6e3;
+    font-style: italic;
   }
 
   .answer-input {
