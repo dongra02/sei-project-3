@@ -1,12 +1,11 @@
 import React from 'react'
 
-
-import Header from '../common/Header'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
+import { createQuest } from '../../lib/api'
 
 class QuestCreate extends React.Component{
 
@@ -50,6 +49,7 @@ class QuestCreate extends React.Component{
     const location = this.state.stops[0].location
     const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
     console.log(newQuestData)
+    await createQuest(newQuestData)
   }
 
   handleStopFormChange = event => {

@@ -7,12 +7,12 @@ const secureRoute = require('../lib/secureRoute')
 
 router.route('/quests')
   .get(quests.index)
-  .post(quests.create)
+  .post(secureRoute, quests.create)
 
 router.route('/quests/:id')
   .get(quests.show)
-  .put(quests.questUpdate)
-  .delete(quests.questDelete)
+  .put(secureRoute, quests.questUpdate)
+  .delete(secureRoute, quests.questDelete)
 
 router.route('/quests/:id/stops')
   .post(quests.stopCreate)
