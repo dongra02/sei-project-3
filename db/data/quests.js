@@ -12,6 +12,7 @@ module.exports = [{
         'longitude': -0.086167
       },
       'clue': 'Interesting architecture when seen from below',
+      'hints': ['Looks like a large Shard of glass poking up through the city'],
       'answer': 'The Shard'
     },
     {
@@ -20,7 +21,7 @@ module.exports = [{
         'latitude': 51.504527,
         'longitude': -0.086525
       },
-      'clue': 'Heritage sales made in my shadow',
+      'clue': 'Heritage sales made in shadows',
       'answer': 'Borough market'
     },
     {
@@ -109,6 +110,7 @@ module.exports = [{
         'longitude': -0.159181
       },
       'clue': 'Dont take the tunnel',
+      'hints': ['One of the memorial fountains in hyde park'],
       'answer': 'Princess diana memorial'
     },
     {
