@@ -13,7 +13,6 @@ import QuestCreate from './components/Quests/QuestCreate'
 const App = () => {
   return (
     <BrowserRouter>
-      {/* Header */}
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
