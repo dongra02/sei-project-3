@@ -10,7 +10,8 @@ class QuestShow extends React.Component {
     route: null,
     currentStop: 0,
     answer: '',
-    flyTo: null
+    flyTo: null, 
+    lastStop: false
   }
 
   componentDidMount = async () => {
@@ -33,7 +34,20 @@ class QuestShow extends React.Component {
 
   nextStop = () => {
 
-    const { currentStop, route, answer } = this.state
+    const { currentStop, route, answer, lastStop } = this.state
+
+    const finalStop = route.stops.length - 1
+    console.log(finalStop)
+
+    console.log(currentStop)
+
+    console.log(lastStop)
+
+    if (currentStop === finalStop)  {
+      lastStop = true
+      this.setState({ lastStop }) 
+    }
+
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       const currentStop = this.state.currentStop + 1
@@ -49,6 +63,7 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer } = this.state
     const stop = route ? route.stops[currentStop] : null
+
     return (
       <>
         <Header />
