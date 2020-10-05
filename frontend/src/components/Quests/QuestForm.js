@@ -31,7 +31,7 @@ const QuestForm = (props) => {
           <input
             type="number"
             className="form-control"
-            id="name"
+            id="estTime"
             value={estTime}
             onChange={handleQuestFormChange}
             placeholder="Quest duration (minutes)"/>

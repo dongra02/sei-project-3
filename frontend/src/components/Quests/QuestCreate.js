@@ -37,9 +37,9 @@ class QuestCreate extends React.Component{
     this.setState({ questFormData })
   }
 
-  handleQuestSubmit = async event => {
-    //set object with formdata as new quest
-    //send quest object to backend with post
+  handleQuestSubmit = async () => {
+    const newQuest = { ...this.state.questFormData, stops: [ ...this.state.stops ] }
+    console.log(newQuest)
   }
 
   handleStopFormChange = event => {
@@ -93,6 +93,7 @@ class QuestCreate extends React.Component{
           </div>
         </div>
         <StopList stops={stops} />
+        <button onClick={this.handleQuestSubmit}>Save Quest</button>
       </div>
     )
   }
