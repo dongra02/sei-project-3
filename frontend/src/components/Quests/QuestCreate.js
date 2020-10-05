@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Header from '../common/Header'
 import QuestForm from './QuestForm'
@@ -18,16 +19,16 @@ class QuestCreate extends React.Component{
     stopFormData: {
       name: '',
       clue: '',
-      hint: '',
+      answerType: 'Answer',
       answer: '',
+      hint: '',
       location: {
         latitude: '',
         longitude: ''
       }
     },
-    stopAnswerType: 'Answer',
     stops: [],
-    flyTo: null,
+    flyTo: null
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -42,8 +43,8 @@ class QuestCreate extends React.Component{
 
   handleQuestSubmit = async () => {
     const location = this.state.stops[0].location
-    const newQuest = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
-    console.log(newQuest)
+    const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
+    console.log(newQuestData)
   }
 
   handleStopFormChange = event => {
@@ -56,11 +57,12 @@ class QuestCreate extends React.Component{
 
   handleStopAnswerTypeChange = event => {
     const stopAnswerType = event.target.value
-    this.setState({ stopAnswerType })
+    const stopFormData = { ...this.state.stopFormData, answerType: stopAnswerType }
+    this.setState({ stopFormData })
   }
 
   displayAnswerType = () => {
-    const stopAnsweryType = this.state.stopAnswerType
+    const stopAnsweryType = this.state.stopFormData.answerType
     return stopAnsweryType === 'Answer'
   }
 
@@ -82,7 +84,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo, stopAnswerType } = this.state
+    const { questFormData, stopFormData, stops, flyTo } = this.state
 
     return (
       <div className="create-quest">
@@ -102,7 +104,6 @@ class QuestCreate extends React.Component{
             displayAnswerType={this.displayAnswerType}
             handleStopSubmit={this.handleStopSubmit}
             selectLocation={this.selectLocation}
-            stopAnswerType={stopAnswerType}
           />
           <div className="create-map">
             <Map flyTo={flyTo} getBounds={() => null} />
