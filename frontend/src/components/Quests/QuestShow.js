@@ -41,6 +41,11 @@ class QuestShow extends React.Component {
     }
   }
 
+  // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
+  getLocationGuess = g => {
+    console.log(g)
+  }
+
   render() {
     const { screen, route, currentStop, answer } = this.state
     const stop = route ? route.stops[currentStop] : null
@@ -72,7 +77,7 @@ class QuestShow extends React.Component {
               </div>
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={this.state.flyTo} getBounds={() => null} route={this.state.route} stop={this.state.currentStop} />
+              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} showGuess={this.getLocationGuess} />
             </div>
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
               <h2>Comments</h2>
