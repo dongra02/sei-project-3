@@ -38,7 +38,8 @@ class QuestCreate extends React.Component{
   }
 
   handleQuestSubmit = async () => {
-    const newQuest = { ...this.state.questFormData, stops: [ ...this.state.stops ] }
+    const location = this.state.stops[0].location
+    const newQuest = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
     console.log(newQuest)
   }
 

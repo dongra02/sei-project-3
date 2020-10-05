@@ -366,6 +366,14 @@ label {
     outline: 1px dashed $map-red;
     padding: 5px;
     box-shadow: 3px 5px $map-red;
+    text-align: center;
+
+    button {
+      border: none;
+      padding: 3px 10px;
+      background-color: $map-red;
+      color: $map-white;
+    }
   }
 }
 

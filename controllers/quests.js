@@ -14,6 +14,7 @@ async function questCreate(req, res, next) {
 async function questIndex(_req, res, next){
   try {
     const quests = await Quest.find()
+      .populate('owner')
     if (!quests) throw new Error(notFound)
     res.status(200).json(quests)
   } catch (err) {

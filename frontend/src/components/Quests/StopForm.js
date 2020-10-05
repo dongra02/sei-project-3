@@ -9,7 +9,7 @@ const StopForm = (props) => {
 
 
   return (
-    <form className="create-form" onSubmit={handleStopSubmit}>
+    <form className="create-form">
       <h5>Add A Stop</h5>
       <div className="form-group">
         <input
@@ -21,13 +21,7 @@ const StopForm = (props) => {
           placeholder="Stop Name"/>
       </div>
       <div className="form-group">
-      <div className="filter-option">
-        <label htmlFor="location">Location :</label>
-        <Geocoder selectLocation={selectLocation} />
-      </div>
-      </div>
-      <div className="form-group">
-        <input
+        <textarea
           type="text"
           id="clue"
           className="form-control"
@@ -36,7 +30,7 @@ const StopForm = (props) => {
           placeholder="Clue"/>
       </div>
       <div className="form-group">
-        <input
+        <textarea
           type="text"
           id="answer"
           className="form-control"
@@ -44,7 +38,13 @@ const StopForm = (props) => {
           onChange={handleStopFormChange}
           placeholder="Answer"/>
       </div>
-      <button type="submit">add stop</button>
+      <div className="form-group">
+      {/* <div className="filter-option"> */}
+        <label htmlFor="location">Location :</label>
+        <Geocoder selectLocation={selectLocation} />
+      {/* </div> */}
+      </div>
+      <button onClick={handleStopSubmit}>Add Stop</button>
     </form>
   )
 }
