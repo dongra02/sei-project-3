@@ -516,12 +516,9 @@ label {
   left: 0;
   height: calc(100vh - 50px);
   width: 100vw;
-  background-color: #2225;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+  background-color: #2229;
   opacity: 0;
-  transition: all 1s;
+  transition: all 0.5s;
   overflow: hidden;
   pointer-events: none;
 
@@ -529,7 +526,6 @@ label {
     position: absolute;
     width: 100vw;
     top: -300px;
-    transition: all 1s;
   }
   
   &.selected {
@@ -562,5 +558,21 @@ label {
 .show-quests,
 .create-quest {
   position: relative;
-  top: 50px;
+  top: 100px;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    text-align: right;
+    padding: 15px;
+    margin: 15px;
+    margin-left: 0;
+    border: none;
+    padding: 3px 10px;
+    background-color: $map-red;
+    color: $map-white;
+  }
 }
