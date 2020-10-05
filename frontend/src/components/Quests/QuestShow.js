@@ -10,7 +10,7 @@ class QuestShow extends React.Component {
     route: null,
     currentStop: 0,
     answer: '',
-    flyTo: null, 
+    flyTo: null,
     lastStop: false
   }
 
@@ -34,18 +34,10 @@ class QuestShow extends React.Component {
 
   nextStop = () => {
 
-    const { currentStop, route, answer, lastStop } = this.state
+    const { currentStop, route, answer } = this.state
 
-    const finalStop = route.stops.length - 1
-    console.log(finalStop)
-
-    console.log(currentStop)
-
-    console.log(lastStop)
-
-    if (currentStop === finalStop)  {
-      lastStop = true
-      this.setState({ lastStop }) 
+    if (currentStop + 1 === route.stops.length - 1)  {
+      this.setState({ lastStop: true }) 
     }
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
@@ -60,7 +52,7 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer } = this.state
+    const { screen, route, currentStop, answer, finalStop } = this.state
     const stop = route ? route.stops[currentStop] : null
     return (
       <>
@@ -73,20 +65,22 @@ class QuestShow extends React.Component {
           </div>
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
-              <h2>{stop ? stop.name : ''}</h2><br />
-              <p>Your next clue is:</p>
-              <p>{stop ? stop.clue : ''}</p>
-              <div className="answer-input">
-                <input
-                  type="text"
-                  name="answer"
-                  value={answer}
-                  placeholder="answer"
-                  onChange={this.changeAnswer}
-                />
-              </div>
-              <div className="btn-next">
-                <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
+              <div>   {/* this is normal content */}
+                <h2>{stop ? stop.name : ''}</h2><br />
+                <p>Your next clue is:</p>
+                <p>{stop ? stop.clue : ''}</p>
+                <div className="answer-input">
+                  <input
+                    type="text"
+                    name="answer"
+                    value={answer}
+                    placeholder="answer"
+                    onChange={this.changeAnswer}
+                  />
+                </div>
+                <div className="btn-next">
+                  <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
+                </div>
               </div>
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
