@@ -69,6 +69,10 @@ label {
 .navbar-expand {
   background-image: url('../images/nav-bg-sand.png');
   padding: 5px 20px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
   
   .user {
     position: absolute;
@@ -290,6 +294,7 @@ label {
 
 .form-container {
   margin: 50px auto;
+  width: 90%;
   max-width: 500px;
   background-color: $map-sand;
   box-shadow: 2px 3px $map-red;
@@ -489,5 +494,54 @@ label {
   .header-title {
     font-size: 4em;
     font-family: 'Sansita Swashed', cursive;
+  }
+}
+
+.popup-form {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: calc(100vh - 50px);
+  width: 100vw;
+  background-color: #2225;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  opacity: 0;
+  transition: all 1s;
+  overflow: hidden;
+
+  .form-contents {
+    position: absolute;
+    width: 100vw;
+    top: -300px;
+    transition: all 1s;
+  }
+  
+  &.selected {
+    opacity: 1;
+
+    .form-contents {
+      animation: slide 0.7s ease-out;
+      top: 0;
+    }
+  }
+}
+
+@keyframes slide {
+  0% {
+    top: -300px;
+  }
+
+  70% {
+    top: 10px;
+  }
+
+  75% {
+    top: 10px;
+  }
+
+  100% {
+    top: 0;
   }
 }
