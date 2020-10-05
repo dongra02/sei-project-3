@@ -13,8 +13,10 @@ const Filter = ({ theme, handleChange, selectLocation }) => {
       <div className="filter-option">
         <label htmlFor="theme">Theme :</label>
         <select id="theme" value={theme} onChange={handleChange} >
-          <option value="adventure">adventure</option>
-          <option value="horror">horror</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Sightseeing">Sightseeing</option>
+          <option value="Food & Drink">Food & Drink</option>
+          <option value="Speed">Speed</option>
         </select>
       </div>
       <div className="filter-option">
