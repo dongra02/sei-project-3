@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MapGL, { Marker } from 'react-map-gl'
+import MapGL, { Marker, FlyToInterpolator } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import StopMarker from '../map/StopMarker'
 
@@ -13,7 +13,13 @@ class Map extends React.Component {
       longitude: 0
     },
     clickedLocation: null,
-    mapRef: null
+    mapRef: null,
+    autoTransition: false
+  }
+
+  transition = {
+    transitionDuration: 'auto',
+    transitionInterpolator: new FlyToInterpolator({ speed: 1.2 })
   }
 
   componentDidMount = () => {
@@ -25,8 +31,21 @@ class Map extends React.Component {
 
   goToCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition(data => {
-      const { latitude, longitude } = data.coords
-      this.setState({ currentLocation: { latitude, longitude }, zoom: 12 })
+      this.flyTo(data.coords)
+    })
+  }
+
+  flyTo = (coords) => {
+    const { latitude, longitude } = coords
+    this.setState({ autoTransition: coords }, () => {
+      this.mapRef.getMap().flyTo({ center: [longitude, latitude], zoom: 11, speed: 2 })
+      
+      this.mapRef.getMap().on('moveend', () => {
+        if (this.state.autoTransition) {
+          const { latitude, longitude } = this.state.autoTransition
+          this.setState({ currentLocation: { latitude, longitude }, autoTransition: false, zoom: 11  })
+        }
+      })
     })
   }
 
@@ -34,11 +53,7 @@ class Map extends React.Component {
     // Go to location on map if requested to by parent component
     // Only called once as the flyTo prop should always be nulled as a callback function to setState when used
     if (this.props.flyTo) {
-      const { latitude, longitude } = this.props.flyTo
-      this.setState({
-        zoom: 13,
-        currentLocation: { latitude, longitude }
-      })
+      this.flyTo(this.props.flyTo)
     }
   }
 
@@ -51,8 +66,12 @@ class Map extends React.Component {
 
     // Gets NE and SW bounds of visible area
     if (this.state.mapRef && this.props.getBounds) {
-      const bounds = this.state.mapRef.getMap().getBounds()
-      this.props.getBounds(bounds)
+      try {
+        const bounds = this.state.mapRef.getMap().getBounds()
+        this.props.getBounds(bounds)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -73,7 +92,7 @@ class Map extends React.Component {
 
   render() {
 
-    const { zoom, currentLocation, clickedLocation } = this.state
+    const { zoom, currentLocation, clickedLocation, autoTransition } = this.state
     const { results, startQuest, route, stop } = this.props
 
     return (
@@ -101,14 +120,15 @@ class Map extends React.Component {
             <div className="marker" />
           </Marker>
         }
-        {results && results.map((quest, i) => {
+        {results && !autoTransition && results.map((quest, i) => {
           const { latitude, longitude } = quest.stops[0].location
           // TODO onClick *not-selected* -> open quest details
           const handleClick = quest.selected ? () => startQuest(quest._id) : null
           const marker =
             <Marker key={i} latitude={latitude} longitude={longitude}>
-              <div className={`marker ${quest.selected ? 'select' : ''}`} onClick={handleClick} />
-              {quest.selected && <div className="marker-border" />}
+              {quest.selected
+                ? <StopMarker />
+                : < div className="marker" onClick={handleClick} />}
             </Marker>
           return marker
         })}
