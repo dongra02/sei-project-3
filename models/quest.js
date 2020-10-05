@@ -7,6 +7,7 @@ const stopSchema = new mongoose.Schema({
     longitude: { type: Number, required: true }
   },
   clue: { type: String, required: true },
+  hint: { type: String },
   answer: { type: String, required: true }
 })
 

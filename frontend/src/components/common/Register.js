@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class Register extends React.Component {
 
@@ -20,8 +21,16 @@ class Register extends React.Component {
     this.setState({ formData })
   }
 
-  handleSubmit = () => {
-    console.log(this.state.formData)
+  handleSubmit = async event => {
+    event.preventDefault()
+
+    try {
+      await axios.post('/api/register', this.state.formData)
+      console.log('register complete')
+      this.props.history.push('/login')
+    } catch (err) {
+      console.log(this.state.formData)
+    }
   }
 
   render() {
