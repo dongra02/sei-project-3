@@ -4,7 +4,7 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
-  const { name, clue, answer, hint, answerType } = props.stopFormData
+  const { name, clue, answer, hint } = props.stopFormData
   const { handleStopFormChange, handleStopSubmit, selectLocation, handleStopAnswerTypeChange, displayAnswerType } = props
 
 
