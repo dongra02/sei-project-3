@@ -1,7 +1,8 @@
 import React from 'react' 
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
+import { isAuthenticated, logout } from '../../lib/auth'
 
 class Navbar extends React.Component {
 
@@ -20,10 +21,6 @@ class Navbar extends React.Component {
     this.setState({ page: event.target.innerHTML })
   }
 
-  fakeLogin = () => {
-    this.setState({ loggedIn: !this.state.loggedIn })
-  }
-
   popupForm = (event) => {
     const popup = this.state.popup ? false : event.target.innerHTML
     this.setState({ popup })
@@ -31,7 +28,7 @@ class Navbar extends React.Component {
 
   render() {
 
-    const { loggedIn, page, popup } = this.state
+    const { page, popup } = this.state
 
     return (
       <>
@@ -42,9 +39,10 @@ class Navbar extends React.Component {
           </div>
           <Link to="/" className={`navbar-logo ${page === 'Found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
           <div className="navbar-nav user">
-            {!loggedIn && <Link to="#" className="nav-link" onClick={this.popupForm}>Register</Link>}
-            {!loggedIn && <Link to="#" className="nav-link" onClick={this.popupForm} >Login</Link>}
-            {loggedIn && <Link to="#" className="nav-link" onClick={this.fakeLogin} >Profile</Link>}
+            {!isAuthenticated() && <Link to="#" className="nav-link" onClick={this.popupForm}>Register</Link>}
+            {!isAuthenticated() && <Link to="#" className="nav-link" onClick={this.popupForm} >Login</Link>}
+            {isAuthenticated() && <Link to="#" className="nav-link" >Profile</Link>}
+            {isAuthenticated() && <Link to="#" className="nav-link" onClick={logout} >Logout</Link>}
           </div>
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
             <div className="form-contents">
@@ -62,4 +60,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)
