@@ -48,7 +48,6 @@ class QuestShow extends React.Component {
       this.setState({ lastStop }) 
     }
 
-
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       const currentStop = this.state.currentStop + 1
       this.setState({ currentStop })
@@ -63,7 +62,6 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer } = this.state
     const stop = route ? route.stops[currentStop] : null
-
     return (
       <>
         <Header />
