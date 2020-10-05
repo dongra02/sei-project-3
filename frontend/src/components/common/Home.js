@@ -1,9 +1,7 @@
 import React from 'react'
-import Header from './Header'
 import BgMap from '../map/BgMap'
 
 const Home = () => {
-  {/* <Header isHome /> */}
   return (
     <>
       <div className="home-logo">

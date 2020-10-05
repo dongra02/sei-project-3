@@ -445,6 +445,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 
   .header-title {
     font-size: 4em;
