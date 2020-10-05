@@ -12,17 +12,21 @@ class Map extends React.Component {
       latitude: 0,
       longitude: 0
     },
+    clickedLocation: null,
     mapRef: null
   }
 
   componentDidMount = () => {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
-
     // Get current location and go to position on map
+    this.goToCurrentPosition()
+  }
+
+  goToCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition(data => {
       const { latitude, longitude } = data.coords
-      this.setState({ currentLocation: { latitude, longitude } })
+      this.setState({ currentLocation: { latitude, longitude }, zoom: 12 })
     })
   }
 
@@ -46,7 +50,7 @@ class Map extends React.Component {
     }
 
     // Gets NE and SW bounds of visible area
-    if (this.state.mapRef) {
+    if (this.state.mapRef && this.props.getBounds) {
       const bounds = this.state.mapRef.getMap().getBounds()
       this.props.getBounds(bounds)
     }
@@ -58,9 +62,18 @@ class Map extends React.Component {
     if (scrollSpeed < -5) this.setState({ zoom: this.state.zoom + 0.05 })
   }
 
+  placeMarker = ({ lngLat }) => {
+    const clickedLocation = {
+      latitude: lngLat[1],
+      longitude: lngLat[0]
+    }
+    this.setState({ clickedLocation })
+    if (this.props.showGuess) this.props.showGuess(clickedLocation)
+  }
+
   render() {
 
-    const { zoom, currentLocation } = this.state
+    const { zoom, currentLocation, clickedLocation } = this.state
     const { results, startQuest, route, stop } = this.props
 
     return (
@@ -74,13 +87,18 @@ class Map extends React.Component {
         zoom={zoom}
         doubleClickZoom={false}
         onViewportChange={this.moveMapView}
-        // onDblClick={this.placeMarker}
+        onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
       >
         {route && 
           <Marker latitude={route.stops[stop].location.latitude} longitude={route.stops[stop].location.longitude}>
             <StopMarker number={stop} />
+          </Marker>
+        }
+        {clickedLocation &&
+          <Marker latitude={clickedLocation.latitude} longitude={clickedLocation.longitude}>
+            <div className="marker" />
           </Marker>
         }
         {results && results.map((quest, i) => {
@@ -94,6 +112,9 @@ class Map extends React.Component {
             </Marker>
           return marker
         })}
+        <div className="locator" onClick={this.goToCurrentPosition}>
+          <img src={require('../../images/locate.png')} alt="locate button"/>
+        </div>
       </MapGL>
     )
   }

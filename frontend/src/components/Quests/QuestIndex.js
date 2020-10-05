@@ -84,7 +84,6 @@ class QuestIndex extends React.Component {
   render() {
     const { formData, results, flyTo } = this.state
     const selected = results ? results.filter(quest => quest.selected)[0] : null
-    console.log(selected)
     return (
       <>
         {/* <Header /> */}

@@ -116,6 +116,9 @@ label {
 }
 
 .marker {
+  position: relative;
+  top: -5px;
+  left: -5px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -123,7 +126,6 @@ label {
   border: 1px solid $map-red;
   
   &.select {
-    position: relative;
     top: -16px;
     left: -8px;
     width: 20px;
@@ -419,4 +421,18 @@ label {
 .stop-list {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.locator {
+  width: 30px;
+  height: 30px;
+  background-color: $map-red;
+  clip-path: circle();
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  img {
+    width: 100%;
+  }
 }
