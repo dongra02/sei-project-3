@@ -45,7 +45,7 @@ const StopForm = (props) => {
           value={hint}
           onChange={handleStopFormChange}
           placeholder="Hint"/>
-      </div>
+      </div>}
       <div className="form-group">
         <textarea
           type="text"

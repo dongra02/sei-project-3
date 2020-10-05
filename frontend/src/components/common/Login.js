@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class Login extends React.Component {
 
@@ -18,8 +19,16 @@ class Login extends React.Component {
     this.setState({ formData })
   }
 
-  handleSubmit = () => {
-    console.log(this.state.formData)
+  handleSubmit = async event => {
+    event.preventDefault()
+
+    try {
+      await axios.post('/api/login', this.state.formData)
+      console.log('login complete')
+      this.props.history.push('/quests')
+    } catch (err) {
+      console.log(this.state.formData)
+    }
   }
 
   render() {
