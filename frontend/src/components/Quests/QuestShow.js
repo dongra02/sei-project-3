@@ -13,13 +13,14 @@ class QuestShow extends React.Component {
     answer: '',
     flyTo: null,
     firstStop: true,
-    lastStop: false
+    lastStop: false,
+    start: ''
   }
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location },
+      { route: response.data, flyTo: response.data.stops[0].location, start: response.data },
       () => this.setState({ flyTo: null })
     )
   }
@@ -40,7 +41,6 @@ class QuestShow extends React.Component {
 
     if (currentStop >= 0)  {
       this.setState({ firstStop: false })
-      console.log(this.state)
     }
 
     if (currentStop + 1 === route.stops.length - 1)  {
@@ -52,6 +52,7 @@ class QuestShow extends React.Component {
       this.setState({ currentStop })
     }
   }
+
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
   getLocationGuess = guess => {
@@ -65,8 +66,9 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
+    console.log(start)
     return (
       <>
         <div className="show-quests">
@@ -78,7 +80,11 @@ class QuestShow extends React.Component {
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
               { !lastStop && firstStop &&
-                <div>
+                <div className="start-details">
+                  <h2 className="detail-name">{start.name}</h2>
+                  <div className="detail-owner">Theme: {start.theme}</div>
+                  <div className="detail-start">First Stop: {stop ? stop.name : ''}</div>
+                  <div className="detail-start">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }
