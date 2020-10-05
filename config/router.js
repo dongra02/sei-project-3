@@ -7,7 +7,7 @@ const secureRoute = require('../lib/secureRoute')
 
 router.route('/quests')
   .get(quests.index)
-  .post(secureRoute, quests.create)
+  .post(quests.create)
 
 router.route('/quests/:id')
   .get(quests.show)
