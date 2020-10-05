@@ -12,6 +12,7 @@ const StopList = (props) => {
             <th scope="col">Name</th>
             <th scope="col">Clue</th>
             <th scope="col">Answer</th>
+            <th scope="col">Hint</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@ const StopList = (props) => {
               <td>{stop.name}</td>
               <td>{stop.clue}</td>
               <td>{stop.answer}</td>
+              <td>{stop.hint}</td>
             </tr>
           )}
         </tbody>

@@ -4,12 +4,12 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
-  const { name, clue, hint, answer } = props.stopFormData
-  const { handleStopFormChange, handleStopSubmit, selectLocation } = props
+  const { name, clue, answer, hint, stopAnswerType } = props.stopFormData
+  const { handleStopFormChange, handleStopSubmit, selectLocation, handleStopAnswerTypeChange, displayAnswerType } = props
 
 
   return (
-    <form className="create-form">
+    <form className="create-form" onSubmit={handleStopSubmit}>
       <h5>Add A Stop</h5>
       <div className="form-group">
         <input
@@ -18,7 +18,8 @@ const StopForm = (props) => {
           className="form-control"
           value={name}
           onChange={handleStopFormChange}
-          placeholder="Stop Name"/>
+          placeholder="Stop Name"
+          required/>
       </div>
       <div className="form-group">
         <textarea
@@ -27,9 +28,16 @@ const StopForm = (props) => {
           className="form-control"
           value={clue}
           onChange={handleStopFormChange}
-          placeholder="Clue"/>
+          placeholder="Clue"
+          required/>
       </div>
       <div className="form-group">
+        <select className="form-control" onChange={handleStopAnswerTypeChange}>
+          <option value='Answer'>Answer</option>
+          <option value="Location">Location</option>
+        </select>
+      </div>
+      {displayAnswerType() &&  <div className="form-group">
         <textarea
           type="text"
           id="hint"
@@ -45,15 +53,33 @@ const StopForm = (props) => {
           className="form-control"
           value={answer}
           onChange={handleStopFormChange}
-          placeholder="Answer"/>
+          placeholder="Answer"
+          required/>
+      </div>
+      {!displayAnswerType() &&  <div className="form-group">
+        <input
+          type="number"
+          id="answer"
+          className="form-control"
+          value={answer}
+          onChange={handleStopFormChange}
+          placeholder="Location Leniency"
+          required/>
+      </div>}
+      <div className="form-group">
+        <textarea
+          type="text"
+          id="hint"
+          className="form-control"
+          value={hint}
+          onChange={handleStopFormChange}
+          placeholder="Hint (optional)"/>
       </div>
       <div className="form-group">
-      {/* <div className="filter-option"> */}
         <label htmlFor="location">Location :</label>
-        <Geocoder selectLocation={selectLocation} />
-      {/* </div> */}
+        <Geocoder selectLocation={selectLocation} required/>
       </div>
-      <button onClick={handleStopSubmit}>Add Stop</button>
+      <button type="submit">Add Stop</button>
     </form>
   )
 }
