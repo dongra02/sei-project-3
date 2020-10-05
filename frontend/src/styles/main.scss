@@ -228,6 +228,18 @@ label {
   }
 }
 
+.newquest-button {
+  margin: 10px;
+    background-color: $map-red;
+    color: $map-white;
+    width: 10em;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+      text-decoration: none;
+    }
+}
+
 .browse-quests h3, 
 .create-quest h3 {
   text-align: center;

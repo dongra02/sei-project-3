@@ -105,10 +105,11 @@ class QuestShow extends React.Component {
               }
               { lastStop && !firstStop &&
                 <div className="endgame">
+                  <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Well done, you have completed your quest!</h2>
                   <p>Your time was ... minutes</p>
                   <hr />
-                  <Link className="detail-button" to={`/quests`}>Choose New Quest</Link>
+                  <Link className="newquest-button" to={`/quests`}>Choose New Quest</Link>
                 </div>
               }
             </div>
