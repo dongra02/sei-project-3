@@ -24,7 +24,7 @@ class Login extends React.Component {
     event.preventDefault()
 
     try {
-      await loginUser(this.state.formData)
+      const response = await loginUser(this.state.formData)
       console.log('login complete')
       setToken(response.data.token)
       this.props.history.push('/quests')
