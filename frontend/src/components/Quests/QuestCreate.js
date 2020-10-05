@@ -25,9 +25,12 @@ class QuestCreate extends React.Component{
         longitude: ''
       }
     },
+    stopAnswerType: 'Answer',
     stops: [],
     flyTo: null,
   }
+
+  stopAnswerTypes = ['Location', 'Answer']
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
 
   handleQuestFormChange = event => {
@@ -52,6 +55,17 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
+  handleStopAnswerTypeChange = event => {
+    const stopAnswerType = event.target.value
+    console.log(stopAnswerType)
+    this.setState({ stopAnswerType })
+  }
+
+  displayAnswerType = () => {
+    const stopAnsweryType = this.state.stopAnswerType
+    return stopAnsweryType === 'Answer'
+  }
+
   handleStopSubmit = event => {
     event.preventDefault()
     const stops = [ ...this.state.stops ]
@@ -70,7 +84,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo } = this.state
+    const { questFormData, stopFormData, stops, flyTo, stopAnswerType } = this.state
 
     return (
       <div className="create-quest">
@@ -86,9 +100,12 @@ class QuestCreate extends React.Component{
           <StopForm
             stopFormData={stopFormData}
             handleStopFormChange={this.handleStopFormChange}
-            handleQuestionChange={this.handleQuestionChange}
+            handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
+            displayAnswerType={this.displayAnswerType}
             handleStopSubmit={this.handleStopSubmit}
             selectLocation={this.selectLocation}
+            stopAnswerType={stopAnswerType}
+            answerTypes={this.stopAnswerTypes}
           />
           <div className="create-map">
             <Map flyTo={flyTo} getBounds={() => null} />
