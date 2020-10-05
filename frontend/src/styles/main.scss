@@ -436,3 +436,14 @@ label {
     width: 100%;
   }
 }
+
+.btn-submit-quest {
+  text-align: center;
+
+  button {
+    border: none;
+    padding: 3px 10px;
+    background-color: $map-red;
+    color: $map-white;
+  }
+}

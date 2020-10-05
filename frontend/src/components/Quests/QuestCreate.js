@@ -18,6 +18,7 @@ class QuestCreate extends React.Component{
     stopFormData: {
       name: '',
       clue: '',
+      hint: '',
       answer: '',
       location: {
         latitude: '',
@@ -69,7 +70,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, results, flyTo } = this.state
+    const { questFormData, stopFormData, stops, flyTo } = this.state
 
     return (
       <div className="create-quest">
@@ -94,7 +95,9 @@ class QuestCreate extends React.Component{
           </div>
         </div>
         <StopList stops={stops} />
-        <button onClick={this.handleQuestSubmit}>Save Quest</button>
+        <div className="btn-submit-quest">
+          <button onClick={this.handleQuestSubmit}>Save Quest</button>
+        </div>
       </div>
     )
   }
