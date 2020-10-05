@@ -12,6 +12,8 @@ module.exports = [{
         'longitude': -0.086167
       },
       'clue': 'Interesting architecture when seen from below',
+      'hint': 'Looks like a large Shard of glass poking up through the city',
+      'answerType': 'Answer',
       'answer': 'The Shard'
     },
     {
@@ -20,7 +22,8 @@ module.exports = [{
         'latitude': 51.504527,
         'longitude': -0.086525
       },
-      'clue': 'Heritage sales made in my shadow',
+      'clue': 'Heritage sales made in shadows',
+      'answerType': 'Answer',
       'answer': 'Borough market'
     },
     {
@@ -30,6 +33,7 @@ module.exports = [{
         'longitude': -0.090371
       },
       'clue': 'Use this to collect leaves',
+      'answerType': 'Answer',
       'answer': 'The Rake'
     },
     {
@@ -39,6 +43,7 @@ module.exports = [{
         'longitude': -0.086167
       },
       'clue': 'Use this to collect leaves',
+      'answerType': 'Answer',
       'answer': 'The Rake'
     }
   ]
@@ -56,6 +61,7 @@ module.exports = [{
         'longitude': 35.470499
       },
       'clue': 'Go for a spin on a nearby ferris wheel & grab a cotten candy',
+      'answerType': 'Answer',
       'answer': 'Luna Park'
     },
     {
@@ -65,6 +71,7 @@ module.exports = [{
         'longitude': 35.469950
       },
       'clue': 'Cafe where you may find Ovi, the pelican, stopping by for some fresh fish ',
+      'answerType': 'Answer',
       'answer': 'Abou Mounir Fish Cafe'
     },
     {
@@ -74,6 +81,7 @@ module.exports = [{
         'longitude': 35.470557
       },
       'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
+      'answerType': 'Answer',
       'answer': 'Zeituna Bay'
     },
     {
@@ -83,6 +91,7 @@ module.exports = [{
         'longitude': 35.497942
       },
       'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
+      'answerType': 'Answer',
       'answer': 'Zeituna Bay'
     }
   ]
@@ -100,6 +109,7 @@ module.exports = [{
         'longitude': -0.158275
       },
       'clue': 'Where anyone can be heard',
+      'answerType': 'Answer',
       'answer': 'Speakers corner'
     },
     {
@@ -109,6 +119,8 @@ module.exports = [{
         'longitude': -0.159181
       },
       'clue': 'Dont take the tunnel',
+      'hint': 'One of the memorial fountains in hyde park',
+      'answerType': 'Answer',
       'answer': 'Princess diana memorial'
     },
     {
@@ -118,6 +130,7 @@ module.exports = [{
         'longitude': -0.171752
       },
       'clue': 'You should probably read the Bulgarian constitution',
+      'answerType': 'Answer',
       'answer': 'The Bulgarian embassy'
     },
     {
@@ -127,6 +140,7 @@ module.exports = [{
         'longitude': -0.179345
       },
       'clue': 'Claim immunity',
+      'answerType': 'Answer',
       'answer': 'Have a nice life'
     }
   ]
@@ -145,6 +159,7 @@ module.exports = [{
         'longitude': 35.656035
       },
       'clue': 'A structure protecting Batroun since the first century BC ',
+      'answerType': 'Answer',
       'answer': 'Old Pheonician Wall'
     },
     {
@@ -154,6 +169,7 @@ module.exports = [{
         'longitude': 35.655740
       },
       'clue': 'Cool of with a rereshing drink, you can even ask for a guinness world record size',
+      'answerType': 'Answer',
       'answer': 'Hilmi House of Lemonade'
     },
     {
@@ -163,6 +179,7 @@ module.exports = [{
         'longitude': 35.658611
       },
       'clue': 'Have a beer at this decorated distillery',
+      'answerType': 'Answer',
       'answer': 'Colonel Brewery & Distillery'
     },
     {
@@ -172,6 +189,7 @@ module.exports = [{
         'longitude': 35.658175
       },
       'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
+      'answerType': 'Answer',
       'answer': 'Zeituna Bay'
     }
   ]
