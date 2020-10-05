@@ -50,17 +50,6 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
-  handleQuestionChange = event => {
-    const stopFormData = { ...this.state.stopFormData }
-    if (event.target.id === 'clue') {
-      stopFormData.clue = event.target.value
-    }
-    if (event.target.id === 'answer') {
-      stopFormData.answer = event.target.value
-    }
-    this.setState({ stopFormData })
-  }
-
   handleStopSubmit = event => {
     event.preventDefault()
     const stops = [ ...this.state.stops ]

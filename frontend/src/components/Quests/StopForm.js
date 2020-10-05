@@ -5,7 +5,7 @@ import Geocoder from '../map/Geocoder'
 const StopForm = (props) => {
 
   const { name, clue, answer } = props.stopFormData
-  const { handleStopFormChange, handleStopSubmit, handleQuestionChange, selectLocation } = props
+  const { handleStopFormChange, handleStopSubmit, selectLocation } = props
 
 
   return (
@@ -32,7 +32,7 @@ const StopForm = (props) => {
           id="clue"
           className="form-control"
           value={clue}
-          onChange={handleQuestionChange}
+          onChange={handleStopFormChange}
           placeholder="Clue"/>
       </div>
       <div className="form-group">
@@ -41,7 +41,7 @@ const StopForm = (props) => {
           id="answer"
           className="form-control"
           value={answer}
-          onChange={handleQuestionChange}
+          onChange={handleStopFormChange}
           placeholder="Answer"/>
       </div>
       <button type="submit">add stop</button>
