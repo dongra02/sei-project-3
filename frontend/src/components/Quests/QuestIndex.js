@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Filter from '../common/Filter'
 import Map from '../map/Map'
+import BgMap from '../map/BgMap'
 
 class QuestIndex extends React.Component {
 
@@ -16,6 +17,11 @@ class QuestIndex extends React.Component {
     results: null,
     flyTo: null
   }
+
+  bgLatLng = [
+    (Math.random() * 180) - 90,
+    (Math.random() * 360) - 180
+  ]
 
   componentDidMount = async () => {
     const response = await axios.get('/api/quests')
@@ -87,6 +93,7 @@ class QuestIndex extends React.Component {
     return (
       <>
         {/* <Header /> */}
+        <BgMap latLng={this.bgLatLng} />
         <div className="browse-quests">
           <h3>Find a new Quest</h3>
           <Filter {...formData} handleChange={this.handleChange} selectLocation={this.selectLocation} />
