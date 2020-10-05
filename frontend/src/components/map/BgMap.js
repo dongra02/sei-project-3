@@ -11,7 +11,8 @@ const BgMap = () => {
     position: 'fixed',
     top: 0,
     zIndex: -10,
-    opacity: 0.3
+    opacity: 0.3,
+    pointerEvents: 'none'
   }
 
   const latitude = (Math.random() * 180) - 90
