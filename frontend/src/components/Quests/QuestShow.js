@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+import { getSingleQuest } from '../../lib/api'
+import { Link } from 'react-router-dom'
 
 import Header from '../common/Header'
 import Map from '../map/Map'
@@ -11,11 +12,12 @@ class QuestShow extends React.Component {
     currentStop: 0,
     answer: '',
     flyTo: null,
+    firstStop: true,
     lastStop: false
   }
 
   componentDidMount = async () => {
-    const response = await axios.get(`/api/quests/${this.props.match.params.id}`)
+    const response = await getSingleQuest(this.props.match.params.id)
     this.setState(
       { route: response.data, flyTo: response.data.stops[0].location },
       () => this.setState({ flyTo: null })
@@ -35,6 +37,10 @@ class QuestShow extends React.Component {
   nextStop = () => {
 
     const { currentStop, route, answer } = this.state
+
+    if (currentStop >= 0)  {
+      this.setState({ firstStop: false })
+    }
 
     if (currentStop + 1 === route.stops.length - 1)  {
       this.setState({ lastStop: true }) 
@@ -58,7 +64,7 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, finalStop } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop } = this.state
     const stop = route ? route.stops[currentStop] : null
     return (
       <>
@@ -71,7 +77,15 @@ class QuestShow extends React.Component {
           </div>
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
-              <div>   {/* this is normal content */}
+              { !lastStop && firstStop &&
+                <div>
+                  <h1>First Stop:</h1>
+                  <h2>{stop ? stop.name : ''}</h2><br />
+                  <button onClick={this.nextStop}>START</button>
+                </div>
+              }
+              { !lastStop && !firstStop && 
+                <div className="next-clue">
                 <h2>{stop ? stop.name : ''}</h2><br />
                 <p>Your next clue is:</p>
                 <p>{stop ? stop.clue : ''}</p>
@@ -88,6 +102,16 @@ class QuestShow extends React.Component {
                   <button onClick={this.nextStop}>{currentStop === 0 ? 'START' : 'NEXT'}</button>
                 </div>
               </div>
+              }
+              { lastStop && !firstStop &&
+                <div className="endgame">
+                  <h2>{stop ? stop.name : ''}</h2><br />
+                  <h2>Well done, you have completed your quest!</h2>
+                  <p>Your time was ... minutes</p>
+                  <hr />
+                  <Link className="newquest-button" to={`/quests`}>Choose New Quest</Link>
+                </div>
+              }
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
               <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} showGuess={this.getLocationGuess} />
