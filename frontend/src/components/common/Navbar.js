@@ -5,7 +5,7 @@ class Navbar extends React.Component {
 
   state = {
     loggedIn: true,
-    page: 'Home'
+    page: 'Found'
   }
 
   componentDidMount = () => {
@@ -28,10 +28,10 @@ class Navbar extends React.Component {
     return (
       <nav className="navbar-expand">   
         <div className="navbar-nav">
-          <Link to="/"       className={`nav-link ${page === 'Home' ? 'active' : ''}`}   onClick={this.selectNavItem}>Home</Link>
-          <Link to="/quests" className={`nav-link ${page === 'Find' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
+          <Link to="/quests" className={`nav-link ${page === 'Find' || page === 'quests' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
           <Link to="/create" className={`nav-link ${page === 'Create' ? 'active' : ''}`} onClick={this.selectNavItem}>Create</Link>
         </div>
+        <Link to="/" className={`navbar-logo ${page === 'Found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
         <div className="navbar-nav user">
           {!loggedIn && <Link to="/register" className="nav-link" >Register</Link>}
           {!loggedIn && <Link to="/login" className="nav-link" >Login</Link>}
