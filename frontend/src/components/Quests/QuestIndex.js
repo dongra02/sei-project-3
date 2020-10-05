@@ -92,7 +92,6 @@ class QuestIndex extends React.Component {
     const selected = results ? results.filter(quest => quest.selected)[0] : null
     return (
       <>
-        {/* <Header /> */}
         <BgMap latLng={this.bgLatLng} />
         <div className="browse-quests">
           <h3>Find a new Quest</h3>
