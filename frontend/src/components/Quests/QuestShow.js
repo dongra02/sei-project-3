@@ -40,6 +40,7 @@ class QuestShow extends React.Component {
 
     if (currentStop >= 0)  {
       this.setState({ firstStop: false })
+      console.log(this.state)
     }
 
     if (currentStop + 1 === route.stops.length - 1)  {
@@ -64,7 +65,7 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop, name, stops, theme } = this.state
     const stop = route ? route.stops[currentStop] : null
     return (
       <>
@@ -78,6 +79,10 @@ class QuestShow extends React.Component {
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
               { !lastStop && firstStop &&
                 <div>
+                  <h2>{name}Quest Name:</h2>
+                  <p>by</p>
+                  <p>Theme:</p>
+                  <p>stops</p>
                   <h2>First Stop:</h2>
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
