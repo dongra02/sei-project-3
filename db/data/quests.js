@@ -12,7 +12,7 @@ module.exports = [{
         'longitude': -0.086167
       },
       'clue': 'Interesting architecture when seen from below',
-      'hints': ['Looks like a large Shard of glass poking up through the city'],
+      'hint': 'Looks like a large Shard of glass poking up through the city',
       'answer': 'The Shard'
     },
     {
@@ -110,7 +110,7 @@ module.exports = [{
         'longitude': -0.159181
       },
       'clue': 'Dont take the tunnel',
-      'hints': ['One of the memorial fountains in hyde park'],
+      'hint': 'One of the memorial fountains in hyde park',
       'answer': 'Princess diana memorial'
     },
     {

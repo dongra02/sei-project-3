@@ -18,7 +18,7 @@ class QuestCreate extends React.Component{
     stopFormData: {
       name: '',
       clue: '',
-      hints: [],
+      hint: '',
       answer: '',
       location: {
         latitude: '',

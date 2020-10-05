@@ -4,7 +4,7 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
-  const { name, clue, answer } = props.stopFormData
+  const { name, clue, hint, answer } = props.stopFormData
   const { handleStopFormChange, handleStopSubmit, selectLocation } = props
 
 
@@ -28,6 +28,15 @@ const StopForm = (props) => {
           value={clue}
           onChange={handleStopFormChange}
           placeholder="Clue"/>
+      </div>
+      <div className="form-group">
+        <textarea
+          type="text"
+          id="hint"
+          className="form-control"
+          value={hint}
+          onChange={handleStopFormChange}
+          placeholder="Hint"/>
       </div>
       <div className="form-group">
         <textarea
