@@ -31,10 +31,14 @@ export const loginUser = formData => {
   return axios.post(`${baseUrl}/login`, formData)
 }
 
-export const reverseGeoCode = location => {
-  return axios.get(`${mapBoxGeoBase}/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
+export const getAllProfiles = () => {
+  return axios.get(`${baseUrl}/users`)
 }
 
 export const getSingleProfile = profileId => {
   return axios.get(`${baseUrl}/users/${profileId}`)
+}
+
+export const reverseGeoCode = location => {
+  return axios.get(`${mapBoxGeoBase}/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
 }
