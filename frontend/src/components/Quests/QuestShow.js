@@ -3,6 +3,8 @@ import { getSingleQuest } from '../../lib/api'
 import { Link } from 'react-router-dom'
 
 import Map from '../map/Map'
+import Timer from './Timer'
+import TimerTwo from './Timer'
 
 class QuestShow extends React.Component {
   state = {
@@ -90,6 +92,8 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
+                  <TimerTwo />
+                  <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Your next clue is:</h2>
                   <p>{stop ? stop.clue : ''}</p>

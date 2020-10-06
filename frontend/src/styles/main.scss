@@ -248,7 +248,34 @@ label {
     }
 }
 
+
+.browse-quests h3, 
+.create-quest h3 {
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+}
+
+
+// Quest Show
+
+
 .start-details {
+  background-color: $map-sand;
+  padding: 40px 80px;
+  border-radius: 12px;
+  border: 1px solid #2e2e2e;
+
+  h2 {
+  font-family: 'Sansita Swashed', cursive;
+  font-size: 2em;
+  text-align: center;
+  background-color: $map-blue;
+  border-radius: 8px;
+  padding: 10px;
+  color: #222;
+  }
+
   .detail-theme {
     padding: 20px 0;
   }
@@ -262,16 +289,6 @@ label {
     padding: 12px 0;
   }
 }
-
-.browse-quests h3, 
-.create-quest h3 {
-  text-align: center;
-  margin-top: 50px;
-  color: #555;
-}
-
-
-// Quest Show
 
 .show-tabs {
   display: flex;
