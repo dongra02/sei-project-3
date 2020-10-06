@@ -78,12 +78,14 @@ class QuestShow extends React.Component {
           </div>
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
-              { !lastStop && firstStop &&
+              { !lastStop && firstStop && start &&
                 <div className="start-details">
                   <h2 className="detail-name">{start.name}</h2>
-                  <div className="detail-owner">Theme: {start.theme}</div>
-                  <div className="detail-start">First Stop: {stop ? stop.name : ''}</div>
-                  <div className="detail-start">Estimated Time: {start.estTime} mins</div>
+                  <div className="detail-user">By {start.owner.username}</div>
+                  <div className="detail-theme">Theme: {start.theme}</div>
+                  <div className="detail-firststop">First Stop: {stop ? stop.name : ''}</div>
+              <div className="detail-stops">Stops: {start.stops.length}</div>
+                  <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }

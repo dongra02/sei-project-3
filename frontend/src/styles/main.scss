@@ -248,8 +248,17 @@ label {
 }
 
 .start-details {
-  h2, div {
-    padding: 15px 0;
+  .detail-theme {
+    padding: 20px 0;
+  }
+  .detail-firststop {
+    padding: 12px 0;
+  }
+  .detail-stops {
+    padding: 12px 0;
+  }
+  .detail-time {
+    padding: 12px 0;
   }
 }
 
