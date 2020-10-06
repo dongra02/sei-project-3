@@ -86,6 +86,7 @@ class Map extends React.Component {
       latitude: lngLat[1],
       longitude: lngLat[0]
     }
+    if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)
     this.setState({ clickedLocation })
     if (this.props.showGuess) this.props.showGuess(clickedLocation)
     if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)

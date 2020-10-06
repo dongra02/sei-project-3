@@ -34,6 +34,7 @@ class QuestCreate extends React.Component{
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
+  
   bgLatLng = [
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
