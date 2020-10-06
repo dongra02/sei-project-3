@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-const Timer = () => {
-  const [seconds, setSeconds] = useState(0)
+class Timer extends React.Component {
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(seconds => seconds + 1)
-    }, 1000);
-    return () => clearInterval(interval)
-  }, []);
+  state = {
+    minutes: 0,
+    seconds: 0
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        {seconds} seconds have elapsed
-      </header>
-    </div>
-  );
-};
+
+  componentDidMount() {
+    this.myInterval = setInterval(() => {
+      this.setState(({ seconds }) => ({
+        seconds: seconds + 1
+      }))
+    }, 1000)
+  }
+
+  render() {
+    const { minutes, seconds } = this.state
+    return (
+      <div>
+        <div>Time Elapsed: { minutes }:{ seconds }</div>
+      </div>
+  )
+  }
+}
 
 export default Timer
