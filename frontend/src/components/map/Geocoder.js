@@ -2,6 +2,7 @@ import React from 'react'
 import GeocoderGL from 'react-mapbox-gl-geocoder'
 
 class Geocoder extends React.Component {
+
   render() {
 
     const { selectLocation, initialValue } = this.props
@@ -13,8 +14,8 @@ class Geocoder extends React.Component {
         onSelected={selectLocation}
         updateInputOnSelect={true}
         inputComponent={input}
-        initialInputValue={initialValue}
         viewport={{ view: 0 }} // TODO put in real object
+        initialInputValue={initialValue}
       />
     )
   }

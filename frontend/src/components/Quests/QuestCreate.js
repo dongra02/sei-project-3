@@ -87,7 +87,7 @@ class QuestCreate extends React.Component{
     const flyTo = { latitude, longitude }
     const stopLocation = { latitude: latitude, longitude: longitude }
     const updateStop = { ...this.state.stopFormData, location: stopLocation }
-    this.setState({ flyTo, stopFormData: updateStop, geocoderValue: details.place_name }, () => this.setState({ flyTo: null }))
+    this.setState({ flyTo, stopFormData: updateStop, geocoderValue: details.place_name }, () => this.setState({ flyTo: null, geocoderValue: null }))
   }
 
   selectTab = (event) => {
@@ -98,7 +98,7 @@ class QuestCreate extends React.Component{
     const localeName = await reverseGeoCode(location)
     const geocoderValue = localeName.data.features[0].place_name
     const stopFormData = { ...this.state.stopFormData, location: location }
-    this.setState({ stopFormData, geocoderValue })
+    this.setState({ stopFormData, geocoderValue }, () => this.setState({ geocoderValue: null }))
   }
 
   render() {
