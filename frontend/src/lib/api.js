@@ -29,3 +29,7 @@ export const registerUser = formData => {
 export const loginUser = formData => {
   return axios.post(`${baseUrl}/login`, formData)
 }
+
+export const getSingleProfile = profileId => {
+  return axios.get(`${baseUrl}/users/${profileId}`)
+}
