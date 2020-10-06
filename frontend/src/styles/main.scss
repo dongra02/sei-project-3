@@ -97,6 +97,7 @@ label {
 
   .nav-link {
     color:#555;
+    cursor: pointer;
 
     &.active {
       color: $map-red;
