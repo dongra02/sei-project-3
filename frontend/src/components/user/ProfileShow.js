@@ -1,5 +1,6 @@
 import React from 'react'
 import { getSingleProfile } from '../../lib/api'
+import { isAuthenticated } from '../../lib/auth'
 
 class ProfileShow extends React.Component {
   state = {

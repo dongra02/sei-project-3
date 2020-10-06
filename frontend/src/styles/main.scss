@@ -250,7 +250,7 @@ label {
 
 
 .browse-quests h3, 
-.create-quest h3 {
+.create-quest h3, .profile-index h3 {
   text-align: center;
   margin-top: 50px;
   color: #555;
@@ -665,7 +665,8 @@ label {
 
 .browse-quests,
 .show-quests,
-.create-quest {
+.create-quest,
+.profile-index {
   position: relative;
   top: 70px;
 }
