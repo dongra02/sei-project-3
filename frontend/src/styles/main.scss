@@ -172,8 +172,11 @@ label {
 }
 
 // Container for map and list divs
+
+
 .results {
   display: flex;
+  // can add flex-direction column
   justify-content: space-between;
   margin: auto;
   height: 500px;
@@ -181,7 +184,7 @@ label {
   .results-map, 
   .results-list {
     position: relative;
-    width: 65%;
+    width: 65%; // make this 100%
     padding: 5px;
     outline: 1px dashed $map-red;
     box-shadow: 3px 5px $map-red;
@@ -189,7 +192,7 @@ label {
   }
 
   .results-list {
-    width: calc(35% - 20px);
+    width: calc(35% - 20px); // make this 100%
     
     .container {
       height: 100%;
@@ -245,7 +248,7 @@ label {
 }
 
 .start-details h2, div {
-  padding: 15px 0;
+  padding: 10px 0;
 }
 
 .browse-quests h3, 
@@ -274,6 +277,7 @@ label {
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
+
 
   .clues {
     text-align: center;
