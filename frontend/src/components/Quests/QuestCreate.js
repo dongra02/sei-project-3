@@ -1,11 +1,13 @@
 import React from 'react'
 
+import Login from '../common/Login'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
 import { createQuest } from '../../lib/api'
+import { isAuthenticated } from '../../lib/auth'
 
 class QuestCreate extends React.Component{
 
@@ -95,29 +97,32 @@ class QuestCreate extends React.Component{
       <div className="create-quest">
         <BgMap latLng={this.bgLatLng} />
         <h3>Create a New Quest</h3>
-        <QuestForm
-          questFormData={questFormData}
-          handleQuestFormChange={this.handleQuestFormChange}
-          handleQuestSubmit={this.handleQuestSubmit}
-          themes={this.themes}
-        />
-        <div className="create-container">
-          <StopForm
-            stopFormData={stopFormData}
-            handleStopFormChange={this.handleStopFormChange}
-            handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
-            displayAnswerType={this.displayAnswerType}
-            handleStopSubmit={this.handleStopSubmit}
-            selectLocation={this.selectLocation}
+        {!isAuthenticated() && <Login />}
+        {isAuthenticated() &&  <div>
+          <QuestForm
+            questFormData={questFormData}
+            handleQuestFormChange={this.handleQuestFormChange}
+            handleQuestSubmit={this.handleQuestSubmit}
+            themes={this.themes}
           />
-          <div className="create-map">
-            <Map flyTo={flyTo} getBounds={() => null} />
+          <div className="create-container">
+            <StopForm
+              stopFormData={stopFormData}
+              handleStopFormChange={this.handleStopFormChange}
+              handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
+              displayAnswerType={this.displayAnswerType}
+              handleStopSubmit={this.handleStopSubmit}
+              selectLocation={this.selectLocation}
+            />
+            <div className="create-map">
+              <Map flyTo={flyTo} getBounds={() => null} />
+            </div>
           </div>
-        </div>
-        <StopList stops={stops} />
-        <div className="btn-submit-quest">
-          <button onClick={this.handleQuestSubmit}>Save Quest</button>
-        </div>
+          <StopList stops={stops} />
+          <div className="btn-submit-quest">
+            <button onClick={this.handleQuestSubmit}>Save Quest</button>
+          </div>
+        </div>}
       </div>
     )
   }
