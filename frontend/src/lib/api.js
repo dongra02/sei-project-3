@@ -30,6 +30,10 @@ export const loginUser = formData => {
   return axios.post(`${baseUrl}/login`, formData)
 }
 
+export const getAllProfiles = () => {
+  return axios.get(`${baseUrl}/users`)
+}
+
 export const getSingleProfile = profileId => {
   return axios.get(`${baseUrl}/users/${profileId}`)
 }
