@@ -42,7 +42,7 @@ class QuestCreate extends React.Component{
   handleQuestFormChange = event => {
     const questFormData = {
       ...this.state.questFormData,
-      [event.target.id]: event.target.value
+      [event.target.name]: event.target.value
     }
     this.setState({ questFormData })
   }
