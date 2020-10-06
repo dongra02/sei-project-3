@@ -17,11 +17,11 @@ const QuestForm = (props) => {
               className="form-control"
               value={name}
               onChange={handleQuestFormChange}
-              placeholder="Give your quest a name"/>
+              placeholder="Quest Name"/>
           </div>
           <div className="form-group">
             <select className="form-control" id="theme" onChange={handleQuestFormChange}>
-              <option value=''>Select a Theme</option>
+              <option value=''>Theme</option>
               {themes.map(theme => 
                 <option key={theme} value={theme}>{theme}</option>
               )}
@@ -34,7 +34,7 @@ const QuestForm = (props) => {
               id="estTime"
               value={estTime}
               onChange={handleQuestFormChange}
-              placeholder="Quest duration (minutes)"/>
+              placeholder="Est. Duration (minutes)"/>
           </div>
         </div>
       </form>
