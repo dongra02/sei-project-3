@@ -1,13 +1,11 @@
 import React from 'react'
 
-import Login from '../common/Login'
 import QuestForm from './QuestForm'
 import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
-import { createQuest } from '../../lib/api'
-import { isAuthenticated } from '../../lib/auth'
+import { createQuest, reverseGeoCode } from '../../lib/api'
 
 class QuestCreate extends React.Component{
 
@@ -31,7 +29,8 @@ class QuestCreate extends React.Component{
     },
     stops: [],
     flyTo: null,
-    tabShow: 'info'
+    tabShow: 'info',
+    geocoderValue: null
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -43,7 +42,7 @@ class QuestCreate extends React.Component{
   handleQuestFormChange = event => {
     const questFormData = {
       ...this.state.questFormData,
-      [event.target.id]: event.target.value
+      [event.target.name]: event.target.value
     }
     this.setState({ questFormData })
   }
@@ -82,16 +81,24 @@ class QuestCreate extends React.Component{
     this.setState({ stops: [...stops] })
   }
 
-  selectLocation = location => {
+  selectLocation = (location, details) => {
     const { latitude, longitude } = location
+    console.log(details.place_name)
     const flyTo = { latitude, longitude }
     const stopLocation = { latitude: latitude, longitude: longitude }
     const updateStop = { ...this.state.stopFormData, location: stopLocation }
-    this.setState({ flyTo, stopFormData: updateStop }, () => this.setState({ flyTo: null }))
+    this.setState({ flyTo, stopFormData: updateStop, geocoderValue: details.place_name }, () => this.setState({ flyTo: null, geocoderValue: null }))
   }
 
   selectTab = (event) => {
     this.setState({ tabShow: event.target.value })
+  }
+
+  handleMapStopLocale = async (location) => {
+    const localeName = await reverseGeoCode(location)
+    const geocoderValue = localeName.data.features[0].place_name
+    const stopFormData = { ...this.state.stopFormData, location: location }
+    this.setState({ stopFormData, geocoderValue }, () => this.setState({ geocoderValue: null }))
   }
 
   render() {
@@ -102,45 +109,43 @@ class QuestCreate extends React.Component{
       <div className="create-quest">
         <BgMap latLng={this.bgLatLng} />
         <h3>Create a New Quest</h3>
-        {!isAuthenticated()
-          ? <Login />
-          :
-          <div>
-            <div className="create-container">
-              <div className="create-info">
-                <div className="show-tabs">
-                  {['info', 'stops'].map((tab, i) => (
-                    <button key={i} value={tab} onClick={this.selectTab} className={`tab ${tabShow === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
-                  ))}
-                </div>
-                <div className="create-tab" style={{ display: tabShow === 'info' ? 'block' : 'none' }}>
-                  <QuestForm
-                    questFormData={questFormData}
-                    handleQuestFormChange={this.handleQuestFormChange}
-                    handleQuestSubmit={this.handleQuestSubmit}
-                    themes={this.themes}
-                  />
-                </div>
-                <div className="create-tab" style={{ display: tabShow === 'stops' ? 'block' : 'none' }}>
-                  <StopForm
-                    stopFormData={stopFormData}
-                    handleStopFormChange={this.handleStopFormChange}
-                    handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
-                    displayAnswerType={this.displayAnswerType}
-                    handleStopSubmit={this.handleStopSubmit}
-                    selectLocation={this.selectLocation}
-                  />
-                </div>
+        <div>
+          <div className="create-container">
+            <div className="create-info">
+              <div className="show-tabs">
+                {['info', 'stops'].map((tab, i) => (
+                  <button key={i} value={tab} onClick={this.selectTab} className={`tab ${tabShow === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
+                ))}
               </div>
-              <div className="create-map">
-                <Map flyTo={flyTo} getBounds={() => null} />
+              <div className="create-tab" style={{ display: tabShow === 'info' ? 'block' : 'none' }}>
+                <QuestForm
+                  questFormData={questFormData}
+                  handleQuestFormChange={this.handleQuestFormChange}
+                  handleQuestSubmit={this.handleQuestSubmit}
+                  themes={this.themes}
+                />
+              </div>
+              <div className="create-tab" style={{ display: tabShow === 'stops' ? 'block' : 'none' }}>
+                <StopForm
+                  stopFormData={stopFormData}
+                  geocoderValue={this.state.geocoderValue}
+                  handleStopFormChange={this.handleStopFormChange}
+                  handleStopAnswerTypeChange={this.handleStopAnswerTypeChange}
+                  displayAnswerType={this.displayAnswerType}
+                  handleStopSubmit={this.handleStopSubmit}
+                  selectLocation={this.selectLocation}
+                />
               </div>
             </div>
-            <StopList stops={stops} />
-            <div className="btn-submit-quest">
-              <button onClick={this.handleQuestSubmit}>Save Quest</button>
+            <div className="create-map">
+              <Map flyTo={flyTo} getBounds={() => null} handleMapStopLocale={this.handleMapStopLocale} />
             </div>
-          </div>}
+          </div>
+          <StopList stops={stops} />
+          <div className="btn-submit-quest">
+            <button onClick={this.handleQuestSubmit}>Save Quest</button>
+          </div>
+        </div>
       </div>
     )
   }

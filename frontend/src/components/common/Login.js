@@ -27,7 +27,7 @@ class Login extends React.Component {
       const response = await loginUser(this.state.formData)
       console.log('login complete')
       setToken(response.data.token)
-      this.props.history.push('/quests')
+      this.props.hidePopup()
     } catch (err) {
       console.log(this.state.formData)
     }
@@ -60,7 +60,7 @@ class Login extends React.Component {
           />
         </div>
         <div className="form-buttons">
-          <button onClick={hidePopup}>cancel</button>
+          {hidePopup && <button onClick={hidePopup}>cancel</button>}
           <button onClick={this.handleSubmit}>submit</button>
         </div>
       </div>

@@ -7,7 +7,6 @@ import { isAuthenticated, logout } from '../../lib/auth'
 class Navbar extends React.Component {
 
   state = {
-    loggedIn: true,
     page: 'Found',
     popup: false
   }
@@ -17,8 +16,14 @@ class Navbar extends React.Component {
     if (url) this.setState({ page: url })
   }
 
+  componentDidUpdate = () => {
+    if (this.state.page.toLowerCase() === 'create' && !isAuthenticated() && this.state.popup !== 'Login') {
+      this.setState({ popup: 'Login' })
+    }
+  }
+
   selectNavItem = event => {
-    this.setState({ page: event.target.innerHTML })
+    this.setState({ page: event.target.innerHTML, popup: false })
   }
 
   popupForm = (event) => {
@@ -39,15 +44,15 @@ class Navbar extends React.Component {
           </div>
           <Link to="/" className={`navbar-logo ${page === 'Found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
           <div className="navbar-nav user">
-            {!isAuthenticated() && <Link to="#" className="nav-link" onClick={this.popupForm}>Register</Link>}
-            {!isAuthenticated() && <Link to="#" className="nav-link" onClick={this.popupForm} >Login</Link>}
+            {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm}>Register</div>}
+            {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm} >Login</div>}
             {isAuthenticated() && <Link to="#" className="nav-link" >Profile</Link>}
-            {isAuthenticated() && <Link to="#" className="nav-link" onClick={logout} >Logout</Link>}
+            {isAuthenticated() && <div className="nav-link" onClick={logout} >Logout</div>}
           </div>
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
             <div className="form-contents">
               <div style={{ display: `${popup === 'Login' ? 'block' : 'none'}` }}>
-                <Login hidePopup={this.popupForm} />
+                <Login hidePopup={page.toLowerCase() === 'create' ? null : this.popupForm} />
               </div>
               <div style={{ display: `${popup === 'Register' ? 'block' : 'none'}` }}>
                 <Register hidePopup={this.popupForm} />
