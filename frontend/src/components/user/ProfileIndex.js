@@ -30,11 +30,13 @@ class ProfileIndex extends React.Component {
         <div>
         {this.state.allProfiles.map((user, i) => (
         <div key={i} className="container">
-          <div className="user-details">
-            <div className="detail-name">{user.username}</div>
-            <div className="detail-quests">{user.createdQuest.length}</div>
-            <br />
-          </div>
+          <Link to={`/users/${user.id}`}>
+            <div className="user-details">
+              <div className="detail-name">{user.username}</div>
+              <div className="detail-quests">{user.createdQuest.length}</div>
+              <br />
+            </div>
+          </Link>
         </div>
       ))}
       </div>

@@ -21,8 +21,8 @@ const App = () => {
         <Route path="/quests/:id" component={QuestShow} />
         <Route path="/quests" component={QuestIndex} />
         <Route path='/create' component={QuestCreate} />
-        <Route path="/users" component={ProfileIndex} />
         <Route path="/users/:id" component={ProfileShow} />  
+        <Route path="/users" component={ProfileIndex} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
