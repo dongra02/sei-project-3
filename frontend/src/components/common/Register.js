@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { registerUser } from '../../lib/api'
 
 class Register extends React.Component {
