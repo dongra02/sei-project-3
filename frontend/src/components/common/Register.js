@@ -15,7 +15,7 @@ class Register extends React.Component {
   handleChange = event => {
     const formData = {
       ...this.state.formData,
-      [event.target.id]: event.target.value
+      [event.target.name]: event.target.value
     }
 
     this.setState({ formData })
@@ -25,9 +25,9 @@ class Register extends React.Component {
     event.preventDefault()
 
     try {
-      await registerUser(this.state.formData)
-      console.log('register complete')
-      this.props.history.push('/login')
+      const response = await registerUser(this.state.formData)
+      this.props.hidePopup()
+      console.log(response)
     } catch (err) {
       console.log(this.state.formData)
     }
@@ -44,7 +44,7 @@ class Register extends React.Component {
         <div className="input-field">
           <input
             type="text"
-            id="username"
+            name="username"
             placeholder="username"
             value={formData.username}
             onChange={this.handleChange}
@@ -53,7 +53,7 @@ class Register extends React.Component {
         <div className="input-field">
           <input
             type="text"
-            id="email"
+            name="email"
             placeholder="email"
             value={formData.email}
             onChange={this.handleChange}
@@ -62,7 +62,7 @@ class Register extends React.Component {
         <div className="input-field">
           <input
             type="password"
-            id="password"
+            name="password"
             placeholder="password"
             value={formData.password}
             onChange={this.handleChange}
@@ -71,7 +71,7 @@ class Register extends React.Component {
         <div className="input-field">
           <input
             type="password"
-            id="passwordConfirmation"
+            name="passwordConfirmation"
             placeholder="confirm password"
             value={formData.passwordConfirmation}
             onChange={this.handleChange}

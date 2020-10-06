@@ -2,9 +2,9 @@ import React from 'react'
 import { getSingleQuest } from '../../lib/api'
 import { Link } from 'react-router-dom'
 
-import Header from '../common/Header'
 import Map from '../map/Map'
 import Timer from './Timer'
+import TimerTwo from './Timer'
 
 class QuestShow extends React.Component {
   state = {
@@ -85,14 +85,14 @@ class QuestShow extends React.Component {
                   <div className="detail-user">By {start.owner.username}</div>
                   <div className="detail-theme">Theme: {start.theme}</div>
                   <div className="detail-firststop">First Stop: {stop ? stop.name : ''}</div>
-              <div className="detail-stops">Stops: {start.stops.length}</div>
+                  <div className="detail-stops">Stops: {start.stops.length}</div>
                   <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                  <Timer />
+                  <TimerTwo />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Your next clue is:</h2>

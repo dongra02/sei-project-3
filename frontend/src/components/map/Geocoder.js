@@ -1,19 +1,24 @@
 import React from 'react'
 import GeocoderGL from 'react-mapbox-gl-geocoder'
 
-const Geocoder = (props) => {
+class Geocoder extends React.Component {
 
-  return (
-    <GeocoderGL
-      className="geocoder"
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-      onSelected={props.selectLocation}
-      updateInputOnSelect={true}
-      initialInputValue={ props.placeName ? props.placeName : null }
-      // inputComponent={input}
-      viewport={{ view: 0 }} // TODO put in real object
-    />
-  )
+  render() {
+
+    const { selectLocation, initialValue } = this.props
+    const input = (inputProps) => <input {...inputProps} placeholder="Location" />
+    return (
+      <GeocoderGL
+        className="geocoder"
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        onSelected={selectLocation}
+        updateInputOnSelect={true}
+        inputComponent={input}
+        viewport={{ view: 0 }} // TODO put in real object
+        initialInputValue={initialValue}
+      />
+    )
+  }
 }
 
 export default Geocoder

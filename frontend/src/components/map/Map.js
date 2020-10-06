@@ -89,6 +89,7 @@ class Map extends React.Component {
     if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)
     this.setState({ clickedLocation })
     if (this.props.showGuess) this.props.showGuess(clickedLocation)
+    if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)
   }
 
   render() {
