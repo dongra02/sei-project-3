@@ -259,11 +259,13 @@ label {
 
 // Quest Show
 
+#root {
+  background-color: $map-sand;
+}
+
 .start-details {
   background-color: $map-sand;
   padding: 40px 80px;
-  border-radius: 12px;
-  border: 1px solid #2e2e2e;
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
@@ -291,9 +293,6 @@ label {
 
 .next-clue {
   background-color: $map-sand;
-  padding: 40px 40px;
-  border-radius: 12px;
-  border: 1px solid #2e2e2e;
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
@@ -312,7 +311,7 @@ label {
 .show-tabs {
   display: flex;
   justify-content: left;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 5%;
   width: 95%;
 }
@@ -325,14 +324,12 @@ label {
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
-  background-image: 
-    linear-gradient(#eee8, #eee8),
-    url('../images/texture.png');
+  background-color: $map-sand;
 
 
   .clues {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
   }
 
   h2 {
@@ -355,9 +352,6 @@ label {
   }
 }
 
-.next-clue {
-  
-}
 
 .form-container {
   margin: 50px auto;
