@@ -399,10 +399,6 @@ label {
   }
 }
 
-.stop-list {
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
 .tab {
   border: none;
@@ -482,6 +478,8 @@ label {
 
   .create-tab {
     height: 100%;
+    outline: 1px dashed $map-red;
+    box-shadow: 2px 3px $map-red;
   }
 
   .create-form {
@@ -491,15 +489,15 @@ label {
     text-align: center;
     height: 100%;
 
-    button {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      border: none;
-      padding: 3px 10px;
-      background-color: $map-red;
-      color: $map-white;
-    }
+    // button {
+    //   position: absolute;
+    //   bottom: 15px;
+    //   right: 15px;
+    //   border: none;
+    //   padding: 3px 10px;
+    //   background-color: $map-red;
+    //   color: $map-white;
+    // }
   }
 }
 
@@ -519,12 +517,19 @@ label {
 }
 
 .react-geocoder-results {
-  border: 1px solid $map-sand;
-  background-color: $map-sand;
+  border: 1px solid #ced4da;
+  background-color: white;
   position: absolute;
-  padding: 5px 10px;
-  width: 90%;
   z-index: 1;
+  // width: 90%;
+
+  div {
+    padding: 5px 10px;
+
+    &:hover {
+      background-color: $map-sand;
+    }
+  }
 }
 
 ::-webkit-scrollbar {
@@ -556,14 +561,45 @@ label {
   }
 }
 
-.btn-submit-quest {
+.stop-list {
+  display: flex;
+  flex-direction: column;
+
+  .stop-list-item {
+    background-color: $map-sand;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    margin-left: 20px;
+
+    div {
+      font-size: 1.2em;
+    }
+
+    button {
+      border: none;
+      padding: 3px 10px;
+      background-color: $map-red;
+      color: $map-white;
+      margin-left: 10px;
+    }
+  }
+}
+
+.btn-submit-quest,
+.btn-add-stop,
+.create-button {
   text-align: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 
   button {
     border: none;
     padding: 3px 10px;
     background-color: $map-red;
     color: $map-white;
+    margin-left: 10px;
   }
 }
 

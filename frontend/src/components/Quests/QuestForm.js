@@ -1,8 +1,8 @@
 import React from 'react'
 
 const QuestForm = (props) => {
-  const { name, estTime } = props.questFormData
-  const { handleQuestFormChange, themes } = props
+  const { name, theme, estTime } = props.questFormData
+  const { handleQuestFormChange, handleQuestSubmit, themes } = props
 
 
   return (
@@ -36,6 +36,9 @@ const QuestForm = (props) => {
               onChange={handleQuestFormChange}
               placeholder="Est. Duration (minutes)"/>
           </div>
+        </div>
+        <div className="btn-submit-quest">
+          <button onClick={handleQuestSubmit}>Save Quest</button>
         </div>
       </form>
     </>

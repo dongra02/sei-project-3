@@ -1,32 +1,25 @@
 import React from 'react'
 
 const StopList = (props) => {
-  const { stops } = props
+  const { stops, changeTab } = props
+
+  {/* <td>{stop.name}</td>
+  <td>{stop.clue}</td>
+  <td>{stop.answer}</td>
+  <td>{stop.hint}</td> */}
 
   return (
     <div className="stop-list">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Stop #</th>
-            <th scope="col">Name</th>
-            <th scope="col">Clue</th>
-            <th scope="col">Answer</th>
-            <th scope="col">Hint</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stops.map((stop, i) => 
-            <tr key={i}>
-              <th scope="row">{i + 1}</th>
-              <td>{stop.name}</td>
-              <td>{stop.clue}</td>
-              <td>{stop.answer}</td>
-              <td>{stop.hint}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+
+      {stops.map((stop, i) => (
+        <div key={i} className="stop-list-item">
+          <div>{stop.name}</div>
+          <button>edit</button>
+        </div>
+      ))}
+      <div className="btn-add-stop">
+        <button onClick={() => changeTab({ target: { value: 'addStop' } })}>Add Stop</button>
+      </div>
     </div>
   )
 }
