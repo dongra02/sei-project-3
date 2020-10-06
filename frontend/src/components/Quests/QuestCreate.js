@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Login from '../common/Login'
 import QuestForm from './QuestForm'
@@ -30,7 +31,8 @@ class QuestCreate extends React.Component{
       }
     },
     stops: [],
-    flyTo: null
+    flyTo: null,
+    stopFormLocale: null
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -82,11 +84,20 @@ class QuestCreate extends React.Component{
   }
 
   selectLocation = location => {
+    console.log(location)
     const { latitude, longitude } = location
     const flyTo = { latitude, longitude }
-    const stopLocation = { latitude: latitude, longitude: longitude }
-    const updateStop = { ...this.state.stopFormData, location: stopLocation }
-    this.setState({ flyTo, stopFormData: updateStop }, () => this.setState({ flyTo: null }))
+    this.handleMapStopLocale(location)
+    // const stopLocation = { latitude: latitude, longitude: longitude }
+    // const updateStop = { ...this.state.stopFormData, location: stopLocation }
+    // this.setState({ flyTo, stopFormData: updateStop }, () => this.setState({ flyTo: null }))
+  }
+
+  handleMapStopLocale = async (location) => {
+    const localeName = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
+    console.log(localeName.data.features[0].place_name)
+    const stopFormData = { ...this.state.stopFormData, name: localeName.data.features[0].place_name, location: location }
+    this.setState({ stopFormData })
   }
 
   render() {
@@ -115,7 +126,7 @@ class QuestCreate extends React.Component{
               selectLocation={this.selectLocation}
             />
             <div className="create-map">
-              <Map flyTo={flyTo} getBounds={() => null} />
+              <Map flyTo={flyTo} getBounds={() => null} handleMapStopLocale={this.handleMapStopLocale}/>
             </div>
           </div>
           <StopList stops={stops} />
