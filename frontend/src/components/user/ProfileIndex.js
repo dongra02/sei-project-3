@@ -23,23 +23,21 @@ class ProfileIndex extends React.Component {
   render() {
     if (!this.state.allProfiles) return null
     return (
-      <>
+      <div className="profile-index">
         <BgMap latLng={this.bgLatLng} />
+        <h3>Profiles</h3>
         <div>
-        <h1>Create a New Quest</h1>
-        <div>
-        {this.state.allProfiles.map((user, i) => (
-        <div key={i} className="container">
-          <div className="user-details">
-            <div className="detail-name">{user.username}</div>
-            <div className="detail-quests">{user.createdQuest.length}</div>
-            <br />
-          </div>
+          {this.state.allProfiles.map((user, i) => (
+            <div key={i} className="container">
+              <div className="user-details">
+                <div className="detail-name">{user.username}</div>
+                <div className="detail-quests">{user.createdQuest.length}</div>
+                <br />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
       </div>
-    </div>
-    </>
     )
   }
 }
