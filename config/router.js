@@ -22,6 +22,9 @@ router.route('/quests/:id/stops/:stopId')
   .put(quests.stopUpdate)
   .delete(quests.stopDelete)
 
+router.route('/quests/:id/comments')
+  .post(quests.commentCreate)
+
 router.route('/register')
   .post(auth.register)
 

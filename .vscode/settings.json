@@ -1,0 +1,11 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#e72222",
+    "titleBar.activeBackground": "#e72222",
+    "titleBar.inactiveBackground": "#e72222",
+    "statusBar.foreground": "#000",
+    "titleBar.inactiveForeground": "#000",
+    "titleBar.activeForeground": "#000",
+  },
+  "window.title": "Found - BACKEND"
+}
