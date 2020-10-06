@@ -31,7 +31,8 @@ class QuestCreate extends React.Component{
     },
     stops: [],
     flyTo: null,
-    tabShow: 'info'
+    tabShow: 'info',
+    placeName: ''
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -91,10 +92,10 @@ class QuestCreate extends React.Component{
   }
 
   handleMapStopLocale = async (location) => {
-    console.log(location)
     const localeName = await reverseGeoCode(location)
-    const stopFormData = { ...this.state.stopFormData, name: localeName.data.features[0].place_name, location: location }
-    this.setState({ stopFormData })
+    const placeName = localeName.data.features[0].place_name
+    const stopFormData = { ...this.state.stopFormData, location: location }
+    this.setState({ stopFormData, placeName })
   }
 
   selectTab = (event) => {
@@ -103,7 +104,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo, tabShow } = this.state
+    const { questFormData, stopFormData, stops, flyTo, tabShow, placeName } = this.state
 
     return (
       <div className="create-quest">
@@ -136,6 +137,7 @@ class QuestCreate extends React.Component{
                     displayAnswerType={this.displayAnswerType}
                     handleStopSubmit={this.handleStopSubmit}
                     selectLocation={this.selectLocation}
+                    placeName={placeName}
                   />
                 </div>
               </div>
