@@ -9,6 +9,7 @@ import QuestIndex from './components/Quests/QuestIndex'
 import QuestShow from './components/Quests/QuestShow'
 import QuestCreate from './components/Quests/QuestCreate'
 import ProfileShow from './components/user/ProfileShow'
+import ProfileIndex from './components/user/ProfileIndex'
 
 
 const App = () => {
@@ -20,8 +21,8 @@ const App = () => {
         <Route path="/quests/:id" component={QuestShow} />
         <Route path="/quests" component={QuestIndex} />
         <Route path='/create' component={QuestCreate} />
-        {/* <Route path="/create" component={QuestIndex} /> */}
         <Route path="/users/:id" component={ProfileShow} />  
+        <Route path="/users" component={ProfileIndex} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>

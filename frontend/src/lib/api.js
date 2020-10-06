@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:3000/api'
+const mapBoxGeoBase = 'https://api.mapbox.com/geocoding/v5/mapbox.places'
 
 const withHeaders = () => {
   return {
@@ -30,6 +31,14 @@ export const loginUser = formData => {
   return axios.post(`${baseUrl}/login`, formData)
 }
 
+export const getAllProfiles = () => {
+  return axios.get(`${baseUrl}/users`)
+}
+
 export const getSingleProfile = profileId => {
   return axios.get(`${baseUrl}/users/${profileId}`)
+}
+
+export const reverseGeoCode = location => {
+  return axios.get(`${mapBoxGeoBase}/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
 }
