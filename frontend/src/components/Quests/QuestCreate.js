@@ -14,7 +14,7 @@ class QuestCreate extends React.Component{
       name: '',
       location: '',
       estTime: '',
-      theme: ''
+      theme: 'theme'
     },
     stopFormData: {
       name: '',
@@ -83,7 +83,6 @@ class QuestCreate extends React.Component{
 
   selectLocation = (location, details) => {
     const { latitude, longitude } = location
-    console.log(details.place_name)
     const flyTo = { latitude, longitude }
     const stopLocation = { latitude: latitude, longitude: longitude }
     const updateStop = { ...this.state.stopFormData, location: stopLocation }
@@ -113,9 +112,8 @@ class QuestCreate extends React.Component{
           <div className="create-container">
             <div className="create-info">
               <div className="show-tabs">
-                {['info', 'stops'].map((tab, i) => (
-                  <button key={i} value={tab} onClick={this.selectTab} className={`tab ${tabShow === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
-                ))}
+                <button value={'info'} onClick={this.selectTab} className={`tab ${tabShow === 'info' ? '' : 'inactive'}`} >INFO</button>
+                <button value={'stops'} onClick={this.selectTab} className={`tab ${tabShow === 'stops' || tabShow === 'addStop' ? '' : 'inactive'}`} >STOPS</button>
               </div>
               <div className="create-tab" style={{ display: tabShow === 'info' ? 'block' : 'none' }}>
                 <QuestForm
@@ -125,7 +123,7 @@ class QuestCreate extends React.Component{
                   themes={this.themes}
                 />
               </div>
-              <div className="create-tab" style={{ display: tabShow === 'stops' ? 'block' : 'none' }}>
+              <div className="create-tab" style={{ display: tabShow === 'addStop' ? 'block' : 'none' }}>
                 <StopForm
                   stopFormData={stopFormData}
                   geocoderValue={this.state.geocoderValue}
@@ -134,16 +132,16 @@ class QuestCreate extends React.Component{
                   displayAnswerType={this.displayAnswerType}
                   handleStopSubmit={this.handleStopSubmit}
                   selectLocation={this.selectLocation}
+                  selectTab={this.selectTab}
                 />
+              </div>
+              <div className="create-tab" style={{ display: tabShow === 'stops' ? 'block' : 'none' }}>
+                <StopList stops={stops} changeTab={this.selectTab} />
               </div>
             </div>
             <div className="create-map">
-              <Map flyTo={flyTo} getBounds={() => null} handleMapStopLocale={this.handleMapStopLocale} />
+              <Map flyTo={flyTo} handleMapStopLocale={this.handleMapStopLocale} />
             </div>
-          </div>
-          <StopList stops={stops} />
-          <div className="btn-submit-quest">
-            <button onClick={this.handleQuestSubmit}>Save Quest</button>
           </div>
         </div>
       </div>
