@@ -9,7 +9,7 @@ class Timer extends React.Component {
 
   componentDidMount() {
     this.myInterval = setInterval(() => {
-      this.setState(({ seconds, minutes }) => ({
+      this.setState(({ seconds }) => ({
         seconds: seconds + 1,
         minutes: Math.floor(seconds / 60)
       }))
@@ -18,7 +18,7 @@ class Timer extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.myInterval)
-}
+  }
 
   render() {
     const { minutes, seconds } = this.state
