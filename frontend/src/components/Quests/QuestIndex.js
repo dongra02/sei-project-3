@@ -74,7 +74,8 @@ class QuestIndex extends React.Component {
   }
 
   // Called when a item is clicked in the geocoder component results
-  selectLocation = location => {
+  selectLocation = (location, placeDetails) => {
+    console.log(location, placeDetails)
     // location.zoom = Math.min(location.zoom + 10, 18)
     // could set the zoom of the map with this, but not quite sure how its measured here yet
     const { latitude, longitude } = location
