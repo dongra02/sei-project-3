@@ -8,7 +8,8 @@ class Register extends React.Component {
       username: '',
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      image: ''
     }
   }
 
@@ -47,6 +48,15 @@ class Register extends React.Component {
             name="username"
             placeholder="username"
             value={formData.username}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="input-field">
+          <input
+            type="text"
+            name="image"
+            placeholder="image"
+            value={formData.image}
             onChange={this.handleChange}
           />
         </div>
