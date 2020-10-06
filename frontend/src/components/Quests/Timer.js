@@ -6,11 +6,6 @@ class Timer extends React.Component {
     minutes: 0,
     seconds: 0
   }
-  
-  // time = () => {
-  //   minutes = Math.floor(time / 60)
-  //   seconds = time - (minutes * 60)
-  // }
 
   componentDidMount() {
     this.myInterval = setInterval(() => {
