@@ -10,7 +10,7 @@ const StopForm = (props) => {
 
   return (
     <form className="create-form" onSubmit={handleStopSubmit}>
-      <h5>Add A Stop</h5>
+      <h5>New Stop</h5>
       <div className="form-group">
         <input
           type="text"
@@ -68,10 +68,9 @@ const StopForm = (props) => {
           placeholder="Hint (optional)"/>
       </div>
       <div className="form-group">
-        <label htmlFor="location">Location :</label>
         <Geocoder selectLocation={selectLocation} required/>
       </div>
-      <button type="submit">Add Stop</button>
+      <button type="submit">Save Stop</button>
     </form>
   )
 }
