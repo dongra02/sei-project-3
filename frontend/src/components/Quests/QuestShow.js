@@ -68,7 +68,6 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
-    console.log(start)
     return (
       <>
         <div className="show-quests">
@@ -79,33 +78,35 @@ class QuestShow extends React.Component {
           </div>
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
-              { !lastStop && firstStop &&
+              { !lastStop && firstStop && start &&
                 <div className="start-details">
                   <h2 className="detail-name">{start.name}</h2>
-                  <div className="detail-owner">Theme: {start.theme}</div>
-                  <div className="detail-start">First Stop: {stop ? stop.name : ''}</div>
-                  <div className="detail-start">Estimated Time: {start.estTime} mins</div>
+                  <div className="detail-user">By {start.owner.username}</div>
+                  <div className="detail-theme">Theme: {start.theme}</div>
+                  <div className="detail-firststop">First Stop: {stop ? stop.name : ''}</div>
+              <div className="detail-stops">Stops: {start.stops.length}</div>
+                  <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                <h2>{stop ? stop.name : ''}</h2><br />
-                <h2>Your next clue is:</h2>
-                <p>{stop ? stop.clue : ''}</p>
-                <div className="answer-input">
-                  <input
-                    type="text"
-                    name="answer"
-                    value={answer}
-                    placeholder="answer"
-                    onChange={this.changeAnswer}
-                  />
+                  <h2>{stop ? stop.name : ''}</h2><br />
+                  <h2>Your next clue is:</h2>
+                  <p>{stop ? stop.clue : ''}</p>
+                  <div className="answer-input">
+                    <input
+                      type="text"
+                      name="answer"
+                      value={answer}
+                      placeholder="answer"
+                      onChange={this.changeAnswer}
+                    />
+                  </div>
+                  <div className="btn-next">
+                    <button onClick={this.nextStop}>{'NEXT'}</button>
+                  </div>
                 </div>
-                <div className="btn-next">
-                  <button onClick={this.nextStop}>{'NEXT'}</button>
-                </div>
-              </div>
               }
               { lastStop && !firstStop &&
                 <div className="endgame">

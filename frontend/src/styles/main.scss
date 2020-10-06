@@ -172,8 +172,11 @@ label {
 }
 
 // Container for map and list divs
+
+
 .results {
   display: flex;
+  // can add flex-direction column
   justify-content: space-between;
   margin: auto;
   height: 500px;
@@ -181,7 +184,7 @@ label {
   .results-map, 
   .results-list {
     position: relative;
-    width: 65%;
+    width: 65%; // make this 100%
     padding: 5px;
     outline: 1px dashed $map-red;
     box-shadow: 3px 5px $map-red;
@@ -189,7 +192,7 @@ label {
   }
 
   .results-list {
-    width: calc(35% - 20px);
+    width: calc(35% - 20px); // make this 100%
     
     .container {
       height: 100%;
@@ -245,8 +248,17 @@ label {
 }
 
 .start-details {
-  h2, div {
-    padding: 15px 0;
+  .detail-theme {
+    padding: 20px 0;
+  }
+  .detail-firststop {
+    padding: 12px 0;
+  }
+  .detail-stops {
+    padding: 12px 0;
+  }
+  .detail-time {
+    padding: 12px 0;
   }
 }
 
@@ -277,6 +289,7 @@ label {
   width: 95%;
   height: calc(100vh - 150px);
 
+
   .clues {
     text-align: center;
     padding: 40px;
@@ -301,11 +314,6 @@ label {
     height: 100%;
   }
 }
-
-// .btn {
-//   padding: 5px;
-//   margin: 5px;
-// }
 
 .form-container {
   margin: 50px auto;
@@ -345,7 +353,37 @@ label {
 
   h5 {
     text-align: center;
+    padding: 30px 10px 20px;
   }
+}
+
+.quest {
+  background-color: #9cd0;
+  box-shadow: none;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  outline: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
+}
+
+.quest-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-right: 20px;
+
+  input, select {
+    width: 250px;
+  }
+  select {
+    margin-left: 25px;
+  }
+}
+
+.stop-list {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tab {
@@ -402,7 +440,8 @@ label {
   display: flex;
   justify-content: space-between;
   margin: 50px;
-  height: 480px;
+  margin-top: 100px;
+  height: 500px;
 
   .create-map {
     width: 55%;
@@ -411,14 +450,33 @@ label {
     box-shadow: 3px 5px $map-red;
   }
 
-  .create-form {
+  .create-info {
     width: 40%;
+    position: relative;
+    background-color: #f8f6e3;
+    background-color: #aaf1;
+
+    .show-tabs {
+      position: absolute;
+      top: -72px;
+    }
+  }
+
+  .create-tab {
+    height: 100%;
+  }
+
+  .create-form {
     outline: 1px dashed $map-red;
     padding: 5px;
     box-shadow: 3px 5px $map-red;
     text-align: center;
+    height: 100%;
 
     button {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
       border: none;
       padding: 3px 10px;
       background-color: $map-red;
@@ -430,7 +488,16 @@ label {
 .react-geocoder {
   display: inline-block;
   position: relative;
-  // width: 350px;
+  width: 100%;
+
+  input {
+    background-color: white;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+  }
 }
 
 .react-geocoder-results {
@@ -455,20 +522,6 @@ label {
   &:hover {
     // background-color: #def;
   }
-}
-
-.quest {
-  max-width: 1000px;
-}
-
-.quest-form {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.stop-list {
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .locator {
@@ -560,7 +613,7 @@ label {
 .show-quests,
 .create-quest {
   position: relative;
-  top: 100px;
+  top: 70px;
 }
 
 .form-buttons {
