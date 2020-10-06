@@ -37,7 +37,7 @@ async function stopCreate(req, res, next){
 
 async function questShow(req, res, next) {
   try {
-    const quest = await Quest.findById(req.params.id)
+    const quest = await (await Quest.findById(req.params.id).populate('owner'))
     if (!quest) throw new Error(notFound)
     res.status(200).json(quest)
   } catch (err) {
