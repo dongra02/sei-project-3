@@ -5,7 +5,7 @@ import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
-import { createQuest } from '../../lib/api'
+import { createQuest, reverseGeoCode } from '../../lib/api'
 
 class QuestCreate extends React.Component{
 
@@ -94,6 +94,13 @@ class QuestCreate extends React.Component{
     this.setState({ tabShow: event.target.value })
   }
 
+  handleMapStopLocale = async (location) => {
+    const localeName = await reverseGeoCode(location)
+    const geocoderValue = localeName.data.features[0].place_name
+    const stopFormData = { ...this.state.stopFormData, location: location }
+    this.setState({ stopFormData, geocoderValue })
+  }
+
   render() {
 
     const { questFormData, stopFormData, stops, flyTo, tabShow } = this.state
@@ -131,7 +138,7 @@ class QuestCreate extends React.Component{
               </div>
             </div>
             <div className="create-map">
-              <Map flyTo={flyTo} getBounds={() => null} />
+              <Map flyTo={flyTo} getBounds={() => null} handleMapStopLocale={this.handleMapStopLocale} />
             </div>
           </div>
           <StopList stops={stops} />
