@@ -40,6 +40,8 @@ class QuestCreate extends React.Component{
     (Math.random() * 360) - 180
   ]
 
+  
+
   handleQuestFormChange = event => {
     const questFormData = {
       ...this.state.questFormData,
@@ -105,6 +107,12 @@ class QuestCreate extends React.Component{
 
     const { questFormData, stopFormData, stops, flyTo, tabShow } = this.state
 
+    const tabStyles = {
+      info: { display: tabShow === 'info' ? 'block' : 'none' },
+      stops: { display: tabShow === 'stops' && stops.length > 0 ? 'block' : 'none' },
+      addStop: { display: tabShow === 'addStop' || (tabShow === 'stops' && stops.length === 0) ? 'block' : 'none' }
+    }
+
     return (
       <div className="create-quest">
         <BgMap latLng={this.bgLatLng} />
@@ -116,7 +124,7 @@ class QuestCreate extends React.Component{
                 <button value={'info'} onClick={this.selectTab} className={`tab ${tabShow === 'info' ? '' : 'inactive'}`} >INFO</button>
                 <button value={'stops'} onClick={this.selectTab} className={`tab ${tabShow === 'stops' || tabShow === 'addStop' ? '' : 'inactive'}`} >STOPS</button>
               </div>
-              <div className="create-tab" style={{ display: tabShow === 'info' ? 'block' : 'none' }}>
+              <div className="create-tab" style={tabStyles.info}>
                 <QuestForm
                   questFormData={questFormData}
                   handleQuestFormChange={this.handleQuestFormChange}
@@ -124,7 +132,7 @@ class QuestCreate extends React.Component{
                   themes={this.themes}
                 />
               </div>
-              <div className="create-tab" style={{ display: tabShow === 'addStop' ? 'block' : 'none' }}>
+              <div className="create-tab" style={tabStyles.addStop}>
                 <StopForm
                   stopFormData={stopFormData}
                   geocoderValue={this.state.geocoderValue}
@@ -136,7 +144,7 @@ class QuestCreate extends React.Component{
                   selectTab={this.selectTab}
                 />
               </div>
-              <div className="create-tab" style={{ display: tabShow === 'stops' ? 'block' : 'none' }}>
+              <div className="create-tab" style={tabStyles.stops}>
                 <StopList stops={stops} changeTab={this.selectTab} />
               </div>
             </div>
