@@ -41,6 +41,7 @@ class Navbar extends React.Component {
           <div className="navbar-nav">
             <Link to="/quests" className={`nav-link ${page === 'Find' || page === 'quests' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
             <Link to="/create" className={`nav-link ${page === 'Create' ? 'active' : ''}`} onClick={this.selectNavItem}>Create</Link>
+            <Link to="/users" className={`nav-link ${page === 'Users' ? 'active' : ''}`} onClick={this.selectNavItem}>Users</Link>
           </div>
           <Link to="/" className={`navbar-logo ${page === 'Found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
           <div className="navbar-nav user">
