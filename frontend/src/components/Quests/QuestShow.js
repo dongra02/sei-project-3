@@ -95,7 +95,7 @@ class QuestShow extends React.Component {
                   <TimerTwo />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h2>Your next clue is:</h2>
+                  <h3>Your next clue is:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input

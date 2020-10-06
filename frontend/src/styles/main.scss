@@ -259,7 +259,6 @@ label {
 
 // Quest Show
 
-
 .start-details {
   background-color: $map-sand;
   padding: 40px 80px;
@@ -290,6 +289,26 @@ label {
   }
 }
 
+.next-clue {
+  background-color: $map-sand;
+  padding: 40px 40px;
+  border-radius: 12px;
+  border: 1px solid #2e2e2e;
+
+  h2 {
+  font-family: 'Sansita Swashed', cursive;
+  font-size: 2em;
+  text-align: center;
+  background-color: $map-blue;
+  border-radius: 8px;
+  padding: 6px;
+  color: #222;
+  }
+  h3 {
+    font-size: 1.1em;
+  }
+}
+
 .show-tabs {
   display: flex;
   justify-content: left;
@@ -306,6 +325,9 @@ label {
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
+  background-image: 
+    linear-gradient(#eee8, #eee8),
+    url('../images/texture.png');
 
 
   .clues {
@@ -331,6 +353,10 @@ label {
     width: 100%;
     height: 100%;
   }
+}
+
+.next-clue {
+  
 }
 
 .form-container {
