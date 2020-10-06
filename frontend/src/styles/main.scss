@@ -461,6 +461,9 @@ label {
     height: 100%;
 
     button {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
       border: none;
       padding: 3px 10px;
       background-color: $map-red;
