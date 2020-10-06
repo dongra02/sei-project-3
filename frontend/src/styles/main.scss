@@ -237,8 +237,9 @@ label {
 }
 
 .newquest-button {
-  margin: 10px;
+    margin: 10px;
     background-color: $map-red;
+    border-radius: 5px;
     color: $map-white;
     width: 10em;
     padding: 5px;
