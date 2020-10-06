@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 
 import Login from '../common/Login'
 import QuestForm from './QuestForm'
@@ -7,7 +6,7 @@ import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
-import { createQuest } from '../../lib/api'
+import { createQuest, reverseGeoCode } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 
 class QuestCreate extends React.Component{
@@ -31,8 +30,7 @@ class QuestCreate extends React.Component{
       }
     },
     stops: [],
-    flyTo: null,
-    stopFormLocale: null
+    flyTo: null
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -84,18 +82,14 @@ class QuestCreate extends React.Component{
   }
 
   selectLocation = location => {
-    console.log(location)
     const { latitude, longitude } = location
     const flyTo = { latitude, longitude }
     this.handleMapStopLocale(location)
-    // const stopLocation = { latitude: latitude, longitude: longitude }
-    // const updateStop = { ...this.state.stopFormData, location: stopLocation }
-    // this.setState({ flyTo, stopFormData: updateStop }, () => this.setState({ flyTo: null }))
+    this.setState({ flyTo }, () => this.setState({ flyTo: null }))
   }
 
   handleMapStopLocale = async (location) => {
-    const localeName = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
-    console.log(localeName.data.features[0].place_name)
+    const localeName = await reverseGeoCode(location)
     const stopFormData = { ...this.state.stopFormData, name: localeName.data.features[0].place_name, location: location }
     this.setState({ stopFormData })
   }
