@@ -91,22 +91,22 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                <h2>{stop ? stop.name : ''}</h2><br />
-                <h2>Your next clue is:</h2>
-                <p>{stop ? stop.clue : ''}</p>
-                <div className="answer-input">
-                  <input
-                    type="text"
-                    name="answer"
-                    value={answer}
-                    placeholder="answer"
-                    onChange={this.changeAnswer}
-                  />
+                  <h2>{stop ? stop.name : ''}</h2><br />
+                  <h2>Your next clue is:</h2>
+                  <p>{stop ? stop.clue : ''}</p>
+                  <div className="answer-input">
+                    <input
+                      type="text"
+                      name="answer"
+                      value={answer}
+                      placeholder="answer"
+                      onChange={this.changeAnswer}
+                    />
+                  </div>
+                  <div className="btn-next">
+                    <button onClick={this.nextStop}>{'NEXT'}</button>
+                  </div>
                 </div>
-                <div className="btn-next">
-                  <button onClick={this.nextStop}>{'NEXT'}</button>
-                </div>
-              </div>
               }
               { lastStop && !firstStop &&
                 <div className="endgame">
