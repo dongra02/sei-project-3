@@ -21,7 +21,7 @@ class Map extends React.Component {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
     // Get current location and go to position on map
-    this.goToCurrentPosition()
+    // this.goToCurrentPosition()
   }
 
   goToCurrentPosition = () => {
@@ -72,10 +72,11 @@ class Map extends React.Component {
 
   scrollToZoom = event => {
     const scrollSpeed = event.srcEvent.deltaY
-    if (scrollSpeed >  5) this.setState({ zoom: this.state.zoom - 0.05 })
-    if (scrollSpeed < -5) this.setState({ zoom: this.state.zoom + 0.05 })
-    // const viewport = { latitude: event.lngLat[1], longitude: event.lngLat[0] }
-    // this.setState({ viewport })
+    let zoom = this.state.zoom
+    if (scrollSpeed >  5) zoom -= 0.05
+    if (scrollSpeed < -5) zoom += 0.05
+    zoom = Math.max(Math.min(zoom, 20), 0)
+    this.setState({ zoom })
   }
 
   placeMarker = ({ lngLat }) => {

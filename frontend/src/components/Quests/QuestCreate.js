@@ -124,7 +124,8 @@ class QuestCreate extends React.Component{
     const { latitude, longitude } = location
     const flyTo = { latitude, longitude }
     const stopFormData = { ...this.state.stopFormData, location: flyTo }
-    this.setState({ flyTo, stopFormData, geocoderValue }, () => this.setState({ flyTo: null }))
+    const markers = [{ location: flyTo }]
+    this.setState({ flyTo, stopFormData, geocoderValue, markers }, () => this.setState({ flyTo: null }))
   }
 
 
@@ -146,8 +147,10 @@ class QuestCreate extends React.Component{
       
     this.setState({ tabShow, stopFormData, stopToEdit }, () => {
       // Set geocoder to correct value
+      // Load *edit*
       if (tabShow === 'addStop' && stopFormData.location.latitude) {
         this.pickLocationFromMap(stopFormData.location)
+        this.setState({ flyTo: stopFormData.location }, () => this.setState({ flyTo: null }))
       } else {
         this.setState({ geocoderValue: '' }, this.refreshGeocoder)
       }
@@ -219,7 +222,12 @@ class QuestCreate extends React.Component{
             </div>
           </div>
           <div className="create-map">
-            <Map flyTo={flyTo} getLocation={this.pickLocationFromMap} results={markers ? markers : null} />
+            <Map
+              flyTo={flyTo}
+              getLocation={this.pickLocationFromMap}
+              results={markers ? markers : null}
+              clickMarker={() => null} // TODO deal with this
+            />
           </div>
         </div>
       </div>
