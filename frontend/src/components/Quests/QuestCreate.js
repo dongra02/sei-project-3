@@ -93,6 +93,11 @@ class QuestCreate extends React.Component{
     this.selectTab({ target: { value: 'stops' } })
   }
 
+  deleteStop = (stopNum) => {
+    const stops = this.state.stops.filter((stop, i) => i !== stopNum)
+    this.setState({ stops })
+  }
+
   // Fires on picking a result from the geocoder suggestions
   selectLocation = (location, { place_name: geocoderValue }) => {
     const { latitude, longitude } = location
@@ -101,6 +106,8 @@ class QuestCreate extends React.Component{
     this.setState({ flyTo, stopFormData, geocoderValue }, () => this.setState({ flyTo: null }))
   }
 
+
+  // TODO break this out into two functions -> edit / select tab
   selectTab = (event) => {
     const stopToEdit = event.target.stopNum || event.target.stopNum === 0 ? event.target.stopNum : this.state.stops.length
     const tabShow = event.target.value
@@ -176,7 +183,7 @@ class QuestCreate extends React.Component{
             </div>
             {/* Stop List */}
             <div className="create-tab" style={tabStyles.stops}>
-              <StopList stops={stops} changeTab={this.selectTab} />
+              <StopList stops={stops} changeTab={this.selectTab} deleteStop={this.deleteStop} />
             </div>
           </div>
           <div className="create-map">
