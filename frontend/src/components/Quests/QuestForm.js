@@ -7,7 +7,7 @@ const QuestForm = (props) => {
 
   return (
     <>
-      <form className="form-container quest">
+      <form className="form-container info-tab">
         <h5>Quest Details</h5>
         <div className="quest-form">
           <div className="form-group">

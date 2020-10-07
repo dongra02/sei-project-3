@@ -20,7 +20,7 @@ const StopForm = (props) => {
   }
 
   return (
-    <div className="create-form">
+    <div className="stop-form">
       <h5>New Stop</h5>
       <div className="form-group">
         <input
@@ -55,7 +55,7 @@ const StopForm = (props) => {
           className="form-control"
           value={answer}
           onChange={handleChange}
-          placeholder={answerType === 'Answer' ? 'Answer' : 'Location Leniency'}
+          placeholder={answerType === 'Answer' ? 'Answer' : 'Location Leniency (meters)'}
         />
       </div>
       <div className="form-group">

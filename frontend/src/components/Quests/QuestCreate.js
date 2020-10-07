@@ -28,6 +28,7 @@ class QuestCreate extends React.Component{
       }
     },
     stops: [],
+    stopToEdit: 0,
     flyTo: null,
     tabShow: 'info',
     geocoderValue: null
@@ -66,17 +67,14 @@ class QuestCreate extends React.Component{
   submitStop = () => {
     const stops = [ ...this.state.stops ]
     const newStop = { ...this.state.stopFormData }
-    stops.push(newStop)
-    const stopFormData = {
-      name: '',
-      clue: '',
-      answerType: 'Answer',
-      answer: '',
-      hint: '',
-      location: { latitude: '', longitude: '' }
-    }
 
-    this.setState({ stops, stopFormData, tabShow: 'stops' })
+    // New Stop
+    if (this.state.stopToEdit === this.state.stops.length) stops.push(newStop)
+    // Edit stop
+    else stops[this.state.stopToEdit] = newStop
+    this.setState({ stops })
+
+    this.selectTab({ target: { value: 'stops' } })
   }
 
   // Fires on picking a result from the geocoder suggestions
@@ -88,15 +86,19 @@ class QuestCreate extends React.Component{
   }
 
   selectTab = (event) => {
-    const stopFormData = {
-      name: '',
-      clue: '',
-      answerType: 'Answer',
-      answer: '',
-      hint: '',
-      location: { latitude: '', longitude: '' }
-    }
-    this.setState({ tabShow: event.target.value, stopFormData })
+    const stopToEdit = event.target.stopNum || event.target.stopNum === 0 ? event.target.stopNum : this.state.stops.length
+    const tabShow = event.target.value
+    const stopFormData = event.target.stopNum || event.target.stopNum === 0
+      ? { ...this.state.stops[event.target.stopNum] }
+      : {
+        name: '',
+        clue: '',
+        answerType: 'Answer',
+        answer: '',
+        hint: '',
+        location: { latitude: '', longitude: '' }
+      }
+    this.setState({ tabShow, stopFormData, stopToEdit })
   }
 
   // TODO handle a blank result here
@@ -109,7 +111,7 @@ class QuestCreate extends React.Component{
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue } = this.state
+    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue, stopToEdit } = this.state
 
     const tabStyles = {
       info: { display: tabShow === 'info' ? 'block' : 'none' },
@@ -124,6 +126,7 @@ class QuestCreate extends React.Component{
       submitStop: this.submitStop,
       selectLocation: this.selectLocation,
       selectTab: this.selectTab
+      // stopToEdit: stopToEdit === stops.length ? null : stopToEdit
     }
 
     const questFormProps = {
@@ -143,6 +146,7 @@ class QuestCreate extends React.Component{
               <button value={'info'} onClick={this.selectTab} className={`tab ${tabShow === 'info' ? '' : 'inactive'}`} >INFO</button>
               <button value={'stops'} onClick={this.selectTab} className={`tab ${tabShow === 'stops' || tabShow === 'addStop' ? '' : 'inactive'}`} >STOPS</button>
             </div>
+            {/* Info tab */}
             <div className="create-tab" style={tabStyles.info}>
               <QuestForm {...questFormProps} />
             </div>
