@@ -237,8 +237,9 @@ label {
 }
 
 .newquest-button {
-  margin: 10px;
+    margin: 10px;
     background-color: $map-red;
+    border-radius: 5px;
     color: $map-white;
     width: 10em;
     padding: 5px;
@@ -259,12 +260,9 @@ label {
 
 // Quest Show
 
-
 .start-details {
   background-color: $map-sand;
-  padding: 40px 80px;
-  border-radius: 12px;
-  border: 1px solid #2e2e2e;
+  padding: 40px 20px;
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
@@ -277,7 +275,7 @@ label {
   }
 
   .detail-theme {
-    padding: 20px 0;
+    padding: 20px 0 12px 0;
   }
   .detail-firststop {
     padding: 12px 0;
@@ -290,10 +288,28 @@ label {
   }
 }
 
+.next-clue,
+.endgame {
+  background-color: $map-sand;
+
+  h2 {
+  font-family: 'Sansita Swashed', cursive;
+  font-size: 2em;
+  text-align: center;
+  background-color: $map-blue;
+  border-radius: 8px;
+  padding: 6px;
+  color: #222;
+  }
+  h3 {
+    font-size: 1.1em;
+  }
+}
+
 .show-tabs {
   display: flex;
   justify-content: left;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 5%;
   width: 95%;
 }
@@ -306,11 +322,11 @@ label {
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
-
+  background-color: $map-sand;
 
   .clues {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
   }
 
   h2 {
@@ -332,6 +348,7 @@ label {
     height: 100%;
   }
 }
+
 
 .form-container {
   margin: 50px auto;
@@ -676,4 +693,9 @@ label {
     background-color: $map-red;
     color: $map-white;
   }
+}
+
+.container-quest {
+  margin-left: 120px;
+  margin-top: 20px;
 }

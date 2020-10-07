@@ -1,5 +1,6 @@
 import React from 'react'
 import { getSingleProfile } from '../../lib/api'
+import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../../lib/auth'
 
 class ProfileShow extends React.Component {
@@ -40,7 +41,19 @@ class ProfileShow extends React.Component {
             <tr>
               <th>Created Quests</th>
               <td>{this.state.profile.createdQuest.length}</td>
-            </tr>
+              </tr>
+              {this.state.profile.createdQuest.map((quest, i) => (
+                <div key={i} className='container-quest'>
+                  <Link to={`/quests/${quest.id}`}>
+                    <div className="quest-details">
+                      <div className="detail-name">{quest.name}</div>
+                      <div className="detail-theme">{quest.theme}</div>
+                      <div className="detail-rating">{quest.avgRating}</div>
+                      <br />
+                    </div>
+                  </Link>
+                </div>
+              ))}
         </tbody>
         </table>
       </div>

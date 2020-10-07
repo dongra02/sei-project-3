@@ -35,16 +35,16 @@ class Register extends React.Component {
   }
 
   showWidget = () => {
-    let widget = window.cloudinary.createUploadWidget(
+    const widget = window.cloudinary.createUploadWidget(
       { 
         cloudName: 'dmhj1vjdf',
-        uploadPreset: 'bu04dewe'
+        uploadPreset: 'bu04dewe',
+        showUploadMoreButton: false
       },
       (error, result) => {
         if (!error && result && result.event === 'success') { 
-          console.log(result.info.url)
-        } else {
-          console.log(error)
+          const formData = { ...this.state.formData, imageUrl: result.info.url }
+          this.setState({ formData })
         }
       })
     widget.open()

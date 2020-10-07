@@ -1,10 +1,9 @@
 import React from 'react'
 import { getSingleQuest } from '../../lib/api'
 import { Link } from 'react-router-dom'
+import Timer from './Timer'
 
 import Map from '../map/Map'
-import Timer from './Timer'
-import TimerTwo from './Timer'
 
 class QuestShow extends React.Component {
   state = {
@@ -15,7 +14,8 @@ class QuestShow extends React.Component {
     flyTo: null,
     firstStop: true,
     lastStop: false,
-    start: ''
+    start: '', 
+    time: ''
   }
 
   componentDidMount = async () => {
@@ -50,10 +50,9 @@ class QuestShow extends React.Component {
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       const currentStop = this.state.currentStop + 1
-      this.setState({ currentStop })
+      this.setState({ currentStop, answer: '' })
     }
   }
-
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
   getLocationGuess = guess => {
@@ -65,10 +64,21 @@ class QuestShow extends React.Component {
     const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
     console.log(length)
   }
+  // function that saves time to state 
+  // set a const to current time + 1
+  // use set state to save that
+  // pass this function to Timer
+
+  // getCurrentTime = () => {
+  //   const time = new Date + 1
+  //   this.setState({ time })
+  // }
+
 
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
+    console.log(this.state)
     return (
       <>
         <div className="show-quests">
@@ -84,18 +94,20 @@ class QuestShow extends React.Component {
                   <h2 className="detail-name">{start.name}</h2>
                   <div className="detail-user">By {start.owner.username}</div>
                   <div className="detail-theme">Theme: {start.theme}</div>
-                  <div className="detail-firststop">First Stop: {stop ? stop.name : ''}</div>
+                  <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
                   <div className="detail-stops">Stops: {start.stops.length}</div>
                   <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
                 </div>
               }
-              { !lastStop && !firstStop && 
+              { !lastStop && !firstStop &&
                 <div className="next-clue">
-                  <TimerTwo />
+                  <Timer 
+                    getCurrentTime={this.getCurrentTime}
+                  />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h2>Your next clue is:</h2>
+                  <h3>Your next clue is:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input
@@ -115,9 +127,9 @@ class QuestShow extends React.Component {
                 <div className="endgame">
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Well done, you have completed your quest!</h2>
-                  <p>Your time was ... minutes</p>
+                  <p>Your time was {this.state.seconds}... minutes</p>
                   <hr />
-                  <Link className="newquest-button" to={`/quests`}>Choose New Quest</Link>
+                  <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
                 </div>
               }
             </div>
