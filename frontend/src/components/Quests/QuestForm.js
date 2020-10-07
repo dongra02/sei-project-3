@@ -1,7 +1,7 @@
 import React from 'react'
 
 const QuestForm = (props) => {
-  const { name, theme, estTime } = props.questFormData
+  const { name, estTime } = props.questFormData
   const { handleQuestFormChange, handleQuestSubmit, themes } = props
 
 
