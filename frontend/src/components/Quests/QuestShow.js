@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import Map from '../map/Map'
 import Timer from './Timer'
-import TimerTwo from './Timer'
 
 class QuestShow extends React.Component {
   state = {
@@ -92,7 +91,7 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                  <TimerTwo />
+                  <Timer />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Your next clue is:</h2>
@@ -117,7 +116,7 @@ class QuestShow extends React.Component {
                   <h2>Well done, you have completed your quest!</h2>
                   <p>Your time was ... minutes</p>
                   <hr />
-                  <Link className="newquest-button" to={`/quests`}>Choose New Quest</Link>
+                  <Link className="newquest-button" to={'/quests'}>Choose New Quest</Link>
                 </div>
               }
             </div>
