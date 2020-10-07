@@ -6,25 +6,25 @@ import { getUserProfile } from '../../lib/api'
 
 class UserProfile extends React.Component{
   state = {
-    profileData: {}
+    userId: ''
   }
 
   componentDidMount = async () => {
     try {
-      const profileData = await getUserProfile()
-      this.setState({ profileData })
-      console.log(profileData)
+      const user = await getUserProfile()
+      this.setState({ userId: user.data.id })
     } catch (err) {
       console.log(err)
     }
   }
 
   render() {
-    const { profileData } = this.state
-    if (!profileData) return <div>...loading profile...</div>
+    const { userId } = this.state
+
+    if (!userId) return <div>...loading profile...</div>
     
     return (
-      <ProfileShow profileData={profileData} />
+      <ProfileShow userId={userId} />
     )
   }
 }

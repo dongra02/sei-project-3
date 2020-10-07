@@ -5,16 +5,19 @@ import { isAuthenticated } from '../../lib/auth'
 
 class ProfileShow extends React.Component {
   state = {
-    profile: ''
+    profile: '',
+    isUser: false
   }
 
+  userId  = this.props.userId
+
   componentDidMount = async () => {
-    console.log(this.props.match.params.id)
-    const response = await getSingleProfile(this.props.match.params.id)
+    const profileId = this.userId ? this.userId : this.props.match.params.id
+    const isUser = this.userId ? true : false
+    const response = await getSingleProfile(profileId)
     this.setState (
-      { profile: response.data }
+      { profile: response.data, isUser }
     )
-    console.log(this.state.profile)
   }
 
   render() {
