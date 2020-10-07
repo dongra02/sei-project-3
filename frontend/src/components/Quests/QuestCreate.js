@@ -12,9 +12,11 @@ class QuestCreate extends React.Component{
   state = {
     questFormData: {
       name: '',
+      description: '',
       location: '',
       estTime: '',
-      theme: 'theme'
+      theme: 'theme',
+      timer: false
     },
     stopFormData: {
       name: '',
@@ -48,9 +50,11 @@ class QuestCreate extends React.Component{
   }
 
   handleQuestFormChange = event => {
+    console.log(event.target.type)
+    const type = event.target.type
     const questFormData = {
       ...this.state.questFormData,
-      [event.target.name]: event.target.value
+      [event.target.name]: type === 'checkbox' ? event.target.checked : event.target.value
     }
     this.setState({ questFormData })
   }

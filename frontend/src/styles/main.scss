@@ -367,10 +367,15 @@ label {
     margin-top: 15px;
   }
 
-  input {
+  input, textarea {
     width: 95%;
     margin-left: 5%;
     color: #444;
+  }
+
+  input[type=checkbox] {
+    width: 20px !important;
+    height: 20px;
   }
 
   .submit {
@@ -466,7 +471,7 @@ label {
 
     .show-tabs {
       position: absolute;
-      top: -72px;
+      top: -42px;
     }
   }
 
@@ -494,7 +499,7 @@ label {
     justify-content: center;
     padding-right: 20px;
   
-    input, select {
+    input, select, textarea {
       width: 250px;
     }
     select {
@@ -698,4 +703,10 @@ label {
 .container-quest {
   margin-left: 120px;
   margin-top: 20px;
+}
+
+.timer-check {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }
