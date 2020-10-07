@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom'
 import Timer from './Timer'
 
 import Map from '../map/Map'
-<<<<<<< HEAD
-import Timer from './Timer'
-=======
->>>>>>> endgame
 
 class QuestShow extends React.Component {
   state = {
@@ -120,11 +116,7 @@ class QuestShow extends React.Component {
                   <h2>Well done, you have completed your quest!</h2>
                   <p>Your time was ... minutes</p>
                   <hr />
-<<<<<<< HEAD
-                  <Link className="newquest-button" to={'/quests'}>Choose New Quest</Link>
-=======
                   <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
->>>>>>> endgame
                 </div>
               }
             </div>
