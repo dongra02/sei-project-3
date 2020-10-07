@@ -156,7 +156,7 @@ class QuestCreate extends React.Component{
             </div>
           </div>
           <div className="create-map">
-            <Map flyTo={flyTo} handleMapStopLocale={this.pickLocationFromMap} />
+            <Map flyTo={flyTo} getLocation={this.pickLocationFromMap} />
           </div>
         </div>
       </div>
