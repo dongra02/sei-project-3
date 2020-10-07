@@ -107,6 +107,18 @@ async function stopDelete(req, res, next) {
   }
 }
 
+async function commentCreate(req, res, next) {
+  try {
+    const quest = await Quest.findById(req.params.id)
+    if (!quest) throw new Error(notFound)
+    quest.comments.push(req.body)
+    await quest.save()
+    res.status(201).json(quest)
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   index: questIndex,
   create: questCreate,
@@ -116,5 +128,6 @@ module.exports = {
   stopCreate,
   stopShow,
   stopUpdate,
-  stopDelete
+  stopDelete,
+  commentCreate
 }
