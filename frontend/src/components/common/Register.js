@@ -42,7 +42,8 @@ class Register extends React.Component {
       },
       (error, result) => {
         if (!error && result && result.event === 'success') { 
-          console.log(result.info.url)
+          const formData = { ...this.state.formData, imageUrl: result.info.url }
+          this.setState({ formData })
         } else {
           console.log(error)
         }

@@ -37,7 +37,7 @@ async function stopCreate(req, res, next){
 
 async function questShow(req, res, next) {
   try {
-    const quest = await (await Quest.findById(req.params.id).populate('owner'))
+    const quest = await Quest.findById(req.params.id).populate('owner').populate('comments.owner')
     if (!quest) throw new Error(notFound)
     res.status(200).json(quest)
   } catch (err) {
@@ -111,7 +111,7 @@ async function commentCreate(req, res, next) {
   try {
     const quest = await Quest.findById(req.params.id)
     if (!quest) throw new Error(notFound)
-    quest.comments.push(req.body)
+    quest.comments.push({ ...req.body, owner: req.currentUser._id })
     await quest.save()
     res.status(201).json(quest)
   } catch (err) {

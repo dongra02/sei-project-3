@@ -14,7 +14,8 @@ const stopSchema = new mongoose.Schema({
 
 const commentSchema = mongoose.Schema({
   text: { type: String, required: true },
-  rating: { type: Number, required: true, min: 1, max: 5 }
+  rating: { type: Number, required: true, min: 1, max: 5 },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
 })
