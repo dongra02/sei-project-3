@@ -4,11 +4,23 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
-  const { name, clue, answer, hint } = props.stopFormData
-  const { handleStopFormChange, handleStopSubmit, selectLocation, handleStopAnswerTypeChange, geocoderValue, displayAnswerType, selectTab } = props
+  const { name, clue, answerType, answer, hint } = props.stopFormData
+  const { handleChange, submitStop, selectLocation, geocoderValue, selectTab } = props
+
+  const validateForm = () => {
+    const errors = {
+      name, clue, answer
+    }
+    if (!name) errors.name = false
+    if (!clue) errors.clue = false
+    if (!answer) errors.answer = false
+
+    if (Object.values(errors).every(val => val)) submitStop()
+    else console.log(errors)
+  }
 
   return (
-    <form className="create-form" onSubmit={handleStopSubmit}>
+    <div className="create-form">
       <h5>New Stop</h5>
       <div className="form-group">
         <input
@@ -16,9 +28,9 @@ const StopForm = (props) => {
           id="name"
           className="form-control"
           value={name}
-          onChange={handleStopFormChange}
+          onChange={handleChange}
           placeholder="Stop Name"
-          required/>
+        />
       </div>
       <div className="form-group">
         <textarea
@@ -26,44 +38,33 @@ const StopForm = (props) => {
           id="clue"
           className="form-control"
           value={clue}
-          onChange={handleStopFormChange}
+          onChange={handleChange}
           placeholder="Clue"
-          required/>
+        />
       </div>
       <div className="form-group">
-        <select className="form-control" onChange={handleStopAnswerTypeChange}>
+        <select className="form-control" id="answerType" value={answerType} onChange={handleChange}>
           <option value='Answer'>Answer</option>
           <option value="Proximity">Proximity</option>
         </select>
       </div>
-      {displayAnswerType() &&  
       <div className="form-group">
-        <textarea
-          type="text"
-          id="answer"
-          className="form-control"
-          value={answer}
-          onChange={handleStopFormChange}
-          placeholder="Answer"
-          required/>
-      </div>}
-      {!displayAnswerType() &&  <div className="form-group">
         <input
-          type="number"
+          type={answerType === 'Answer' ? 'text' : 'number'}
           id="answer"
           className="form-control"
           value={answer}
-          onChange={handleStopFormChange}
-          placeholder="Location Leniency"
-          required/>
-      </div>}
+          onChange={handleChange}
+          placeholder={answerType === 'Answer' ? 'Answer' : 'Location Leniency'}
+        />
+      </div>
       <div className="form-group">
         <textarea
           type="text"
           id="hint"
           className="form-control"
           value={hint}
-          onChange={handleStopFormChange}
+          onChange={handleChange}
           placeholder="Hint (optional)"/>
       </div>
       <div className="form-group">
@@ -71,9 +72,9 @@ const StopForm = (props) => {
       </div>
       <div className="create-button">
         <button onClick={() => selectTab({ target: { value: 'stops' } })}>Cancel</button>
-        <button type="submit">Save Stop</button>
+        <button onClick={validateForm}>Save Stop</button>
       </div>
-    </form>
+    </div>
   )
 }
 
