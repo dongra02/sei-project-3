@@ -23,8 +23,9 @@ class ProfileIndex extends React.Component {
   render() {
     if (!this.state.allProfiles) return null
     return (
+      <>
+      <BgMap latLng={this.bgLatLng} />
       <div className="profile-index">
-        <BgMap latLng={this.bgLatLng} />
         <h3>Profiles</h3>
         <div>
           {this.state.allProfiles.map((user, i) => (
@@ -43,6 +44,7 @@ class ProfileIndex extends React.Component {
           ))}
         </div>
       </div>
+    </>
     )
   }
 }

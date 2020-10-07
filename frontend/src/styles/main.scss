@@ -288,6 +288,7 @@ label {
   }
 }
 
+
 .next-clue,
 .endgame {
   background-color: $map-sand;
@@ -700,9 +701,19 @@ label {
   }
 }
 
+.profile {
+  margin-left: 100px;
+}
+
+.title-text {
+  // text-decoration: underline;
+  color: $map-red;
+}
+
 .container-quest {
   margin-left: 120px;
   margin-top: 20px;
+  width: 60%;
 }
 
 .timer-check {
