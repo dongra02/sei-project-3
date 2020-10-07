@@ -1,9 +1,13 @@
 import React from 'react'
 import { getSingleQuest } from '../../lib/api'
 import { Link } from 'react-router-dom'
+import Timer from './Timer'
 
 import Map from '../map/Map'
+<<<<<<< HEAD
 import Timer from './Timer'
+=======
+>>>>>>> endgame
 
 class QuestShow extends React.Component {
   state = {
@@ -94,7 +98,7 @@ class QuestShow extends React.Component {
                   <Timer />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h2>Your next clue is:</h2>
+                  <h3>Your next clue is:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input
@@ -116,7 +120,11 @@ class QuestShow extends React.Component {
                   <h2>Well done, you have completed your quest!</h2>
                   <p>Your time was ... minutes</p>
                   <hr />
+<<<<<<< HEAD
                   <Link className="newquest-button" to={'/quests'}>Choose New Quest</Link>
+=======
+                  <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
+>>>>>>> endgame
                 </div>
               }
             </div>
