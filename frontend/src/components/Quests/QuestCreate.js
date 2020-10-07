@@ -31,7 +31,8 @@ class QuestCreate extends React.Component{
     stopToEdit: 0,
     flyTo: null,
     tabShow: 'info',
-    geocoderValue: null
+    geocoderValue: null,
+    geocoderKey: 0
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -40,6 +41,11 @@ class QuestCreate extends React.Component{
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
   ]
+
+  refreshGeocoder = () => {
+    const geocoderKey = (this.state.geocoderKey + 1) % 2
+    this.setState({ geocoderKey })
+  }
 
   handleQuestFormChange = event => {
     const questFormData = {
@@ -57,11 +63,17 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
-  handleQuestSubmit = async () => {
-    const location = this.state.stops[0].location
-    const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
-    console.log(newQuestData)
-    await createQuest(newQuestData)
+  handleQuestSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const location = this.state.stops[0].location
+      const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
+      console.log(newQuestData)
+      const response = await createQuest(newQuestData)
+      if (response.status === 201) this.props.history.push(`/quests/${response.data._id}`)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   submitStop = () => {
@@ -99,19 +111,23 @@ class QuestCreate extends React.Component{
         location: { latitude: '', longitude: '' }
       }
     this.setState({ tabShow, stopFormData, stopToEdit })
+
+    const location = stopFormData.location
+    if (location.latitude) this.pickLocationFromMap(location)
   }
 
-  // TODO handle a blank result here
   pickLocationFromMap = async (location) => {
-    const localeName = await reverseGeoCode(location)
-    const geocoderValue = localeName.data.features[0].place_name
+    const geoData = await reverseGeoCode(location)
+    if (!geoData.data.features[0]) return
+    const geocoderValue = geoData.data.features[0].place_name
     const stopFormData = { ...this.state.stopFormData, location }
     this.setState({ stopFormData, geocoderValue })
+    this.refreshGeocoder()
   }
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue, stopToEdit } = this.state
+    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue, geocoderKey } = this.state
 
     const tabStyles = {
       info: { display: tabShow === 'info' ? 'block' : 'none' },
@@ -120,13 +136,13 @@ class QuestCreate extends React.Component{
     }
 
     const stopFormProps = {
-      stopFormData: stopFormData,
-      geocoderValue: geocoderValue,
+      stopFormData,
+      geocoderValue,
       handleChange: this.handleStopFormChange,
       submitStop: this.submitStop,
       selectLocation: this.selectLocation,
-      selectTab: this.selectTab
-      // stopToEdit: stopToEdit === stops.length ? null : stopToEdit
+      selectTab: this.selectTab,
+      geocoderKey
     }
 
     const questFormProps = {
