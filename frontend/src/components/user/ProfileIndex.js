@@ -25,26 +25,26 @@ class ProfileIndex extends React.Component {
     return (
       <>
       <BgMap latLng={this.bgLatLng} />
-      <div className="profile-index">
-        <h3>Profiles</h3>
-        <div>
-          {this.state.allProfiles.map((user, i) => (
-            <div key={i} className="container">
-              <Link to={`/users/${user.id}`}>
-                <div className="user-details">
-                  <div className="detail-name">{user.username}</div>
-                  <div className="detail-quests">
-              <span>Created Quests: </span>
-              <span>{user.createdQuest.length}</span>
-              </div>
-                  <br />
+        <div className="profile-index">
+          <h3>Profiles</h3>
+          <div className='profile-list'>
+            {this.state.allProfiles.map((user, i) => (
+              <div key={i} className="profile-list-item">
+                <Link to={`/users/${user.id}`}>
+                  <div className="user-details">
+                    <div className="detail-name">{user.username}</div>
+                    <div className="detail-quests">
+                <span>Created Quests: </span>
+                <span>{user.createdQuest.length}</span>
                 </div>
-              </Link>
-            </div>
-          ))}
+                    <br />
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </>
+      </>
     )
   }
 }

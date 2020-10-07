@@ -29,34 +29,36 @@ class ProfileShow extends React.Component {
   render() {
     if ( !this.state.profile ) return null
     return (
-      <div className='profile'>
-        <BgMap latLng={this.bgLatLng} />
-        <table className='table'>
-          <thead>
-            <tr>
-              <th scope="col">Email</th>
-              <th scope="col">Username</th>
-              <th scope="col">Quests</th>
-            </tr>
-          </thead>
-          </table>
-        <h1 className='title-text'>{this.state.profile.username}</h1>
-        <div><img src={this.state.profile.imageUrl} alt='Profile image' /></div>
-        <h3>{this.state.profile.email}</h3>
-        <h2>Created Quests:</h2>
-        {this.state.profile.createdQuest.map((quest, i) => (
-          <div key={i} className='container-quest'>
-            <Link to={`/quests/${quest.id}`}>
-              <div className="quest-details">
-                <div className="detail-name">{quest.name}</div>
-                <div className="detail-theme">{quest.theme}</div>
-                <div className="detail-rating">{quest.avgRating}</div>
-                <br />
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <>
+      <BgMap latLng={this.bgLatLng} />
+        <div className='profile'>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Quests</th>
+              </tr>
+            </thead>
+            </table>
+          <h1 className='title-text'>{this.state.profile.username}</h1>
+          <div><img src={this.state.profile.imageUrl} alt='Profile' /></div>
+          <h3>{this.state.profile.email}</h3>
+          <h2>Created Quests:</h2>
+          {this.state.profile.createdQuest.map((quest, i) => (
+            <div key={i} className='container-quest'>
+              <Link to={`/quests/${quest.id}`}>
+                <div className="quest-details">
+                  <div className="detail-name">{quest.name}</div>
+                  <div className="detail-theme">{quest.theme}</div>
+                  <div className="detail-rating">{quest.avgRating}</div>
+                  <br />
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </>
     )
   }
 } 
