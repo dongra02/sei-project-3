@@ -15,7 +15,8 @@ class QuestShow extends React.Component {
     firstStop: true,
     lastStop: false,
     start: '', 
-    time: 0
+    time: 0,
+    markers: []
   }
 
   componentDidMount = async () => {
@@ -63,6 +64,7 @@ class QuestShow extends React.Component {
     const lngDiff = Math.abs(guess.longitude - nextLocation.longitude) * degreeLengthInMeters
     const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
     console.log(length)
+    this.setState({ markers: [{ location: guess }] })
   }
   
   updateTime = () => {
@@ -74,7 +76,6 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
-    console.log(this.state)
     return (
       <>
         <div className="show-quests">
@@ -129,7 +130,7 @@ class QuestShow extends React.Component {
               }
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} />
+              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} results={this.state.markers} />
             </div>
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
               <h2>Comments</h2>

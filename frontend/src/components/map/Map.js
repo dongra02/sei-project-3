@@ -21,7 +21,7 @@ class Map extends React.Component {
     // Sets a reference to the map so that it can be accessed for methods etc.
     this.setState({ mapRef: this.mapRef })
     // Get current location and go to position on map
-    this.goToCurrentPosition()
+    // this.goToCurrentPosition()
   }
 
   goToCurrentPosition = () => {
@@ -72,10 +72,11 @@ class Map extends React.Component {
 
   scrollToZoom = event => {
     const scrollSpeed = event.srcEvent.deltaY
-    if (scrollSpeed >  5) this.setState({ zoom: this.state.zoom - 0.05 })
-    if (scrollSpeed < -5) this.setState({ zoom: this.state.zoom + 0.05 })
-    // const viewport = { latitude: event.lngLat[1], longitude: event.lngLat[0] }
-    // this.setState({ viewport })
+    let zoom = this.state.zoom
+    if (scrollSpeed >  5) zoom -= 0.05
+    if (scrollSpeed < -5) zoom += 0.05
+    zoom = Math.max(Math.min(zoom, 20), 0)
+    this.setState({ zoom })
   }
 
   placeMarker = ({ lngLat }) => {
@@ -85,7 +86,7 @@ class Map extends React.Component {
       latitude: lngLat[1],
       longitude: lngLat[0]
     }
-    this.setState({ clickedLocation })
+    // this.setState({ clickedLocation })
     this.props.getLocation(clickedLocation)
   }
 
@@ -102,7 +103,6 @@ class Map extends React.Component {
         width={'100%'} height={'100%'}
         {...viewport}
         zoom={zoom}
-        // doubleClickZoom={false}
         onViewportChange={this.moveMapView}
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
@@ -118,13 +118,13 @@ class Map extends React.Component {
             <div className="marker" />
           </Marker>
         }
-        {results && !autoTransition && results.map((quest, i) => {
-          const { latitude, longitude } = quest.stops[0].location
+        {results && !autoTransition && results.map((place, i) => {
+          const { latitude, longitude } = place.location
           const marker =
             <Marker key={i} latitude={latitude} longitude={longitude}>
-              {quest.selected
+              {place.selected
                 ? <StopMarker />
-                : < div className="marker" onClick={() => clickMarker(quest)} />}
+                : < div className="marker" onClick={() => clickMarker(place)} />}
             </Marker>
           return marker
         })}
