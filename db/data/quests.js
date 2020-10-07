@@ -8,6 +8,7 @@ module.exports = [{
     'longitude': -0.086167
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'London Bridge Railway',
@@ -61,6 +62,7 @@ module.exports = [{
     'longitude': 35.470499
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'Raouche Rocks',
@@ -113,6 +115,7 @@ module.exports = [{
     'longitude': -0.158275
   },
   timer: true,
+  comments: [],
   stops: [
     {
       'name': 'Marble arch station',
@@ -167,6 +170,7 @@ module.exports = [{
     'longitude': 35.656035
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'Our Lady of the Sea',
