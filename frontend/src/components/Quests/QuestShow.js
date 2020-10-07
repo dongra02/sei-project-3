@@ -74,7 +74,6 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
-    console.log(this.state)
     return (
       <>
         <div className="show-quests">

@@ -85,7 +85,7 @@ class Map extends React.Component {
       latitude: lngLat[1],
       longitude: lngLat[0]
     }
-    this.setState({ clickedLocation })
+    // this.setState({ clickedLocation })
     this.props.getLocation(clickedLocation)
   }
 
@@ -102,7 +102,6 @@ class Map extends React.Component {
         width={'100%'} height={'100%'}
         {...viewport}
         zoom={zoom}
-        // doubleClickZoom={false}
         onViewportChange={this.moveMapView}
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
@@ -118,13 +117,13 @@ class Map extends React.Component {
             <div className="marker" />
           </Marker>
         }
-        {results && !autoTransition && results.map((quest, i) => {
-          const { latitude, longitude } = quest.stops[0].location
+        {results && !autoTransition && results.map((place, i) => {
+          const { latitude, longitude } = place.location
           const marker =
             <Marker key={i} latitude={latitude} longitude={longitude}>
-              {quest.selected
+              {place.selected
                 ? <StopMarker />
-                : < div className="marker" onClick={() => clickMarker(quest)} />}
+                : < div className="marker" onClick={() => clickMarker(place)} />}
             </Marker>
           return marker
         })}
