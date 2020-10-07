@@ -9,7 +9,7 @@ class Register extends React.Component {
       email: '',
       password: '',
       passwordConfirmation: '',
-      image: ''
+      imageUrl: ''
     }
   }
 
@@ -34,6 +34,22 @@ class Register extends React.Component {
     }
   }
 
+  showWidget = () => {
+    let widget = window.cloudinary.createUploadWidget(
+      { 
+        cloudName: 'dmhj1vjdf',
+        uploadPreset: 'bu04dewe'
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') { 
+          console.log(result.info.url)
+        } else {
+          console.log(error)
+        }
+      })
+    widget.open()
+  }
+
   render() {
 
     const { formData } = this.state
@@ -48,15 +64,6 @@ class Register extends React.Component {
             name="username"
             placeholder="username"
             value={formData.username}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="input-field">
-          <input
-            type="text"
-            name="image"
-            placeholder="image"
-            value={formData.image}
             onChange={this.handleChange}
           />
         </div>
@@ -90,6 +97,7 @@ class Register extends React.Component {
         <div className="form-buttons">
           <button onClick={hidePopup}>cancel</button>
           <button onClick={this.handleSubmit}>submit</button>
+          <button onClick={this.showWidget}>Upload Profile Image</button>
         </div>
       </div>
     )
