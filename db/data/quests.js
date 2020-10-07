@@ -49,6 +49,20 @@ module.exports = [{
       'answerType': 'Answer',
       'answer': 'The Rake'
     }
+  ],
+  comments: [
+    {
+      text: 'This was a great quest!',
+      rating: 5
+    },
+    {
+      text: 'Every stop was a thrill',
+      rating: 4
+    },
+    {
+      text: 'I got lost',
+      rating: 2
+    }
   ]
 }, {
   name: 'Beirut Corniche Crawl',
@@ -99,6 +113,16 @@ module.exports = [{
       'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
       'answerType': 'Answer',
       'answer': 'Zeituna Bay'
+    }
+  ],
+  comments: [
+    {
+      text: 'I got food sickness at the fish cae',
+      rating: 1
+    },
+    {
+      text: 'Corniche is beautiful',
+      rating: 4
     }
   ]
 }, {
@@ -151,6 +175,16 @@ module.exports = [{
       'clue': 'Claim immunity',
       'answerType': 'Answer',
       'answer': 'Have a nice life'
+    }
+  ],
+  comments: [
+    {
+      text: 'Too soon on the princess Diana hint',
+      rating: 1
+    },
+    {
+      text: 'Love the princess Diana clue!',
+      rating: 5
     }
   ]
 },
