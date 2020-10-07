@@ -24,6 +24,7 @@ class Timer extends React.Component {
           seconds: 0
         }))
       }
+      this.props.updateTime()
     }, 1000)
   }
 
