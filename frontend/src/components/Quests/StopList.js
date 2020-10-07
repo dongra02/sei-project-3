@@ -14,7 +14,8 @@ const StopList = (props) => {
       {stops.map((stop, i) => (
         <div key={i} className="stop-list-item">
           <div>{stop.name}</div>
-          <button>edit</button>
+          <button onClick={() => changeTab({ target: { value: 'addStop', stopNum: i } })}>edit</button>
+          <button onClick={() => console.log('TODO delete stop')}>delete</button>
         </div>
       ))}
       <div className="btn-add-stop">

@@ -41,8 +41,9 @@ class ProfileShow extends React.Component {
             <tr>
               <th>Created Quests</th>
               <td>{this.state.profile.createdQuest.length}</td>
+              </tr>
               {this.state.profile.createdQuest.map((quest, i) => (
-                <div key={i} className='container'>
+                <div key={i} className='container-quest'>
                   <Link to={`/quests/${quest.id}`}>
                     <div className="quest-details">
                       <div className="detail-name">{quest.name}</div>
@@ -53,7 +54,6 @@ class ProfileShow extends React.Component {
                   </Link>
                 </div>
               ))}
-            </tr>
         </tbody>
         </table>
       </div>
