@@ -105,6 +105,7 @@ class QuestIndex extends React.Component {
                 results={results}
                 startQuest={this.startQuest}
                 flyTo={flyTo}
+                clickMarker={this.flyToQuest}
               />
             </div>
             <div className="results-list">

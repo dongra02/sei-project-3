@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MapGL, { Marker, FlyToInterpolator } from 'react-map-gl'
+import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import StopMarker from '../map/StopMarker'
 
@@ -8,18 +8,13 @@ class Map extends React.Component {
 
   state = {
     zoom: 1,
-    currentLocation: {
+    viewport: {
       latitude: 0,
       longitude: 0
     },
     clickedLocation: null,
     mapRef: null,
     autoTransition: false
-  }
-
-  transition = {
-    transitionDuration: 'auto',
-    transitionInterpolator: new FlyToInterpolator({ speed: 1.2 })
   }
 
   componentDidMount = () => {
@@ -43,7 +38,7 @@ class Map extends React.Component {
       this.mapRef.getMap().on('moveend', () => {
         if (this.state.autoTransition) {
           const { latitude, longitude } = this.state.autoTransition
-          this.setState({ currentLocation: { latitude, longitude }, autoTransition: false, zoom: 11  })
+          this.setState({ viewport: { latitude, longitude }, autoTransition: false, zoom: 11  })
         }
       })
     })
@@ -61,7 +56,7 @@ class Map extends React.Component {
     // This if block stop the scroll zoom from moving the map
     if (event.zoom === this.state.zoom) {
       const { latitude, longitude } = event
-      this.setState({ currentLocation: { latitude, longitude } })
+      this.setState({ viewport: { latitude, longitude } })
     }
 
     // Gets NE and SW bounds of visible area
@@ -79,23 +74,25 @@ class Map extends React.Component {
     const scrollSpeed = event.srcEvent.deltaY
     if (scrollSpeed >  5) this.setState({ zoom: this.state.zoom - 0.05 })
     if (scrollSpeed < -5) this.setState({ zoom: this.state.zoom + 0.05 })
+    // const viewport = { latitude: event.lngLat[1], longitude: event.lngLat[0] }
+    // this.setState({ viewport })
   }
 
   placeMarker = ({ lngLat }) => {
+    if (!this.props.getLocation) return
+
     const clickedLocation = {
       latitude: lngLat[1],
       longitude: lngLat[0]
     }
-    if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)
     this.setState({ clickedLocation })
-    if (this.props.showGuess) this.props.showGuess(clickedLocation)
-    if (this.props.handleMapStopLocale) this.props.handleMapStopLocale(clickedLocation)
+    this.props.getLocation(clickedLocation)
   }
 
   render() {
 
-    const { zoom, currentLocation, clickedLocation, autoTransition } = this.state
-    const { results, startQuest, route, stop } = this.props
+    const { zoom, viewport, clickedLocation, autoTransition } = this.state
+    const { results, route, stop, clickMarker } = this.props
 
     return (
       <MapGL
@@ -103,10 +100,9 @@ class Map extends React.Component {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle='mapbox://styles/sriramsiv/ckfqhispj079919t8xxbwa6t7'
         width={'100%'} height={'100%'}
-        latitude={currentLocation.latitude}
-        longitude={currentLocation.longitude}
+        {...viewport}
         zoom={zoom}
-        doubleClickZoom={false}
+        // doubleClickZoom={false}
         onViewportChange={this.moveMapView}
         onDblClick={this.placeMarker}
         getCursor={(() => 'arrow')}
@@ -124,13 +120,11 @@ class Map extends React.Component {
         }
         {results && !autoTransition && results.map((quest, i) => {
           const { latitude, longitude } = quest.stops[0].location
-          // TODO onClick *not-selected* -> open quest details
-          const handleClick = quest.selected ? () => startQuest(quest._id) : null
           const marker =
             <Marker key={i} latitude={latitude} longitude={longitude}>
               {quest.selected
                 ? <StopMarker />
-                : < div className="marker" onClick={handleClick} />}
+                : < div className="marker" onClick={() => clickMarker(quest)} />}
             </Marker>
           return marker
         })}
