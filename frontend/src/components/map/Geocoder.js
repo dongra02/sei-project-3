@@ -3,6 +3,10 @@ import GeocoderGL from 'react-mapbox-gl-geocoder'
 
 class Geocoder extends React.Component {
 
+  componentDidUpdate = () => {
+    console.log('geo updating')
+  }
+
   render() {
 
     const { selectLocation, initialValue } = this.props
