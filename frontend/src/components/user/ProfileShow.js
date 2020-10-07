@@ -31,11 +31,12 @@ class ProfileShow extends React.Component {
           </thead>
           <tbody>
             <tr>
+            <div><img src={this.state.profile.imageUrl} alt='Profile image' /></div>
               <th>Email</th>
               <td>{this.state.profile.email}</td>
             </tr>
             <tr>
-            <th>Username</th>
+              <th>Username</th>
               <td>{this.state.profile.username}</td>
             </tr>
             <tr>
@@ -54,8 +55,8 @@ class ProfileShow extends React.Component {
                   </Link>
                 </div>
               ))}
-        </tbody>
-        </table>
+              </tbody>
+              </table>
       </div>
     )
   }
