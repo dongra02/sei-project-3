@@ -69,10 +69,10 @@ class QuestShow extends React.Component {
   // use set state to save that
   // pass this function to Timer
 
-  // getCurrentTime = () => {
-  //   const time = new Date + 1
-  //   this.setState({ time })
-  // }
+  getCurrentTime = () => {
+    const time = new Date + 1
+    this.setState({ time })
+  }
 
 
   render() {
