@@ -44,8 +44,6 @@ class Register extends React.Component {
         if (!error && result && result.event === 'success') { 
           const formData = { ...this.state.formData, imageUrl: result.info.url }
           this.setState({ formData })
-        } else {
-          console.log(error)
         }
       })
     widget.open()
