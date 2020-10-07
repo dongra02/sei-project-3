@@ -11,7 +11,13 @@ class Timer extends React.Component {
   componentDidMount() {
     this.myInterval = setInterval(() => {
       const { seconds } = this.state
-      if (seconds >= 0 && seconds <= 9) {
+      // if (seconds <= 9) {
+      //   this.setState(({ seconds }) => ({
+      //     seconds: '0' + seconds
+      //   }))
+      // } 
+
+      if (seconds >= 0) {
         this.setState(({ seconds }) => ({
           seconds: seconds + 1
         }))
@@ -23,7 +29,6 @@ class Timer extends React.Component {
           seconds: 0
         }))
       }
-
     }, 1000)
   }
 
