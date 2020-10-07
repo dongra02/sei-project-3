@@ -260,10 +260,6 @@ label {
 
 // Quest Show
 
-#root {
-  background-color: $map-sand;
-}
-
 .start-details {
   background-color: $map-sand;
   padding: 40px 80px;
@@ -292,7 +288,8 @@ label {
   }
 }
 
-.next-clue {
+.next-clue,
+.endgame {
   background-color: $map-sand;
 
   h2 {
@@ -326,7 +323,6 @@ label {
   width: 95%;
   height: calc(100vh - 150px);
   background-color: $map-sand;
-
 
   .clues {
     text-align: center;

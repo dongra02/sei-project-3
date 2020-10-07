@@ -7,6 +7,7 @@ class Timer extends React.Component {
     seconds: 0
   }
 
+
   componentDidMount() {
     this.myInterval = setInterval(() => {
       this.setState(({ seconds }) => ({
