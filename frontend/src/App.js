@@ -10,6 +10,7 @@ import QuestShow from './components/Quests/QuestShow'
 import QuestCreate from './components/Quests/QuestCreate'
 import ProfileShow from './components/user/ProfileShow'
 import ProfileIndex from './components/user/ProfileIndex'
+import UserProfile from './components/user/UserProfile'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/users" component={ProfileIndex} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/profile" component={UserProfile} />
       </Switch>
       {/* Footer */}
     </BrowserRouter>

@@ -37,4 +37,7 @@ router.route('/users')
 router.route('/users/:id')
   .get(auth.profile)
 
+router.route('/profile')
+  .get(secureRoute, auth.userProfile)
+
 module.exports = router

@@ -39,6 +39,10 @@ export const getSingleProfile = profileId => {
   return axios.get(`${baseUrl}/users/${profileId}`)
 }
 
+export const getUserProfile = () => {
+  return axios.get(`${baseUrl}/profile`, withHeaders())
+}
+
 export const reverseGeoCode = location => {
   return axios.get(`${mapBoxGeoBase}/${location.longitude},${location.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`)
 }
