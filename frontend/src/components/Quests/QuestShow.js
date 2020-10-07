@@ -66,8 +66,9 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop, start, minutes, seconds } = this.state
     const stop = route ? route.stops[currentStop] : null
+    
     return (
       <>
         <div className="show-quests">
@@ -83,7 +84,7 @@ class QuestShow extends React.Component {
                   <h2 className="detail-name">{start.name}</h2>
                   <div className="detail-user">By {start.owner.username}</div>
                   <div className="detail-theme">Theme: {start.theme}</div>
-                  <div className="detail-firststop">First Stop: {stop ? stop.name : ''}</div>
+                  <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
                   <div className="detail-stops">Stops: {start.stops.length}</div>
                   <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>
@@ -91,7 +92,10 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                  <Timer />
+                  <Timer 
+                    minutes={minutes}
+                    seconds={seconds}
+                  />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h3>Your next clue is:</h3>
@@ -114,7 +118,7 @@ class QuestShow extends React.Component {
                 <div className="endgame">
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h2>Well done, you have completed your quest!</h2>
-                  <p>Your time was ... minutes</p>
+                  <p>Your time was {this.seconds}... minutes</p>
                   <hr />
                   <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
                 </div>
