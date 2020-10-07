@@ -25,7 +25,8 @@ class QuestIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await getAllQuests()
-    this.setState({ allQuests: response.data, results: response.data })
+    this.setState({ allQuests: response.data })
+    // this.setState({ allQuests: response.data, results: response.data })
   }
 
   // Form input control
@@ -53,6 +54,8 @@ class QuestIndex extends React.Component {
       const inLat = location.latitude > bounds.latitude[0] && location.latitude < bounds.latitude[1]
       const inLng = location.longitude > bounds.longitude[0] && location.longitude < bounds.longitude[1]
       return inLat && inLng
+    }).map(result => {
+      return { ...result, location: result.location }
     })
     this.setState({ results })
   }

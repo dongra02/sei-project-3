@@ -143,14 +143,15 @@ class QuestCreate extends React.Component{
         location: { latitude: '', longitude: '' }
       }
     
-    // Set geocoder to correct value
-    if (tabShow === 'addStop' && stopFormData.location.latitude) {
-      this.pickLocationFromMap(stopFormData.location)
-    } else {
-      this.setState({ geocoderValue: '' }, this.refreshGeocoder)
-    }
-    
-    this.setState({ tabShow, stopFormData, stopToEdit })
+      
+    this.setState({ tabShow, stopFormData, stopToEdit }, () => {
+      // Set geocoder to correct value
+      if (tabShow === 'addStop' && stopFormData.location.latitude) {
+        this.pickLocationFromMap(stopFormData.location)
+      } else {
+        this.setState({ geocoderValue: '' }, this.refreshGeocoder)
+      }
+    })
 
     const location = stopFormData.location
     if (location.latitude) this.pickLocationFromMap(location)
@@ -158,7 +159,6 @@ class QuestCreate extends React.Component{
 
   pickLocationFromMap = async (location) => {
     if (this.state.tabShow !== 'addStop') return
-    console.log('here') //trying to access before the tab switch
     const geoData = await reverseGeoCode(location)
     if (!geoData.data.features[0]) return
     const geocoderValue = geoData.data.features[0].place_name
