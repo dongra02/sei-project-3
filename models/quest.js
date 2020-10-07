@@ -28,6 +28,7 @@ const questSchema = new mongoose.Schema({
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true }
   },
+  description: { type: String, required: true, maxlength: 350 },
   estTime: { type: Number, required: true },
   stops: [stopSchema],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },

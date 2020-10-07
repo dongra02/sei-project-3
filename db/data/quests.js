@@ -2,6 +2,7 @@ module.exports = [{
   name: 'London Bridge Walkabout',
   theme: 'Sightseeing',
   estTime: 15,
+  description: 'this is a test quest, have fun with this quest!',
   location: {
     'latitude': 51.505347,
     'longitude': -0.086167
@@ -54,6 +55,7 @@ module.exports = [{
   name: 'Beirut Corniche Crawl',
   theme: 'Food & Drink',
   estTime: 60,
+  description: 'this is a test quest, have fun with this quest!',
   location: {
     'latitude': 33.890556,
     'longitude': 35.470499
@@ -105,6 +107,7 @@ module.exports = [{
   name: 'Escape of the country',
   theme: 'Adventure',
   estTime: 45,
+  description: 'this is a test quest, have fun with this quest!',
   location: {
     'latitude': 51.513563,
     'longitude': -0.158275
@@ -158,6 +161,7 @@ module.exports = [{
   name: 'Batroun Tour',
   theme: 'Sightseeing',
   estTime: 60,
+  description: 'this is a test quest, have fun with this quest!',
   location: {
     'latitude': 34.254793,
     'longitude': 35.656035
