@@ -19,7 +19,7 @@ mongoose.connect(
       const users = await User.create(userData)
       
       const questsWithUsers = questData.map(quest => {
-        quest.owner = users[0]
+        quest.owner = users[(Math.floor(Math.random() * 3))]
         // stopData.map(stop => quest.stops.push(stop))
         return quest
       })

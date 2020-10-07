@@ -106,8 +106,6 @@ label {
 }
 
 
-
-
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -286,6 +284,10 @@ label {
   .detail-time {
     padding: 12px 0;
   }
+}
+
+.endgame {
+  padding-top: 30px;
 }
 
 .next-clue,
@@ -700,9 +702,19 @@ label {
   }
 }
 
+.profile {
+  margin-left: 100px;
+}
+
+.title-text {
+  // text-decoration: underline;
+  color: $map-red;
+}
+
 .container-quest {
   margin-left: 120px;
   margin-top: 20px;
+  width: 60%;
 }
 
 .timer-check {

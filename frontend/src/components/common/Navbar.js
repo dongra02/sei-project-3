@@ -47,7 +47,7 @@ class Navbar extends React.Component {
           <div className="navbar-nav user">
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm}>Register</div>}
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm} >Login</div>}
-            {isAuthenticated() && <Link to="#" className="nav-link" >Profile</Link>}
+            {isAuthenticated() && <Link to="/profile" className="nav-link" >Profile</Link>}
             {isAuthenticated() && <div className="nav-link" onClick={logout} >Logout</div>}
           </div>
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
