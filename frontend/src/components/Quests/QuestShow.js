@@ -69,10 +69,10 @@ class QuestShow extends React.Component {
   // use set state to save that
   // pass this function to Timer
 
-  // getCurrentTime = () => {
-  //   const time = new Date + 1
-  //   this.setState({ time })
-  // }
+  getCurrentTime = () => {
+    const time = time + 1
+    this.setState({ time })
+  }
 
 
   render() {
@@ -103,7 +103,7 @@ class QuestShow extends React.Component {
               { !lastStop && !firstStop &&
                 <div className="next-clue">
                   <Timer 
-                    getCurrentTime={this.getCurrentTime}
+                    // getCurrentTime={this.getCurrentTime}
                   />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
