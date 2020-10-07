@@ -53,6 +53,10 @@ class QuestShow extends React.Component {
     }
   }
 
+  Time = () => {
+    
+  }
+
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
   getLocationGuess = guess => {
@@ -66,9 +70,9 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop, start, minutes, seconds } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
-    console.log(minutes, seconds)
+
     return (
       <>
         <div className="show-quests">
@@ -92,10 +96,7 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop && 
                 <div className="next-clue">
-                  <Timer 
-                    minutes={minutes}
-                    seconds={seconds}
-                  />
+                  <Timer />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h3>Your next clue is:</h3>
