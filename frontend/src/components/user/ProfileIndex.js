@@ -32,7 +32,10 @@ class ProfileIndex extends React.Component {
               <Link to={`/users/${user.id}`}>
                 <div className="user-details">
                   <div className="detail-name">{user.username}</div>
-                  <div className="detail-quests">{user.createdQuest.length}</div>
+                  <div className="detail-quests">
+              <span>Created Quests: </span>
+              <span>{user.createdQuest.length}</span>
+              </div>
                   <br />
                 </div>
               </Link>
