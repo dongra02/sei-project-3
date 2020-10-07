@@ -125,7 +125,7 @@ class QuestShow extends React.Component {
               }
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} showGuess={this.getLocationGuess} />
+              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} />
             </div>
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
               <h2>Comments</h2>
