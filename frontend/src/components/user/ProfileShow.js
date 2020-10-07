@@ -30,6 +30,7 @@ class ProfileShow extends React.Component {
             </tr>
           </thead>
           <tbody>
+            <div><img src={this.state.profile.imageUrl} alt='Profile image' /></div>
             <tr>
               <th>Email</th>
               <td>{this.state.profile.email}</td>
