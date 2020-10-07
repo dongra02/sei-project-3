@@ -12,9 +12,11 @@ class QuestCreate extends React.Component{
   state = {
     questFormData: {
       name: '',
+      description: '',
       location: '',
       estTime: '',
-      theme: 'theme'
+      theme: 'theme',
+      timer: false
     },
     stopFormData: {
       name: '',
@@ -28,9 +30,11 @@ class QuestCreate extends React.Component{
       }
     },
     stops: [],
+    stopToEdit: 0,
     flyTo: null,
     tabShow: 'info',
-    geocoderValue: null
+    geocoderValue: null,
+    geocoderKey: 0
   }
 
   themes = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed']
@@ -40,10 +44,17 @@ class QuestCreate extends React.Component{
     (Math.random() * 360) - 180
   ]
 
+  refreshGeocoder = () => {
+    const geocoderKey = (this.state.geocoderKey + 1) % 2
+    this.setState({ geocoderKey })
+  }
+
   handleQuestFormChange = event => {
+    console.log(event.target.type)
+    const type = event.target.type
     const questFormData = {
       ...this.state.questFormData,
-      [event.target.name]: event.target.value
+      [event.target.name]: type === 'checkbox' ? event.target.checked : event.target.value
     }
     this.setState({ questFormData })
   }
@@ -56,27 +67,35 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
-  handleQuestSubmit = async () => {
-    const location = this.state.stops[0].location
-    const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
-    console.log(newQuestData)
-    await createQuest(newQuestData)
+  handleQuestSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const location = this.state.stops[0].location
+      const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
+      console.log(newQuestData)
+      const response = await createQuest(newQuestData)
+      if (response.status === 201) this.props.history.push(`/quests/${response.data._id}`)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   submitStop = () => {
     const stops = [ ...this.state.stops ]
     const newStop = { ...this.state.stopFormData }
-    stops.push(newStop)
-    const stopFormData = {
-      name: '',
-      clue: '',
-      answerType: 'Answer',
-      answer: '',
-      hint: '',
-      location: { latitude: '', longitude: '' }
-    }
 
-    this.setState({ stops, stopFormData, tabShow: 'stops' })
+    // New Stop
+    if (this.state.stopToEdit === this.state.stops.length) stops.push(newStop)
+    // Edit stop
+    else stops[this.state.stopToEdit] = newStop
+    this.setState({ stops })
+
+    this.selectTab({ target: { value: 'stops' } })
+  }
+
+  deleteStop = (stopNum) => {
+    const stops = this.state.stops.filter((stop, i) => i !== stopNum)
+    this.setState({ stops })
   }
 
   // Fires on picking a result from the geocoder suggestions
@@ -87,29 +106,39 @@ class QuestCreate extends React.Component{
     this.setState({ flyTo, stopFormData, geocoderValue }, () => this.setState({ flyTo: null }))
   }
 
+
+  // TODO break this out into two functions -> edit / select tab
   selectTab = (event) => {
-    const stopFormData = {
-      name: '',
-      clue: '',
-      answerType: 'Answer',
-      answer: '',
-      hint: '',
-      location: { latitude: '', longitude: '' }
-    }
-    this.setState({ tabShow: event.target.value, stopFormData })
+    const stopToEdit = event.target.stopNum || event.target.stopNum === 0 ? event.target.stopNum : this.state.stops.length
+    const tabShow = event.target.value
+    const stopFormData = event.target.stopNum || event.target.stopNum === 0
+      ? { ...this.state.stops[event.target.stopNum] }
+      : {
+        name: '',
+        clue: '',
+        answerType: 'Answer',
+        answer: '',
+        hint: '',
+        location: { latitude: '', longitude: '' }
+      }
+    this.setState({ tabShow, stopFormData, stopToEdit })
+
+    const location = stopFormData.location
+    if (location.latitude) this.pickLocationFromMap(location)
   }
 
-  // TODO handle a blank result here
   pickLocationFromMap = async (location) => {
-    const localeName = await reverseGeoCode(location)
-    const geocoderValue = localeName.data.features[0].place_name
+    const geoData = await reverseGeoCode(location)
+    if (!geoData.data.features[0]) return
+    const geocoderValue = geoData.data.features[0].place_name
     const stopFormData = { ...this.state.stopFormData, location }
     this.setState({ stopFormData, geocoderValue })
+    this.refreshGeocoder()
   }
 
   render() {
 
-    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue } = this.state
+    const { questFormData, stopFormData, stops, flyTo, tabShow, geocoderValue, geocoderKey } = this.state
 
     const tabStyles = {
       info: { display: tabShow === 'info' ? 'block' : 'none' },
@@ -118,12 +147,13 @@ class QuestCreate extends React.Component{
     }
 
     const stopFormProps = {
-      stopFormData: stopFormData,
-      geocoderValue: geocoderValue,
+      stopFormData,
+      geocoderValue,
       handleChange: this.handleStopFormChange,
       submitStop: this.submitStop,
       selectLocation: this.selectLocation,
-      selectTab: this.selectTab
+      selectTab: this.selectTab,
+      geocoderKey
     }
 
     const questFormProps = {
@@ -143,6 +173,7 @@ class QuestCreate extends React.Component{
               <button value={'info'} onClick={this.selectTab} className={`tab ${tabShow === 'info' ? '' : 'inactive'}`} >INFO</button>
               <button value={'stops'} onClick={this.selectTab} className={`tab ${tabShow === 'stops' || tabShow === 'addStop' ? '' : 'inactive'}`} >STOPS</button>
             </div>
+            {/* Info tab */}
             <div className="create-tab" style={tabStyles.info}>
               <QuestForm {...questFormProps} />
             </div>
@@ -152,7 +183,7 @@ class QuestCreate extends React.Component{
             </div>
             {/* Stop List */}
             <div className="create-tab" style={tabStyles.stops}>
-              <StopList stops={stops} changeTab={this.selectTab} />
+              <StopList stops={stops} changeTab={this.selectTab} deleteStop={this.deleteStop} />
             </div>
           </div>
           <div className="create-map">

@@ -367,10 +367,15 @@ label {
     margin-top: 15px;
   }
 
-  input {
+  input, textarea {
     width: 95%;
     margin-left: 5%;
     color: #444;
+  }
+
+  input[type=checkbox] {
+    width: 20px !important;
+    height: 20px;
   }
 
   .submit {
@@ -388,33 +393,11 @@ label {
 
   h5 {
     text-align: center;
-    padding: 30px 10px 20px;
+    padding: 10px;
   }
 }
 
-.quest {
-  background-color: #9cd0;
-  box-shadow: none;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  outline: 1px dashed $map-red;
-  box-shadow: 2px 3px $map-red;
-}
 
-.quest-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-right: 20px;
-
-  input, select {
-    width: 250px;
-  }
-  select {
-    margin-left: 25px;
-  }
-}
 
 
 .tab {
@@ -484,37 +467,50 @@ label {
   .create-info {
     width: 40%;
     position: relative;
-    background-color: #f8f6e3;
     background-color: #aaf1;
 
     .show-tabs {
       position: absolute;
-      top: -72px;
+      top: -42px;
     }
   }
 
   .create-tab {
+    padding: 15px 10px;
     height: 100%;
     outline: 1px dashed $map-red;
     box-shadow: 2px 3px $map-red;
+    text-align: center;
   }
 
-  .create-form {
-    outline: 1px dashed $map-red;
-    padding: 5px;
-    box-shadow: 3px 5px $map-red;
-    text-align: center;
+  .info-tab {
+    // Mainly turning off formstyles here
+    background-color: #0000;
+    box-shadow: none;
+    margin: 0;
+    padding-right: 4px;
+    width: 100%;
     height: 100%;
+  }
+  
+  .quest-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 20px;
+  
+    input, select, textarea {
+      width: 250px;
+    }
+    select {
+      margin-left: 25px;
+    }
+  }
 
-    // button {
-    //   position: absolute;
-    //   bottom: 15px;
-    //   right: 15px;
-    //   border: none;
-    //   padding: 3px 10px;
-    //   background-color: $map-red;
-    //   color: $map-white;
-    // }
+  .stop-form {
+    h5 {
+      padding: 10px 10px;
+    }
   }
 }
 
@@ -707,4 +703,10 @@ label {
 .container-quest {
   margin-left: 120px;
   margin-top: 20px;
+}
+
+.timer-check {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }

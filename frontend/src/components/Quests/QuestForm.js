@@ -1,13 +1,13 @@
 import React from 'react'
 
 const QuestForm = (props) => {
-  const { name, estTime } = props.questFormData
+  const { name, description, estTime, timer } = props.questFormData
   const { handleQuestFormChange, handleQuestSubmit, themes } = props
 
 
   return (
     <>
-      <form className="form-container quest">
+      <form className="form-container info-tab">
         <h5>Quest Details</h5>
         <div className="quest-form">
           <div className="form-group">
@@ -18,6 +18,14 @@ const QuestForm = (props) => {
               value={name}
               onChange={handleQuestFormChange}
               placeholder="Quest Name"/>
+          </div>
+          <div className="form-group">
+            <textarea
+              name="description"
+              className="form-control"
+              value={description}
+              onChange={handleQuestFormChange}
+              placeholder="Description"/>
           </div>
           <div className="form-group">
             <select className="form-control" name="theme" onChange={handleQuestFormChange}>
@@ -35,6 +43,16 @@ const QuestForm = (props) => {
               value={estTime}
               onChange={handleQuestFormChange}
               placeholder="Est. Duration (minutes)"/>
+          </div>
+          <div className="form-group timer-check">
+            <label style={{ width: '100px' }}>Enable timer</label>
+            <input
+              type="checkbox"
+              className="form-control"
+              name="timer"
+              checked={timer}
+              onChange={handleQuestFormChange}
+            />
           </div>
         </div>
         <div className="btn-submit-quest">

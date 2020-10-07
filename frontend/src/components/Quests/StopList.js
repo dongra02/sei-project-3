@@ -1,7 +1,7 @@
 import React from 'react'
 
 const StopList = (props) => {
-  const { stops, changeTab } = props
+  const { stops, changeTab, deleteStop } = props
 
   {/* <td>{stop.name}</td>
   <td>{stop.clue}</td>
@@ -14,7 +14,8 @@ const StopList = (props) => {
       {stops.map((stop, i) => (
         <div key={i} className="stop-list-item">
           <div>{stop.name}</div>
-          <button>edit</button>
+          <button onClick={() => changeTab({ target: { value: 'addStop', stopNum: i } })}>edit</button>
+          <button onClick={() => deleteStop(i)}>delete</button>
         </div>
       ))}
       <div className="btn-add-stop">

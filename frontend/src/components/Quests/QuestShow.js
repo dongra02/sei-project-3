@@ -15,7 +15,7 @@ class QuestShow extends React.Component {
     firstStop: true,
     lastStop: false,
     start: '', 
-    time: ''
+    time: 0
   }
 
   componentDidMount = async () => {
@@ -64,15 +64,11 @@ class QuestShow extends React.Component {
     const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
     console.log(length)
   }
-  // function that saves time to state 
-  // set a const to current time + 1
-  // use set state to save that
-  // pass this function to Timer
-
-  // getCurrentTime = () => {
-  //   const time = new Date + 1
-  //   this.setState({ time })
-  // }
+  
+  updateTime = () => {
+    const time = this.state.time + 1
+    this.setState({ time })
+  }
 
 
   render() {
@@ -102,9 +98,7 @@ class QuestShow extends React.Component {
               }
               { !lastStop && !firstStop &&
                 <div className="next-clue">
-                  <Timer 
-                    getCurrentTime={this.getCurrentTime}
-                  />
+                  <Timer updateTime={this.updateTime} />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h3>Your next clue is:</h3>
