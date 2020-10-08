@@ -31,6 +31,11 @@ class Navbar extends React.Component {
     this.setState({ popup })
   }
 
+  logoutUser = () => {
+    logout()
+    this.setState({ page: this.state.page })
+  }
+
   render() {
 
     const { page, popup } = this.state
@@ -48,12 +53,12 @@ class Navbar extends React.Component {
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm}>Register</div>}
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm} >Login</div>}
             {isAuthenticated() && <Link to="/profile" className="nav-link" >Profile</Link>}
-            {isAuthenticated() && <div className="nav-link" onClick={logout} >Logout</div>}
+            {isAuthenticated() && <div className="nav-link" onClick={this.logoutUser} >Logout</div>}
           </div>
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
             <div className="form-contents">
               <div style={{ display: `${popup === 'Login' ? 'block' : 'none'}` }}>
-                <Login hidePopup={page.toLowerCase() === 'create' ? null : this.popupForm} />
+                <Login hidePopup={this.popupForm} cancelable={page.toLowerCase() === 'create' ? null : this.popupForm} />
               </div>
               <div style={{ display: `${popup === 'Register' ? 'block' : 'none'}` }}>
                 <Register hidePopup={this.popupForm} />
