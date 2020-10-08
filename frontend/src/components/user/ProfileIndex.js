@@ -6,7 +6,11 @@ import BgMap from '../map/BgMap'
 class ProfileIndex extends React.Component {
 
   state = {
-    allProfiles: null
+    allProfiles: null,
+    formData: {
+      filterSearch: '',
+      filterOption: ''
+    }
   }
 
   bgLatLng = [
@@ -20,6 +24,15 @@ class ProfileIndex extends React.Component {
     console.log(response)
   }
 
+  handleChange = event => {
+    const formData = {
+      ...this.state.formData,
+      [event.target.name]: event.target.value
+    }
+
+    this.setState({ formData })
+  }
+
   render() {
     if (!this.state.allProfiles) return null
     return (
@@ -27,6 +40,23 @@ class ProfileIndex extends React.Component {
       <BgMap latLng={this.bgLatLng} />
         <div className="profile-index">
           <h3>Profiles</h3>
+          {/* <input type='text' id='filterNames' onChange={this.handleChange()} placeholder='Search' /> */}
+          <div className="input-field">
+          <input
+            type="text"
+            name="filterSearch"
+            placeholder="Search..."
+            value={this.state.formData.filterSearch}
+            onChange={this.handleChange}
+          />
+          </div>
+          <div className="filter-option">
+        <label htmlFor="filterOption">Filter Options :</label>
+        <select id="filterOption" value={this.state.formData.filterOption} onChange={this.handleChange} >
+          <option value="questAmount">Quest amount</option>
+          <option value="questRating">Quest rating</option>
+        </select>
+      </div>
           <div className='profile-list'>
             {this.state.allProfiles.map((user, i) => (
               <div key={i} className="profile-list-item">
