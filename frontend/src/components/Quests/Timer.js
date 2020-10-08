@@ -1,5 +1,4 @@
 import React from 'react'
-import Time from 'react-time-format'
 
 class Timer extends React.Component {
 

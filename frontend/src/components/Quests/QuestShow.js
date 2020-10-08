@@ -73,17 +73,10 @@ class QuestShow extends React.Component {
     this.setState({ time })
   }
 
-  correctAnswer = ()  => {
-    const { currentStop, route, answer } = this.state
-    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
-      const correct = true
-      this.setState({ correct })
-    }
-  }
-
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
+    console.log(this.state.start.comments)
     return (
       <>
         <div className="show-quests">
@@ -145,7 +138,7 @@ class QuestShow extends React.Component {
               <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} results={this.state.markers} />
             </div>
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
-              <h2>Comments</h2>
+              <h2>Comments {start.comments}</h2>
               <p>Other users comments</p>
             </div>
           </div>
