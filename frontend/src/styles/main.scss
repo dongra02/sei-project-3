@@ -110,13 +110,11 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 50px auto;
+  margin: 50px auto 20px;
   background-color: #eeea;
-  
-  select {
-    padding-bottom: 4px;
-    width: 150px;
-  }
+  padding: 10px 25px;
+  outline: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
 }
 
 .filter-option {
@@ -126,8 +124,8 @@ label {
   min-width: 200px;
   margin: 10px 0;
 
-  .slider, select, input {
-    width: 90%;
+  .slider, select, input, .form-control {
+    width: 100%;
   }
   .slider {
     padding-top: 10px;
@@ -183,7 +181,7 @@ label {
   .results-map, 
   .results-list {
     position: relative;
-    width: 65%; // make this 100%
+    width: 60%;
     padding: 5px;
     outline: 1px dashed $map-red;
     box-shadow: 3px 5px $map-red;
@@ -191,7 +189,7 @@ label {
   }
 
   .results-list {
-    width: calc(35% - 20px); // make this 100%
+    width: calc(40% - 20px);
     
     .container {
       height: 100%;
@@ -761,4 +759,21 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: right;
+}
+
+@media screen and (max-width: 768px) {
+  .results {
+    flex-direction: column;
+    width: 100%;
+
+    .results-map {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 25px;
+    }
+    .results-list {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+  }
 }
