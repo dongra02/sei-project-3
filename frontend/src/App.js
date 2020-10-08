@@ -8,6 +8,7 @@ import Login from './components/common/Login'
 import QuestIndex from './components/Quests/QuestIndex'
 import QuestShow from './components/Quests/QuestShow'
 import QuestCreate from './components/Quests/QuestCreate'
+import QuestUpdate from './components/Quests/QuestUpdate'
 import ProfileShow from './components/user/ProfileShow'
 import ProfileIndex from './components/user/ProfileIndex'
 import UserProfile from './components/user/UserProfile'
@@ -19,6 +20,7 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/quests/edit/:id" component={QuestUpdate} />
         <Route path="/quests/:id" component={QuestShow} />
         <Route path="/quests" component={QuestIndex} />
         <Route path='/create' component={QuestCreate} />
