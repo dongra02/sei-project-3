@@ -17,7 +17,8 @@ class QuestShow extends React.Component {
     start: '', 
     time: 0,
     markers: [],
-    hasComments: false
+    hasComments: false, 
+    hasHint: false
   }
 
   componentDidMount = async () => {
@@ -26,6 +27,10 @@ class QuestShow extends React.Component {
     if (response.data.comments.length > 0) {
       hasComments = true
     }
+    // let hasHint
+    // if (response.data.stops[0].hint.length > 0) {
+    //   hasHint = true
+    // }
     this.setState(
       { route: response.data, flyTo: response.data.stops[0].location, start: response.data, hasComments },
       () => this.setState({ flyTo: null })
@@ -59,7 +64,6 @@ class QuestShow extends React.Component {
     if (currentStop + 1 === route.stops.length - 1)  {
       this.setState({ lastStop: true }) 
     }
-
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
@@ -78,6 +82,10 @@ class QuestShow extends React.Component {
     const time = this.state.time + 1
     this.setState({ time })
   }
+
+  // handleHint = () => {
+  //   this.start.stops.map(stop => stop.hint)
+  // }
 
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start, hasComments } = this.state
@@ -103,9 +111,9 @@ class QuestShow extends React.Component {
                   <div className="detail-stops">Stops: {start.stops.length}</div>
                   <div className="detail-time">Estimated Time: {start.estTime} mins</div>
                   <button className="newquest-button" onClick={this.nextStop}>START</button>  
-                  { start.timer === true &&
+                  {/* { start.timer === true &&
                     <div className="timer">Timer {start.timer}</div>
-                  }
+                  } */}
                 </div>
               }
               { !lastStop && !firstStop && 
@@ -127,7 +135,12 @@ class QuestShow extends React.Component {
                   <div className="btn-next">
                     <button onClick={this.nextStop}>NEXT</button>
                   </div>
-                </div>
+                  {/* { hasHint &&
+                  <div className="btn-hint">
+                    <button>Need a hint?</button>
+                  </div>
+                  } */}
+                </div>   
               }
               { lastStop && !firstStop &&
                 <div className="endgame">     
