@@ -542,6 +542,10 @@ label {
       width: 100%;
       margin-left: 0;
     }
+
+    textarea {
+      height: 8em;
+    }
   }
 
   .stop-form {
@@ -863,6 +867,10 @@ label {
   .create-container {
     flex-direction: column;
     width: 100;
+
+    .form-container {
+      max-width: none;
+    }
 
     .create-info,
     .create-map {
