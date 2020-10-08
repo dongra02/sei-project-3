@@ -30,16 +30,29 @@ const StopMarker = ({ number }) => {
     clipPath: 'circle()',
     backgroundColor: '#f8f6f3',
     color: '#333',
-    fontSize: '1em',
-    lineHeight: '1em',
-    paddingLeft: '3px'
+    fontSize: '1.1em',
+    lineHeight: '0.8em',
+    paddingLeft: '3px',
+    fontFamily: '\'Sanshita Swashed\', cursive'
+  }
+  const dot = {
+    position: 'absolute',
+    top: '3px',
+    left: '3px',
+    width: '10px',
+    height: '10px',
+    backgroundColor: '#050',
+    clipPath: 'circle()'
   }
 
   return (
     <div style={container}>
       <div style={border} />
       <div style={point} />
-      <div style={inner}>{number}</div>
+      <div style={inner}>
+        {number > 0 ? 'number'
+          : <div style={dot} />}
+      </div>
     </div>
   )
 }

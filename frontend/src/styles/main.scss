@@ -209,7 +209,7 @@ label {
 .quest-details {
   text-align: center;
   margin: 5px -5px;
-  padding: 20px 10px;
+  padding: 20px;
   height: 95%;
   background-color: $map-sand;
   box-shadow: 0px 0px 2px $map-grey;
@@ -604,6 +604,7 @@ label {
 .locator {
   width: 30px;
   height: 30px;
+  padding: 1px;
   background-color: $map-red;
   clip-path: circle();
   position: absolute;
@@ -929,6 +930,11 @@ label {
     .user {
       top: 50px;
     }
+  }
+
+  .popup-form {
+    top: 100px;
+    height: calc(100vh - 100px);
   }
 }
 
