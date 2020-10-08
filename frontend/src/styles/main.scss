@@ -258,13 +258,18 @@ label {
 
 // Quest Show
 
+.animate__animated.animate__heartBeat.correct {
+  --animate-duration: 1.8s;
+  
+}
+
+
 .start-details {
   background-color: $map-sand;
   padding: 40px 20px;
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
-  font-size: 2em;
   text-align: center;
   background-color: $map-blue;
   border-radius: 8px;
@@ -336,8 +341,21 @@ label {
   }
 
   p {
-    background-color: #f8f6e3;
+    background-color: $map-red;
+    color: white;
+    padding: 5px;
     font-style: italic;
+    // border: 1px solid #a63535;
+    border-radius: 5px;
+  }
+
+  h5 {
+    background-color: $map-blue;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: bold;
   }
 
   .answer-input {
