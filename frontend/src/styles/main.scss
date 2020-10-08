@@ -505,7 +505,6 @@ label {
     background-color: #0000;
     box-shadow: none;
     margin: 0;
-    padding-right: 4px;
     width: 100%;
     height: 100%;
   }
@@ -514,13 +513,14 @@ label {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-right: 20px;
+    width: 100%;
   
-    input, select, textarea {
-      width: 250px;
+    .form-group {
+      width: 100%;
     }
-    select {
-      margin-left: 25px;
+    input, textarea, select {
+      width: 100%;
+      margin-left: 0;
     }
   }
 
@@ -599,19 +599,15 @@ label {
     background-color: $map-sand;
     display: flex;
     justify-content: space-between;
-    margin: 15px;
-    margin-left: 20px;
-
-    div {
-      font-size: 1.2em;
-    }
+    margin: 5px;
+    padding: 5px 5px 5px 15px;
+    font-size: 1.2em;
+    box-shadow: 0 0 2px $map-grey;
+    color: #333;
 
     button {
       border: none;
-      padding: 3px 10px;
-      background-color: $map-red;
-      color: $map-white;
-      margin-left: 10px;
+      background-color: $map-sand;
     }
   }
 }
@@ -773,6 +769,18 @@ label {
     .results-list {
       width: 100%;
       margin-bottom: 25px;
+    }
+  }
+
+  .create-container {
+    flex-direction: column;
+    width: 100;
+
+    .create-info,
+    .create-map {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 20px;
     }
   }
 }
