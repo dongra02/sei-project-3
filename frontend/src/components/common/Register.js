@@ -1,5 +1,6 @@
 import React from 'react'
-import { registerUser } from '../../lib/api'
+import { registerUser, loginUser } from '../../lib/api'
+import { setToken } from '../../lib/auth'
 
 class Register extends React.Component {
 
@@ -26,9 +27,13 @@ class Register extends React.Component {
     event.preventDefault()
 
     try {
-      const response = await registerUser(this.state.formData)
+      await registerUser(this.state.formData)
+      console.log('registration complete')
+      const { email, password } = this.state.formData
+      const response = await loginUser({ email, password })
+      console.log('login complete')
+      setToken(response.data.token)
       this.props.hidePopup()
-      console.log(response)
     } catch (err) {
       console.log(this.state.formData)
     }

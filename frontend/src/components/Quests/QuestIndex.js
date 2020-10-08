@@ -123,6 +123,8 @@ class QuestIndex extends React.Component {
                       <div className="detail-theme">{selected.theme}</div>
                       <div className="detail-length">{selected.stops.length} stops</div>
                       <br />
+                      <div className="detail-description">{selected.description}</div>
+                      <br />
                       <div className="detail-start">{selected.stops[0].name}</div>
                       <br />
                       <Link className="detail-button" to={`/quests/${selected._id}`}>Begin</Link>
