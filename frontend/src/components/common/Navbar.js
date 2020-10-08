@@ -58,7 +58,7 @@ class Navbar extends React.Component {
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
             <div className="form-contents">
               <div style={{ display: `${popup === 'Login' ? 'block' : 'none'}` }}>
-                <Login hidePopup={page.toLowerCase() === 'create' ? null : this.popupForm} />
+                <Login hidePopup={this.popupForm} cancelable={page.toLowerCase() === 'create' ? null : this.popupForm} />
               </div>
               <div style={{ display: `${popup === 'Register' ? 'block' : 'none'}` }}>
                 <Register hidePopup={this.popupForm} />

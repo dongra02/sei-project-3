@@ -25,10 +25,11 @@ class ProfileShow extends React.Component {
   }
 
   render() {
+    const { isUser } = this.state
     if ( !this.state.profile ) return null
     return (
       <>
-      <BgMap latLng={this.bgLatLng} />
+        <BgMap latLng={this.bgLatLng} />
         <div className='profile'>
           <table className='table'>
             <thead>
@@ -38,21 +39,22 @@ class ProfileShow extends React.Component {
                 <th scope="col">Quests</th>
               </tr>
             </thead>
-            </table>
+          </table>
           <h1 className='title-text'>{this.state.profile.username}</h1>
           <div><img src={this.state.profile.imageUrl} alt='Profile' /></div>
           <h3>{this.state.profile.email}</h3>
           <h2>Created Quests:</h2>
           {this.state.profile.createdQuest.map((quest, i) => (
             <div key={i} className='container-quest'>
-              <Link to={`/quests/${quest.id}`}>
-                <div className="quest-details">
+              <div className="quest-details">
+                <Link to={`/quests/${quest.id}`}>
                   <div className="detail-name">{quest.name}</div>
-                  <div className="detail-theme">{quest.theme}</div>
-                  <div className="detail-rating">{quest.avgRating}</div>
-                  <br />
-                </div>
-              </Link>
+                </Link>
+                <div className="detail-theme">{quest.theme}</div>
+                <div className="detail-rating">{quest.avgRating}</div>
+                {isUser && <Link to={`/quests/edit/${quest.id}`}>Edit</Link>}
+                <br />
+              </div>
             </div>
           ))}
         </div>
