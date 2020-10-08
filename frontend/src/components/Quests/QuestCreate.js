@@ -102,7 +102,6 @@ class QuestCreate extends React.Component{
     try {
       const location = this.state.stops[0].location
       const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
-      console.log(newQuestData)
       let response
       if (this.props.questToEdit) {
         response  = await updateQuest(newQuestData, this.props.questId)
@@ -110,6 +109,7 @@ class QuestCreate extends React.Component{
         response = await createQuest(newQuestData)
       }
       if (response.status === 201) this.props.history.push(`/quests/${response.data._id}`)
+      if (response.status === 202) this.props.redirect()
     } catch (err) {
       console.log(err)
     }
@@ -226,7 +226,7 @@ class QuestCreate extends React.Component{
     return (
       <div className="create-quest">
         <BgMap latLng={this.bgLatLng} />
-        <h3>Create a New Quest</h3>
+        {this.props.questToEdit ? <h3>Edit Quest</h3> : <h3>Create a New Quest</h3>}
         <div className="create-container">
           <div className="create-info">
             <div className="show-tabs">
