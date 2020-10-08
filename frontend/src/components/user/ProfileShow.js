@@ -21,9 +21,7 @@ class ProfileShow extends React.Component {
     const profileId = this.userId ? this.userId : this.props.match.params.id
     const isUser = this.userId ? true : false
     const response = await getSingleProfile(profileId)
-    this.setState (
-      { profile: response.data, isUser }
-    )
+    this.setState({ profile: response.data, isUser })
   }
 
   render() {
