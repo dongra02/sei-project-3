@@ -21,7 +21,7 @@ async function login(req, res, next) {
       secret,
       { expiresIn: '7 days' }
     )
-    res.status(202).json({ message: `Welcome back ${req.username}`, token })
+    res.status(202).json({ message: `Welcome back ${user.username}`, token })
   } catch (err) {
     next(err)
   }
