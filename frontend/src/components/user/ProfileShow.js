@@ -39,7 +39,7 @@ class ProfileShow extends React.Component {
             <img src={profile.imageUrl} alt='Profile' />
             <h3 className="title-text">{profile.username}</h3>
           </div>
-          <div className="profile-quests">
+          <div className="profile-quests" style={{ opacity: profile.createdQuest.length > 0 ? 1 : 0 }}>
             {profile.createdQuest.map((quest, i) => (
               <div key={i} className='container-quest'>
                 <Link to={`/quests/${quest.id}`} className="title">{quest.name}</Link>
