@@ -15,7 +15,8 @@ class QuestShow extends React.Component {
     firstStop: true,
     lastStop: false,
     start: '', 
-    time: 0
+    time: 0, 
+    correct: ''
   }
 
   componentDidMount = async () => {
@@ -71,6 +72,14 @@ class QuestShow extends React.Component {
     this.setState({ time })
   }
 
+  correctAnswer = ()  => {
+    const { currentStop, route, answer } = this.state
+    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
+      const correct = true
+      this.setState({ correct })
+    }
+  }
+
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
     const stop = route ? route.stops[currentStop] : null
@@ -94,7 +103,7 @@ class QuestShow extends React.Component {
                   <div className="detail-description">Description: {start.description}</div>
                   <div className="detail-stops">Stops: {start.stops.length}</div>
                   <div className="detail-time">Estimated Time: {start.estTime} mins</div>
-                  <button className="newquest-button" onClick={this.nextStop}>START</button>             
+                  <button className="newquest-button" onClick={this.nextStop}>START</button>  
                   { start.timer === true &&
                     <div className="timer">Timer {start.timer}</div>
                   }
@@ -105,7 +114,7 @@ class QuestShow extends React.Component {
                   <Timer updateTime={this.updateTime} />
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h3>Your next clue is:</h3>
+                  <h3>Clue for next stop:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input
@@ -122,11 +131,11 @@ class QuestShow extends React.Component {
                 </div>
               }
               { lastStop && !firstStop &&
-                <div className="endgame">
+                <div className="endgame">     
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <h3>Well done, you have completed your quest!</h3>
-                  <p>Your time was {this.state.time} seconds</p>
+                  <h5>Your time was {this.state.time} seconds</h5>
                   <hr />
                   <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
                 </div>
