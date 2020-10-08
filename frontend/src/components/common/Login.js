@@ -8,7 +8,8 @@ class Login extends React.Component {
     formData: {
       email: '',
       password: ''
-    }
+    },
+    errorMessage: ''
   }
 
   handleChange = event => {
@@ -23,19 +24,28 @@ class Login extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
 
+    const { formData } = this.state
+
+    let errorMessage = ''
+    if (!formData.email) errorMessage = 'please provide an email address'
+    else if (!formData.password) errorMessage = 'please provide your password'
+    this.setState({ errorMessage })
+
     try {
-      const response = await loginUser(this.state.formData)
+      const response = await loginUser(formData)
+      console.log(response)
       console.log('login complete')
       setToken(response.data.token)
       this.props.hidePopup()
     } catch (err) {
-      console.log(this.state.formData)
+      console.log(err)
+      this.setState({ errorMessage: 'login failed. please check your details'})
     }
   }
 
   render() {
 
-    const { formData } = this.state
+    const { formData, errorMessage } = this.state
     const { hidePopup } = this.props
 
     return (
@@ -59,6 +69,7 @@ class Login extends React.Component {
             onChange={this.handleChange}
           />
         </div>
+        <p className="error-message">{errorMessage}</p>
         <div className="form-buttons">
           {hidePopup && <button onClick={hidePopup}>cancel</button>}
           <button onClick={this.handleSubmit}>submit</button>

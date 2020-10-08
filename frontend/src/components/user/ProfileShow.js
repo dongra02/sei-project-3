@@ -25,6 +25,7 @@ class ProfileShow extends React.Component {
   }
 
   render() {
+    const { isUser } = this.state
     if ( !this.state.profile ) return null
     return (
       <>
@@ -51,7 +52,7 @@ class ProfileShow extends React.Component {
                 </Link>
                 <div className="detail-theme">{quest.theme}</div>
                 <div className="detail-rating">{quest.avgRating}</div>
-                <Link to={`/quests/edit/${quest.id}`}>Edit</Link>
+                {isUser && <Link to={`/quests/edit/${quest.id}`}>Edit</Link>}
                 <br />
               </div>
             </div>
