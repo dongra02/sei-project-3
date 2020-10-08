@@ -14,12 +14,12 @@ const StopList = (props) => {
       {stops.map((stop, i) => (
         <div key={i} className="stop-list-item">
           <div>{stop.name}</div>
-          <button onClick={() => changeTab({ target: { value: 'addStop', stopNum: i } })}>edit</button>
+          <button onClick={() => changeTab('addStop', i)}>edit</button>
           <button onClick={() => deleteStop(i)}>delete</button>
         </div>
       ))}
       <div className="btn-add-stop">
-        <button onClick={() => changeTab({ target: { value: 'addStop' } })}>Add Stop</button>
+        <button onClick={() => changeTab('addStop')}>Add Stop</button>
       </div>
     </div>
   )
