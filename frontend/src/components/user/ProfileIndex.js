@@ -6,7 +6,9 @@ import BgMap from '../map/BgMap'
 class ProfileIndex extends React.Component {
 
   state = {
-    allProfiles: null
+    allProfiles: [],
+    displayProfiles: [],
+    filterSearch: ''
   }
 
   bgLatLng = [
@@ -16,8 +18,17 @@ class ProfileIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await getAllProfiles()
-    this.setState({ allProfiles: response.data })
-    console.log(response)
+    this.setState({ allProfiles: response.data, displayProfiles: response.data })
+  }
+
+  handleChange = event => {
+    const filterSearch = event.target.value
+    const filteredProfile = this.state.allProfiles.filter(profile => {
+      const regEx = new RegExp(filterSearch, 'i')
+      return regEx.test(profile.username)
+    })
+
+    this.setState({ filterSearch, displayProfiles: filteredProfile })
   }
 
   render() {
@@ -27,9 +38,18 @@ class ProfileIndex extends React.Component {
       <BgMap latLng={this.bgLatLng} />
         <div className="profile-index">
           <h3>Profiles</h3>
+          <div className="profile-search-field">
+          <input
+            type="text"
+            name="filterSearch"
+            placeholder="Search..."
+            value={this.state.filterSearch}
+            onChange={this.handleChange}
+          />
+          </div>
           <div className='profile-list'>
-            {this.state.allProfiles.map((user, i) => (
-              <div key={i} className="profile-list-item">
+            {this.state.displayProfiles.map((user) => (
+              <div key={user.username} className="profile-list-item">
                 <Link to={`/users/${user.id}`}>
                   <div className="user-details">
                     <div className="detail-name">{user.username}</div>

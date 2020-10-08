@@ -16,15 +16,21 @@ class QuestShow extends React.Component {
     lastStop: false,
     start: '', 
     time: 0,
-    markers: []
+    markers: [],
+    hasComments: false
   }
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
+    let hasComments
+    if (response.data.comments.length > 0) {
+      hasComments = true
+    }
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, start: response.data },
+      { route: response.data, flyTo: response.data.stops[0].location, start: response.data, hasComments },
       () => this.setState({ flyTo: null })
     )
+
   }
 
   handleClick = event => {
@@ -73,17 +79,10 @@ class QuestShow extends React.Component {
     this.setState({ time })
   }
 
-  correctAnswer = ()  => {
-    const { currentStop, route, answer } = this.state
-    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
-      const correct = true
-      this.setState({ correct })
-    }
-  }
-
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop, start } = this.state
+    const { screen, route, currentStop, answer, lastStop, firstStop, start, hasComments } = this.state
     const stop = route ? route.stops[currentStop] : null
+    
     return (
       <>
         <div className="show-quests">
@@ -138,15 +137,30 @@ class QuestShow extends React.Component {
                   <h5>Your time was {this.state.time} seconds</h5>
                   <hr />
                   <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
+                  <h6>Login to leave a review!</h6>
                 </div>
               }
             </div>
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
               <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} results={this.state.markers} />
             </div>
+            
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
-              <h2>Comments</h2>
-              <p>Other users comments</p>
+              <h2>Reviews</h2>
+              <hr />
+              <div>
+                { hasComments &&
+                <>
+                  <div>{start.comments[0].text}</div>
+                  <hr />
+                  <div>{start.comments[1].text}</div>
+                  <hr />
+                  <div>{start.comments[2].text}</div>
+                  <hr />
+                  <div>{start.comments[3].text}</div>
+                </>
+                } 
+              </div>
             </div>
           </div>
         </div>

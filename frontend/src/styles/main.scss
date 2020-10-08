@@ -309,6 +309,9 @@ label {
   h3 {
     font-size: 1.1em;
   }
+  h6 {
+    padding-top: 30px;
+  }
 }
 
 .show-tabs {
@@ -352,7 +355,7 @@ label {
     color: white;
     border-radius: 5px;
     font-size: 16px;
-    padding: 5px;
+    padding: 10px;
     font-weight: bold;
   }
 
@@ -364,6 +367,13 @@ label {
     padding: 10px;
     width: 100%;
     height: 100%;
+  }
+}
+
+.comments {
+  h2 {
+    font-weight: bold;
+    padding-top: 15px;
   }
 }
 
@@ -721,6 +731,11 @@ label {
     background-color: $map-red;
     color: $map-white;
   }
+}
+
+.profile-search-field {
+  margin-left: 18%;
+  margin-bottom: 5px;
 }
 
 .profile {
