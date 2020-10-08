@@ -10,78 +10,56 @@ class ProfileShow extends React.Component {
     isUser: false
   }
 
-  userId  = this.props.userId
-  
   bgLatLng = [
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
   ]
 
   componentDidMount = async () => {
-    const profileId = this.userId ? this.userId : this.props.match.params.id
-    const isUser = this.userId ? true : false
+    const profileId = this.props.userId ? this.props.userId : this.props.match.params.id
+    const isUser = this.props.userId ? true : false
     const response = await getSingleProfile(profileId)
     this.setState({ profile: response.data, isUser })
   }
 
+  deleteQuest = () => {
+    console.log('TODO delete quest')
+  }
+
   render() {
 
-    const { isUser } = this.state
-    if (!this.state.profile) return null
-    const { username } = this.state.profile
+    const { isUser, profile } = this.state
+    if (!profile) return null
 
     return (
       <>
         <BgMap latLng={this.bgLatLng} />
         <div className="profile">
           <div className="profile-details">
-            <img src={this.state.profile.imageUrl} alt='Profile' />
-            <h3 className="title-text">{username}</h3>
+            <img src={profile.imageUrl} alt='Profile' />
+            <h3 className="title-text">{profile.username}</h3>
           </div>
           <div className="profile-quests">
-            {this.state.profile.createdQuest.map((quest, i) => (
+            {profile.createdQuest.map((quest, i) => (
               <div key={i} className='container-quest'>
-                  <Link to={`/quests/${quest.id}`}>
-                    <div className="detail-name">{quest.name}</div>
+                <Link to={`/quests/${quest.id}`} className="title">{quest.name}</Link>
+                <div className="detail-theme">{quest.theme}</div>
+                <div className="detail-rating">{quest.avgRating}</div>
+                <div className="quest-buttons">
+                  <Link to={`/quests/edit/${quest.id}`}>
+                    <button className={isUser ? '' : 'hide'}>edit</button>
                   </Link>
-                  <div className="detail-theme">{quest.theme}</div>
-                  <div className="detail-rating">{quest.avgRating}</div>
-                  {isUser && <Link to={`/quests/edit/${quest.id}`}>Edit</Link>}
+                  <button className={isUser ? '' : 'hide'} onClick={() => this.deleteQuest(quest.id)}>
+                    delete
+                  </button>
+                  <Link to={`/quests/${quest.id}`}>
+                    <button>play</button>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
-
-
-
-        {/* <div className='profile'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Username</th>
-                <th scope="col">Quests</th>
-              </tr>
-            </thead>
-          </table>
-          <h1 className='title-text'>{this.state.profile.username}</h1>
-          <div><img src={this.state.profile.imageUrl} alt='Profile' /></div>
-          <h3>{this.state.profile.email}</h3>
-          <h2>Created Quests:</h2>
-          {this.state.profile.createdQuest.map((quest, i) => (
-            <div key={i} className='container-quest'>
-              <div className="quest-details">
-                <Link to={`/quests/${quest.id}`}>
-                  <div className="detail-name">{quest.name}</div>
-                </Link>
-                <div className="detail-theme">{quest.theme}</div>
-                <div className="detail-rating">{quest.avgRating}</div>
-                {isUser && <Link to={`/quests/edit/${quest.id}`}>Edit</Link>}
-                <br />
-              </div>
-            </div>
-          ))}
-        </div> */}
       </>
     )
   }

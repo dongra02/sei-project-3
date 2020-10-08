@@ -736,15 +736,47 @@ label {
   }
   .profile-quests {
     width: calc(100% - 300px);
-    outline: 1px solid green;
+    outline: 1px dashed $map-red;
+    box-shadow: 2px 3px $map-red;
     overflow: scroll;
 
     .container-quest {
+      position: relative;
       margin: 10px 20px;
       padding: 10px;
+      min-height: calc(5.4em + 39px);
       text-align: center;
       background-color: $map-sand;
       box-shadow: 0 0 2px $map-grey;
+
+      .title {
+        font-size: 1.3em;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .quest-buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding: 10px;
+        width: 100px;
+
+        button {
+          width: 100%;
+          height: 1.8em;
+          background-color: $map-red;
+          color: $map-white;
+          border: none;
+          margin-top: 5px;
+
+          &.hide {
+            opacity: 0;
+            pointer-events: none;
+          }
+        }
+      }
     }
   }
   
@@ -822,6 +854,17 @@ label {
       width: 100%;
       height: 500px;
       margin-bottom: 20px;
+    }
+  }
+
+  .profile {
+    flex-direction: column;
+
+    .profile-details {
+      margin-right: auto;
+    }
+    .profile-quests {
+      width: 100%;
     }
   }
 }
