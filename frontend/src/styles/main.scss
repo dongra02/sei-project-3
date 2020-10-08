@@ -246,7 +246,8 @@ label {
 
 
 .browse-quests h3, 
-.create-quest h3, .profile-index h3 {
+.create-quest h3,
+.profile-index h3 {
   text-align: center;
   margin-top: 50px;
   color: #555;
@@ -723,8 +724,21 @@ label {
 }
 
 .profile {
-  margin-left: 100px;
-  font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 80px 20px 50px;
+  height: 100vh;
+
+  .profile-details,
+  .profile-quests {
+    outline: 1px solid plum;
+    width: 50%;
+  }
+  
+  .title-text {
+    font-family: 'Sansita Swashed', cursive;
+    color: $map-red;
+  }
 }
 
 .profile-list {
@@ -748,10 +762,7 @@ label {
   cursor: crosshair;
 }
 
-.title-text {
-  font-family: 'Sansita Swashed', cursive;
-  color: $map-red;
-}
+
 
 .container-quest {
   margin-left: 120px;

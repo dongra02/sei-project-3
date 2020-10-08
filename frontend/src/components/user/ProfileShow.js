@@ -25,12 +25,24 @@ class ProfileShow extends React.Component {
   }
 
   render() {
+
     const { isUser } = this.state
-    if ( !this.state.profile ) return null
+    if (!this.state.profile) return null
+    const { username } = this.state.profile
+
     return (
       <>
         <BgMap latLng={this.bgLatLng} />
-        <div className='profile'>
+        <div className="profile">
+          <div className="profile-details">
+            <h3 className="title-text">{username}</h3>
+          </div>
+          <div className="profile-quests"></div>
+        </div>
+
+
+
+        {/* <div className='profile'>
           <table className='table'>
             <thead>
               <tr>
@@ -57,7 +69,7 @@ class ProfileShow extends React.Component {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </>
     )
   }
