@@ -97,8 +97,7 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
-  handleQuestSubmit = async (event) => {
-    event.preventDefault()
+  handleQuestSubmit = async () => {
     try {
       const location = this.state.stops[0].location
       const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
@@ -220,7 +219,8 @@ class QuestCreate extends React.Component{
       questFormData: questFormData,
       handleQuestFormChange: this.handleQuestFormChange,
       handleQuestSubmit: this.handleQuestSubmit,
-      themes: this.themes
+      themes: this.themes,
+      stops: stops.length
     }
 
     return (
