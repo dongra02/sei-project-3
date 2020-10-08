@@ -326,7 +326,7 @@ label {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  border: 1px dashed $map-red;
+  outline: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
@@ -919,6 +919,15 @@ label {
     }
     .profile-quests {
       width: 100%;
+    }
+  }
+
+  .navbar-expand {
+    height: 100px;
+    padding-top: 50px;
+
+    .user {
+      top: 50px;
     }
   }
 }
