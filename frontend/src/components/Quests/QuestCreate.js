@@ -5,7 +5,7 @@ import StopForm from './StopForm'
 import StopList from './StopList'
 import Map from '../map/Map'
 import BgMap from '../map/BgMap'
-import { createQuest, reverseGeoCode } from '../../lib/api'
+import { createQuest, updateQuest, reverseGeoCode } from '../../lib/api'
 
 class QuestCreate extends React.Component{
 
@@ -44,6 +44,15 @@ class QuestCreate extends React.Component{
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
   ]
+
+  componentDidMount = () => {
+    if (this.props.questToEdit) {
+      const questToEdit = (this.props.questToEdit)
+      const questFormData = { ...questToEdit, stops: [] }
+      const stops = [ ...questToEdit.stops ]
+      this.setState({ questFormData, stops })
+    }
+  }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (this.state.tabShow === 'stops' && this.state.stops.length === 0) this.selectTab('addStop')
@@ -88,14 +97,18 @@ class QuestCreate extends React.Component{
     this.setState({ stopFormData })
   }
 
-  handleQuestSubmit = async (event) => {
-    event.preventDefault()
+  handleQuestSubmit = async () => {
     try {
       const location = this.state.stops[0].location
       const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
-      console.log(newQuestData)
-      const response = await createQuest(newQuestData)
+      let response
+      if (this.props.questToEdit) {
+        response  = await updateQuest(newQuestData, this.props.questId)
+      } else {
+        response = await createQuest(newQuestData)
+      }
       if (response.status === 201) this.props.history.push(`/quests/${response.data._id}`)
+      if (response.status === 202) this.props.redirect()
     } catch (err) {
       console.log(err)
     }
@@ -206,13 +219,14 @@ class QuestCreate extends React.Component{
       questFormData: questFormData,
       handleQuestFormChange: this.handleQuestFormChange,
       handleQuestSubmit: this.handleQuestSubmit,
-      themes: this.themes
+      themes: this.themes,
+      stops: stops.length
     }
 
     return (
       <div className="create-quest">
         <BgMap latLng={this.bgLatLng} />
-        <h3>Create a New Quest</h3>
+        {this.props.questToEdit ? <h3>Edit Quest</h3> : <h3>Create a New Quest</h3>}
         <div className="create-container">
           <div className="create-info">
             <div className="show-tabs">

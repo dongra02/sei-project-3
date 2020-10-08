@@ -26,16 +26,27 @@ class Register extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
 
+    const { formData } = this.state
+    let errorMessage = ''
+    if (!formData.username) errorMessage = 'please choose a username'
+    else if (!formData.email) errorMessage = 'please choose a valid email'
+    else if (!formData.password) errorMessage = 'please enter a password'
+    else if (formData.password !== formData.passwordConfirmation) errorMessage = 'password confirmation does not match'
+
+    this.setState({ errorMessage })
+
+    if (errorMessage) return
+
     try {
-      await registerUser(this.state.formData)
+      await registerUser(formData)
       console.log('registration complete')
-      const { email, password } = this.state.formData
+      const { email, password } = formData
       const response = await loginUser({ email, password })
       console.log('login complete')
       setToken(response.data.token)
       this.props.hidePopup()
     } catch (err) {
-      console.log(this.state.formData)
+      console.log(formData)
     }
   }
 
@@ -57,7 +68,7 @@ class Register extends React.Component {
 
   render() {
 
-    const { formData } = this.state
+    const { formData, errorMessage } = this.state
     const { hidePopup } = this.props
 
     return (
@@ -99,10 +110,13 @@ class Register extends React.Component {
             onChange={this.handleChange}
           />
         </div>
+        <div className="input-field">
+          <div className="image-picker" onClick={this.showWidget}>upload profile image</div>
+        </div>
+        <p className="error-message">{errorMessage}</p>
         <div className="form-buttons">
           <button onClick={hidePopup}>cancel</button>
           <button onClick={this.handleSubmit}>submit</button>
-          <button onClick={this.showWidget}>Upload Profile Image</button>
         </div>
       </div>
     )

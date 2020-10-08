@@ -308,6 +308,9 @@ label {
   h3 {
     font-size: 1.1em;
   }
+  h6 {
+    padding-top: 30px;
+  }
 }
 
 .show-tabs {
@@ -351,7 +354,7 @@ label {
     color: white;
     border-radius: 5px;
     font-size: 16px;
-    padding: 5px;
+    padding: 10px;
     font-weight: bold;
   }
 
@@ -366,8 +369,16 @@ label {
   }
 }
 
+.comments {
+  h2 {
+    font-weight: bold;
+    padding-top: 15px;
+  }
+}
+
 
 .form-container {
+  position: relative;
   margin: 50px auto;
   width: 90%;
   max-width: 500px;
@@ -382,6 +393,14 @@ label {
 
   .input-field {
     margin-top: 15px;
+  }
+
+  .image-picker {
+    width: 95%;
+    margin-left: 5%;
+    color: #777;
+    border-bottom: 1px dashed $map-red;
+    cursor: pointer;
   }
 
   input, textarea {
@@ -472,7 +491,7 @@ label {
   justify-content: space-between;
   margin: 50px;
   margin-top: 100px;
-  height: 500px;
+  height: 520px;
 
   .create-map {
     width: 55%;
@@ -505,7 +524,6 @@ label {
     background-color: #0000;
     box-shadow: none;
     margin: 0;
-    padding-right: 4px;
     width: 100%;
     height: 100%;
   }
@@ -514,13 +532,14 @@ label {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-right: 20px;
+    width: 100%;
   
-    input, select, textarea {
-      width: 250px;
+    .form-group {
+      width: 100%;
     }
-    select {
-      margin-left: 25px;
+    input, textarea, select {
+      width: 100%;
+      margin-left: 0;
     }
   }
 
@@ -599,19 +618,15 @@ label {
     background-color: $map-sand;
     display: flex;
     justify-content: space-between;
-    margin: 15px;
-    margin-left: 20px;
-
-    div {
-      font-size: 1.2em;
-    }
+    margin: 5px;
+    padding: 5px 5px 5px 15px;
+    font-size: 1.2em;
+    box-shadow: 0 0 2px $map-grey;
+    color: #333;
 
     button {
       border: none;
-      padding: 3px 10px;
-      background-color: $map-red;
-      color: $map-white;
-      margin-left: 10px;
+      background-color: $map-sand;
     }
   }
 }
@@ -761,8 +776,23 @@ label {
 
 .timer-check {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: right;
+  margin-right: 2.5%;
+}
+
+.error-message {
+  position: absolute;
+  bottom: 5px;
+  left: 30px;
+  color: $map-red;
+
+  &.create {
+    position: relative;
+    bottom: 0;
+    left: -2.5%;
+    text-align: right;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -778,6 +808,18 @@ label {
     .results-list {
       width: 100%;
       margin-bottom: 25px;
+    }
+  }
+
+  .create-container {
+    flex-direction: column;
+    width: 100;
+
+    .create-info,
+    .create-map {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 20px;
     }
   }
 }

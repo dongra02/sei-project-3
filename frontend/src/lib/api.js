@@ -23,6 +23,14 @@ export const createQuest = questFormData => {
   return axios.post(`${baseUrl}/quests`, questFormData, withHeaders())
 }
 
+export const updateQuest = (questFormData, questId) => {
+  return axios.put(`${baseUrl}/quests/${questId}`, questFormData, withHeaders())
+}
+
+export const deleteQuest = questId => {
+  return axios.delete(`${baseUrl}/quests/${questId}`, withHeaders())
+}
+
 export const registerUser = formData => {
   return axios.post(`${baseUrl}/register`, formData)
 }
