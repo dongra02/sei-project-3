@@ -72,9 +72,11 @@ class Map extends React.Component {
 
   scrollToZoom = event => {
     const scrollSpeed = event.srcEvent.deltaY
+    // Set scrolling dead zone
+    if (Math.abs(scrollSpeed) < 1) return
+
     let zoom = this.state.zoom
-    if (scrollSpeed >  5) zoom -= 0.05
-    if (scrollSpeed < -5) zoom += 0.05
+    zoom -= 0.005 * scrollSpeed
     zoom = Math.max(Math.min(zoom, 20), 0)
     this.setState({ zoom })
   }
