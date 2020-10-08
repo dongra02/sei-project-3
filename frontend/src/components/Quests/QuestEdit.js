@@ -10,20 +10,31 @@ class QuestEdit extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const questToEdit = await getSingleQuest(this.props.match.params.id)
-      if (!questToEdit) throw new Error()
-      this.setState({ questToEdit: questToEdit.data })
+      const questToEditFull = await getSingleQuest(this.props.match.params.id)
+      if (!questToEditFull) throw new Error()
+      const questToEdit = {
+        id: questToEditFull.data.id,
+        name: questToEditFull.data.name,
+        owner: questToEditFull.data.owner,
+        description: questToEditFull.data.description,
+        estTime: questToEditFull.data.estTime,
+        stops: questToEditFull.data.stops,
+        theme: questToEditFull.data.theme,
+      }
+      this.setState({ questToEdit })
+      console.log(questToEdit)
     } catch (err) {
       console.log(err)
     }
-    
   }
 
   render(){
     const { questToEdit } = this.state
 
+    if (!questToEdit) return null
+
     return (
-      <QuestCreate questToEdit={questToEdit}/>
+      <QuestCreate questToEdit={questToEdit} questId={questToEdit.id}/>
     )
   }
 }
