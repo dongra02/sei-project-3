@@ -35,9 +35,21 @@ class ProfileShow extends React.Component {
         <BgMap latLng={this.bgLatLng} />
         <div className="profile">
           <div className="profile-details">
+            <img src={this.state.profile.imageUrl} alt='Profile' />
             <h3 className="title-text">{username}</h3>
           </div>
-          <div className="profile-quests"></div>
+          <div className="profile-quests">
+            {this.state.profile.createdQuest.map((quest, i) => (
+              <div key={i} className='container-quest'>
+                  <Link to={`/quests/${quest.id}`}>
+                    <div className="detail-name">{quest.name}</div>
+                  </Link>
+                  <div className="detail-theme">{quest.theme}</div>
+                  <div className="detail-rating">{quest.avgRating}</div>
+                  {isUser && <Link to={`/quests/edit/${quest.id}`}>Edit</Link>}
+              </div>
+            ))}
+          </div>
         </div>
 
 

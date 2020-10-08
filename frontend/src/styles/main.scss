@@ -729,14 +729,28 @@ label {
   padding: 80px 20px 50px;
   height: 100vh;
 
-  .profile-details,
+  .profile-details {
+    width: 300px;
+    padding: 11px;
+    text-align: center;
+  }
   .profile-quests {
-    outline: 1px solid plum;
-    width: 50%;
+    width: calc(100% - 300px);
+    outline: 1px solid green;
+    overflow: scroll;
+
+    .container-quest {
+      margin: 10px 20px;
+      padding: 10px;
+      text-align: center;
+      background-color: $map-sand;
+      box-shadow: 0 0 2px $map-grey;
+    }
   }
   
   .title-text {
     font-family: 'Sansita Swashed', cursive;
+    margin-top: 15px;
     color: $map-red;
   }
 }
@@ -760,14 +774,6 @@ label {
   background-color: $map-sand;
   box-shadow: 0px 0px 2px $map-grey;
   cursor: crosshair;
-}
-
-
-
-.container-quest {
-  margin-left: 120px;
-  margin-top: 20px;
-  width: 60%;
 }
 
 .timer-check {
