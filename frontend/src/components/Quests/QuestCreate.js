@@ -128,13 +128,25 @@ class QuestCreate extends React.Component{
     this.setState({ flyTo, stopFormData, geocoderValue, markers }, () => this.setState({ flyTo: null }))
   }
 
-
   // TODO break this out into two functions -> edit / select tab
   selectTab = (event) => {
-    const stopToEdit = event.target.stopNum || event.target.stopNum === 0 ? event.target.stopNum : this.state.stops.length
+    // Change tab display
     const tabShow = event.target.value
-    const stopFormData = event.target.stopNum || event.target.stopNum === 0
-      ? { ...this.state.stops[event.target.stopNum] }
+    
+    this.setState({ tabShow }, () => {
+      // Call after setState so that other functions can read tabShow value
+      if (tabShow === 'addStop') this.initStopForm(event.target.stopNum)
+    })
+  }
+
+  initStopForm = (stopToEdit) => {
+
+    const isEdit = stopToEdit > -1
+    // TODO fix inputs
+    if (stopToEdit === undefined) stopToEdit = this.state.stops.length
+
+    const stopFormData = isEdit
+      ? { ...this.state.stops[stopToEdit] }
       : {
         name: '',
         clue: '',
@@ -144,20 +156,15 @@ class QuestCreate extends React.Component{
         location: { latitude: '', longitude: '' }
       }
     
+    this.setState({ stopFormData, stopToEdit })
       
-    this.setState({ tabShow, stopFormData, stopToEdit }, () => {
-      // Set geocoder to correct value
-      // Load *edit*
-      if (tabShow === 'addStop' && stopFormData.location.latitude) {
-        this.pickLocationFromMap(stopFormData.location)
-        this.setState({ flyTo: stopFormData.location }, () => this.setState({ flyTo: null }))
-      } else {
-        this.setState({ geocoderValue: '' }, this.refreshGeocoder)
-      }
-    })
-
-    const location = stopFormData.location
-    if (location.latitude) this.pickLocationFromMap(location)
+    // Set geocoder to correct value
+    if (stopToEdit === this.state.stops.length) {
+      this.setState({ geocoderValue: '' }, this.refreshGeocoder)
+    } else {
+      this.pickLocationFromMap(stopFormData.location)
+      this.setState({ flyTo: stopFormData.location }, () => this.setState({ flyTo: null }))
+    }
   }
 
   pickLocationFromMap = async (location) => {
