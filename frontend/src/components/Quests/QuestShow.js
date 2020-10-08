@@ -7,17 +7,16 @@ import Map from '../map/Map'
 
 class QuestShow extends React.Component {
   state = {
-    screen: 'map',
+    screen: 'clue',
     route: null,
     currentStop: 0,
     answer: '',
     flyTo: null,
-    firstStop: true,
     lastStop: false,
-    start: '', 
     time: 0,
     markers: [],
-    hasComments: false
+    hasComments: false,
+    hasBegun: false
   }
 
   componentDidMount = async () => {
@@ -27,7 +26,7 @@ class QuestShow extends React.Component {
       hasComments = true
     }
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, start: response.data, hasComments },
+      { route: response.data, flyTo: response.data.stops[0].location, hasComments },
       () => this.setState({ flyTo: null })
     )
 
@@ -44,22 +43,13 @@ class QuestShow extends React.Component {
   }
 
   nextStop = () => {
-
-    const { currentStop, route, answer } = this.state
+    const { route, currentStop, answer } = this.state
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
-      const currentStop = this.state.currentStop + 1
-      this.setState({ currentStop, answer: '' })
+      this.setState({ currentStop: currentStop + 1, answer: '' })
+
+      if (currentStop + 2 >= route.stops.length) this.setState({ lastStop: true }) 
     } 
-
-    if (currentStop >= 0)  {
-      this.setState({ firstStop: false })
-    }
-
-    if (currentStop + 1 === route.stops.length - 1)  {
-      this.setState({ lastStop: true }) 
-    }
-
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
@@ -80,9 +70,8 @@ class QuestShow extends React.Component {
   }
 
   render() {
-    const { screen, route, currentStop, answer, lastStop, firstStop, start, hasComments } = this.state
+    const { screen, route, currentStop, answer, lastStop, hasComments, hasBegun } = this.state
     const stop = route ? route.stops[currentStop] : null
-    console.log(this.state)
     return (
       <>
         <div className="show-quests">
@@ -93,22 +82,24 @@ class QuestShow extends React.Component {
           </div>
           <div className="quest-view">
             <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
-              { !lastStop && firstStop && start && 
+              { route && !hasBegun && 
                 <div className="start-details">
-                  <h2 className="detail-name">{start.name}</h2>
-                  <div className="detail-user">By {start.owner.username}</div>
-                  <div className="detail-theme">Theme: {start.theme}</div>
+                  <div className="detail-heading">
+                    <h2>{route.name}</h2>
+                    <div className="detail-user">By {route.owner.username}</div>
+                  </div>
+                  <div className="detail-theme">{route.theme}</div>
+                  <div className="detail-stops">{route.stops.length} stops</div>
+                  <div className="detail-time">Est. Time: {route.estTime} mins</div>
                   <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
-                  <div className="detail-description">Description: {start.description}</div>
-                  <div className="detail-stops">Stops: {start.stops.length}</div>
-                  <div className="detail-time">Estimated Time: {start.estTime} mins</div>
-                  <button className="newquest-button" onClick={this.nextStop}>START</button>  
-                  { start.timer === true &&
-                    <div className="timer">Timer {start.timer}</div>
+                  <div className="detail-description">{route.description}</div>
+                  <button className="newquest-button" onClick={() => this.setState({ hasBegun: true })}>START</button>  
+                  { route.timer === true &&
+                    <div className="timer">Timer {route.timer}</div>
                   }
                 </div>
               }
-              { !lastStop && !firstStop && 
+              { hasBegun && !lastStop &&
                 <div className="next-clue">
                   <Timer updateTime={this.updateTime} />
                   <hr />
@@ -129,7 +120,7 @@ class QuestShow extends React.Component {
                   </div>
                 </div>
               }
-              { lastStop && !firstStop &&
+              { lastStop &&
                 <div className="endgame">     
                   <hr />
                   <h2>{stop ? stop.name : ''}</h2><br />
@@ -150,7 +141,7 @@ class QuestShow extends React.Component {
               <hr />
               <div>
                 { hasComments &&
-                  start.comments.map(comment => comment.text)          
+                  route.comments.map(comment => comment.text)          
                 }           
               </div>
             </div>

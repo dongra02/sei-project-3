@@ -50,7 +50,7 @@ const StopMarker = ({ number }) => {
       <div style={border} />
       <div style={point} />
       <div style={inner}>
-        {number > 0 ? 'number'
+        {number > 0 ? number
           : <div style={dot} />}
       </div>
     </div>
