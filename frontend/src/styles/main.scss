@@ -738,8 +738,14 @@ label {
 }
 
 .profile-search-field {
-  margin-left: 18%;
-  margin-bottom: 5px;
+  margin-left: 9%;
+  margin-right: 9%;
+  margin-bottom: 20px;
+  // margin: 50px auto 20px;
+  background-color: #eeea;
+  padding: 10px 25px;
+  outline: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
 }
 
 .profile {
@@ -808,6 +814,7 @@ label {
 
 .profile-list {
   margin-left: 18%;
+  padding: 20px;
   position: relative;
   width: 65%;
   padding: 5px;

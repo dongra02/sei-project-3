@@ -38,6 +38,7 @@ class ProfileIndex extends React.Component {
       <BgMap latLng={this.bgLatLng} />
         <div className="profile-index">
           <h3>Profiles</h3>
+          <div className='container'>
           <div className="profile-search-field">
           <input
             type="text"
@@ -46,6 +47,7 @@ class ProfileIndex extends React.Component {
             value={this.state.filterSearch}
             onChange={this.handleChange}
           />
+          </div>
           </div>
           <div className='profile-list'>
             {this.state.displayProfiles.map((user) => (
