@@ -38,6 +38,18 @@ async function profile(req, res, next) {
   }
 }
 
+async function userProfile(req, res, next) {
+  try {
+    const userId = req.currentUser._id
+    const user = await User.findById(userId)
+      .populate('createdQuest')
+    if (!user) throw new Error(notFound)
+    res.status(200).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
 async function profileIndex(_req, res, next) {
   try {
     const users = await User.find()
@@ -53,5 +65,6 @@ module.exports = {
   register,
   login,
   profile,
-  profileIndex
+  profileIndex,
+  userProfile
 }

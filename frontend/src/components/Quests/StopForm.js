@@ -4,8 +4,9 @@ import Geocoder from '../map/Geocoder'
 
 const StopForm = (props) => {
 
+  
+  const { handleChange, submitStop, selectLocation, geocoderValue, geocoderKey, selectTab, isNew } = props
   const { name, clue, answerType, answer, hint, location } = props.stopFormData
-  const { handleChange, submitStop, selectLocation, geocoderValue, geocoderKey, selectTab } = props
 
   const validateForm = () => {
     const errors = {
@@ -22,7 +23,7 @@ const StopForm = (props) => {
 
   return (
     <div className="stop-form">
-      <h5>New Stop</h5>
+      <h5>{isNew ? 'New Stop' : 'Edit Stop'}</h5>
       <div className="form-group">
         <input
           type="text"
@@ -72,7 +73,7 @@ const StopForm = (props) => {
         <Geocoder key={geocoderKey} selectLocation={selectLocation} initialValue={geocoderValue} />
       </div>
       <div className="create-button">
-        <button onClick={() => selectTab({ target: { value: 'stops' } })}>Cancel</button>
+        <button onClick={() => selectTab('stops')}>Cancel</button>
         <button onClick={validateForm}>Save Stop</button>
       </div>
     </div>

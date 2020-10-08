@@ -8,6 +8,7 @@ module.exports = [{
     'longitude': -0.086167
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'London Bridge Railway',
@@ -61,6 +62,7 @@ module.exports = [{
     'longitude': 35.470499
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'Raouche Rocks',
@@ -113,6 +115,7 @@ module.exports = [{
     'longitude': -0.158275
   },
   timer: true,
+  comments: [],
   stops: [
     {
       'name': 'Marble arch station',
@@ -167,6 +170,7 @@ module.exports = [{
     'longitude': 35.656035
   },
   timer: false,
+  comments: [],
   stops: [
     {
       'name': 'Our Lady of the Sea',
@@ -207,6 +211,115 @@ module.exports = [{
       'clue': 'Finish off the trip with a nice meal, shisha and a cocktail surrounded by yachts',
       'answerType': 'Answer',
       'answer': 'Zeituna Bay'
+    }
+  ]
+} , 
+{
+  name: 'Pheonix Lane',
+  theme: 'Food & Drink',
+  estTime: 60,
+  description: 'this is a test quest, have fun with this quest!',
+  location: {
+    'latitude': 51.513563,
+    'longitude': -0.158275
+  },
+  timer: false,
+  comments: [],
+  stops: [
+    {
+      'name': 'Marble arch station',
+      'location': {
+        'latitude': 51.513563,
+        'longitude': -0.158275
+      },
+      'clue': 'Follow the smells of steak and blood',
+      'answerType': 'Answer',
+      'answer': 'Boxcar Butchers'
+    },
+    {
+      'name': 'Boxcar Butchers',
+      'location': {
+        'latitude': 51.515057,
+        'longitude': -0.158296
+      },
+      'clue': 'Surf and turf near bond street',
+      'answerType': 'Answer',
+      'answer': 'Burger and Lobster'
+    },
+    {
+      'name': 'Burger and Lobster',
+      'location': {
+        'latitude': 51.513918,
+        'longitude': -0.150718
+      },
+      'clue': 'A bird made of fire that can never die',
+      'answerType': 'Answer',
+      'answer': 'The Phoenix'
+    },
+    {
+      'name': 'The Phoenix',
+      'location': {
+        'latitude': 51.516065,
+        'longitude': -0.143624
+      },
+      'clue': 'Get a Beehive wig and your swinging shoes on',
+      'answerType': 'Answer',
+      'answer': 'On some Thursdays they have a sixties night'
+    }
+  ]
+} , 
+{
+  name: 'Newport adventure',
+  theme: 'Food & Drink',
+  estTime: 30,
+  description: 'this is a test quest, have fun with this quest!',
+  location: {
+    'latitude': 50.700125,
+    'longitude': -1.295770
+  },
+  timer: false,
+  comments: [],
+  stops: [
+    {
+      'name': 'Man on the moon',
+      'location': {
+        'latitude': 50.700125,
+        'longitude': -1.295770
+      },
+      'clue': 'What part of the pig do you put the apple in',
+      'answerType': 'Answer',
+      'answer': 'Hogs head'
+    },
+    {
+      'name': 'Hogs head',
+      'location': {
+        'latitude': 50.700233,
+        'longitude': -1.292611
+      
+      },
+      'clue': 'Lets all go to the lobby',
+      'answerType': 'Answer',
+      'answer': 'Cineworld'
+    },
+    {
+      'name': 'Cineworld',
+      'location': {
+        'latitude': 50.699116,
+        'longitude': -1.289354
+      },
+      'clue': 'Get down with the sickness',
+      'answerType': 'Answer',
+      'answer': 'Fever'
+    },
+    {
+      'name': 'Fever',
+      'location': {
+        'latitude': 50.699374,
+        'longitude': -1.289188
+      },
+      'clue': '80s music in the back',
+      'answerType': 'Answer',
+      'answer': '18 year olds in the front'
     }
   ]
 }

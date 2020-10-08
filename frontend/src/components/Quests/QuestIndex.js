@@ -54,6 +54,9 @@ class QuestIndex extends React.Component {
       const inLng = location.longitude > bounds.longitude[0] && location.longitude < bounds.longitude[1]
       return inLat && inLng
     })
+    //   .map(result => {
+    //   return { ...result, location: result.location }
+    // })
     this.setState({ results })
   }
 
