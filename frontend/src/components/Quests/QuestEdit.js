@@ -19,7 +19,7 @@ class QuestEdit extends React.Component {
         description: questToEditFull.data.description,
         estTime: questToEditFull.data.estTime,
         stops: questToEditFull.data.stops,
-        theme: questToEditFull.data.theme,
+        theme: questToEditFull.data.theme
       }
       this.setState({ questToEdit })
       console.log(questToEdit)
