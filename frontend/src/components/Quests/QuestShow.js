@@ -82,7 +82,6 @@ class QuestShow extends React.Component {
   render() {
     const { screen, route, currentStop, answer, lastStop, firstStop, start, hasComments } = this.state
     const stop = route ? route.stops[currentStop] : null
-    
     return (
       <>
         <div className="show-quests">
@@ -151,13 +150,13 @@ class QuestShow extends React.Component {
               <div>
                 { hasComments &&
                 <>
-                  <div>{start.comments[0].text}</div>
+                  {/* <div>{start.comments[0].text}</div>
                   <hr />
                   <div>{start.comments[1].text}</div>
                   <hr />
                   <div>{start.comments[2].text}</div>
                   <hr />
-                  <div>{start.comments[3].text}</div>
+                  <div>{start.comments[3].text}</div> */}
                 </>
                 } 
               </div>
