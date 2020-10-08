@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 // Custom Variables
 $map-blue: #94c1cf;
@@ -542,6 +542,10 @@ label {
       width: 100%;
       margin-left: 0;
     }
+
+    textarea {
+      height: 8em;
+    }
   }
 
   .stop-form {
@@ -844,6 +848,37 @@ label {
   }
 }
 
+.notification-bar {
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  overflow-y: hidden;
+  transition: all 3s;
+  pointer-events: none;
+
+  &.toasty {
+    animation: toast 5s;
+  }
+
+  .navbar-logo {
+    pointer-events: all;
+  }
+
+  .notification-text {
+    position: relative;
+    top: 50px;
+    width: 100%;
+    max-width: 200px;
+    margin: auto;
+    height: 50px;
+    color: $map-red;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 700;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .results {
     flex-direction: column;
@@ -864,6 +899,10 @@ label {
     flex-direction: column;
     width: 100;
 
+    .form-container {
+      max-width: none;
+    }
+
     .create-info,
     .create-map {
       width: 100%;
@@ -881,5 +920,16 @@ label {
     .profile-quests {
       width: 100%;
     }
+  }
+}
+
+@keyframes toast {
+  0%, 100% {
+    top: 0;
+    height: 50px;
+  }
+  30%, 70% {
+    top: -50px;
+    height: 100px;
   }
 }
