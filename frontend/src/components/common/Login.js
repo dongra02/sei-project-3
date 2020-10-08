@@ -36,7 +36,7 @@ class Login extends React.Component {
       console.log(response)
       console.log('login complete')
       setToken(response.data.token)
-      this.props.hidePopup()
+      this.props.hidePopup(null, response.data.message)
     } catch (err) {
       console.log(err)
       this.setState({ errorMessage: 'login failed. please check your details'})
