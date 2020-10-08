@@ -246,7 +246,8 @@ label {
 
 
 .browse-quests h3, 
-.create-quest h3, .profile-index h3 {
+.create-quest h3,
+.profile-index h3 {
   text-align: center;
   margin-top: 50px;
   color: #555;
@@ -732,9 +733,73 @@ label {
   }
 }
 
+.profile-search-field {
+  margin-left: 18%;
+  margin-bottom: 5px;
+}
+
 .profile {
-  margin-left: 100px;
-  font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 80px 20px 50px;
+  height: 100vh;
+
+  .profile-details {
+    width: 300px;
+    padding: 11px;
+    text-align: center;
+  }
+  .profile-quests {
+    width: calc(100% - 300px);
+    outline: 1px dashed $map-red;
+    box-shadow: 2px 3px $map-red;
+    overflow: scroll;
+
+    .container-quest {
+      position: relative;
+      margin: 10px 20px;
+      padding: 10px;
+      min-height: calc(5.4em + 39px);
+      text-align: center;
+      background-color: $map-sand;
+      box-shadow: 0 0 2px $map-grey;
+
+      .title {
+        font-size: 1.3em;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .quest-buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding: 10px;
+        width: 100px;
+
+        button {
+          width: 100%;
+          height: 1.8em;
+          background-color: $map-red;
+          color: $map-white;
+          border: none;
+          margin-top: 5px;
+
+          &.hide {
+            opacity: 0;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+  
+  .title-text {
+    font-family: 'Sansita Swashed', cursive;
+    margin-top: 15px;
+    color: $map-red;
+  }
 }
 
 .profile-list {
@@ -756,17 +821,6 @@ label {
   background-color: $map-sand;
   box-shadow: 0px 0px 2px $map-grey;
   cursor: crosshair;
-}
-
-.title-text {
-  font-family: 'Sansita Swashed', cursive;
-  color: $map-red;
-}
-
-.container-quest {
-  margin-left: 120px;
-  margin-top: 20px;
-  width: 60%;
 }
 
 .timer-check {
@@ -815,6 +869,17 @@ label {
       width: 100%;
       height: 500px;
       margin-bottom: 20px;
+    }
+  }
+
+  .profile {
+    flex-direction: column;
+
+    .profile-details {
+      margin-right: auto;
+    }
+    .profile-quests {
+      width: 100%;
     }
   }
 }

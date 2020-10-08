@@ -3,11 +3,6 @@ import React from 'react'
 const StopList = (props) => {
   const { stops, changeTab, deleteStop } = props
 
-  {/* <td>{stop.name}</td>
-  <td>{stop.clue}</td>
-  <td>{stop.answer}</td>
-  <td>{stop.hint}</td> */}
-
   return (
     <div className="stop-list">
       {stops.map((stop, i) => (

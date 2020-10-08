@@ -7,7 +7,7 @@ import { isAuthenticated, logout } from '../../lib/auth'
 class Navbar extends React.Component {
 
   state = {
-    page: 'Found',
+    page: 'found',
     popup: false
   }
 
@@ -23,7 +23,7 @@ class Navbar extends React.Component {
   }
 
   selectNavItem = event => {
-    this.setState({ page: event.target.innerHTML, popup: false })
+    this.setState({ page: event.target.innerHTML.toLowerCase(), popup: false })
   }
 
   popupForm = (event) => {
@@ -33,7 +33,9 @@ class Navbar extends React.Component {
 
   logoutUser = () => {
     logout()
-    this.setState({ page: this.state.page })
+    const page = this.state.page === 'profile' ? 'found' : this.state.page
+    this.setState({ page })
+    this.props.history.push('/')
   }
 
   render() {
@@ -44,15 +46,15 @@ class Navbar extends React.Component {
       <>
         <nav className="navbar-expand">   
           <div className="navbar-nav">
-            <Link to="/quests" className={`nav-link ${page === 'Find' || page === 'quests' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
-            <Link to="/create" className={`nav-link ${page === 'Create' ? 'active' : ''}`} onClick={this.selectNavItem}>Create</Link>
-            <Link to="/users" className={`nav-link ${page === 'Users' ? 'active' : ''}`} onClick={this.selectNavItem}>Users</Link>
+            <Link to="/quests" className={`nav-link ${page === 'find' || page === 'quests' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
+            <Link to="/create" className={`nav-link ${page === 'create' ? 'active' : ''}`} onClick={this.selectNavItem}>Create</Link>
+            <Link to="/users" className={`nav-link ${page === 'users' ? 'active' : ''}`} onClick={this.selectNavItem}>Users</Link>
           </div>
-          <Link to="/" className={`navbar-logo ${page === 'Found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
+          <Link to="/" className={`navbar-logo ${page === 'found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
           <div className="navbar-nav user">
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm}>Register</div>}
             {!isAuthenticated() && <div className="nav-link" onClick={this.popupForm} >Login</div>}
-            {isAuthenticated() && <Link to="/profile" className="nav-link" >Profile</Link>}
+            {isAuthenticated() && <Link to="/profile" className={`nav-link ${page === 'profile' ? 'active' : ''}`} onClick={this.selectNavItem} >Profile</Link>}
             {isAuthenticated() && <div className="nav-link" onClick={this.logoutUser} >Logout</div>}
           </div>
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
