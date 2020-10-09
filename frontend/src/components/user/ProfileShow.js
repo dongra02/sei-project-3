@@ -9,6 +9,8 @@ class ProfileShow extends React.Component {
     isUser: false
   }
 
+  star = '⭐️'
+
   bgLatLng = [
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
@@ -46,7 +48,7 @@ class ProfileShow extends React.Component {
               <div key={i} className='container-quest'>
                 <Link to={`/quests/${quest.id}`} className="title">{quest.name}</Link>
                 <div className="detail-theme">{quest.theme}</div>
-                <div className="detail-rating">{quest.avgRating}</div>
+                <div className="detail-rating">{this.star.repeat(quest.avgRating)}</div>
                 <div className="quest-buttons">
                   <Link to={`/quests/edit/${quest.id}`}>
                     <button className={isUser ? '' : 'hide'}>edit</button>
