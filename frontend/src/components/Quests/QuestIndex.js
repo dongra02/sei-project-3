@@ -18,6 +18,8 @@ class QuestIndex extends React.Component {
     flyTo: null
   }
 
+  star = '⭐️'
+
   bgLatLng = [
     (Math.random() * 180) - 90,
     (Math.random() * 360) - 180
@@ -153,7 +155,7 @@ class QuestIndex extends React.Component {
                     </div>
                     :
                     results.map((quest, i) => (
-                      <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}</div>
+                      <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name} {this.star.repeat(quest.avgRating)}</div>
                     ))
                   }
                 </div>}
