@@ -58,10 +58,12 @@ label {
     height: calc(100vh - 56px);
   }
 
-  .header-title {
-    position: relative;
-    left: -90px;
-  }
+}
+
+.header-title {
+  position: relative;
+  left: -20px;
+  top: -20px;
 }
 
 // Navbar
