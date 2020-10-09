@@ -150,7 +150,7 @@ class QuestShow extends React.Component {
                 <div className="start-details">
                   <div className="detail-heading">
                     <h2>{route.name}</h2>
-                    <div className="detail-user">By {route.owner.username}</div>
+                    <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
                   </div>
                   <div className="detail-theme">{route.theme}</div>
                   <div className="detail-stops">{route.stops.length} stops</div>
@@ -187,7 +187,7 @@ class QuestShow extends React.Component {
                 <div className="endgame">     
                   <div className="detail-heading">
                     <h2>{route.name}</h2>
-                    <div className="detail-user">By {route.owner.username}</div>
+                    <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
                   </div>
                   <div><br />Well done, you have completed your quest!<br /></div>
                   <div>Your time was {this.state.time} seconds</div>
@@ -219,7 +219,11 @@ class QuestShow extends React.Component {
             
             <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
               { route.reviews.length > 0
-                ? route.reviews.map((review, i) => <div key={i}>{review.text}<hr /></div>)         
+                ? route.reviews.map((review, i) => (
+                  <div key={i} className='comment-style'>
+                    <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
+                    <span>{review.rating}</span><hr />
+                  </div>))                
                 : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
               }    
             </div>

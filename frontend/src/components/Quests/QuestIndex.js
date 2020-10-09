@@ -138,7 +138,7 @@ class QuestIndex extends React.Component {
                     ?
                     <div className="quest-details">
                       <div className="detail-name">{selected.name}</div>
-                      <div className="detail-owner">by {selected.owner.username}</div>
+                      <div className="detail-owner">by <Link to={`/users/${selected.owner.id}`}>{selected.owner.username}</Link></div>
                       <br />
                       <div className="detail-theme">{selected.theme}</div>
                       <div className="detail-length">{selected.stops.length} stops</div>

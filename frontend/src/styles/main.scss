@@ -387,6 +387,12 @@ label {
   }
 }
 
+.comment-style {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 
 .form-container {
   position: relative;
