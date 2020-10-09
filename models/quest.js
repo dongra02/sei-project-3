@@ -32,7 +32,8 @@ const questSchema = new mongoose.Schema({
   estTime: { type: Number, required: true },
   stops: [stopSchema],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  comments: [commentSchema]
+  comments: [commentSchema],
+  completedTimes: [{ type: Number }]
 }, {
   timestamps: true
 })
