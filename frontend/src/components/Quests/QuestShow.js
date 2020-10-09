@@ -74,7 +74,9 @@ class QuestShow extends React.Component {
             console.log(err)
           }
         } 
-        if (!isAuthenticated) console.log('TODO: non authenticated time not added')
+        if (!isAuthenticated) {
+          console.log('TODO: non authenticated time not added')
+        } 
         this.setState({ lastStop: true })
       }
     } 
