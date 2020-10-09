@@ -60,7 +60,7 @@ class Navbar extends React.Component {
             <Link to="/users" className={`nav-link ${page === 'users' ? 'active' : ''}`} onClick={this.selectNavItem}>Users</Link>
           </div>
           <div className={`notification-bar ${toast ? 'toasty' : ''}`}>
-            <Link to="/" className={`navbar-logo ${page === 'found' ? 'active' : ''}`} onClick={this.selectNavItem}>Found</Link>
+            <Link to="/" className={`navbar-logo ${page === 'popquest' ? 'active' : ''}`} onClick={this.selectNavItem}>popQuest</Link>
             <div className="notification-text">{toast}</div>
           </div>
           <div className="navbar-nav user">
