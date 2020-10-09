@@ -44,7 +44,8 @@ class Register extends React.Component {
       const response = await loginUser({ email, password })
       console.log('login complete')
       setToken(response.data.token)
-      this.props.hidePopup()
+      // TODO set register message
+      this.props.hidePopup(null, 'Welcome to Found')
     } catch (err) {
       const errors = err.response.data.errors
       let errorMessage = ''

@@ -35,7 +35,6 @@ class QuestShow extends React.Component {
       { route: response.data, flyTo: response.data.stops[0].location, hasComments },
       () => this.setState({ flyTo: null })
     )
-
   }
 
   handleClick = event => {
@@ -85,6 +84,7 @@ class QuestShow extends React.Component {
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
   getLocationGuess = guess => {
     const { currentStop, route } = this.state
+    if (!route.stops[currentStop + 1]) return
     const degreeLengthInMeters = 111000
     const nextLocation = route.stops[currentStop + 1].location
     const latDiff = Math.abs(guess.latitude - nextLocation.latitude) * degreeLengthInMeters
@@ -173,7 +173,7 @@ class QuestShow extends React.Component {
                   <div className="btn-next">
                     <button onClick={this.nextStop}>NEXT</button>
                   </div>
-                </div>
+                </div>   
               }
               { lastStop && !addReview &&
                 <div className="endgame">     

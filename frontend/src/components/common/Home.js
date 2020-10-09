@@ -28,7 +28,7 @@ class Home extends React.Component {
       <>
         <div className="home-logo">
           <img src={require('../../images/trail-red.png')} alt="" />
-          <div className="header-title">Found</div>
+          <div className="header-title">popQuest</div>
         </div>
         <BgMap latLng={this.state.bgLatLng} />
       </>
