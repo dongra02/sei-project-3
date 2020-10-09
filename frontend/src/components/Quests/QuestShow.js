@@ -1,5 +1,6 @@
 import React from 'react'
 import { getSingleQuest } from '../../lib/api'
+import { isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import Timer from './Timer'
 
@@ -14,9 +15,14 @@ class QuestShow extends React.Component {
     flyTo: null,
     lastStop: false,
     time: 0,
-    markers: [],
+    guess: [],
     hasComments: false,
-    hasBegun: false
+    hasBegun: false,
+    addReview: false,
+    reviewForm: {
+      text: '',
+      rating: 5
+    }
   }
 
   componentDidMount = async () => {
@@ -42,6 +48,18 @@ class QuestShow extends React.Component {
     this.setState({ answer: event.target.value })
   }
 
+  updateReview = event => {
+    const reviewForm = {
+      ...this.state.reviewForm,
+      [event.target.name]: event.target.value
+    }
+    this.setState({ reviewForm })
+  }
+
+  submitReview = () => {
+    console.log(this.state.reviewForm)
+  }
+
   nextStop = () => {
     const { route, currentStop, answer } = this.state
 
@@ -61,7 +79,7 @@ class QuestShow extends React.Component {
     const lngDiff = Math.abs(guess.longitude - nextLocation.longitude) * degreeLengthInMeters
     const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
     console.log(length)
-    this.setState({ markers: [{ location: guess }] })
+    this.setState({ guess: [{ location: guess }] })
   }
   
   updateTime = () => {
@@ -69,14 +87,38 @@ class QuestShow extends React.Component {
     this.setState({ time })
   }
 
+  toggleReview = () => {
+    this.setState({ addReview: !this.state.addReview })
+  }
+
   render() {
-    const { screen, route, currentStop, answer, lastStop, hasComments, hasBegun } = this.state
-    const stop = route ? route.stops[currentStop] : null
+    const {
+      screen,
+      route,
+      currentStop,
+      answer,
+      lastStop,
+      hasComments,
+      hasBegun,
+      addReview,
+      flyTo,
+      guess,
+      reviewForm
+    } = this.state
+    if (!route) return null //TODO display loading or failed to get
+    const stop = route.stops[currentStop]
+    // Only show marker for current stop if playing a certain theme
+    if (route.theme === 'Adventure' || route.them === 'Speed') {
+      route.stops = [route.stops[currentStop]]
+    } else {
+      route.stops[currentStop].altColor = true
+    }
+      
     return (
       <>
         <div className="show-quests">
           <div className="show-tabs">
-            {['map', 'clue', 'comments'].map((tab, i) => (
+            {['clue', 'map', 'comments'].map((tab, i) => (
               <button key={i} value={tab} onClick={this.handleClick} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
             ))}
           </div>
@@ -120,30 +162,45 @@ class QuestShow extends React.Component {
                   </div>
                 </div>
               }
-              { lastStop &&
+              { lastStop && !addReview &&
                 <div className="endgame">     
+                  <div className="detail-heading">
+                    <h2>{route.name}</h2>
+                    <div className="detail-user">By {route.owner.username}</div>
+                  </div>
+                  <div><br />Well done, you have completed your quest!<br /></div>
+                  <div>Your time was {this.state.time} seconds</div>
                   <hr />
-                  <h2>{stop ? stop.name : ''}</h2><br />
-                  <h3>Well done, you have completed your quest!</h3>
-                  <h5>Your time was {this.state.time} seconds</h5>
-                  <hr />
-                  <Link className="newquest-button" to={'/quests/'}>Choose New Quest</Link>
-                  <h6>Login to leave a review!</h6>
+                  <div className="btn-play red"><Link to={'/quests/'}>Choose New Quest</Link></div>
+                  {isAuthenticated()
+                    ? <div className="btn-play red" onClick={this.toggleReview}>Leave a Review</div>
+                    : <div> Login to leave a review!</div>}
+                </div>
+              }
+              {/* REVIEW */}
+              {lastStop && addReview && 
+                <div className="review-form">
+                  <h2>Your review</h2>
+                  <textarea className="form-control" name="text" value={reviewForm.text} onChange={this.updateReview}/>
+                  <div>Rating</div>
+                  <select className="form-control" name="rating" value={reviewForm.rating} onChange={this.updateReview}>
+                    {[1, 2, 3, 4, 5].map((val) => <option key={val} value={val}>{val}</option>)}
+                  </select>
+                  <button className="btn-play red" onClick={this.submitReview}>submit</button>
+                  <button className="btn-play red" onClick={this.toggleReview}>cancel</button>
                 </div>
               }
             </div>
+            {/* MAP */}
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={this.state.flyTo} route={this.state.route} stop={this.state.currentStop} getLocation={this.getLocationGuess} results={this.state.markers} />
+              <Map flyTo={flyTo} route={route} getLocation={this.getLocationGuess} results={guess} />
             </div>
             
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
-              <h2>Reviews</h2>
-              <hr />
-              <div>
-                { hasComments &&
-                  route.comments.map(comment => comment.text)          
-                }           
-              </div>
+              { hasComments
+                ? route.comments.map((comment, i) => <div key={i}>{comment.text}<hr /></div>)         
+                : <div>No comments yet.<br />Complete the quest to leave one of your own</div>
+              }    
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { getSingleProfile } from '../../lib/api'
 import { Link } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
 import BgMap from '../map/BgMap'
 
 class ProfileShow extends React.Component {

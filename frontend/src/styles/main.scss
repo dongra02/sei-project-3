@@ -262,7 +262,8 @@ label {
 }
 
 
-.start-details {
+.start-details,
+.endgame {
   background-color: $map-sand;
   padding: 40px 20px;
   text-align: center;
@@ -277,6 +278,10 @@ label {
   font-family: 'Sansita Swashed', cursive;
   margin: 10px;
   color: #222;
+  }
+
+  .detail-user {
+    padding: 10px;
   }
 
   .detail-stops,
@@ -296,12 +301,7 @@ label {
   
 }
 
-.endgame {
-  padding-top: 30px;
-}
-
-.next-clue,
-.endgame {
+.next-clue {
   background-color: $map-sand;
 
   h2 {
@@ -326,18 +326,19 @@ label {
   justify-content: left;
   margin-top: 20px;
   margin-left: 5%;
-  width: 95%;
+  width: 90%;
 }
 
 .quest-view {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   outline: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
   width: 95%;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 180px);
   background-color: $map-sand;
+  overflow: hidden;
 
   .clues {
     text-align: center;
@@ -378,10 +379,9 @@ label {
 }
 
 .comments {
-  h2 {
-    font-weight: bold;
-    padding-top: 15px;
-  }
+  text-align: left;
+  padding-top: 50px;
+  overflow-y: scroll;
 }
 
 
@@ -471,7 +471,7 @@ label {
 .inactive {
   background-color: $map-white;
   border: 1px solid $map-red;
-  border-bottom: none;
+  border-bottom: 1px dashed $map-red;
   color: #444;
   z-index: 0;
 
@@ -968,5 +968,55 @@ label {
   30%, 70% {
     top: -50px;
     height: 100px;
+  }
+}
+
+.btn-play {
+  padding: 5px 15px;
+  width: 170px;
+  background-color: $map-white;
+  border: 1px solid $map-blue;
+  box-shadow: 1px 1px $map-blue;
+  color: #444;
+  line-height: 1.5em;
+  margin: 5px auto;
+  cursor: pointer;
+
+  &.red {
+    border-color: $map-red;
+    box-shadow: 1px 1px $map-red;
+
+    &:hover {
+      color: $map-white;
+      background-color: $map-red;
+      :first-child { color: $map-white; }
+    }
+  }
+
+  :first-child {
+    color: #444;
+    text-decoration: none;
+  }
+
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 90vw;
+
+  textarea {
+    width: 100%;
+    height: 200px;
+  }
+
+  select {
+    width: 170px;
+    margin: auto;
+  }
+
+  div {
+    margin: 10px;
   }
 }

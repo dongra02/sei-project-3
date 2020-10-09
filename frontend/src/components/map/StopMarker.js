@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StopMarker = ({ number }) => {
+const StopMarker = ({ number, altColor }) => {
   const container = {
     position: 'relative',
     top: '-25px',
@@ -28,8 +28,8 @@ const StopMarker = ({ number }) => {
     width: '16px',
     height: '16px',
     clipPath: 'circle()',
-    backgroundColor: '#f8f6f3',
-    color: '#333',
+    backgroundColor: altColor ? '#050' : '#f8f6f3',
+    color: altColor ? 'white' : '#333',
     fontSize: '1.1em',
     lineHeight: '0.8em',
     paddingLeft: '3px',
