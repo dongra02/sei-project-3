@@ -46,7 +46,11 @@ class Register extends React.Component {
       setToken(response.data.token)
       this.props.hidePopup()
     } catch (err) {
-      console.log(formData)
+      const errors = err.response.data.errors
+      let errorMessage = ''
+      if (errors.username) errorMessage = 'That username is already in use'
+      else if (errors.email) errorMessage = 'That email already has an account'
+      this.setState({ errorMessage })
     }
   }
 

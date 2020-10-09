@@ -209,7 +209,7 @@ label {
 .quest-details {
   text-align: center;
   margin: 5px -5px;
-  padding: 20px 10px;
+  padding: 20px;
   height: 95%;
   background-color: $map-sand;
   box-shadow: 0px 0px 2px $map-grey;
@@ -265,28 +265,35 @@ label {
 .start-details {
   background-color: $map-sand;
   padding: 40px 20px;
+  text-align: center;
+
+  .detail-heading {
+    background-color: $map-blue;
+    border-radius: 5px;
+    padding: 10px;
+  }
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
-  text-align: center;
-  background-color: $map-blue;
-  border-radius: 8px;
-  padding: 10px;
+  margin: 10px;
   color: #222;
   }
 
-  .detail-theme {
-    padding: 20px 0 12px 0;
-  }
-  .detail-firststop {
-    padding: 12px 0;
-  }
-  .detail-stops {
-    padding: 12px 0;
-  }
+  .detail-stops,
   .detail-time {
-    padding: 12px 0;
+    padding: 5px 0;
   }
+
+  .detail-theme,
+  .detail-firststop,
+  .detail-description {
+    padding-top: 20px;
+  }
+
+  .detail-description {
+    min-height: 80px;
+  }
+  
 }
 
 .endgame {
@@ -326,7 +333,7 @@ label {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  border: 1px dashed $map-red;
+  outline: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
   width: 95%;
   height: calc(100vh - 150px);
@@ -604,6 +611,7 @@ label {
 .locator {
   width: 30px;
   height: 30px;
+  padding: 1px 2px;
   background-color: $map-red;
   clip-path: circle();
   position: absolute;
@@ -738,8 +746,14 @@ label {
 }
 
 .profile-search-field {
-  margin-left: 18%;
-  margin-bottom: 5px;
+  margin-left: 9%;
+  margin-right: 9%;
+  margin-bottom: 20px;
+  // margin: 50px auto 20px;
+  background-color: #eeea;
+  padding: 10px 25px;
+  outline: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
 }
 
 .profile {
@@ -808,6 +822,7 @@ label {
 
 .profile-list {
   margin-left: 18%;
+  padding: 20px;
   position: relative;
   width: 65%;
   padding: 5px;
@@ -852,7 +867,8 @@ label {
   height: 60px;
   position: absolute;
   width: 100%;
-  top: 0px;
+  top: 0;
+  left: 0;
   overflow-y: hidden;
   transition: all 3s;
   pointer-events: none;
@@ -921,6 +937,27 @@ label {
       width: 100%;
     }
   }
+
+  .navbar-expand {
+    height: 100px;
+    padding-top: 50px;
+
+    .user {
+      top: 50px;
+    }
+  }
+
+  .popup-form {
+    top: 100px;
+    height: calc(100vh - 100px);
+  }
+
+.browse-quests,
+.show-quests,
+.create-quest,
+.profile-index {
+  top: 120px;
+}
 }
 
 @keyframes toast {
