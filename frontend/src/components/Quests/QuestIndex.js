@@ -27,11 +27,7 @@ class QuestIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await getAllQuests()
-    response.data.sort((a,b) => {
-      if (a.avgRating === 'Not yet rated') return 1
-      return b.avgRating - a.avgRating
-    })
-    this.setState({ allQuests: response.data, results: response.data })
+    this.setState({ allQuests: response.data, results: response.data }, this.filterResults)
   }
 
   // Form input control
@@ -52,6 +48,7 @@ class QuestIndex extends React.Component {
       .sort((a, b) => {
         if (sortBy === 'time') return b.estTime - a.estTime
         if (a.avgRating === 'Not yet rated') return 1
+        if (b.avgRating === 'Not yet rated') return -1
         return b.avgRating - a.avgRating
       })
     
