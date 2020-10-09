@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleQuest } from '../../lib/api'
+import { getSingleQuest, updateQuest, submitReview } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import Timer from './Timer'
@@ -16,7 +16,7 @@ class QuestShow extends React.Component {
     lastStop: false,
     time: 0,
     guess: [],
-    hasComments: false,
+    hasReviews: false,
     hasBegun: false,
     addReview: false,
     reviewForm: {
@@ -27,12 +27,12 @@ class QuestShow extends React.Component {
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
-    let hasComments
-    if (response.data.comments.length > 0) {
-      hasComments = true
+    let hasReviews
+    if (response.data.reviews.length > 0) {
+      hasReviews = true
     }
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, hasComments },
+      { route: response.data, flyTo: response.data.stops[0].location, hasReviews },
       () => this.setState({ flyTo: null })
     )
   }
@@ -55,18 +55,34 @@ class QuestShow extends React.Component {
     this.setState({ reviewForm })
   }
 
-  submitReview = () => {
+  submitReview = async () => {
     console.log(this.state.reviewForm)
-    console.log(this.state.route.comments)
+    try {
+      await submitReview(this.state.reviewForm, this.state.route.id)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  nextStop = () => {
+  nextStop = async () => {
     const { route, currentStop, answer } = this.state
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
 
-      if (currentStop + 2 >= route.stops.length) this.setState({ lastStop: true }) 
+      if (currentStop + 2 >= route.stops.length) {
+        if (isAuthenticated) {
+          try {
+            await updateQuest({ completedTime: this.state.time }, route.id)
+          } catch (err) {
+            console.log(err)
+          }
+        } 
+        if (!isAuthenticated) {
+          console.log('TODO: non authenticated time not added')
+        } 
+        this.setState({ lastStop: true })
+      }
     } 
   }
 
@@ -99,7 +115,7 @@ class QuestShow extends React.Component {
       currentStop,
       answer,
       lastStop,
-      hasComments,
+      hasReviews,
       hasBegun,
       addReview,
       flyTo,
@@ -111,9 +127,10 @@ class QuestShow extends React.Component {
     // Only show marker for current stop if playing a certain theme
     if (route.theme === 'Adventure' || route.them === 'Speed') {
       route.stops = [route.stops[currentStop]]
-    } else {
-      route.stops[currentStop].altColor = true
-    }
+    } 
+    // else {
+    //   route.stops[currentStop].altColor = true
+    // }
       
     return (
       <>
@@ -198,13 +215,13 @@ class QuestShow extends React.Component {
             </div>
             
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
-              { hasComments
-                ? route.comments.map((comment, i) => (
+              { hasReviews
+                ? route.reviews.map((review, i) => (
                 <div key={i} className='comment-style'>
-                  <span><Link to={`/users/${comment.owner.id}`}>{comment.owner.username}</Link>: {comment.text}</span>
-                  <span>{comment.rating}</span><hr />
-                  </div>))
-                : <div>No comments yet.<br />Complete the quest to leave one of your own</div>
+                  <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
+                  <span>{review.rating}</span><hr />
+                  </div>))        
+                : <div>No reviews yet.<br />Complete the quest to leave one of your own</div>
               }    
             </div>
           </div>

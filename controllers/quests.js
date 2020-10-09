@@ -37,7 +37,7 @@ async function stopCreate(req, res, next){
 
 async function questShow(req, res, next) {
   try {
-    const quest = await Quest.findById(req.params.id).populate('owner').populate('comments.owner')
+    const quest = await Quest.findById(req.params.id).populate('owner').populate('reviews.owner')
     if (!quest) throw new Error(notFound)
     res.status(200).json(quest)
   } catch (err) {
@@ -118,11 +118,11 @@ async function stopDelete(req, res, next) {
   }
 }
 
-async function commentCreate(req, res, next) {
+async function reviewCreate(req, res, next) {
   try {
     const quest = await Quest.findById(req.params.id)
     if (!quest) throw new Error(notFound)
-    quest.comments.push({ ...req.body, owner: req.currentUser._id })
+    quest.reviews.push({ ...req.body, owner: req.currentUser._id })
     await quest.save()
     res.status(201).json(quest)
   } catch (err) {
@@ -140,5 +140,5 @@ module.exports = {
   stopShow,
   stopUpdate,
   stopDelete,
-  commentCreate
+  reviewCreate
 }
