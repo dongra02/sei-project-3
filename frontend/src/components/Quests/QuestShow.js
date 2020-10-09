@@ -17,8 +17,7 @@ class QuestShow extends React.Component {
     start: '', 
     time: 0,
     markers: [],
-    hasComments: false, 
-    hasHint: false
+    hasComments: false
   }
 
   componentDidMount = async () => {
@@ -35,7 +34,6 @@ class QuestShow extends React.Component {
       { route: response.data, flyTo: response.data.stops[0].location, start: response.data, hasComments },
       () => this.setState({ flyTo: null })
     )
-
   }
 
   handleClick = event => {
