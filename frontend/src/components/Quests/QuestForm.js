@@ -82,9 +82,9 @@ class QuestForm extends React.Component {
           <div className="error-message create">
             {errorMessage}
           </div>
-          <div className="btn-submit-quest">
-            <button onClick={this.validateForm}>Save Quest</button>
-          </div>
+        </div>
+        <div className="btn-submit-quest">
+          <button onClick={this.validateForm}>Save Quest</button>
         </div>
       </>
     )
