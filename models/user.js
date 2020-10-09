@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, maxlength: 50, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  imageUrl: { type: String, default: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.ytxJ7Kdh914kuyHWdkyz2QHaFj%26pid%3DApi&f=1' }
+  imageUrl: { type: String, default: 'https://res.cloudinary.com/dmhj1vjdf/image/upload/v1602242782/found/ukrz5az3teboohl8ddyj.jpg' }
 })
 
 userSchema

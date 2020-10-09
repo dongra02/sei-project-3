@@ -18,12 +18,15 @@ class ProfileIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await getAllProfiles()
-    this.setState({ allProfiles: response.data, displayProfiles: response.data })
+    const sortedProfiles = [...response.data]
+    sortedProfiles.sort((a, b) => a.username.localeCompare(b.username))
+    this.setState({ allProfiles: sortedProfiles, displayProfiles: sortedProfiles })
   }
 
   handleChange = event => {
     const filterSearch = event.target.value
-    const filteredProfile = this.state.allProfiles.filter(profile => {
+    const filteredProfile = this.state.allProfiles
+    .filter(profile => {
       const regEx = new RegExp(filterSearch, 'i')
       return regEx.test(profile.username)
     })
