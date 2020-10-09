@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleQuest, updateQuest } from '../../lib/api'
+import { getSingleQuest, updateQuest, submitReview } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import Timer from './Timer'
@@ -55,8 +55,13 @@ class QuestShow extends React.Component {
     this.setState({ reviewForm })
   }
 
-  submitReview = () => {
+  submitReview = async () => {
     console.log(this.state.reviewForm)
+    try {
+      await submitReview(this.state.reviewForm, this.state.route.id)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   nextStop = async () => {
