@@ -27,6 +27,10 @@ class QuestIndex extends React.Component {
 
   componentDidMount = async () => {
     const response = await getAllQuests()
+    response.data.sort((a,b) => {
+      if (a.avgRating === 'Not yet rated') return 1
+      return b.avgRating - a.avgRating
+    })
     this.setState({ allQuests: response.data, results: response.data })
   }
 
