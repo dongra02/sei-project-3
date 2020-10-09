@@ -8,7 +8,7 @@ import Map from '../map/Map'
 
 class QuestShow extends React.Component {
   state = {
-    screen: 'clue',
+    screen: 'quest',
     route: null,
     currentStop: 0,
     answer: '',
@@ -120,23 +120,22 @@ class QuestShow extends React.Component {
     if (!route) return null //TODO display loading or failed to get
     const stop = route.stops[currentStop]
     // Only show marker for current stop if playing a certain theme
-    if (route.theme === 'Adventure' || route.them === 'Speed') {
+    if (route.theme === 'Adventure' || route.theme === 'Speed') {
       route.stops = [route.stops[currentStop]]
-    } 
-    // else {
-    //   route.stops[currentStop].altColor = true
-    // }
+    } else if (!lastStop) {
+      route.stops[currentStop].altColor = true
+    }
       
     return (
       <>
         <div className="show-quests">
           <div className="show-tabs">
-            {['clue', 'map', 'comments'].map((tab, i) => (
+            {['quest', 'map', 'comments'].map((tab, i) => (
               <button key={i} value={tab} onClick={this.handleClick} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
             ))}
           </div>
           <div className="quest-view">
-            <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
+            <div className="clues" style={{ display: screen === 'quest' ? 'block' : 'none' }}>
               { route && !hasBegun && 
                 <div className="start-details">
                   <div className="detail-heading">

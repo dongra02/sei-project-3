@@ -959,6 +959,17 @@ label {
 .profile-index {
   top: 120px;
 }
+
+.filters {
+  flex-direction: column;
+
+  .filter-option {
+    width: 100%;
+    max-width: 500px;
+    margin: 5px auto;
+  }
+}
+
 }
 
 @keyframes toast {
