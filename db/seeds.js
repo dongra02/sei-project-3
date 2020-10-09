@@ -93,6 +93,7 @@ mongoose.connect(
 
       const questsWithUsersComments = randQuests.map(quest => {
         quest.owner = createdUsers[(Math.floor(Math.random() * createdUsers.length))]
+        quest.name = `${faker.lorem.word()} quest by ${quest.owner.username}`
         return quest
       })
 

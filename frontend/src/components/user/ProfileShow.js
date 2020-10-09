@@ -1,7 +1,7 @@
 import React from 'react'
-import { getSingleProfile } from '../../lib/api'
 import { Link } from 'react-router-dom'
 import BgMap from '../map/BgMap'
+import { getSingleProfile, deleteQuest } from '../../lib/api'
 
 class ProfileShow extends React.Component {
   state = {
@@ -21,8 +21,11 @@ class ProfileShow extends React.Component {
     this.setState({ profile: response.data, isUser })
   }
 
-  deleteQuest = () => {
-    console.log('TODO delete quest')
+  deleteQuest = async (questId) => {
+    await deleteQuest(questId)
+    const profile = await getSingleProfile(this.props.userId)
+    this.setState({ profile: profile.data })
+    console.log('TODO CONFIRM delete quest')
   }
 
   render() {

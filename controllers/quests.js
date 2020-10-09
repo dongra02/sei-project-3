@@ -49,7 +49,18 @@ async function questUpdate(req, res, next) {
   try {
     const questToEdit = await Quest.findById(req.params.id)
     if (!questToEdit) throw new Error(notFound)
-    Object.assign(questToEdit, req.body)
+    const updates = { ...req.body }
+    let estTime = questToEdit.estTime
+    const completedTimes = questToEdit.completedTimes
+    if (Object.keys(updates).includes('completedTime')) {
+      completedTimes.push(updates.completedTime)
+      estTime = (completedTimes.reduce((acc, curr) => {
+        return acc + curr
+      }, 0) / Math.max(1, completedTimes.length))
+      updates.completedTimes = completedTimes
+      updates.estTime = estTime
+    }
+    Object.assign(questToEdit, updates)
     await questToEdit.save()
     res.status(202).json(questToEdit)
   } catch (err) {
