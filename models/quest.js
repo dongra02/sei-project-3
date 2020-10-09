@@ -12,7 +12,7 @@ const stopSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 })
 
-const commentSchema = mongoose.Schema({
+const reviewSchema = mongoose.Schema({
   text: { type: String, required: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
   owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
@@ -32,7 +32,7 @@ const questSchema = new mongoose.Schema({
   estTime: { type: Number, required: true },
   stops: [stopSchema],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  comments: [commentSchema],
+  reviews: [reviewSchema],
   completedTimes: [{ type: Number }]
 }, {
   timestamps: true
@@ -41,10 +41,10 @@ const questSchema = new mongoose.Schema({
 questSchema
   .virtual('avgRating')
   .get(function() {
-    if (!this.comments.length) return 'Not yet rated'
-    return Math.round(this.comments.reduce((acc, curr) => {
+    if (!this.reviews.length) return 'Not yet rated'
+    return Math.round(this.reviews.reduce((acc, curr) => {
       return acc + curr.rating
-    }, 0) / this.comments.length)
+    }, 0) / this.reviews.length)
   })
 
 questSchema.set('toJSON', { virtuals: true })

@@ -20,7 +20,7 @@ mongoose.connect(
       const randQuests = []
       for (let quest = 0; quest < 5; quest++) {
         const stops = []
-        const comments = []
+        const reviews = []
         const description = faker.lorem.sentence()
         const name = `Quest ${quest + 1}`
         const theme = ['Food & Drink', 'Sightseeing', 'Adventure', 'Speed'][Math.floor(Math.random() * 4)]
@@ -55,7 +55,7 @@ mongoose.connect(
           theme,
           estTime,
           location,
-          comments
+          reviews
         })
       }
       randQuests.push( ...questData )
@@ -84,21 +84,21 @@ mongoose.connect(
         const rating = Math.ceil(Math.random() * 5)
         const text = faker.lorem.sentence()
         const owner = createdUsers[Math.floor(Math.random() * createdUsers.length)]
-        quest.comments.push({
+        quest.reviews.push({
           rating,
           text,
           owner
         })
       }
 
-      const questsWithUsersComments = randQuests.map(quest => {
+      const questsWithUsersReviews = randQuests.map(quest => {
         quest.owner = createdUsers[(Math.floor(Math.random() * createdUsers.length))]
         quest.name = `${faker.lorem.word()} quest by ${quest.owner.username}`
         return quest
       })
 
-      await Quest.create(questsWithUsersComments)
-      console.log(`${questsWithUsersComments.length} quests added with comments!`)
+      await Quest.create(questsWithUsersReviews)
+      console.log(`${questsWithUsersReviews.length} quests added with reviews!`)
 
     } catch (err) {
       console.log(err)
