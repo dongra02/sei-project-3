@@ -21,7 +21,8 @@ class QuestShow extends React.Component {
     reviewForm: {
       text: '',
       rating: 5
-    }
+    },
+    guessProximity: -1
   }
 
   componentDidMount = async () => {
@@ -61,16 +62,22 @@ class QuestShow extends React.Component {
   }
 
   nextStop = async () => {
-    const { route, currentStop, answer } = this.state
+    const { route, currentStop, answer, guessProximity } = this.state
+
+    // Get answer type
+    const answerType = route.stops[currentStop].answerType
+    const correctAnswer = route.stops[currentStop].answer
 
     // Correct answer
-    const correctAnswer = answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()
+    const isCorrect =
+      answer.toLowerCase() === correctAnswer.toLowerCase() ||
+      answerType === 'Proximity' && (guessProximity >= 0 && guessProximity <= correctAnswer)
     const answerNeeded = route.theme === 'Adventure' || route.theme === 'Speed'
 
-    if (correctAnswer || !answerNeeded) {
+    if (isCorrect || !answerNeeded) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
       // Last stop reached
-      if (currentStop + 2 >= route.stops.length) {
+      if (currentStop + 1 >= route.stops.length) {
         // Save time
         try { //TODO properly implement this on backend - allow anonymous times?
           await updateQuest({ completedTime: this.state.time }, route.id)
@@ -96,9 +103,9 @@ class QuestShow extends React.Component {
     const nextLocation = route.stops[currentStop + 1].location
     const latDiff = Math.abs(guess.latitude - nextLocation.latitude) * degreeLengthInMeters
     const lngDiff = Math.abs(guess.longitude - nextLocation.longitude) * degreeLengthInMeters
-    const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
-    console.log(length)
-    this.setState({ guess: [{ location: guess }] })
+    const guessProximity = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
+    console.log(guessProximity)
+    this.setState({ guess: [{ location: guess }], guessProximity })
   }
   
   updateTime = () => {
@@ -128,10 +135,11 @@ class QuestShow extends React.Component {
     // Only show marker for current stop if playing a certain theme
     const showAll = route.theme === 'Sightseeing' || route.theme === 'Food & Drink'
       ? true : false
+    const mutatedRoute = { ...route }
     if (!showAll) {
-      route.stops = route.stops //[route.stops[currentStop]]
+      mutatedRoute.stops = [mutatedRoute.stops[currentStop]]
     } else if (!lastStop) {
-      route.stops = route.stops.map((stop, i) => {
+      mutatedRoute.stops = mutatedRoute.stops.map((stop, i) => {
         stop.altColor = i === currentStop ? true : false
         return stop
       })
@@ -215,7 +223,7 @@ class QuestShow extends React.Component {
             </div>
             {/* MAP */}
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={flyTo} route={route} getLocation={this.getLocationGuess} results={guess} />
+              <Map flyTo={flyTo} route={mutatedRoute} getLocation={this.getLocationGuess} results={guess} />
             </div>
             
             <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
