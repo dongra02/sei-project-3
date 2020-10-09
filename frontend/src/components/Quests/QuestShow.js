@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleQuest } from '../../lib/api'
+import { getSingleQuest, updateQuest } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import Timer from './Timer'
@@ -35,7 +35,6 @@ class QuestShow extends React.Component {
       { route: response.data, flyTo: response.data.stops[0].location, hasComments },
       () => this.setState({ flyTo: null })
     )
-
   }
 
   handleClick = event => {
@@ -60,19 +59,32 @@ class QuestShow extends React.Component {
     console.log(this.state.reviewForm)
   }
 
-  nextStop = () => {
+  nextStop = async () => {
     const { route, currentStop, answer } = this.state
 
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
 
-      if (currentStop + 2 >= route.stops.length) this.setState({ lastStop: true }) 
+      if (currentStop + 2 >= route.stops.length) {
+        if (isAuthenticated) {
+          try {
+            await updateQuest({ completedTime: this.state.time }, route.id)
+          } catch (err) {
+            console.log(err)
+          }
+        } 
+        if (!isAuthenticated) {
+          console.log('TODO: non authenticated time not added')
+        } 
+        this.setState({ lastStop: true })
+      }
     } 
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
   getLocationGuess = guess => {
     const { currentStop, route } = this.state
+    if (!route.stops[currentStop + 1]) return
     const degreeLengthInMeters = 111000
     const nextLocation = route.stops[currentStop + 1].location
     const latDiff = Math.abs(guess.latitude - nextLocation.latitude) * degreeLengthInMeters
@@ -110,9 +122,10 @@ class QuestShow extends React.Component {
     // Only show marker for current stop if playing a certain theme
     if (route.theme === 'Adventure' || route.them === 'Speed') {
       route.stops = [route.stops[currentStop]]
-    } else {
-      route.stops[currentStop].altColor = true
-    }
+    } 
+    // else {
+    //   route.stops[currentStop].altColor = true
+    // }
       
     return (
       <>
@@ -160,7 +173,7 @@ class QuestShow extends React.Component {
                   <div className="btn-next">
                     <button onClick={this.nextStop}>NEXT</button>
                   </div>
-                </div>
+                </div>   
               }
               { lastStop && !addReview &&
                 <div className="endgame">     
