@@ -380,10 +380,16 @@ label {
   }
 }
 
-.comments {
+.reviews {
   text-align: left;
   padding-top: 50px;
   overflow-y: scroll;
+
+  h4 {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 2em;
+  }
 }
 
 

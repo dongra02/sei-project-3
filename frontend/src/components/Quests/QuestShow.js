@@ -37,10 +37,8 @@ class QuestShow extends React.Component {
     )
   }
 
-  handleClick = event => {
-    this.setState({
-      screen: event.target.value
-    })
+  changeTab = screen => {
+    this.setState({ screen })
   }
 
   changeAnswer = event => {
@@ -58,7 +56,9 @@ class QuestShow extends React.Component {
   submitReview = async () => {
     console.log(this.state.reviewForm)
     try {
-      await submitReview(this.state.reviewForm, this.state.route.id)
+      const response = await submitReview(this.state.reviewForm, this.state.route.id)
+      this.setState({ route: response.data })
+      this.changeTab('reviews')
     } catch (err) {
       console.log(err)
     }
@@ -135,8 +135,8 @@ class QuestShow extends React.Component {
       <>
         <div className="show-quests">
           <div className="show-tabs">
-            {['quest', 'map', 'comments'].map((tab, i) => (
-              <button key={i} value={tab} onClick={this.handleClick} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
+            {['quest', 'map', 'reviews'].map((tab, i) => (
+              <button key={i} value={tab} onClick={() => this.changeTab(tab)} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
             ))}
           </div>
           <div className="quest-view">
@@ -152,7 +152,7 @@ class QuestShow extends React.Component {
                   <div className="detail-time">Est. Time: {route.estTime} mins</div>
                   <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
                   <div className="detail-description">{route.description}</div>
-                  <button className="newquest-button" onClick={() => this.setState({ hasBegun: true })}>START</button>  
+                  <button className="btn-play red" onClick={() => this.setState({ hasBegun: true })}>START</button>  
                   { route.timer === true &&
                     <div className="timer">Timer {route.timer}</div>
                   }
@@ -213,10 +213,10 @@ class QuestShow extends React.Component {
               <Map flyTo={flyTo} route={route} getLocation={this.getLocationGuess} results={guess} />
             </div>
             
-            <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
+            <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
               { hasReviews
                 ? route.reviews.map((review, i) => <div key={i}>{review.text}<hr /></div>)         
-                : <div>No reviews yet.<br />Complete the quest to leave one of your own</div>
+                : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
               }    
             </div>
           </div>
