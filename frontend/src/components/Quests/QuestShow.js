@@ -57,8 +57,8 @@ class QuestShow extends React.Component {
     console.log(this.state.reviewForm)
     try {
       const response = await submitReview(this.state.reviewForm, this.state.route.id)
-      this.setState({ route: response.data })
-      this.changeTab('reviews')
+      this.setState({ route: response.data },
+        this.changeTab('reviews'))
     } catch (err) {
       console.log(err)
     }
@@ -67,23 +67,26 @@ class QuestShow extends React.Component {
   nextStop = async () => {
     const { route, currentStop, answer } = this.state
 
+    // Correct answer
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
-
+      // Last stop reached
       if (currentStop + 2 >= route.stops.length) {
-        if (isAuthenticated) {
-          try {
-            await updateQuest({ completedTime: this.state.time }, route.id)
-          } catch (err) {
-            console.log(err)
-          }
-        } 
-        if (!isAuthenticated) {
-          console.log('TODO: non authenticated time not added')
-        } 
+        // Save time
+        try { //TODO properly implement this on backend - allow anonymous times?
+          await updateQuest({ completedTime: this.state.time }, route.id)
+        } catch (err) {
+          console.log('not authenticated to save time')
+        }
         this.setState({ lastStop: true })
       }
-    } 
+    // Incorrect asnwer 
+    } else {
+      // TODO redo this properly - Very bad solution currently!
+      this.setState({ answer: 'Incorrect! Try again' },
+        () => setTimeout(() => this.setState({ answer: '' }),1500)
+      )
+    }
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
@@ -149,21 +152,18 @@ class QuestShow extends React.Component {
                   </div>
                   <div className="detail-theme">{route.theme}</div>
                   <div className="detail-stops">{route.stops.length} stops</div>
-                  <div className="detail-time">Est. Time: {route.estTime} mins</div>
+                  <div className="detail-time">Est. Time: {Math.floor(route.estTime)} mins</div>
                   <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
                   <div className="detail-description">{route.description}</div>
                   <button className="btn-play red" onClick={() => this.setState({ hasBegun: true })}>START</button>  
-                  { route.timer === true &&
-                    <div className="timer">Timer {route.timer}</div>
-                  }
                 </div>
               }
               { hasBegun && !lastStop &&
                 <div className="next-clue">
-                  <Timer updateTime={this.updateTime} />
-                  <hr />
+                  <div style={{ display: route.timer ? 'block' : 'none' }}>
+                    <Timer updateTime={this.updateTime} /><hr />
+                  </div>
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h3>Clue for next stop:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input
