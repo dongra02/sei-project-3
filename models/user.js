@@ -50,4 +50,5 @@ userSchema.methods.validatePassword = function(password) {
 }
 
 userSchema.plugin(require('mongoose-unique-validator'))
+
 module.exports = mongoose.model('User', userSchema)
