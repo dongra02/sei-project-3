@@ -112,6 +112,7 @@ class Map extends React.Component {
       >
         {route && route.stops.map((stop, i) => {
           // TODO fix this bug -> doesnt display the start location
+          if (!stop) return null
           const marker =
             <Marker key={i} latitude={stop.location.latitude} longitude={stop.location.longitude}>
               <StopMarker number={i} altColor={stop.altColor} />
