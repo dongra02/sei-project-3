@@ -154,8 +154,8 @@ class QuestIndex extends React.Component {
                       <br />
                       <div className="detail-start">{selected.stops[0].name}</div>
                       <br />
-                      <Link className="detail-button" to={`/quests/${selected._id}`}>Begin</Link>
                       <div className="detail-button" onClick={this.exitDetailView}>Back</div>
+                      <Link className="detail-button" to={`/quests/${selected._id}`}>Begin</Link>
                     </div>
                     :
                     results.map((quest, i) => (

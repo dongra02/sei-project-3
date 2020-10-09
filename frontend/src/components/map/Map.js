@@ -22,6 +22,9 @@ class Map extends React.Component {
     this.setState({ mapRef: this.mapRef })
     // Get current location and go to position on map
     // this.goToCurrentPosition()
+    if (this.props.flyTo) {
+      this.flyTo(this.props.flyTo)
+    }
   }
 
   goToCurrentPosition = () => {
