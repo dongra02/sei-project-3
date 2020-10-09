@@ -8,7 +8,7 @@ import Map from '../map/Map'
 
 class QuestShow extends React.Component {
   state = {
-    screen: 'clue',
+    screen: 'quest',
     route: null,
     currentStop: 0,
     answer: '',
@@ -37,10 +37,8 @@ class QuestShow extends React.Component {
     )
   }
 
-  handleClick = event => {
-    this.setState({
-      screen: event.target.value
-    })
+  changeTab = screen => {
+    this.setState({ screen })
   }
 
   changeAnswer = event => {
@@ -58,7 +56,9 @@ class QuestShow extends React.Component {
   submitReview = async () => {
     console.log(this.state.reviewForm)
     try {
-      await submitReview(this.state.reviewForm, this.state.route.id)
+      const response = await submitReview(this.state.reviewForm, this.state.route.id)
+      this.setState({ route: response.data },
+        this.changeTab('reviews'))
     } catch (err) {
       console.log(err)
     }
@@ -67,23 +67,26 @@ class QuestShow extends React.Component {
   nextStop = async () => {
     const { route, currentStop, answer } = this.state
 
+    // Correct answer
     if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
-
+      // Last stop reached
       if (currentStop + 2 >= route.stops.length) {
-        if (isAuthenticated) {
-          try {
-            await updateQuest({ completedTime: this.state.time }, route.id)
-          } catch (err) {
-            console.log(err)
-          }
-        } 
-        if (!isAuthenticated) {
-          console.log('TODO: non authenticated time not added')
-        } 
+        // Save time
+        try { //TODO properly implement this on backend - allow anonymous times?
+          await updateQuest({ completedTime: this.state.time }, route.id)
+        } catch (err) {
+          console.log('not authenticated to save time')
+        }
         this.setState({ lastStop: true })
       }
-    } 
+    // Incorrect asnwer 
+    } else {
+      // TODO redo this properly - Very bad solution currently!
+      this.setState({ answer: 'Incorrect! Try again' },
+        () => setTimeout(() => this.setState({ answer: '' }),1500)
+      )
+    }
   }
 
   // TODO this value can be checked against correct latlng for next stop to trigger a correct guess
@@ -125,23 +128,22 @@ class QuestShow extends React.Component {
     if (!route) return null //TODO display loading or failed to get
     const stop = route.stops[currentStop]
     // Only show marker for current stop if playing a certain theme
-    if (route.theme === 'Adventure' || route.them === 'Speed') {
+    if (route.theme === 'Adventure' || route.theme === 'Speed') {
       route.stops = [route.stops[currentStop]]
-    } 
-    // else {
-    //   route.stops[currentStop].altColor = true
-    // }
+    } else if (!lastStop) {
+      route.stops[currentStop].altColor = true
+    }
       
     return (
       <>
         <div className="show-quests">
           <div className="show-tabs">
-            {['clue', 'map', 'comments'].map((tab, i) => (
-              <button key={i} value={tab} onClick={this.handleClick} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
+            {['quest', 'map', 'reviews'].map((tab, i) => (
+              <button key={i} value={tab} onClick={() => this.changeTab(tab)} className={`tab ${screen === tab ? '' : 'inactive'}`} >{tab.toUpperCase()}</button>
             ))}
           </div>
           <div className="quest-view">
-            <div className="clues" style={{ display: screen === 'clue' ? 'block' : 'none' }}>
+            <div className="clues" style={{ display: screen === 'quest' ? 'block' : 'none' }}>
               { route && !hasBegun && 
                 <div className="start-details">
                   <div className="detail-heading">
@@ -150,21 +152,18 @@ class QuestShow extends React.Component {
                   </div>
                   <div className="detail-theme">{route.theme}</div>
                   <div className="detail-stops">{route.stops.length} stops</div>
-                  <div className="detail-time">Est. Time: {route.estTime} mins</div>
+                  <div className="detail-time">Est. Time: {Math.floor(route.estTime)} mins</div>
                   <div className="detail-firststop">Start at: {stop ? stop.name : ''}</div>
                   <div className="detail-description">{route.description}</div>
-                  <button className="newquest-button" onClick={() => this.setState({ hasBegun: true })}>START</button>  
-                  { route.timer === true &&
-                    <div className="timer">Timer {route.timer}</div>
-                  }
+                  <button className="btn-play red" onClick={() => this.setState({ hasBegun: true })}>START</button>  
                 </div>
               }
               { hasBegun && !lastStop &&
                 <div className="next-clue">
-                  <Timer updateTime={this.updateTime} />
-                  <hr />
+                  <div style={{ display: route.timer ? 'block' : 'none' }}>
+                    <Timer updateTime={this.updateTime} /><hr />
+                  </div>
                   <h2>{stop ? stop.name : ''}</h2><br />
-                  <h3>Clue for next stop:</h3>
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
                     <input
@@ -214,14 +213,14 @@ class QuestShow extends React.Component {
               <Map flyTo={flyTo} route={route} getLocation={this.getLocationGuess} results={guess} />
             </div>
             
-            <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
+            <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
               { hasReviews
                 ? route.reviews.map((review, i) => (
                 <div key={i} className='comment-style'>
                   <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
                   <span>{review.rating}</span><hr />
-                  </div>))        
-                : <div>No reviews yet.<br />Complete the quest to leave one of your own</div>
+                  </div>))                
+                : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
               }    
             </div>
           </div>

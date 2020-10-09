@@ -58,10 +58,12 @@ label {
     height: calc(100vh - 56px);
   }
 
-  .header-title {
-    position: relative;
-    left: -30px;
-  }
+}
+
+.header-title {
+  position: relative;
+  left: -20px;
+  top: -20px;
 }
 
 // Navbar
@@ -309,15 +311,10 @@ label {
   font-size: 2em;
   text-align: center;
   background-color: $map-blue;
-  border-radius: 8px;
+  margin-top: 50px;
+  border-radius: 5px;
   padding: 6px;
   color: #222;
-  }
-  h3 {
-    font-size: 1.1em;
-  }
-  h6 {
-    padding-top: 30px;
   }
 }
 
@@ -378,10 +375,16 @@ label {
   }
 }
 
-.comments {
+.reviews {
   text-align: left;
   padding-top: 50px;
   overflow-y: scroll;
+
+  h4 {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 2em;
+  }
 }
 
 .comment-style {
@@ -963,6 +966,17 @@ label {
 .profile-index {
   top: 120px;
 }
+
+.filters {
+  flex-direction: column;
+
+  .filter-option {
+    width: 100%;
+    max-width: 500px;
+    margin: 5px auto;
+  }
+}
+
 }
 
 @keyframes toast {
