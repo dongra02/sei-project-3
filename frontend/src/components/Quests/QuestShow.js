@@ -57,6 +57,7 @@ class QuestShow extends React.Component {
 
   submitReview = () => {
     console.log(this.state.reviewForm)
+    console.log(this.state.route.comments)
   }
 
   nextStop = () => {
@@ -128,7 +129,7 @@ class QuestShow extends React.Component {
                 <div className="start-details">
                   <div className="detail-heading">
                     <h2>{route.name}</h2>
-                    <div className="detail-user">By {route.owner.username}</div>
+                    <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
                   </div>
                   <div className="detail-theme">{route.theme}</div>
                   <div className="detail-stops">{route.stops.length} stops</div>
@@ -166,7 +167,7 @@ class QuestShow extends React.Component {
                 <div className="endgame">     
                   <div className="detail-heading">
                     <h2>{route.name}</h2>
-                    <div className="detail-user">By {route.owner.username}</div>
+                    <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
                   </div>
                   <div><br />Well done, you have completed your quest!<br /></div>
                   <div>Your time was {this.state.time} seconds</div>
@@ -198,7 +199,11 @@ class QuestShow extends React.Component {
             
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
               { hasComments
-                ? route.comments.map((comment, i) => <div key={i}>{comment.text}<hr /></div>)         
+                ? route.comments.map((comment, i) => (
+                <div key={i} className='comment-style'>
+                  <span><Link to={`/users/${comment.owner.id}`}>{comment.owner.username}</Link>: {comment.text}</span>
+                  <span>{comment.rating}</span><hr />
+                  </div>))
                 : <div>No comments yet.<br />Complete the quest to leave one of your own</div>
               }    
             </div>
