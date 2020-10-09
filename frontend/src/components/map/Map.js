@@ -130,7 +130,8 @@ class Map extends React.Component {
             <Marker key={i} latitude={latitude} longitude={longitude}>
               {place.selected
                 ? <StopMarker />
-                : < div className="marker" onClick={() => clickMarker(place)} />}
+                // TODO fix this crappy ternary
+                : < div className="marker" onClick={clickMarker ? () => clickMarker(place) : null} />}
             </Marker>
           return marker
         })}
