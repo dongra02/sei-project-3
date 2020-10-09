@@ -95,7 +95,7 @@ class Map extends React.Component {
   render() {
 
     const { zoom, viewport, clickedLocation, autoTransition } = this.state
-    const { results, route, stop, clickMarker } = this.props
+    const { results, clickMarker, route } = this.props
 
     return (
       <MapGL
@@ -110,11 +110,14 @@ class Map extends React.Component {
         getCursor={(() => 'arrow')}
         onWheel={this.scrollToZoom}
       >
-        {route && 
-          <Marker latitude={route.stops[stop].location.latitude} longitude={route.stops[stop].location.longitude}>
-            <StopMarker number={stop} />
-          </Marker>
-        }
+        {route && route.stops.map((stop, i) => {
+          // TODO fix this bug -> doesnt display the start location
+          const marker =
+            <Marker key={i} latitude={stop.location.latitude} longitude={stop.location.longitude}>
+              <StopMarker number={i} altColor={stop.altColor} />
+            </Marker>
+          return marker
+        })}
         {clickedLocation &&
           <Marker latitude={clickedLocation.latitude} longitude={clickedLocation.longitude}>
             <div className="marker" />

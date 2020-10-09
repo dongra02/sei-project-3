@@ -3,26 +3,16 @@ import React from 'react'
 class Timer extends React.Component {
 
   state = {
-    minutes: 0,
-    seconds: 0
+    time: 0,
+    seconds: '00',
+    minutes: '00'
   }
-
 
   componentDidMount() {
     this.myInterval = setInterval(() => {
-      const { seconds } = this.state
-      if (seconds >= 0) {
-        this.setState(({ seconds }) => ({
-          seconds: seconds + 1
-        }))
-      }
-      // if statement that checks if seconds reach 59
-      if (seconds === 59) {
-        this.setState(({ minutes }) => ({
-          minutes: minutes + 1,
-          seconds: 0
-        }))
-      }
+      this.setState({ time: this.state.time + 1 })
+      this.formatTime()
+      // Update parent component
       this.props.updateTime()
     }, 1000)
   }
@@ -31,13 +21,20 @@ class Timer extends React.Component {
     clearInterval(this.myInterval)
   }
 
+  formatTime = () => {
+    let { time } = this.state
+    let minutes = Math.floor(time / 60)
+    if (minutes < 10) minutes = '0' + minutes
+    time -= minutes * 60
+    let seconds = time
+    if (seconds < 10) seconds = '0' + seconds
+
+    this.setState({ seconds, minutes })
+  }
+
   render() {
     const { minutes, seconds } = this.state
-    return (
-      <div>
-        <div>Time Elapsed: { minutes }:{ seconds }</div>
-      </div>
-    )
+    return <div>Time Elapsed<br />{minutes} : {seconds}</div>
   }
 }
 

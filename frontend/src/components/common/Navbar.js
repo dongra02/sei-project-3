@@ -37,6 +37,7 @@ class Navbar extends React.Component {
     logout()
     const page = this.state.page === 'profile' ? 'found' : this.state.page
     this.setState({ page })
+    this.toastNotification('See you next time')
     this.props.history.push('/')
   }
 

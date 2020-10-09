@@ -10,8 +10,8 @@ class QuestIndex extends React.Component {
 
   state = {
     formData: {
-      theme: '',
-      time: 0
+      theme: 'All',
+      sortBy: 'rating'
     },
     allQuests: null,
     results: null,
@@ -34,7 +34,22 @@ class QuestIndex extends React.Component {
       ...this.state.formData,
       [event.target.id]: event.target.value
     }
-    this.setState({ formData })
+    this.setState({ formData }, this.filterResults)
+  }
+
+  filterResults = () => {
+    if (!this.state.results) return
+
+    const { theme, sortBy } = this.state.formData
+    const results = this.state.results
+      .filter(result => result.theme === theme || theme === 'All')
+      .sort((a, b) => {
+        if (sortBy === 'time') return b.estTime - a.estTime
+        if (a.avgRating === 'Not yet rated') return 1
+        return b.avgRating - a.avgRating
+      })
+    
+    this.setState({ results })
   }
 
   // Used to filter search results by visible map area
@@ -61,14 +76,19 @@ class QuestIndex extends React.Component {
   }
 
   flyToQuest = quest => {
-    const results = this.state.results.map(result => (
-      { ...result, selected: result._id === quest._id ? true : false }
-    ))
+    this.selectQuest(quest)
     const { latitude, longitude } = quest.stops[0].location
     const flyTo = { latitude, longitude }
     // Set state and reset flyTo so that same location can be triggered consecutively if requested
     // ie. Click to go to location -> move map -> click location again
-    this.setState({ results, flyTo }, () => this.setState({ flyTo: null }))
+    this.setState({ flyTo }, () => this.setState({ flyTo: null }))
+  }
+
+  selectQuest = (quest) => {
+    const results = this.state.results.map(result => (
+      { ...result, selected: result._id === quest._id ? true : false }
+    ))
+    this.setState({ results })
   }
 
   startQuest = questId => {
@@ -108,7 +128,7 @@ class QuestIndex extends React.Component {
                 results={results}
                 startQuest={this.startQuest}
                 flyTo={flyTo}
-                clickMarker={this.flyToQuest}
+                clickMarker={this.selectQuest}
               />
             </div>
             <div className="results-list">
@@ -122,6 +142,7 @@ class QuestIndex extends React.Component {
                       <br />
                       <div className="detail-theme">{selected.theme}</div>
                       <div className="detail-length">{selected.stops.length} stops</div>
+                      <div className="detail-time">Est. Time: {selected.estTime} mins</div>
                       <br />
                       <div className="detail-description">{selected.description}</div>
                       <br />

@@ -209,7 +209,7 @@ label {
 .quest-details {
   text-align: center;
   margin: 5px -5px;
-  padding: 20px 10px;
+  padding: 20px;
   height: 95%;
   background-color: $map-sand;
   box-shadow: 0px 0px 2px $map-grey;
@@ -262,39 +262,46 @@ label {
 }
 
 
-.start-details {
+.start-details,
+.endgame {
   background-color: $map-sand;
   padding: 40px 20px;
+  text-align: center;
+
+  .detail-heading {
+    background-color: $map-blue;
+    border-radius: 5px;
+    padding: 10px;
+  }
 
   h2 {
   font-family: 'Sansita Swashed', cursive;
-  text-align: center;
-  background-color: $map-blue;
-  border-radius: 8px;
-  padding: 10px;
+  margin: 10px;
   color: #222;
   }
 
-  .detail-theme {
-    padding: 20px 0 12px 0;
+  .detail-user {
+    padding: 10px;
   }
-  .detail-firststop {
-    padding: 12px 0;
-  }
-  .detail-stops {
-    padding: 12px 0;
-  }
+
+  .detail-stops,
   .detail-time {
-    padding: 12px 0;
+    padding: 5px 0;
   }
+
+  .detail-theme,
+  .detail-firststop,
+  .detail-description {
+    padding-top: 20px;
+  }
+
+  .detail-description {
+    min-height: 80px;
+  }
+  
 }
 
-.endgame {
-  padding-top: 30px;
-}
-
-.next-clue,
-.endgame {
+.next-clue {
   background-color: $map-sand;
 
   h2 {
@@ -319,18 +326,19 @@ label {
   justify-content: left;
   margin-top: 20px;
   margin-left: 5%;
-  width: 95%;
+  width: 90%;
 }
 
 .quest-view {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
-  border: 1px dashed $map-red;
+  margin: 0 auto 30px;
+  outline: 1px dashed $map-red;
   box-shadow: 2px 3px $map-red;
   width: 95%;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 180px);
   background-color: $map-sand;
+  overflow: hidden;
 
   .clues {
     text-align: center;
@@ -371,10 +379,9 @@ label {
 }
 
 .comments {
-  h2 {
-    font-weight: bold;
-    padding-top: 15px;
-  }
+  text-align: left;
+  padding-top: 50px;
+  overflow-y: scroll;
 }
 
 
@@ -464,7 +471,7 @@ label {
 .inactive {
   background-color: $map-white;
   border: 1px solid $map-red;
-  border-bottom: none;
+  border-bottom: 1px dashed $map-red;
   color: #444;
   z-index: 0;
 
@@ -604,6 +611,7 @@ label {
 .locator {
   width: 30px;
   height: 30px;
+  padding: 1px 2px;
   background-color: $map-red;
   clip-path: circle();
   position: absolute;
@@ -738,8 +746,14 @@ label {
 }
 
 .profile-search-field {
-  margin-left: 18%;
-  margin-bottom: 5px;
+  margin-left: 9%;
+  margin-right: 9%;
+  margin-bottom: 20px;
+  // margin: 50px auto 20px;
+  background-color: #eeea;
+  padding: 10px 25px;
+  outline: 1px dashed $map-red;
+  box-shadow: 2px 3px $map-red;
 }
 
 .profile {
@@ -808,6 +822,7 @@ label {
 
 .profile-list {
   margin-left: 18%;
+  padding: 20px;
   position: relative;
   width: 65%;
   padding: 5px;
@@ -852,7 +867,8 @@ label {
   height: 60px;
   position: absolute;
   width: 100%;
-  top: 0px;
+  top: 0;
+  left: 0;
   overflow-y: hidden;
   transition: all 3s;
   pointer-events: none;
@@ -875,7 +891,6 @@ label {
     color: $map-red;
     line-height: 50px;
     text-align: center;
-    font-weight: 700;
   }
 }
 
@@ -921,6 +936,27 @@ label {
       width: 100%;
     }
   }
+
+  .navbar-expand {
+    height: 100px;
+    padding-top: 50px;
+
+    .user {
+      top: 50px;
+    }
+  }
+
+  .popup-form {
+    top: 100px;
+    height: calc(100vh - 100px);
+  }
+
+.browse-quests,
+.show-quests,
+.create-quest,
+.profile-index {
+  top: 120px;
+}
 }
 
 @keyframes toast {
@@ -931,5 +967,55 @@ label {
   30%, 70% {
     top: -50px;
     height: 100px;
+  }
+}
+
+.btn-play {
+  padding: 5px 15px;
+  width: 170px;
+  background-color: $map-white;
+  border: 1px solid $map-blue;
+  box-shadow: 1px 1px $map-blue;
+  color: #444;
+  line-height: 1.5em;
+  margin: 5px auto;
+  cursor: pointer;
+
+  &.red {
+    border-color: $map-red;
+    box-shadow: 1px 1px $map-red;
+
+    &:hover {
+      color: $map-white;
+      background-color: $map-red;
+      :first-child { color: $map-white; }
+    }
+  }
+
+  :first-child {
+    color: #444;
+    text-decoration: none;
+  }
+
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 90vw;
+
+  textarea {
+    width: 100%;
+    height: 200px;
+  }
+
+  select {
+    width: 170px;
+    margin: auto;
+  }
+
+  div {
+    margin: 10px;
   }
 }

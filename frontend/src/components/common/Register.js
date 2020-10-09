@@ -44,9 +44,14 @@ class Register extends React.Component {
       const response = await loginUser({ email, password })
       console.log('login complete')
       setToken(response.data.token)
-      this.props.hidePopup()
+      // TODO set register message
+      this.props.hidePopup(null, 'Welcome to Found')
     } catch (err) {
-      console.log(formData)
+      const errors = err.response.data.errors
+      let errorMessage = ''
+      if (errors.username) errorMessage = 'That username is already in use'
+      else if (errors.email) errorMessage = 'That email already has an account'
+      this.setState({ errorMessage })
     }
   }
 

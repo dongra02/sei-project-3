@@ -1,9 +1,9 @@
 import React from 'react'
-import Slider from 'rc-slider'
+// import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import Geocoder from '../map/Geocoder'
 
-const Filter = ({ theme, handleChange, selectLocation }) => {
+const Filter = ({ theme, sortBy, handleChange, selectLocation }) => {
   return (
     <div className="filters">
       <div className="filter-option">
@@ -13,6 +13,7 @@ const Filter = ({ theme, handleChange, selectLocation }) => {
       <div className="filter-option">
         <label htmlFor="theme">Theme :</label>
         <select id="theme" value={theme} onChange={handleChange} className="form-control">
+          <option value="All">All</option>
           <option value="Adventure">Adventure</option>
           <option value="Sightseeing">Sightseeing</option>
           <option value="Food & Drink">Food & Drink</option>
@@ -20,6 +21,13 @@ const Filter = ({ theme, handleChange, selectLocation }) => {
         </select>
       </div>
       <div className="filter-option">
+        <label htmlFor="theme">Sort by :</label>
+        <select id="sortBy" value={sortBy} onChange={handleChange} className="form-control">
+          <option value="rating">Top Rated</option>
+          <option value="time">Est. Time</option>
+        </select>
+      </div>
+      {/* <div className="filter-option">
         <label htmlFor="time">Time :</label>
         <Slider
           className="slider"
@@ -27,7 +35,7 @@ const Filter = ({ theme, handleChange, selectLocation }) => {
           handleStyle={{ border: '2px solid #a63535' }}
         // onChange={event => console.log(event)}
         />
-      </div>
+      </div> */}
     </div>
   )
 }
