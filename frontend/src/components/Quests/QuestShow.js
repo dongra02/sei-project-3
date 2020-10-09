@@ -16,7 +16,6 @@ class QuestShow extends React.Component {
     lastStop: false,
     time: 0,
     guess: [],
-    hasReviews: false,
     hasBegun: false,
     addReview: false,
     reviewForm: {
@@ -27,12 +26,8 @@ class QuestShow extends React.Component {
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
-    let hasReviews
-    if (response.data.reviews.length > 0) {
-      hasReviews = true
-    }
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, hasReviews },
+      { route: response.data, flyTo: response.data.stops[0].location },
       () => this.setState({ flyTo: null })
     )
   }
@@ -68,7 +63,10 @@ class QuestShow extends React.Component {
     const { route, currentStop, answer } = this.state
 
     // Correct answer
-    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
+    const correctAnswer = answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()
+    const answerNeeded = route.theme === 'Adventure' || route.theme === 'Speed'
+
+    if (correctAnswer || !answerNeeded) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
       // Last stop reached
       if (currentStop + 2 >= route.stops.length) {
@@ -118,7 +116,6 @@ class QuestShow extends React.Component {
       currentStop,
       answer,
       lastStop,
-      hasReviews,
       hasBegun,
       addReview,
       flyTo,
@@ -128,10 +125,15 @@ class QuestShow extends React.Component {
     if (!route) return null //TODO display loading or failed to get
     const stop = route.stops[currentStop]
     // Only show marker for current stop if playing a certain theme
-    if (route.theme === 'Adventure' || route.theme === 'Speed') {
+    const showAll = route.theme === 'Sightseeing' || route.theme === 'Food & Drink'
+      ? true : false
+    if (!showAll) {
       route.stops = [route.stops[currentStop]]
     } else if (!lastStop) {
-      route.stops[currentStop].altColor = true
+      route.stops = route.stops.map((stop, i) => {
+        stop.altColor = i === currentStop ? true : false
+        return stop
+      })
     }
       
     return (
@@ -166,13 +168,15 @@ class QuestShow extends React.Component {
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
-                    <input
-                      type="text"
-                      name="answer"
-                      value={answer}
-                      placeholder="answer"
-                      onChange={this.changeAnswer}
-                    />
+                    {!showAll &&
+                        <input
+                          type="text"
+                          name="answer"
+                          value={answer}
+                          placeholder="answer"
+                          onChange={this.changeAnswer}
+                        />
+                    }
                   </div>
                   <div className="btn-next">
                     <button onClick={this.nextStop}>NEXT</button>
@@ -214,7 +218,7 @@ class QuestShow extends React.Component {
             </div>
             
             <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
-              { hasReviews
+              { route.reviews.length > 0
                 ? route.reviews.map((review, i) => <div key={i}>{review.text}<hr /></div>)         
                 : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
               }    
