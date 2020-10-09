@@ -80,7 +80,7 @@ class Map extends React.Component {
 
     let zoom = this.state.zoom
     zoom -= 0.005 * scrollSpeed
-    zoom = Math.max(Math.min(zoom, 20), 0)
+    zoom = Math.max(Math.min(zoom, 20), 1)
     this.setState({ zoom })
   }
 
