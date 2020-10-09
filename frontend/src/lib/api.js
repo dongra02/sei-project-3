@@ -27,6 +27,10 @@ export const updateQuest = (questFormData, questId) => {
   return axios.put(`${baseUrl}/quests/${questId}`, questFormData, withHeaders())
 }
 
+export const submitReview = (reviewFormData, questId) => {
+  return axios.post(`${baseUrl}/quests/${questId}/reviews`, reviewFormData, withHeaders())
+}
+
 export const deleteQuest = questId => {
   return axios.delete(`${baseUrl}/quests/${questId}`, withHeaders())
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleQuest, updateQuest } from '../../lib/api'
+import { getSingleQuest, updateQuest, submitReview } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import Timer from './Timer'
@@ -16,7 +16,7 @@ class QuestShow extends React.Component {
     lastStop: false,
     time: 0,
     guess: [],
-    hasComments: false,
+    hasReviews: false,
     hasBegun: false,
     addReview: false,
     reviewForm: {
@@ -27,12 +27,12 @@ class QuestShow extends React.Component {
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
-    let hasComments
-    if (response.data.comments.length > 0) {
-      hasComments = true
+    let hasReviews
+    if (response.data.reviews.length > 0) {
+      hasReviews = true
     }
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, hasComments },
+      { route: response.data, flyTo: response.data.stops[0].location, hasReviews },
       () => this.setState({ flyTo: null })
     )
   }
@@ -55,8 +55,13 @@ class QuestShow extends React.Component {
     this.setState({ reviewForm })
   }
 
-  submitReview = () => {
+  submitReview = async () => {
     console.log(this.state.reviewForm)
+    try {
+      await submitReview(this.state.reviewForm, this.state.route.id)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   nextStop = async () => {
@@ -110,7 +115,7 @@ class QuestShow extends React.Component {
       currentStop,
       answer,
       lastStop,
-      hasComments,
+      hasReviews,
       hasBegun,
       addReview,
       flyTo,
@@ -209,9 +214,9 @@ class QuestShow extends React.Component {
             </div>
             
             <div className="comments" style={{ display: screen === 'comments' ? 'block' : 'none' }}>
-              { hasComments
-                ? route.comments.map((comment, i) => <div key={i}>{comment.text}<hr /></div>)         
-                : <div>No comments yet.<br />Complete the quest to leave one of your own</div>
+              { hasReviews
+                ? route.reviews.map((review, i) => <div key={i}>{review.text}<hr /></div>)         
+                : <div>No reviews yet.<br />Complete the quest to leave one of your own</div>
               }    
             </div>
           </div>
