@@ -26,6 +26,7 @@ class QuestShow extends React.Component {
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
+    console.log(response)
     this.setState(
       { route: response.data, flyTo: response.data.stops[0].location },
       () => this.setState({ flyTo: null })
@@ -128,7 +129,7 @@ class QuestShow extends React.Component {
     const showAll = route.theme === 'Sightseeing' || route.theme === 'Food & Drink'
       ? true : false
     if (!showAll) {
-      route.stops = [route.stops[currentStop]]
+      route.stops = route.stops //[route.stops[currentStop]]
     } else if (!lastStop) {
       route.stops = route.stops.map((stop, i) => {
         stop.altColor = i === currentStop ? true : false
