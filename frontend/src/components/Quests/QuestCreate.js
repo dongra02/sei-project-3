@@ -100,7 +100,8 @@ class QuestCreate extends React.Component{
   handleQuestSubmit = async () => {
     try {
       const location = this.state.stops[0].location
-      const newQuestData = { ...this.state.questFormData, stops: [ ...this.state.stops ], location: location }
+      const newQuestData = { ...this.state.questFormData, stops: [...this.state.stops], location }
+      console.log(newQuestData)
       let response
       if (this.props.questToEdit) {
         response  = await updateQuest(newQuestData, this.props.questId)

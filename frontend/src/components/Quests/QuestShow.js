@@ -16,23 +16,20 @@ class QuestShow extends React.Component {
     lastStop: false,
     time: 0,
     guess: [],
-    hasReviews: false,
     hasBegun: false,
     addReview: false,
     reviewForm: {
       text: '',
       rating: 5
-    }
+    },
+    guessProximity: -1
   }
 
   componentDidMount = async () => {
     const response = await getSingleQuest(this.props.match.params.id)
-    let hasReviews
-    if (response.data.reviews.length > 0) {
-      hasReviews = true
-    }
+    console.log(response)
     this.setState(
-      { route: response.data, flyTo: response.data.stops[0].location, hasReviews },
+      { route: response.data, flyTo: response.data.stops[0].location },
       () => this.setState({ flyTo: null })
     )
   }
@@ -65,13 +62,22 @@ class QuestShow extends React.Component {
   }
 
   nextStop = async () => {
-    const { route, currentStop, answer } = this.state
+    const { route, currentStop, answer, guessProximity } = this.state
+
+    // Get answer type
+    const answerType = route.stops[currentStop].answerType
+    const correctAnswer = route.stops[currentStop].answer
 
     // Correct answer
-    if (answer.toLowerCase() === route.stops[currentStop].answer.toLowerCase()) {
+    const isCorrect =
+      answer.toLowerCase() === correctAnswer.toLowerCase() ||
+      answerType === 'Proximity' && (guessProximity >= 0 && guessProximity <= correctAnswer)
+    const answerNeeded = route.theme === 'Adventure' || route.theme === 'Speed'
+
+    if (isCorrect || !answerNeeded) {
       this.setState({ currentStop: currentStop + 1, answer: '' })
       // Last stop reached
-      if (currentStop + 2 >= route.stops.length) {
+      if (currentStop + 1 >= route.stops.length) {
         // Save time
         try { //TODO properly implement this on backend - allow anonymous times?
           await updateQuest({ completedTime: this.state.time }, route.id)
@@ -97,9 +103,9 @@ class QuestShow extends React.Component {
     const nextLocation = route.stops[currentStop + 1].location
     const latDiff = Math.abs(guess.latitude - nextLocation.latitude) * degreeLengthInMeters
     const lngDiff = Math.abs(guess.longitude - nextLocation.longitude) * degreeLengthInMeters
-    const length = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
-    console.log(length)
-    this.setState({ guess: [{ location: guess }] })
+    const guessProximity = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lngDiff, 2))
+    console.log(guessProximity)
+    this.setState({ guess: [{ location: guess }], guessProximity })
   }
   
   updateTime = () => {
@@ -118,7 +124,6 @@ class QuestShow extends React.Component {
       currentStop,
       answer,
       lastStop,
-      hasReviews,
       hasBegun,
       addReview,
       flyTo,
@@ -128,10 +133,16 @@ class QuestShow extends React.Component {
     if (!route) return null //TODO display loading or failed to get
     const stop = route.stops[currentStop]
     // Only show marker for current stop if playing a certain theme
-    if (route.theme === 'Adventure' || route.theme === 'Speed') {
-      route.stops = [route.stops[currentStop]]
+    const showAll = route.theme === 'Sightseeing' || route.theme === 'Food & Drink'
+      ? true : false
+    const mutatedRoute = { ...route }
+    if (!showAll) {
+      mutatedRoute.stops = [mutatedRoute.stops[currentStop]]
     } else if (!lastStop) {
-      route.stops[currentStop].altColor = true
+      mutatedRoute.stops = mutatedRoute.stops.map((stop, i) => {
+        stop.altColor = i === currentStop ? true : false
+        return stop
+      })
     }
       
     return (
@@ -166,13 +177,15 @@ class QuestShow extends React.Component {
                   <h2>{stop ? stop.name : ''}</h2><br />
                   <p>{stop ? stop.clue : ''}</p>
                   <div className="answer-input">
-                    <input
-                      type="text"
-                      name="answer"
-                      value={answer}
-                      placeholder="answer"
-                      onChange={this.changeAnswer}
-                    />
+                    {!showAll &&
+                        <input
+                          type="text"
+                          name="answer"
+                          value={answer}
+                          placeholder="answer"
+                          onChange={this.changeAnswer}
+                        />
+                    }
                   </div>
                   <div className="btn-next">
                     <button onClick={this.nextStop}>NEXT</button>
@@ -210,15 +223,15 @@ class QuestShow extends React.Component {
             </div>
             {/* MAP */}
             <div className="show-map" style={{ display: screen === 'map' ? 'block' : 'none' }}>
-              <Map flyTo={flyTo} route={route} getLocation={this.getLocationGuess} results={guess} />
+              <Map flyTo={flyTo} route={mutatedRoute} getLocation={this.getLocationGuess} results={guess} />
             </div>
             
             <div className="reviews" style={{ display: screen === 'reviews' ? 'block' : 'none' }}>
-              { hasReviews
+              { route.reviews.length > 0
                 ? route.reviews.map((review, i) => (
-                <div key={i} className='comment-style'>
-                  <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
-                  <span>{review.rating}</span><hr />
+                  <div key={i} className='comment-style'>
+                    <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
+                    <span>{review.rating}</span><hr />
                   </div>))                
                 : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
               }    
