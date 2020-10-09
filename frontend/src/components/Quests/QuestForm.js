@@ -25,7 +25,7 @@ class QuestForm extends React.Component {
 
   render() {
 
-    const { name, description, estTime, timer } = this.props.questFormData
+    const { name, description, theme, estTime, timer } = this.props.questFormData
     const { handleQuestFormChange, themes } = this.props
     const { errorMessage } = this.state
 
@@ -52,8 +52,8 @@ class QuestForm extends React.Component {
                 placeholder="Description" />
             </div>
             <div className="form-group">
-              <select className="form-control" name="theme" onChange={handleQuestFormChange}>
-                <option value=''>Theme</option>
+              <select className="form-control" name="theme" value={theme} onChange={handleQuestFormChange}>
+                <option value='theme'>Theme</option>
                 {themes.map(theme =>
                   <option key={theme} value={theme}>{theme}</option>
                 )}
