@@ -13,8 +13,9 @@ class Navbar extends React.Component {
   }
 
   componentDidMount = () => {
-    const url = window.location.pathname.replace('/', '')
-    if (url) this.setState({ page: url })
+    let page = window.location.pathname.replace('/', '')
+    if (!page) page = 'popquest'
+    this.setState({ page })
   }
 
   componentDidUpdate = () => {
