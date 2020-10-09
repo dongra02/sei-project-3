@@ -52,6 +52,7 @@ class QuestCreate extends React.Component{
       const stops = [ ...questToEdit.stops ]
       this.setState({ questFormData, stops })
     }
+
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -81,6 +82,12 @@ class QuestCreate extends React.Component{
   }
 
   handleQuestFormChange = event => {
+    // TODO error display to user
+    if (event.target.name === 'theme' && this.state.stops.length > 0) {
+      console.log('changing theme illegally')
+      return
+    }
+
     const type = event.target.type
     const questFormData = {
       ...this.state.questFormData,
@@ -118,6 +125,9 @@ class QuestCreate extends React.Component{
   submitStop = () => {
     const stops = [ ...this.state.stops ]
     const stopData = { ...this.state.stopFormData }
+
+    if (stopData.answer === '') stopData.answer = 'tour'
+    console.log(stopData)
 
     // New Stop
     if (this.state.stopToEdit === this.state.stops.length) stops.push(stopData)
@@ -213,7 +223,8 @@ class QuestCreate extends React.Component{
       submitStop: this.submitStop,
       selectLocation: this.selectLocation,
       selectTab: this.selectTab,
-      isNew: stopToEdit === stops.length
+      isNew: stopToEdit === stops.length,
+      isTour: questFormData.theme === 'Sightseeing' || questFormData.theme === 'Food & Drink'
     }
 
     const questFormProps = {

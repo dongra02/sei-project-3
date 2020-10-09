@@ -9,12 +9,14 @@ class StopForm extends React.Component {
   }
   
   validateForm = () => {
+    const { isTour } = this.props
     const { name, clue, answer, location } = this.props.stopFormData
     
     let errorMessage = ''
     if (!name) errorMessage = 'please provide a stop name'
-    else if (!clue) errorMessage = 'please provide a clue'
-    else if (!answer) errorMessage = 'please provide an answer'
+    else if (!clue && !isTour) errorMessage = 'please provide a clue'
+    else if (!clue && isTour) errorMessage = 'please provide a description'
+    else if (!answer && !isTour) errorMessage = 'please provide an answer'
     else if (!location.latitude) errorMessage = 'please select a location'
 
     this.setState({ errorMessage })
@@ -23,7 +25,7 @@ class StopForm extends React.Component {
   }
 
   render() {
-    const { handleChange, selectLocation, geocoderValue, geocoderKey, selectTab, isNew } = this.props
+    const { handleChange, selectLocation, geocoderValue, geocoderKey, selectTab, isNew, isTour } = this.props
     const { name, clue, answerType, answer, hint } = this.props.stopFormData
     const { errorMessage } = this.state
   
@@ -47,34 +49,37 @@ class StopForm extends React.Component {
             className="form-control"
             value={clue}
             onChange={handleChange}
-            placeholder="Clue"
+            placeholder={isTour ? 'Description' : 'Clue'}
+            style={{ height: isTour ? '250px' : 'auto' }}
           />
         </div>
-        <div className="form-group">
-          <select className="form-control" id="answerType" value={answerType} onChange={handleChange}>
-            <option value='Answer'>Answer</option>
-            <option value="Proximity">Proximity</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <input
-            type={answerType === 'Answer' ? 'text' : 'number'}
-            id="answer"
-            className="form-control"
-            value={answer}
-            onChange={handleChange}
-            placeholder={answerType === 'Answer' ? 'Answer' : 'Location Leniency (meters)'}
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            type="text"
-            id="hint"
-            className="form-control"
-            value={hint}
-            onChange={handleChange}
-            placeholder="Hint (optional)" />
-        </div>
+        {!isTour && <>
+          <div className="form-group">
+            <select className="form-control" id="answerType" value={answerType} onChange={handleChange}>
+              <option value='Answer'>Answer</option>
+              <option value="Proximity">Proximity</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <input
+              type={answerType === 'Answer' ? 'text' : 'number'}
+              id="answer"
+              className="form-control"
+              value={answer}
+              onChange={handleChange}
+              placeholder={answerType === 'Answer' ? 'Answer' : 'Location Leniency (meters)'}
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              type="text"
+              id="hint"
+              className="form-control"
+              value={hint}
+              onChange={handleChange}
+              placeholder="Hint (optional)" />
+          </div>
+        </>}
         <div className="form-group">
           <Geocoder key={geocoderKey} selectLocation={selectLocation} initialValue={geocoderValue} />
         </div>

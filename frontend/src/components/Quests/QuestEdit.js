@@ -19,7 +19,8 @@ class QuestEdit extends React.Component {
         description: questToEditFull.data.description,
         estTime: questToEditFull.data.estTime,
         stops: questToEditFull.data.stops,
-        theme: questToEditFull.data.theme
+        theme: questToEditFull.data.theme,
+        timer: questToEditFull.data.timer
       }
       this.setState({ questToEdit })
     } catch (err) {
@@ -27,6 +28,7 @@ class QuestEdit extends React.Component {
     }
   }
 
+  // TODO redirect to quest page?
   redirect = () => {
     this.props.history.goBack()
   }
