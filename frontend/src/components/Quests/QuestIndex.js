@@ -156,7 +156,7 @@ class QuestIndex extends React.Component {
                     </div>
                     :
                     results.map((quest, i) => (
-                      <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name} {this.star.repeat(quest.avgRating)}</div>
+                      <div key={i} className="results-list-item" onClick={() => this.flyToQuest(quest)}>{quest.name}<br />{this.star.repeat(quest.avgRating)}</div>
                     ))
                   }
                 </div>}

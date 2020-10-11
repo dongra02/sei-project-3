@@ -18,7 +18,7 @@ const StopList = (props) => {
           </div>
         </div>
       ))}
-      <div className="btn-add-stop">
+      <div className="create-button">
         <button onClick={() => changeTab('addStop')}>Add Stop</button>
       </div>
     </div>

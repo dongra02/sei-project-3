@@ -156,12 +156,12 @@ class QuestShow extends React.Component {
             ))}
           </div>
           <div className="quest-view">
-            <div className="clues" style={{ display: screen === 'quest' ? 'block' : 'none' }}>
+            <div style={{ display: screen === 'quest' ? 'block' : 'none' }}>
               { route && !hasBegun && 
-                <div className="start-details">
+                <div className="quest-play">
                   <div className="detail-heading">
-                    <h2>{route.name}</h2>
-                    <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
+                    <h3 className="title">{route.name}</h3>
+                    <div>By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
                   </div>
                   <div className="detail-theme">{route.theme}</div>
                   <div className="detail-stops">{route.stops.length} stops</div>
@@ -172,13 +172,13 @@ class QuestShow extends React.Component {
                 </div>
               }
               { hasBegun && !lastStop &&
-                <div className="next-clue">
+                <div className="quest-play">
                   <div style={{ display: route.timer ? 'block' : 'none' }}>
                     <Timer updateTime={this.updateTime} /><hr />
                   </div>
-                  <h2>{stop ? stop.name : ''}</h2><br />
-                  <p>{stop ? stop.clue : ''}</p>
-                  <div className="answer-input">
+                  <h3 className="detail-heading title">{stop ? stop.name : ''}</h3><br />
+                  <p className="clue">{stop ? stop.clue : ''}</p>
+                  <div className="user-form answer-input">
                     {!showAll &&
                         <input
                           type="text"
@@ -189,13 +189,13 @@ class QuestShow extends React.Component {
                         />
                     }
                   </div>
-                  <div className="btn-next">
+                  <div className="btn-play">
                     <button onClick={this.nextStop}>NEXT</button>
                   </div>
                 </div>   
               }
               { lastStop && !addReview &&
-                <div className="endgame">     
+                <div className="quest-play">     
                   <div className="detail-heading">
                     <h2>{route.name}</h2>
                     <div className="detail-user">By <Link to={`/users/${route.owner.id}`}>{route.owner.username}</Link></div>
@@ -235,7 +235,7 @@ class QuestShow extends React.Component {
                     <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
                     <span>{this.star.repeat(review.rating)}</span><hr />
                   </div>))                
-                : <h4>No reviews yet.<br />Complete the quest to leave one of your own</h4>
+                : <h5>No reviews yet.<br />Complete the quest to leave one of your own</h5>
               }    
             </div>
           </div>

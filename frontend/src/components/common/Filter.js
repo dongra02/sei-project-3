@@ -27,15 +27,6 @@ const Filter = ({ theme, sortBy, handleChange, selectLocation }) => {
           <option value="time">Est. Time</option>
         </select>
       </div>
-      {/* <div className="filter-option">
-        <label htmlFor="time">Time :</label>
-        <Slider
-          className="slider"
-          trackStyle={{ backgroundColor: '#a63535' }}
-          handleStyle={{ border: '2px solid #a63535' }}
-        // onChange={event => console.log(event)}
-        />
-      </div> */}
     </div>
   )
 }

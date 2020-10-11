@@ -26,9 +26,9 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <div className="home-logo">
+        <div className="splash-screen">
           <img src={require('../../images/trail-red.png')} alt="" />
-          <div className="header-title">popQuest</div>
+          <div className="title">popQuest</div>
         </div>
         <BgMap latLng={this.state.bgLatLng} />
       </>

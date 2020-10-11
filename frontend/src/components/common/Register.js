@@ -76,7 +76,7 @@ class Register extends React.Component {
     const { hidePopup } = this.props
 
     return (
-      <div className="form-container">
+      <div className="form-container user-form">
         <h3>Register for an Account</h3>
         <div className="input-field">
           <input

@@ -7,25 +7,27 @@ import { isAuthenticated, logout } from '../../lib/auth'
 class Navbar extends React.Component {
 
   state = {
-    page: 'found',
+    page: 'popquest',
     popup: false,
     toast: false
   }
 
   componentDidMount = () => {
+    // Get correct screen for navbar highlighting
     let page = window.location.pathname.replace('/', '')
     if (!page) page = 'popquest'
     this.setState({ page })
   }
 
   componentDidUpdate = () => {
-    if (this.state.page.toLowerCase() === 'create' && !isAuthenticated() && this.state.popup !== 'Login') {
+    if (this.state.page === 'create' && !isAuthenticated() &&
+      (this.state.popup !== 'Login' && this.state.popup !== 'Register')) {
       this.setState({ popup: 'Login' })
     }
   }
 
-  selectNavItem = event => {
-    this.setState({ page: event.target.innerHTML.toLowerCase(), popup: false })
+  selectNavItem = page => {
+    this.setState({ page, popup: false })
   }
 
   popupForm = (form, message) => {
@@ -56,12 +58,12 @@ class Navbar extends React.Component {
       <>
         <nav className="navbar-expand">   
           <div className="navbar-nav">
-            <Link to="/quests" className={`nav-link ${page === 'find' || page === 'quests' ? 'active' : ''}`}   onClick={this.selectNavItem}>Find</Link>
-            <Link to="/create" className={`nav-link ${page === 'create' ? 'active' : ''}`} onClick={this.selectNavItem}>Create</Link>
-            <Link to="/users" className={`nav-link ${page === 'users' ? 'active' : ''}`} onClick={this.selectNavItem}>Users</Link>
+            <Link to="/quests" className={`nav-link ${page === 'quests' ? 'active' : ''}`} onClick={() => this.selectNavItem('quests')}>Find</Link>
+            <Link to="/create" className={`nav-link ${page === 'create' ? 'active' : ''}`} onClick={() => this.selectNavItem('create')}>Create</Link>
+            <Link to="/users" className={`nav-link ${page === 'users' ? 'active' : ''}`} onClick={() => this.selectNavItem('users')}>Users</Link>
           </div>
           <div className={`notification-bar ${toast ? 'toasty' : ''}`}>
-            <Link to="/" className={`navbar-logo ${page === 'popquest' ? 'active' : ''}`} onClick={this.selectNavItem}>popQuest</Link>
+            <Link to="/" className={`navbar-logo ${page === 'popquest' ? 'active' : ''}`} onClick={() => this.selectNavItem('popquest')}>popQuest</Link>
             <div className="notification-text">{toast}</div>
           </div>
           <div className="navbar-nav user">
@@ -73,7 +75,7 @@ class Navbar extends React.Component {
           <div className={`popup-form ${popup ? 'selected' : ''}`}>
             <div className="form-contents">
               <div style={{ display: `${popup === 'Login' ? 'block' : 'none'}` }}>
-                <Login hidePopup={this.popupForm} cancelable={page.toLowerCase() === 'create' ? null : this.popupForm} />
+                <Login hidePopup={this.popupForm} cancelable={page === 'create' ? null : this.popupForm} />
               </div>
               <div style={{ display: `${popup === 'Register' ? 'block' : 'none'}` }}>
                 <Register hidePopup={this.popupForm} />

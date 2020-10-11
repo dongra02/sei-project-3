@@ -31,7 +31,7 @@ class QuestForm extends React.Component {
 
     return (
       <>
-        <div className="form-container info-tab">
+        <div className="info-tab">
           <h5>Quest Details</h5>
           <div className="quest-form">
             <div className="form-group">
@@ -83,7 +83,7 @@ class QuestForm extends React.Component {
             {errorMessage}
           </div>
         </div>
-        <div className="btn-submit-quest">
+        <div className="create-button">
           <button onClick={this.validateForm}>Save Quest</button>
         </div>
       </>
