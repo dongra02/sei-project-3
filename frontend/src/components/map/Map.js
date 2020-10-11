@@ -77,11 +77,23 @@ class Map extends React.Component {
     const scrollSpeed = event.srcEvent.deltaY
     // Set scrolling dead zone
     if (Math.abs(scrollSpeed) < 1) return
+    if ((this.state.zoom >= 20 && scrollSpeed < 0) || (this.state.zoom <= 1 && scrollSpeed > 0)) return
+
+    // Get distance between mouse and center of map
+    const difference = {
+      latitude: event.lngLat[1] - this.state.viewport.latitude,
+      longitude: event.lngLat[0] - this.state.viewport.longitude
+    }
+    // Set new viewport with respect to difference and scroll speed
+    const viewport = {
+      latitude: this.state.viewport.latitude + (difference.latitude * 0.0034 * -scrollSpeed ),
+      longitude: this.state.viewport.longitude + (difference.longitude * 0.0034 * -scrollSpeed)
+    }
 
     let zoom = this.state.zoom
     zoom -= 0.005 * scrollSpeed
     zoom = Math.max(Math.min(zoom, 20), 1)
-    this.setState({ zoom })
+    this.setState({ zoom, viewport })
   }
 
   placeMarker = ({ lngLat }) => {
