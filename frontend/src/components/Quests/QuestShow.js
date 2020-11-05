@@ -234,7 +234,7 @@ class QuestShow extends React.Component {
                   <div key={i} className='comment-style'>
                     <span><Link to={`/users/${review.owner.id}`}>{review.owner.username}</Link>: {review.text}</span>
                     <span>{this.star.repeat(review.rating)}</span><hr />
-                  </div>))                
+np                  </div>))                
                 : <h5>No reviews yet.<br />Complete the quest to leave one of your own</h5>
               }    
             </div>
