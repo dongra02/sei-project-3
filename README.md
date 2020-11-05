@@ -16,6 +16,7 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Axios
 * Mapbox-gl & Geocoder
 * Cloudinary
+
 ### Backend
 * Express
 * MongoDB
@@ -23,9 +24,11 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Bcrypt
 * Faker
 * jsonwebtoken
+
 ### Collaboration
 * Git + Github
 * Slack
+* Trello
 
 
 
@@ -34,11 +37,11 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 Once our team decided on an idea and worked together to map the basic wireframing and models as a complete group. We discussed the user stories and worked separate the core needs from extra features. 
 
 User Stories:
-- User can participate in quests without Login/Account
-- Logged in user can create a profile
-- Logged in user can rate & review completed quests
-- Logged in user can create/delete quests, stops, clues/proximities
-- Map is interactive, and responsive to users location
+* User can participate in quests without Login/Account
+* Logged in user can create a profile
+* Logged in user can rate & review completed quests
+* Logged in user can create/delete quests, stops, clues/proximities
+* Map is interactive, and responsive to users location
 
 <div align='center'>
 <img src='./images/index-frame.jpg' height='300'/>
