@@ -42,11 +42,11 @@ User Stories:
 
 Quest Index Wireframe:
 <div align='center'>
-<img src='./images/index-frame.jpg' height='300'/>
+<img src='./images/index-frame.jpg' height='500'/>
 </div>
 Quest Show Wireframe:
 <div align='center'>
-<img src='./images/show-frame.jpg' height='300'/>
+<img src='./images/show-frame.jpg' height='500'/>
 </div>
 
 Having completed those steps, we broke into 2 pairs with one focusing on the front-end and other on the back. The full team met every morning for a standup session and planning, and often again in the evening to check in. We communicated throughout the day on Slack and kept a Trello board up to date to manage tasks and timelines. 
@@ -102,9 +102,9 @@ As the application took shape, the back-end team was responsible for supporting 
 
 Quest Index:
 <div align='center'>
-<img src='./images/index.jpg' height='300'/>
+<img src='./images/index.jpg' height='500'/>
 </div>
 Quest Show:
 <div align='center'>
-<img src='./images/show.jpg' height='300'/>
+<img src='./images/show.jpg' height='500'/>
 </div>
