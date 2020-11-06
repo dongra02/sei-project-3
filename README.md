@@ -30,9 +30,6 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Slack
 * Trello
 
-
-
-***
 ## Process
 Once our team decided on an idea, we worked together to map the basic wireframing and models. We discussed the user stories and separated what we viewed as the core needs from extra features. We landed on the below user stories as the foundation (MVP) for our app.
 
