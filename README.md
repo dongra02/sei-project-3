@@ -24,6 +24,7 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Bcrypt
 * Faker
 * jsonwebtoken
+* Insomnia
 
 ### Collaboration
 * Git + Github
