@@ -98,7 +98,7 @@ const randQuests = []
       randQuests.push( ...questData )
 ```
 
-As the application took shape, the back-end team was responsible for supporting any udpates to how the data was served to front-end. This involved minor tweaks to response bodies and controllers, as well as the models themselves. In the final days of the project, the team worked together to style, add finishing touches and test user stories. 
+As the application took shape, the back-end team was responsible for supporting any updates to how the data was served to front-end. This involved minor tweaks to response bodies and controllers, as well as the models themselves. In the final days of the project, the team worked together to style, add finishing touches and test user stories. 
 
 Quest Index:
 <div align='center'>
