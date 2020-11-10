@@ -4,9 +4,11 @@
   "description": "A repository for SEI Group Project MERN sri don something don this way comes newline conflict!",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node db/seeds.js"
+    "seed": "node db/seeds.js",
+    "dev": "nodemon",
+    "build": "cd frontend && npm install && npm run build"
   },
   "repository": {
     "type": "git",

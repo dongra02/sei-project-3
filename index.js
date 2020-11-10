@@ -19,11 +19,15 @@ mongoose.connect(
   }
 )
 
+app.use(express.static(`${__dirname}/frontend/build`))
+
 app.use(express.json())
 
 app.use(logger)
 
 app.use('/api', router)
+
+app.use('/*', (_, res) => res.sendFile(`${__dirname}/frontend/build/index.html`))
 
 app.use(errorHandler)
 
