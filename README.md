@@ -109,3 +109,13 @@ Quest Show:
 <div align='center'>
 <img src='./images/show.jpg' height='500'/>
 </div>
+
+## Challenges, Bugs & Future Considerations
+
+This was the first full-stack collaborative project I have had the opportunity to work on. Doing so remotely while learning Git/GitHub best practices presented a great opportunity and a few challenges. Early on, we dealt with several merge conflicts related to package installs. Our team worked well together to resolve and ensured a smooth process going forward. 
+
+On the back-end, while creating the models and controllers was fairly straightforward, new ideas or needs from the front-end required adjustments to the models. This necessitated adjustments to the API and population of the response bodies, as well as the seed data and related seed.js file. Given more time, I would like to have created more detailed and relevant seed quests and users.
+
+Additional challenges arose when the back-end foundation was complete, and I moved into a role helping to create and finish the remaining front-end components. This required ‘catching-up’ to the styling and syntax used by my teammates who were primarily building the front-end. If given more time, we would have liked to spend it reviewing each other’s code to create a more uniform style (function declarations, variable naming, etc.).
+
+Given this was a timed project, I will not likely return to it in the near future.
