@@ -4,11 +4,11 @@
 The popQuest app allows users to create and complete fun 'quests' within the city of their choosing. Each quest consists of a series of stops where the user must solve a clue in order to reveal the next stop. In some cases, the user device's coordinates will 'solve' the clue based on its proximity to a given location. Quests can be timed for those seeking a challenge, or simply a 'guided tour'-like trip for those interested in a more leisurely journey.
 
 ## Project Brief
-Collaborate remotely within a team of 4 to create a full-stack application. The application must include a React front-end consuming data served from a Mongo database by an Express API. Complete the project within 9 days.
+Collaborate remotely within a team of 4 to create a full-stack application. The application must include a React front end consuming data served from a Mongo database by an Express API. Complete the project within 9 days.
 
 ## Technologies Used
 
-### Front-end
+### Front End
 * JavaScript
 * React
 * Node - SASS
@@ -17,7 +17,7 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Mapbox-gl & Geocoder
 * Cloudinary
 
-### Back-end
+### Back End
 * Express
 * MongoDB
 * Mongoose
@@ -50,9 +50,9 @@ Quest Show Wireframe:
 <img src='./images/show-frame.jpg' height='500'/>
 </div>
 
-Having completed those steps, we broke into 2 pairs with one focusing on the front-end and other on the back. The full team met every morning for a standup session and planning, and often again in the evening to check in. We communicated throughout the day on Slack and kept a Trello board up to date to manage tasks and timelines. 
+Having completed those steps, we broke into 2 pairs with one focusing on the front end and other on the back. The full team met every morning for a standup session and planning, and often again in the evening to check in. We communicated throughout the day on Slack and kept a Trello board up to date to manage tasks and timelines. 
 
-I primarily worked within the back-end team to setup the initial models, routes and controllers for the app. I was also responsible for creating the script for seeding our database. I used Faker to create user profiles, reviews and quests consisting of 4 stops within the greater London area. 
+I primarily worked within the back end team to setup the initial models, routes and controllers for the app. I was also responsible for creating the script for seeding our database. I used Faker to create user profiles, reviews and quests consisting of 4 stops within the greater London area. 
 
 ``` javascript
 const randQuests = []
@@ -99,7 +99,7 @@ const randQuests = []
       randQuests.push( ...questData )
 ```
 
-As the application took shape, the back-end team was responsible for supporting any updates to how the data was served to front-end. This involved minor tweaks to response bodies and controllers, as well as the models themselves. In the final days of the project, the team worked together to style, add finishing touches and test user stories. 
+As the application took shape, the back end team was responsible for supporting any updates to how the data was served to front end. This involved minor tweaks to response bodies and controllers, as well as the models themselves. In the final days of the project, the team worked together to style, add finishing touches and test user stories. 
 
 Quest Index:
 <div align='center'>
@@ -114,8 +114,6 @@ Quest Show:
 
 This was the first full-stack collaborative project I have had the opportunity to work on. Doing so remotely while learning Git/GitHub best practices presented a great opportunity and a few challenges. Early on, we dealt with several merge conflicts related to package installs. Our team worked well together to resolve and ensured a smooth process going forward. 
 
-On the back-end, while creating the models and controllers was fairly straightforward, new ideas or needs from the front-end required adjustments to the models. This necessitated adjustments to the API and population of the response bodies, as well as the seed data and related seed.js file. Given more time, I would like to have created more detailed and relevant seed quests and users.
+On the back end, while creating the models and controllers was fairly straightforward, new ideas or needs from the front end required adjustments to the models. This necessitated adjustments to the API and population of the response bodies, as well as the seed data and related seed.js file. Given more time, I would like to have created more detailed and relevant seed quests and users.
 
-Additional challenges arose when the back-end foundation was complete, and I moved into a role helping to create and finish the remaining front-end components. This required ‘catching-up’ to the styling and syntax used by my teammates who were primarily building the front-end. If given more time, we would have liked to spend it reviewing each other’s code to create a more uniform style (function declarations, variable naming, etc.).
-
-Given this was a timed project, I will not likely return to it in the near future.
+Additional challenges arose when the back end foundation was complete, and I moved into a role helping to create and finish the remaining front end components. This required ‘catching-up’ to the styling and syntax used by my teammates who were primarily building the front end. If given more time, we would have liked to spend it reviewing each other’s code to create a more uniform style (function declarations, variable naming, etc.).
