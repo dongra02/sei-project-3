@@ -3,6 +3,8 @@
 ## Application Outline
 The popQuest app allows users to create and complete fun 'quests' within the city of their choosing. Each quest consists of a series of stops where the user must solve a clue in order to reveal the next stop. In some cases, the user device's coordinates will 'solve' the clue based on its proximity to a given location. Quests can be timed for those seeking a challenge, or simply a 'guided tour'-like trip for those interested in a more leisurely journey.
 
+[Deployed App](https://popquest-app.herokuapp.com/)
+
 ## Project Brief
 Collaborate remotely within a team of 4 to create a full-stack application. The application must include a React front end consuming data served from a Mongo database by an Express API. Complete the project within 9 days.
 
@@ -30,6 +32,9 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Git + Github
 * Slack
 * Trello
+
+### Deployment
+* Heroku
 
 ## Process
 Once our team decided on an idea, we worked together to map the basic wireframing and models. We discussed the user stories and separated what we viewed as the core needs from extra features. We landed on the below user stories as the foundation (MVP) for our app.
@@ -117,3 +122,8 @@ This was the first full-stack collaborative project I have had the opportunity t
 On the back end, while creating the models and controllers was fairly straightforward, new ideas or needs from the front end required adjustments to the models. This necessitated adjustments to the API and population of the response bodies, as well as the seed data and related seed.js file. Given more time, I would like to have created more detailed and relevant seed quests and users.
 
 Additional challenges arose when the back end foundation was complete, and I moved into a role helping to create and finish the remaining front end components. This required ‘catching-up’ to the styling and syntax used by my teammates who were primarily building the front end. If given more time, we would have liked to spend it reviewing each other’s code to create a more uniform style (function declarations, variable naming, etc.).
+
+## Key Takeaways
+
+As mentioned above, working with a remote team on this app provided an opportunity for me to get more familiar with GitHub and the other collaborative tools we used. This included everything from communicating about new packages & working through merge conflicts to maintaining a Trello board to limit disruptions and organize our tasks and timelines. Overall, it was exciting to see how quickly the app took shape with each team member working through their tasks. As the first full stack project I have worked on to completion, it was a very enlightening experience to see how different technologies in the MERN stack relate to form a complete application.
+
