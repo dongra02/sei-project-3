@@ -25,7 +25,7 @@ Collaborate remotely within a team of 4 to create a full-stack application. The 
 * Mongoose
 * Bcrypt
 * Faker
-* jsonwebtoken
+* Jsonwebtoken
 * Insomnia
 
 ### Collaboration
